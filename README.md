@@ -1,3 +1,5 @@
-# teamDeploy
+# Team Purple
 
-this is the main repository for team 1!
+This is the repository for Team 1 (Bec, Josh & Nick).
+
+
