@@ -13,8 +13,10 @@ public Student( Integer id, String firstName, String lastName,
   this.id = id;
   this.firstName = firstName;
   this.lastName = lastName;
-  this.studentUnitRecordList = studentUnitRecordList == null ?
-       new StudentUnitRecordList() : studentUnitRecordList;
+  if (studentUnitRecordList == null) {
+    studentUnitRecordList = new StudentUnitRecordList();
+  }
+  this.studentUnitRecordList = studentUnitRecordList ;
 }
 
 
