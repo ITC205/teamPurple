@@ -3,32 +3,37 @@ package datamanagement;
 import java.util.List;
 import org.jdom.*;
 
-public class StudentUnitRecordManager {
+public class StudentUnitRecordManager
+{
 
 	private static StudentUnitRecordManager s = null;
 	private StudentUnitRecordMap rm;
 	private java.util.HashMap<String, StudentUnitRecordList> ur;
 	private java.util.HashMap<Integer, StudentUnitRecordList> sr;
 
-	public static StudentUnitRecordManager instance() {
+	public static StudentUnitRecordManager instance()
+	{
 		if (s == null)
 			s = new StudentUnitRecordManager();
 		return s;
 	}
 
-	private StudentUnitRecordManager() {
+	private StudentUnitRecordManager()
+	{
 		rm = new StudentUnitRecordMap();
 		ur = new java.util.HashMap<>();
 		sr = new java.util.HashMap<>();
 	}
 
 	public IStudentUnitRecord getStudentUnitRecord(Integer studentID,
-			String unitCode) {
+			String unitCode)
+	{
 		IStudentUnitRecord ir = rm.get(studentID.toString() + unitCode);
 		return ir != null ? ir : createStudentUnitRecord(studentID, unitCode);
 	}
 
-	private IStudentUnitRecord createStudentUnitRecord(Integer uid, String sid) {
+	private IStudentUnitRecord createStudentUnitRecord(Integer uid, String sid)
+	{
 		IStudentUnitRecord ir;
 		for (Element el : (List<Element>) XMLManager.getXML().getDocument()
 				.getRootElement().getChild("studentUnitRecordTable")
@@ -48,7 +53,8 @@ public class StudentUnitRecordManager {
 				"DBMD: createStudent : student unit record not in file");
 	}
 
-	public StudentUnitRecordList getRecordsByUnit(String unitCode) {
+	public StudentUnitRecordList getRecordsByUnit(String unitCode)
+	{
 		StudentUnitRecordList recs = ur.get(unitCode);
 		if (recs != null)
 			return recs;
@@ -65,7 +71,8 @@ public class StudentUnitRecordManager {
 		return recs;
 	}
 
-	public StudentUnitRecordList getRecordsByStudent(Integer studentID) {
+	public StudentUnitRecordList getRecordsByStudent(Integer studentID)
+	{
 		StudentUnitRecordList recs = sr.get(studentID);
 		if (recs != null)
 			return recs;
@@ -81,7 +88,8 @@ public class StudentUnitRecordManager {
 		return recs;
 	}
 
-	public void saveRecord(IStudentUnitRecord irec) {
+	public void saveRecord(IStudentUnitRecord irec)
+	{
 		for (Element el : (List<Element>) XMLManager.getXML().getDocument()
 				.getRootElement().getChild("studentUnitRecordTable")
 				.getChildren("record")) {

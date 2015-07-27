@@ -1,5 +1,6 @@
 package datamanagement;
 
 public class StudentUnitRecordMap extends
-		java.util.HashMap<String, IStudentUnitRecord> {
+		java.util.HashMap<String, IStudentUnitRecord>
+{
 }
