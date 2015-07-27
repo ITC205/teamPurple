@@ -1,34 +1,36 @@
 package datamanagement;
 
 import java.util.List;
-import org.jdom.*;
+import java.util.HashMap;
+
+import org.jdom.Element;
 
 public class StudentUnitRecordManager
 {
 
-	private static StudentUnitRecordManager s = null;
-	private StudentUnitRecordMap rm;
-	private java.util.HashMap<String, StudentUnitRecordList> ur;
-	private java.util.HashMap<Integer, StudentUnitRecordList> sr;
+	private static StudentUnitRecordManager manager_ = null;
+	private StudentUnitRecordMap recordMap_;
+	private HashMap<String, StudentUnitRecordList> ur; // What is this?
+	private HashMap<Integer, StudentUnitRecordList> sr; // And this?
 
-	public static StudentUnitRecordManager instance()
+	public static StudentUnitRecordManager instance() // Change to getInstance() Affects multiple classes
 	{
-		if (s == null)
-			s = new StudentUnitRecordManager();
-		return s;
+		if (manager_ == null)
+			manager_ = new StudentUnitRecordManager();
+		return manager_;
 	}
 
 	private StudentUnitRecordManager()
 	{
-		rm = new StudentUnitRecordMap();
-		ur = new java.util.HashMap<>();
-		sr = new java.util.HashMap<>();
+		recordMap_ = new StudentUnitRecordMap();
+		ur = new HashMap<>();
+		sr = new HashMap<>();
 	}
 
 	public IStudentUnitRecord getStudentUnitRecord(Integer studentID,
 			String unitCode)
 	{
-		IStudentUnitRecord ir = rm.get(studentID.toString() + unitCode);
+		IStudentUnitRecord ir = recordMap_.get(studentID.toString() + unitCode);
 		return ir != null ? ir : createStudentUnitRecord(studentID, unitCode);
 	}
 
@@ -45,7 +47,7 @@ public class StudentUnitRecordManager
 						new Float(el.getAttributeValue("asg1")).floatValue(), new Float(
 								el.getAttributeValue("asg2")).floatValue(), new Float(
 								el.getAttributeValue("exam")).floatValue());
-				rm.put(ir.getStudentID().toString() + ir.getUnitCode(), ir);
+				recordMap_.put(ir.getStudentID().toString() + ir.getUnitCode(), ir);
 				return ir;
 			}
 		}
