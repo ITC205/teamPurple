@@ -2,15 +2,15 @@ package datamanagement;
 
 public class StudentUnitRecord implements IStudentUnitRecord
 {
-	private Integer sid;
-	private String uc;
-	private float a1, a2, ex;
+	private Integer studentId_;
+	private String unitCode_;
+	private float assessmentOneMark_, assessmentTwoMark_, examMark_;
 
 	public StudentUnitRecord(Integer id, String code, float asg1, float asg2,
-			float exam)
+														float exam)
 	{
-		this.sid = id;
-		this.uc = code;
+		this.studentId_ = id;
+		this.unitCode_ = code;
 		this.setAsg1(asg1);
 		this.setAsg2(asg2);
 		this.setExam(exam);
@@ -18,61 +18,61 @@ public class StudentUnitRecord implements IStudentUnitRecord
 
 	public Integer getStudentID()
 	{
-		return sid;
+		return studentId_;
 	}
 
 	public String getUnitCode()
 	{
-		return uc;
+		return unitCode_;
 	}
 
 	public void setAsg1(float a1)
 	{
-		if (a1 < 0 || a1 > UnitManager.UM().getUnit(uc).getAsg1Weight()) {
+		if (a1 < 0 || a1 > UnitManager.UM().getUnit(unitCode_).getAsg1Weight()) {
 			throw new RuntimeException(
 					"Mark cannot be less than zero or greater than assessment weight");
 		}
-		this.a1 = a1;
+		this.assessmentOneMark_ = a1;
 	}
 
 	public float getAsg1()
 	{
 
-		return a1;
+		return assessmentOneMark_;
 	}
 
 	public void setAsg2(float a2)
 	{
-		if (a2 < 0 || a2 > UnitManager.UM().getUnit(uc).getAsg2Weight()) {
+		if (a2 < 0 || a2 > UnitManager.UM().getUnit(unitCode_).getAsg2Weight()) {
 			throw new RuntimeException(
 					"Mark cannot be less than zero or greater than assessment weight");
 		}
-		this.a2 = a2;
+		this.assessmentTwoMark_ = a2;
 
 	}
 
 	public float getAsg2()
 	{
-		return a2;
+		return assessmentTwoMark_;
 	}
 
 	public void setExam(float ex)
 	{
-		if (ex < 0 || ex > UnitManager.UM().getUnit(uc).getExamWeight()) {
+		if (ex < 0 || ex > UnitManager.UM().getUnit(unitCode_).getExamWeight()) {
 			throw new RuntimeException(
 					"Mark cannot be less than zero or greater than assessment weight");
 		}
-		this.ex = ex;
+		this.examMark_ = ex;
 	}
 
 	public float getExam()
 	{
-		return ex;
+		return examMark_;
 	}
 
 	public float getTotal()
 	{
-		return a1 + a2 + ex;
+		return assessmentOneMark_ + assessmentTwoMark_ + examMark_;
 
 	}
 }
