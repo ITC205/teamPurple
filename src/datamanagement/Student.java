@@ -5,8 +5,8 @@ public class Student implements IStudent {
   private String studentLastName;
   private StudentUnitRecordList su;
 
-  public Student( Integer id, String studentFirstName, String ln, StudentUnitRecordList su ) { this.studentId = id; this.studentFirstName = studentFirstName;
-  this.studentLastName = ln;this.su = 
+  public Student( Integer studentId, String studentFirstName, String studentLastName, StudentUnitRecordList su ) { this.studentId = studentId; this.studentFirstName = studentFirstName;
+  this.studentLastName = studentLastName;this.su = 
       su == null ? new StudentUnitRecordList() : 
         su;
   }
@@ -20,10 +20,10 @@ public class Student implements IStudent {
 
   public String getLastName() { 
     return studentLastName; }
-  public void setLastName( String lastName ) { 
+  public void setLastName( String studentLastName ) { 
 
 
-    this.studentLastName = lastName; }
+    this.studentLastName = studentLastName; }
 
   public void addUnitRecord( IStudentUnitRecord record ) { su.add(record); }
   public IStudentUnitRecord getUnitRecord( String unitCode ) {
