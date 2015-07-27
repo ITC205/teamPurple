@@ -1,22 +1,22 @@
 package datamanagement;
 
 public class Student implements IStudent {
-  private Integer id; private String fn;
+  private Integer studentId; private String studentFirstName;
   private String ln;
   private StudentUnitRecordList su;
 
-  public Student( Integer id, String fn, String ln, StudentUnitRecordList su ) { this.id = id; this.fn = fn;
+  public Student( Integer id, String studentFirstName, String ln, StudentUnitRecordList su ) { this.studentId = id; this.studentFirstName = studentFirstName;
   this.ln = ln;this.su = 
       su == null ? new StudentUnitRecordList() : 
         su;
   }
 
-  public Integer getID() { return this.id; 
+  public Integer getID() { return this.studentId; 
   } public String getFirstName() { 
-    return fn; }
+    return studentFirstName; }
 
   public void setFirstName( String firstName ) { 
-    this.fn = firstName; }
+    this.studentFirstName = firstName; }
 
   public String getLastName() { 
     return ln; }
