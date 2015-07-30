@@ -3,14 +3,14 @@ package datamanagement;
 public class StudentProxy implements IStudent 
 {
 private Integer studentId;
-private String l;
+private String firstName;
     private String Il;
     private StudentManager lI;
     
-    public StudentProxy( Integer studentId, String fn, String Il) 
+    public StudentProxy( Integer studentId, String firstName, String Il) 
     {
         this.studentId = studentId;
-        this.l = fn;
+        this.firstName = firstName;
         this.Il = Il;
 this.lI = StudentManager.get();
 }
@@ -22,7 +22,7 @@ this.lI = StudentManager.get();
     
 public String getFirstName() 
 { 
-        return l; 
+        return firstName; 
         }
 
     public String getLastName() 
