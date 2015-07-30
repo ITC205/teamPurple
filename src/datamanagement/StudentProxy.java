@@ -2,14 +2,14 @@ package datamanagement;
 
 public class StudentProxy implements IStudent 
 {
-private Integer I;
+private Integer studentId;
 private String l;
     private String Il;
     private StudentManager lI;
     
-    public StudentProxy( Integer id, String fn, String Il) 
+    public StudentProxy( Integer studentId, String fn, String Il) 
     {
-        this.I = id;
+        this.studentId = studentId;
         this.l = fn;
         this.Il = Il;
 this.lI = StudentManager.get();
@@ -17,7 +17,7 @@ this.lI = StudentManager.get();
 
     public Integer getID() 
     { 
-      return I; 
+      return studentId; 
 }
     
 public String getFirstName() 
@@ -32,26 +32,26 @@ return Il;
     
 public void setFirstName(String firstName) 
 {
-    lI.getStudent(I).setFirstName(firstName);
+    lI.getStudent(studentId).setFirstName(firstName);
     }
 
     public void setLastName(String lastName) 
     {
-        lI.getStudent(I).setLastName(lastName);
+        lI.getStudent(studentId).setLastName(lastName);
         }
 
     public void addUnitRecord(IStudentUnitRecord record) 
     {
-        lI.getStudent(I).addUnitRecord(record);
+        lI.getStudent(studentId).addUnitRecord(record);
         }
     
         public IStudentUnitRecord getUnitRecord(String unitCode) 
         {
-return lI.getStudent(I).getUnitRecord(unitCode);
+return lI.getStudent(studentId).getUnitRecord(unitCode);
 }
 
 public StudentUnitRecordList getUnitRecords() 
 { 
-  return lI.getStudent(I).getUnitRecords();
+  return lI.getStudent(studentId).getUnitRecords();
   }
 }
