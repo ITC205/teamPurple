@@ -4,14 +4,14 @@ public class Student implements IStudent
 {
   private Integer studentId; 
   private String firstName;
-  private String ln;
+  private String lastName;
   private StudentUnitRecordList su;
 
-  public Student( Integer studentId, String firstName, String ln, StudentUnitRecordList su ) 
+  public Student( Integer studentId, String firstName, String lastName, StudentUnitRecordList su ) 
   { 
     this.studentId = studentId; 
     this.firstName = firstName;
-    this.ln = ln;
+    this.lastName = lastName;
     this.su = su == null ? new StudentUnitRecordList() : su;
   }
 
@@ -32,12 +32,12 @@ public class Student implements IStudent
 
   public String getLastName() 
   { 
-    return ln;
+    return lastName;
   }
 
   public void setLastName( String lastName ) 
   { 
-    this.ln = lastName; 
+    this.lastName = lastName; 
   }
 
   public void addUnitRecord( IStudentUnitRecord record ) 
