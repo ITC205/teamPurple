@@ -3,14 +3,14 @@ package datamanagement;
 public class Student implements IStudent 
 {
   private Integer studentId; 
-  private String fn;
+  private String firstName;
   private String ln;
   private StudentUnitRecordList su;
 
-  public Student( Integer studentId, String fn, String ln, StudentUnitRecordList su ) 
+  public Student( Integer studentId, String firstName, String ln, StudentUnitRecordList su ) 
   { 
     this.studentId = studentId; 
-    this.fn = fn;
+    this.firstName = firstName;
     this.ln = ln;
     this.su = su == null ? new StudentUnitRecordList() : su;
   }
@@ -22,12 +22,12 @@ public class Student implements IStudent
 
   public String getFirstName() 
   { 
-    return fn; 
+    return firstName; 
   }
 
   public void setFirstName( String firstName ) 
   { 
-    this.fn = firstName;
+    this.firstName = firstName;
   }
 
   public String getLastName() 
