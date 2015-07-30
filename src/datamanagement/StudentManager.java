@@ -22,26 +22,26 @@ public class StudentManager
     sm = new StudentMap();
     um = new java.util.HashMap<>();}
 
-  public IStudent getStudent(Integer id) 
+  public IStudent getStudent(Integer studentId) 
   {
-    IStudent is = sm.get(id);
-    return is != null ? is : createStudent(id);
+    IStudent is = sm.get(studentId);
+    return is != null ? is : createStudent(studentId);
   }
 
-  private Element getStudentElement(Integer id) 
+  private Element getStudentElement(Integer studentId) 
   {
     for (Element el : (List<Element>) XMLManager.getXML().getDocument().getRootElement().getChild("studentTable").getChildren("student")) 
-      if (id.toString().equals(el.getAttributeValue("sid"))) 
+      if (studentId.toString().equals(el.getAttributeValue("sid"))) 
         return el;
     return null;
   }
 
-  private IStudent createStudent(Integer id) 
+  private IStudent createStudent(Integer studentId) 
   {
     IStudent is;
-    Element el = getStudentElement(id);
+    Element el = getStudentElement(studentId);
     if (el != null) {
-      StudentUnitRecordList rlist = StudentUnitRecordManager.instance().getRecordsByStudent(id);
+      StudentUnitRecordList rlist = StudentUnitRecordManager.instance().getRecordsByStudent(studentId);
       is = new Student(new Integer(el.getAttributeValue("sid")),el.getAttributeValue("fname"),el.getAttributeValue("lname"),rlist);
       sm.put(is.getID(), is);
       return is; 
@@ -49,12 +49,12 @@ public class StudentManager
     throw new RuntimeException("DBMD: createStudent : student not in file");
   }
 
-  private IStudent createStudentProxy(Integer id) 
+  private IStudent createStudentProxy(Integer studentId) 
   {
-    Element el = getStudentElement(id);
+    Element el = getStudentElement(studentId);
 
     if (el != null) 
-      return new StudentProxy(id, el.getAttributeValue("fname"), el.getAttributeValue("lname"));
+      return new StudentProxy(studentId, el.getAttributeValue("fname"), el.getAttributeValue("lname"));
     throw new RuntimeException("DBMD: createStudent : student not in file");
   }
 
