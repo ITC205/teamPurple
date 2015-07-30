@@ -4,14 +4,14 @@ public class StudentProxy implements IStudent
 {
 private Integer studentId;
 private String firstName;
-    private String Il;
+    private String lastName;
     private StudentManager lI;
     
-    public StudentProxy( Integer studentId, String firstName, String Il) 
+    public StudentProxy( Integer studentId, String firstName, String lastName) 
     {
         this.studentId = studentId;
         this.firstName = firstName;
-        this.Il = Il;
+        this.lastName = lastName;
 this.lI = StudentManager.get();
 }
 
@@ -27,7 +27,7 @@ public String getFirstName()
 
     public String getLastName() 
     { 
-return Il; 
+return lastName; 
 }
     
 public void setFirstName(String firstName) 
