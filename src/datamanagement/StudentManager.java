@@ -21,12 +21,13 @@ public class StudentManager
   private StudentManager() 
   {
     sm = new StudentMap();
-    um = new HashMap<>();}
+    um = new HashMap<>();
+  }
 
   public IStudent getStudent(Integer studentId) 
   {
-    IStudent is = sm.get(studentId);
-    return is != null ? is : createStudent(studentId);
+    IStudent student = sm.get(studentId);
+    return student != null ? student : createStudent(studentId);
   }
 
   private Element getStudentElement(Integer studentId) 
