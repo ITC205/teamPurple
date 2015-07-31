@@ -2,13 +2,14 @@ package datamanagement;
 
 import org.jdom.*;
 import java.util.List;
+import java.util.HashMap;
 
 public class StudentManager 
 {
   private static StudentManager self = null;
 
   private StudentMap sm;
-  private java.util.HashMap<String, StudentMap> um;
+  private HashMap<String, StudentMap> um;
 
   public static StudentManager get() 
   {
@@ -20,7 +21,7 @@ public class StudentManager
   private StudentManager() 
   {
     sm = new StudentMap();
-    um = new java.util.HashMap<>();}
+    um = new HashMap<>();}
 
   public IStudent getStudent(Integer studentId) 
   {
