@@ -60,20 +60,20 @@ public class StudentManager
     throw new RuntimeException("DBMD: createStudent : student not in file");
   }
 
-  public StudentMap getStudentsByUnit(String uc) 
+  public StudentMap getStudentsByUnit(String unitCode) 
   {
-    StudentMap s = um.get(uc);
-    if (s != null) {
-      return s;
+    StudentMap studentMapByUnit = um.get(unitCode);
+    if (studentMapByUnit != null) {
+      return studentMapByUnit;
     }
-    s = new StudentMap();
+    studentMapByUnit = new StudentMap();
     IStudent student;
-    StudentUnitRecordList ur = StudentUnitRecordManager.instance().getRecordsByUnit(uc);
+    StudentUnitRecordList ur = StudentUnitRecordManager.instance().getRecordsByUnit(unitCode);
     for (IStudentUnitRecord S : ur) {
       student = createStudentProxy(new Integer(S.getStudentID()));
-      s.put(student.getID(), student);
+      studentMapByUnit.put(student.getID(), student);
     }
-    um.put( uc, s);
-    return s;
+    um.put( unitCode, studentMapByUnit);
+    return studentMapByUnit;
   }
 }
