@@ -1,176 +1,270 @@
 package datamanagement;
 
-public class Unit implements IUnit {
-	private String uc;
-	private String UN;
-	private float co2;
-	private float co1;
-	private float co4;
-	private float co3;
-	private float co5;
-	private int a1, a2, ex;
-	
-	private StudentUnitRecordList rs;
+/**
+*
+*/
+public class Unit implements IUnit
+{
+  //===========================================================================
+  // Variables
+  //===========================================================================
 
-	public Unit(String UC, String un, float f1, float f2, float f3, float f4,
-			float f5, int i1, int i2, int i3, StudentUnitRecordList rl) {
+  //TODO: Variables - correct name?
 
-		uc = UC;
-		UN = un;
-		co2 = f1;
-		co1 = f2;
-		this.co4 = f3;
-		co3 = f4;
-		this.co5 = f5;
-		this.setAssessmentWeights(i1, i2, i3);
-		rs = rl == null ? new StudentUnitRecordList() : rl;
-	}
+  private static final String GRADE_FAIL = "FL";
+  private static final String GRADE_ADDITIONAL_EXAMINATION = "AE";
+  private static final String GRADE_PASS = "PS";
+  private static final String GRADE_CREDIT = "CR";
+  private static final String GRADE_DISTINCTION = "DI";
+  private static final String GRADE_HIGH_DISTINCTION = "HD";
 
-	public String getUnitCode() {
-		return this.uc;
-	}
 
-	public String getUnitName() {
 
-		return this.UN;
-	}
+  private String unitCode_;
+  private String unitName_;
 
-	public void setPsCutoff1(float cutoff) {
-		this.co2 = cutoff;
-	}
+  private float additionalExaminationMinimumMark_;  // additionalExaminationCutoffMark_ // cutoff used in UI descriptions
+  private float passMinimumMark_;
+  private float creditMinimumMark_;
+  private float distinctionMinimumMark_;
+  private float highDistinctionMinimumMark_;
 
-	public float getPsCutoff() {
-		return this.co2;
-	}
+  private int assignmentOneWeight_;
+  private int assignmentTwoWeight_;
+  private int examWeight_;
 
-	public void setCrCutoff(float cutoff) {
-		this.co1 = cutoff;
-	}
+  private StudentUnitRecordList studentUnitRecordList_; //studentUnitRecords ???
 
-	public float getCrCutoff() {
-		return this.co1;
-	}
 
-	public void setDiCutoff(float cutoff) {
-		this.co4 = cutoff;
-	}
 
-	public float getDiCuttoff() {
-		return this.co4;
-	}
+  //===========================================================================
+  // Constructors
+  //===========================================================================
 
-	public void HDCutoff(float cutoff) {
-		this.co3 = cutoff;
-	}
+  public Unit(String unitCode, String unitName,
+              float additionalExaminationMinimumMark, float passMinimumMark,
+              float creditMinimumMark, float distinctionMinimumMark,
+              float highDistinctionMinimumMark,
+              int assignmentOneWeight, int assignmentTwoWeight, int examWeight,
+              StudentUnitRecordList StudentUnitRecordList) {
 
-	public void setHdCutoff(float cutoff) {
-		this.co3 = cutoff;
-	}
+    this.unitCode_ = unitCode;
+    this.unitName_ = unitName;
 
-	public float getHdCutoff() {
-		return this.co3;
+    this.additionalExaminationMinimumMark_ = additionalExaminationMinimumMark;
+    this.passMinimumMark_ = passMinimumMark;
+    this.creditMinimumMark_ = creditMinimumMark;
+    this.distinctionMinimumMark_ = distinctionMinimumMark;
+    this.highDistinctionMinimumMark_ = highDistinctionMinimumMark;
 
-	}
+    this.setAssessmentWeights(assignmentOneWeight, assignmentTwoWeight,
+                              examWeight);
 
-	public void setAeCutoff(float cutoff) {
-		this.co5 = cutoff;
-	}
+    if (StudentUnitRecordList == null) {
+      StudentUnitRecordList = new StudentUnitRecordList();
+    }
+    this.studentUnitRecordList_ = StudentUnitRecordList;
+  }
 
-	public float getAeCutoff() {
-		return this.co5;
-	}
 
-	public void addStudentRecord(IStudentUnitRecord record) {
-		rs.add(record);
-	}
 
-	public IStudentUnitRecord getStudentRecord(int studentID) {
-		for (IStudentUnitRecord r : rs) {
-			if (r.getStudentID() == studentID)
-				return r;
-		}
-		return null;
-	}
+  public String calculateGrade(float assignmentOneMark, float assignmentTwoMark,
+                               float examMark) {
 
-	public StudentUnitRecordList listStudentRecords() {
-		return rs;
-	}
+    float totalMark = assignmentOneMark + assignmentTwoMark + examMark;
 
-	@Override
-	public int getAsg1Weight() {
-		return a1;
-	}
+    if ((assignmentOneMark < 0 || assignmentOneMark > assignmentOneWeight_) ||
+        (assignmentTwoMark < 0 || assignmentTwoMark > assignmentTwoWeight_) ||
+        (examMark < 0          || examMark > examWeight_)) {
+      throw new RuntimeException("marks cannot be less than zero or greater " +
+                                 "than assessment weights" );
+    }
 
-	@Override
-	public int getAsg2Weight() {
-		return a2;
-	}
+    if (totalMark < this.getAdditionalExaminationMinimumMark()) {
+      return GRADE_FAIL;
+    } else if (totalMark < this.getPassMinimumMark()) {
+      return GRADE_ADDITIONAL_EXAMINATION;
+    } else if (totalMark < this.getCreditMinimumMark()) {
+      return GRADE_PASS;
+    } else if (totalMark < this.getDistinctionMinimumMark()) {
+      return GRADE_CREDIT;
+    } else if (totalMark < this.getHighDistinctionMinimumMark()) {
+      return GRADE_DISTINCTION;
+    } else {
+      return GRADE_HIGH_DISTINCTION;
+    }
+  }
 
-	@Override
-	public int getExamWeight() {
-		return ex;
-	}
 
-	@Override
-	public void setAssessmentWeights(int a1, int a2, int ex) {
-		if (a1 < 0 || a1 > 100 ||
-			a2 < 0 || a2 > 100 ||
-			ex < 0 || ex > 100 ) {
-			throw new RuntimeException("Assessment weights cant be less than zero or greater than 100");
-		}			
-		if (a1 + a2 + ex != 100 ) {
-			throw new RuntimeException("Assessment weights must add to 100");
-		}
-		this.a1 = a1;
-		this.a2 = a2;
-		this.ex = ex;			
-	}
-	
-	private void setCutoffs( float ps, float cr, float di, float hd, float ae) {
-		if (ps < 0 || ps > 100 ||
-			cr < 0 || cr > 100 ||
-			di < 0 || di > 100 ||
-			hd < 0 || hd > 100 ||
-			ae < 0 || ae > 100 ) {
-			throw new RuntimeException("Assessment cutoffs cant be less than zero or greater than 100");
-		}
-		if (ae >= ps) {
-			throw new RuntimeException("AE cutoff must be less than PS cutoff");
-		}
-		if (ps >= cr) {
-			throw new RuntimeException("PS cutoff must be less than CR cutoff");
-		}
-		if (cr >= di) {
-			throw new RuntimeException("CR cutoff must be less than DI cutoff");
-		}
-		if (di >= hd) {
-			throw new RuntimeException("DI cutoff must be less than HD cutoff");
-		}
 
-	}
-	
-	public String getGrade(float f1, float f2, float f3) {
-		float t = f1 + f2 + f3;
-		
-		if (f1 < 0 || f1 > a1 ||
-			f2 < 0 || f2 > a2 ||
-			f3 < 0 || f3 > ex ) {
-			throw new RuntimeException("marks cannot be less than zero or greater than assessment weights");
-		}
+  public void addStudentRecord(IStudentUnitRecord record) {
+    this.getStudentUnitRecords().add(record);
+  }
 
-		if (t < co5) {
-			return "FL";
-		} else if (t < co2)
-			return "AE";
-		else if (t < co1)
-			return "PS";
-		else if (t < co4)
-			return "CR";
-		else if (t < co3)
-			return "DI";
-		else
-			return "HD";
-	}
 
-	
+
+  public String getUnitCode() {
+    return this.unitCode_;
+  }
+
+
+
+  public String getUnitName() {
+    return this.unitName_;
+  }
+
+
+
+  public float getAdditionalExaminationMinimumMark() {
+    return this.additionalExaminationMinimumMark_;
+  }
+
+
+
+  public float getPassMinimumMark() {
+    return this.passMinimumMark_;
+  }
+
+
+
+  public float getCreditMinimumMark() {
+    return this.creditMinimumMark_;
+  }
+
+
+
+  public float getDistinctionMinimumMark() {
+    return this.distinctionMinimumMark_;
+  }
+
+
+
+  public float getHighDistinctionMinimumMark() {
+    return this.highDistinctionMinimumMark_;
+  }
+
+
+
+  @Override
+  public int getAssignmentOneWeight() {
+    return this.assignmentOneWeight_;
+  }
+
+
+
+  @Override
+  public int getAssignmentTwoWeight() {
+    return this.assignmentTwoWeight_;
+  }
+
+
+
+  @Override
+  public int getExamWeight() {
+    return this.examWeight_;
+  }
+
+
+
+  public IStudentUnitRecord getStudentUnitRecord(int studentId) {
+    for (IStudentUnitRecord record : this.getStudentUnitRecords()) {
+      if (record.getStudentId() == studentId) {
+        return record;
+      }
+    }
+    return null;
+  }
+
+
+
+  public StudentUnitRecordList getStudentUnitRecords() {
+    return this.studentUnitRecordList_;
+  }
+
+
+
+  public void setAdditionalExaminationMinimumMark(float mark) {
+    this.additionalExaminationMinimumMark_ = mark;
+  }
+
+
+
+  public void setPassMinimumMark(float mark) {
+    this.passMinimumMark_ = mark;
+  }
+
+
+
+  public void setCreditMinimumMark(float mark) {
+    this.creditMinimumMark_ = mark;
+  }
+
+
+
+  public void setDistinctionMinimumMark(float mark) {
+    this.distinctionMinimumMark_ = mark;
+  }
+
+
+
+  public void setHighDistinctionMinimumMark(float mark) {
+    this.highDistinctionMinimumMark_ = mark;
+  }
+
+
+
+  @Override
+  public void setAssessmentWeights(int assignmentOneWeight,
+                                   int assignmentTwoWeight, int examWeight) {
+
+    if ((assignmentOneWeight < 0 || assignmentOneWeight > 100) ||
+        (assignmentTwoWeight < 0 || assignmentTwoWeight > 100) ||
+        (examWeight < 0          || examWeight > 100)) {
+      throw new RuntimeException("Assessment weights cant be less than " +
+                                 "zero or greater than 100" );
+    }
+
+    // TODO: will 3 floats cause rounding errors???
+    if (assignmentOneWeight + assignmentTwoWeight + examWeight != 100) {
+      throw new RuntimeException("Assessment weights must add to 100");
+    }
+
+    this.assignmentOneWeight_ = assignmentOneWeight;
+    this.assignmentTwoWeight_ = assignmentTwoWeight;
+    this.examWeight_ = examWeight;
+  }
+
+
+
+  private void setCutoffs(float alternativeAssessmentMinimumMark,
+                          float passMinimumMark, float creditMinimumMark,
+                          float distinctionMinimumMark,
+                          float highDistinctionMinimumMark) {
+    // could refactor for range check
+    if ((alternativeAssessmentMinimumMark < 0 ||
+             alternativeAssessmentMinimumMark > 100) ||
+        (passMinimumMark < 0            || passMinimumMark > 100) ||
+        (creditMinimumMark < 0          || creditMinimumMark > 100) ||
+        (distinctionMinimumMark < 0     || distinctionMinimumMark > 100) ||
+        (highDistinctionMinimumMark < 0 || highDistinctionMinimumMark > 100)) {
+      throw new RuntimeException( "Assessment cutoffs cant be less than zero or greater than 100");
+    }
+
+    if (alternativeAssessmentMinimumMark >= passMinimumMark) {
+      throw new RuntimeException( "AE cutoff must be less than PS cutoff");
+    }
+    if (passMinimumMark >= creditMinimumMark) {
+      throw new RuntimeException( "PS cutoff must be less than CR cutoff" );
+    }
+    if (creditMinimumMark >= distinctionMinimumMark) {
+      throw new RuntimeException( "CR cutoff must be less than DI cutoff" );
+    }
+    if (distinctionMinimumMark >= highDistinctionMinimumMark) {
+      throw new RuntimeException( "DI cutoff must be less than HD cutoff" );
+    }
+
+  }
+
+
+
 }

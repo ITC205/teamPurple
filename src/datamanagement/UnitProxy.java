@@ -1,62 +1,263 @@
 package datamanagement;
-public class UnitProxy implements IUnit {
-private String UC;
-        private String un;
 
-        
-        UnitManager   um;
+/**
+ * Proxy class for Unit
+ */
+public class UnitProxy
+  implements IUnit
+{
+  //===========================================================================
+  // Variables
+  //===========================================================================
 
-    public UnitProxy( String unitCode, String unitName ) {
-        this.UC = unitCode;
-            this.un = unitName;
-                um = UnitManager.UM(); }
-    public String getUnitCode() { 
-        return this.UC;}
-        public String getUnitName() { 
-            return this.un; 
-        }
-    public void setPsCutoff1(float cutoff) {
-        um.getUnit(UC).setPsCutoff1(cutoff);
-}
-public float getPsCutoff() {
-        return um.getUnit(UC).getPsCutoff();}
-    public void setCrCutoff(float cutoff) {um.getUnit(UC).setCrCutoff(cutoff);
-    }
-    public float getCrCutoff() {
-return um.getUnit(UC).getCrCutoff();
-    }
+  private String unitCode_;
+  private String unitName_;
 
-public void setDiCutoff(float cutoff) {um.getUnit(UC).setDiCutoff(cutoff);}
-    public float getDiCuttoff() {return um.getUnit(UC).getDiCuttoff();}
-public void setHdCutoff(float cutoff) {
-    um.getUnit(UC).setHdCutoff(cutoff);}
-    public float getHdCutoff() {
+  UnitManager unitManager_;
 
-        return um.getUnit(UC).getHdCutoff();}
-public void setAeCutoff(float cutoff) {um.getUnit(UC).setAeCutoff(cutoff);
-    }
-    public float getAeCutoff() {return um.getUnit(UC).getAeCutoff();}
-public String getGrade(float f1, float f2, float f3) {
-return um.getUnit(UC).getGrade(f1, f2, f3);
-    }
-    public void addStudentRecord(IStudentUnitRecord record) 
-{ 
-um.getUnit(UC).addStudentRecord(record);
-    }
-    public IStudentUnitRecord getStudentRecord(int s) {return um.getUnit(UC).getStudentRecord(s);}
-public StudentUnitRecordList listStudentRecords() {
-    return um.getUnit(UC).listStudentRecords();
+  //===========================================================================
+  // Constructors
+  //===========================================================================
+
+  /**
+   * Creates a new UnitProxy with a singleton unitManager
+   */
+  public UnitProxy(String unitCode, String unitName)
+  {
+    this.unitCode_ = unitCode;
+    this.unitName_ = unitName;
+    this.unitManager_ = UnitManager.getInstance();
+  }
+
+  //===========================================================================
+  // Methods
+  //===========================================================================
+
+  /**
+   * calculates the correct grade for this unit
+   * @param assignmentOneMark student's mark (float) for assignment one
+   * @param assignmentTwoMark student's mark (float) for assignment two
+   * @param examMark student's mark (float) for the exam
+   */
+  public String calculateGrade(float assignmentOneMark,
+                               float assignmentTwoMark, float examMark)
+  {
+    // TODO: refactor ref to: this.unitManager_.getUnit(this.unitCode_)
+    return this.unitManager_.getUnit(this.unitCode_)
+                            .calculateGrade(assignmentOneMark,
+                                            assignmentTwoMark, examMark);
+  }
+
+
+
+  /**
+   * adds a student's record to the unit records
+   * @param record studentUnitRecord
+   */
+  public void addStudentRecord(IStudentUnitRecord record)
+  {
+    this.unitManager_.getUnit(this.unitCode_)
+                     .addStudentRecord(record);
+  }
+
+
+
+
+  /**
+   * returns this unit's code
+   * @return unitCode (String)
+   */
+  public String getUnitCode()
+  {
+    return this.unitCode_;
+  }
+
+
+  /**
+   * returns this unit's name
+   * @return unitName (String)
+   */
+  public String getUnitName()
+  {
+    return this.unitName_;
+  }
+
+
+  /**
+   * returns the minimum mark required to qualify for an additional examination
+   * @return mark (float)
+   */
+  public float getAdditionalExaminationMinimumMark()
+  {
+    return this.unitManager_.getUnit(this.unitCode_)
+                            .getAdditionalExaminationMinimumMark();
+  }
+
+
+
+  /**
+   * returns the minimum mark required to attain a Pass grade
+   * @return mark (float)
+   */
+  public float getPassMinimumMark()
+  {
+    return this.unitManager_.getUnit(this.unitCode_)
+                            .getPassMinimumMark();
+  }
+
+
+
+  /**
+   * returns the minimum mark required to attain a Credit grade
+   * @return mark (float)
+   */
+  public float getCreditMinimumMark()
+  {
+    return this.unitManager_.getUnit(this.unitCode_)
+                            .getCreditMinimumMark();
+  }
+
+
+
+  /**
+   * returns the minimum mark required to attain a Distinction grade
+   * @return mark (float)
+   */
+  public float getDistinctionMinimumMark()
+  {
+    return this.unitManager_.getUnit(this.unitCode_)
+                            .getDistinctionMinimumMark();
+  }
+
+
+
+  /**
+   * returns the minimum mark required to attain a High Distinction grade
+   * for this unit
+   * @return mark (float)
+   */
+  public float getHighDistinctionMinimumMark()
+  {
+    return this.unitManager_.getUnit(this.unitCode_)
+                            .getHighDistinctionMinimumMark();
+  }
+
+
+
+  /**
+   * returns the weighting for assignment one in this unit
+   * @return weight (int)
+   */
+  public int getAssignmentOneWeight()
+  {
+    return this.unitManager_.getUnit(this.unitCode_)
+                            .getAssignmentOneWeight();
+  }
+
+
+
+  /**
+   * returns the weighting for assignment two in this unit
+   * @return weight (int)
+   */
+  public int getAssignmentTwoWeight()
+  {
+    return this.unitManager_.getUnit(this.unitCode_)
+                            .getAssignmentTwoWeight();
+  }
+
+
+
+  /**
+   * returns the weighting for the exam in this unit
+   * @return weight (int)
+   */
+  public int getExamWeight()
+  {
+    return this.unitManager_.getUnit(this.unitCode_)
+                            .getExamWeight();
+  }
+
+
+  /**
+   * returns a student's record for this unit
+   * @param studentId identifies student
+   * @return studentUnitRecord
+   */
+  public IStudentUnitRecord getStudentUnitRecord(int studentId)
+  {
+    return this.unitManager_.getUnit(this.unitCode_)
+                            .getStudentUnitRecord(studentId);
+  }
+
+
+
+  /**
+   * returns all students' records for this unit
+   * @return studentUnitRecordList
+   */
+  public StudentUnitRecordList getStudentUnitRecords()
+  {
+    return this.unitManager_.getUnit(this.unitCode_)
+                            .getStudentUnitRecords();
+  }
+
+
+
+  public void setAdditionalExaminationMinimumMark(float mark)
+  {
+    this.unitManager_.getUnit(this.unitCode_)
+                     .setAdditionalExaminationMinimumMark(mark);
+  }
+
+
+
+  public void setPassMinimumMark(float mark)
+  {
+    this.unitManager_.getUnit(this.unitCode_)
+                     .setPassMinimumMark(mark);
+  }
+
+
+
+  public void setCreditMinimumMark(float mark)
+  {
+    this.unitManager_.getUnit(this.unitCode_)
+                     .setCreditMinimumMark(mark);
+  }
+
+
+
+  public void setDistinctionMinimumMark(float mark)
+  {
+    this.unitManager_.getUnit(this.unitCode_)
+                     .setDistinctionMinimumMark(mark);
+  }
+
+
+
+  public void setHighDistinctionMinimumMark(float mark)
+  {
+    this.unitManager_.getUnit(this.unitCode_)
+                     .setHighDistinctionMinimumMark(mark);
+  }
+
+
+
+  /**
+   * sets this unit's weightings
+   * @param assignmentOneWeight weight of assignment one in overall mark
+   * @param assignmentTwoWeight weight of assignment two in overall mark
+   * @param examWeight weight of the exam in overall mark
+   */
+  public void setAssessmentWeights(int assignmentOneWeight,
+                                   int assignmentTwoWeight, int examWeight)
+  {
+    this.unitManager_.getUnit(this.unitCode_)
+                     .setAssessmentWeights(assignmentOneWeight,
+                                           assignmentTwoWeight, examWeight);
+  }
+
+
+
 }
-public int getAsg1Weight() {
-	return um.getUnit(UC).getAsg1Weight();
-}
-public int getAsg2Weight() {
-	return um.getUnit(UC).getAsg2Weight();
-}
-public int getExamWeight() {
-	return um.getUnit(UC).getExamWeight();
-}
-public void setAssessmentWeights(int asg1Wgt, int asg2Wgt, int examWgt) {
-	um.getUnit(UC).setAssessmentWeights(asg1Wgt, asg2Wgt, examWgt);
-	
-}}

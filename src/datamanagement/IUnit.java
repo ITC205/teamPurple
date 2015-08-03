@@ -1,34 +1,43 @@
 package datamanagement;
 
-public interface IUnit {
 
-    public String getUnitCode();
-    public String getUnitName();
+/**
+ * all about this interface...
+ */
+public interface IUnit
+{
+  public String calculateGrade(float assignmentOneMark,
+                               float assignmentTwoMark,
+                               float examMark);
 
-    public float getPsCutoff();
-    public void  setPsCutoff1(float cutoff);
+  public void addStudentRecord(IStudentUnitRecord studentUnitRecord);
 
-    public float getCrCutoff();
-    public void  setCrCutoff(float cutoff);
+  public String getUnitCode();
+  public String getUnitName();
 
-    public float getDiCuttoff();    
-    public void  setDiCutoff(float cutoff);
+  public float getAdditionalExaminationMinimumMark();
+  public float getPassMinimumMark();
+  public float getCreditMinimumMark();
+  public float getDistinctionMinimumMark();
+  public float getHighDistinctionMinimumMark();
 
-    public float getHdCutoff();
-    public void  setHdCutoff(float cutoff);    
+  public int getAssignmentOneWeight();
+  public int getAssignmentTwoWeight();
+  public int getExamWeight();
 
-    public float getAeCutoff();    
-    public void  setAeCutoff(float cutoff);
-    
-    public int getAsg1Weight();
-    public int getAsg2Weight();
-    public int getExamWeight();
-    public void setAssessmentWeights(int asg1Wgt, int asg2Wgt, int examWgt);
+  public IStudentUnitRecord getStudentUnitRecord(int studentId);
+  public StudentUnitRecordList getStudentUnitRecords();
 
-    public String getGrade(float asg1, float asg2, float exam);
+  public void setAdditionalExaminationMinimumMark(float mark);
+  public void setPassMinimumMark(float mark);
+  public void setCreditMinimumMark(float mark);
+  public void setDistinctionMinimumMark(float mark);
+  public void setHighDistinctionMinimumMark(float mark);
 
-    public void addStudentRecord(IStudentUnitRecord record );
-    public IStudentUnitRecord getStudentRecord(int studentID );
-    
-    public StudentUnitRecordList listStudentRecords();
+  public void setAssessmentWeights(int assignmentOneWeight,
+                                   int assignmentTwoWeight,
+                                   int examWeight);
+
+
+
 }
