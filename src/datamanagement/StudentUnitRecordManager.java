@@ -135,17 +135,21 @@ public class StudentUnitRecordManager
 	
 	
 	
-	public void saveRecord(IStudentUnitRecord irec)
+	public void saveRecord(IStudentUnitRecord studentUnitRecord)
 	{
-		for (Element el : (List<Element>) XMLManager.getXML().getDocument()
-				.getRootElement().getChild("studentUnitRecordTable")
-				.getChildren("record")) {
-			if (irec.getStudentID().toString().equals(el.getAttributeValue("sid"))
-					&& irec.getUnitCode().equals(el.getAttributeValue("uid"))) {
-				el.setAttribute("asg1", new Float(irec.getAssessmentOneMark()).toString());
-
-				el.setAttribute("asg2", new Float(irec.getAssessmentTwoMark()).toString());
-				el.setAttribute("exam", new Float(irec.getExamMark()).toString());
+		List<Element> recordList = (List<Element>) XMLManager.getXML().getDocument() // recordList or studentUnitRecordList
+					.getRootElement().getChild("studentUnitRecordTable")
+					.getChildren("record");
+		
+		for (Element record : recordList) {
+			
+			if (studentUnitRecord.getStudentID().toString().equals(record.getAttributeValue("sid"))
+					&& studentUnitRecord.getUnitCode().equals(record.getAttributeValue("uid"))) {
+				
+				record.setAttribute("asg1", new Float(studentUnitRecord.getAssessmentOneMark()).toString());
+				record.setAttribute("asg2", new Float(studentUnitRecord.getAssessmentTwoMark()).toString());
+				record.setAttribute("exam", new Float(studentUnitRecord.getExamMark()).toString());
+				
 				XMLManager.getXML().saveDocument(); // write out the XML file for
 																						// continuous save
 				return;

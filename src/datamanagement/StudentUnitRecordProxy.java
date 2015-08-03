@@ -54,14 +54,16 @@ public class StudentUnitRecordProxy implements IStudentUnitRecord
 	public float getAssessmentOneMark()
 	{
 		
-		return manager_.getStudentUnitRecord(studentId_, unitCode_).getAssessmentOneMark();
+		return manager_.getStudentUnitRecord(studentId_, unitCode_).
+				getAssessmentOneMark(); // Okay?
 	}
 	
 	
 	
 	public float getAssessmentTwoMark()
 	{
-		return manager_.getStudentUnitRecord(studentId_, unitCode_).getAssessmentTwoMark();
+		return manager_.getStudentUnitRecord(studentId_, unitCode_).
+				getAssessmentTwoMark();
 	}
 	
 	
@@ -82,14 +84,16 @@ public class StudentUnitRecordProxy implements IStudentUnitRecord
 	
 	public void setAssessmentOneMark(float newMark)
 	{
-		manager_.getStudentUnitRecord(studentId_, unitCode_).setAssessmentOneMark(newMark);
+		manager_.getStudentUnitRecord(studentId_, unitCode_).
+				setAssessmentOneMark(newMark);
 	}
 
 	
 
 	public void setAssessmentTwoMark(float newMark)
 	{
-		manager_.getStudentUnitRecord(studentId_, unitCode_).setAssessmentTwoMark(newMark);
+		manager_.getStudentUnitRecord(studentId_, unitCode_).
+				setAssessmentTwoMark(newMark); // Okay? Double tab
 	}
 
 	
