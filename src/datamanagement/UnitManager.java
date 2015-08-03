@@ -42,7 +42,7 @@ public class UnitManager
    */
   public IUnit getUnit(String uc)
   {
-    IUnit iu = UM.get(uc);
+    IUnit iu = this.UM.get(uc);
     return iu != null ? iu : createUnit(uc);
   }
 

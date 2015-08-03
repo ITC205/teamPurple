@@ -25,7 +25,7 @@ public class UnitProxy implements IUnit
   {
     this.UC = unitCode;
     this.un = unitName;
-    um = UnitManager.UM();
+    this.um = UnitManager.UM();
   }
 
 
@@ -62,7 +62,7 @@ public class UnitProxy implements IUnit
   @Override
   public float getAeCutoff()
   {
-    return um.getUnit(UC).getAeCutoff();
+    return this.um.getUnit(UC).getAeCutoff();
   }
 
 
@@ -73,7 +73,7 @@ public class UnitProxy implements IUnit
   @Override
   public float getPsCutoff()
   {
-    return um.getUnit(UC).getPsCutoff();
+    return this.um.getUnit(UC).getPsCutoff();
   }
 
 
@@ -83,7 +83,7 @@ public class UnitProxy implements IUnit
    */
   @Override
   public float getCrCutoff() {
-  return um.getUnit(UC).getCrCutoff();
+  return this.um.getUnit(UC).getCrCutoff();
   }
 
 
@@ -94,7 +94,7 @@ public class UnitProxy implements IUnit
   @Override
   public float getDiCuttoff()
   {
-    return um.getUnit(UC).getDiCuttoff();
+    return this.um.getUnit(UC).getDiCuttoff();
   }
 
 

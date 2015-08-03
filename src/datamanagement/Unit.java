@@ -30,7 +30,18 @@ public class Unit
   //===========================================================================
 
   /**
-   *
+   * creates a new unit
+   * @param UC this unit's code
+   * @param un this unit's name
+   * @param f1 minimum mark to obtain a Pass grade in this unit
+   * @param f2 minimum mark to obtain a Credit grade in this unit
+   * @param f3 minimum mark to obtain a Distinction grade in this unit
+   * @param f4 minimum mark to obtain a High Distinction grade in this unit
+   * @param f5 minimum mark to qualify for an Alternative Assessment in this unit
+   * @param i1 weighting for assessment one in this unit
+   * @param i2 weighting for assessment two in this unit
+   * @param i3 weighting for the exam in this unit
+   * @param rl collection of student records for this unit
    */
   public Unit(String UC, String un,
               float f1, float f2, float f3,
@@ -38,15 +49,15 @@ public class Unit
               int i1, int i2, int i3,
               StudentUnitRecordList rl)
   {
-    uc = UC;
-    UN = un;
-    co2 = f1;
-    co1 = f2;
+    this.uc = UC;
+    this.UN = un;
+    this.co2 = f1;
+    this.co1 = f2;
     this.co4 = f3;
-    co3 = f4;
+    this.co3 = f4;
     this.co5 = f5;
     this.setAssessmentWeights(i1, i2, i3);
-    rs = rl == null ? new StudentUnitRecordList() : rl;
+    this.rs = rl == null ? new StudentUnitRecordList() : rl;
   }
 
 
@@ -55,7 +66,8 @@ public class Unit
   //===========================================================================
 
   /**
-   *
+   * returns this unit's code
+   * @return String code for unit
    */
   @Override
   public String getUnitCode() {
@@ -65,7 +77,8 @@ public class Unit
 
 
   /**
-   *
+   * returns this unit's name
+   * @return String name of unit
    */
   @Override
   public String getUnitName()
@@ -76,18 +89,8 @@ public class Unit
 
 
   /**
-   *
-   */
-  @Override
-  public float getAeCutoff()
-  {
-    return this.co5;
-  }
-
-
-
-  /**
-   *
+   * returns the minimum mark to obtain a Pass grade in this unit
+   * @return float value represents mark required for the grade
    */
   @Override
   public float getPsCutoff()
@@ -98,7 +101,8 @@ public class Unit
 
 
   /**
-   *
+   * returns the minimum mark to obtain a Credit grade in this unit
+   * @return float value represents mark required for the grade
    */
   @Override
   public float getCrCutoff()
@@ -109,7 +113,8 @@ public class Unit
 
 
   /**
-   *
+   * returns the minimum mark to obtain a Distinction grade in this unit
+   * @return float value represents mark required for the grade
    */
   @Override
   public float getDiCuttoff()
@@ -120,67 +125,84 @@ public class Unit
 
 
   /**
-   *
+   * returns the minimum mark to obtain a High Distinction grade in this unit
+   * @return float value represents mark required for the grade
    */
   @Override
   public float getHdCutoff()
   {
     return this.co3;
-
   }
 
 
 
   /**
-   *
+   * returns minimum mark to qualify for an Alternative Assessment in this unit
+   * @return float value represents mark required to qualify
+   */
+  @Override
+  public float getAeCutoff()
+  {
+    return this.co5;
+  }
+
+
+
+  /**
+   * returns the weighting for assessment one in this unit
+   * @return integer weighting used for assignment one
    */
   @Override
   public int getAsg1Weight()
   {
-    return a1;
+    return this.a1;
   }
 
 
 
   /**
-   *
+   * returns the weighting for assessment one in this unit
+   * @return integer weighting used for assignment two
    */
   @Override
   public int getAsg2Weight()
   {
-    return a2;
+    return this.a2;
   }
 
 
 
   /**
-   *
+   * returns the weighting for assessment one in this unit
+   * @return integer weighting used for the exam
    */
   @Override
   public int getExamWeight()
   {
-    return ex;
+    return this.ex;
   }
 
 
 
   /**
-   *
+   * returns the entire collection of student records for this unit
+   * @return collection of student records (grades)
    */
   @Override
   public StudentUnitRecordList listStudentRecords()
   {
-    return rs;
+    return this.rs;
   }
 
 
 
   /**
-   *
+   * returns a specified student's (single) record for this unit
+   * @return student (grade) record for this unit
    */
   public IStudentUnitRecord getStudentRecord(int studentID)
   {
-    for (IStudentUnitRecord r : rs) {
+    for (IStudentUnitRecord r : this.rs) {
       if (r.getStudentID() == studentID)
         return r;
     }
@@ -190,17 +212,8 @@ public class Unit
 
 
   /**
-   *
-   */
-  public void setAeCutoff(float cutoff)
-  {
-    this.co5 = cutoff;
-  }
-
-
-
-  /**
-   *
+   * sets the minimum mark to obtain a Pass grade in this unit
+   * @param cutoff float value sets mark required for the grade
    */
   public void setPsCutoff1(float cutoff)
   {
@@ -210,7 +223,8 @@ public class Unit
 
 
   /**
-   *
+   * sets the minimum mark to obtain a Credit grade in this unit
+   * @param cutoff float value sets mark required for the grade
    */
   @Override
   public void setCrCutoff(float cutoff)
@@ -221,7 +235,8 @@ public class Unit
 
 
   /**
-   *
+   * sets the minimum mark to obtain a Distinction grade in this unit
+   * @param cutoff float value sets mark required for the grade
    */
   public void setDiCutoff(float cutoff)
   {
@@ -231,7 +246,8 @@ public class Unit
 
 
   /**
-   *
+   *  unused
+   *  @param cutoff float value sets mark required for the grade
    */
   public void HDCutoff(float cutoff)
   {
@@ -241,11 +257,25 @@ public class Unit
 
 
   /**
-   *
+   *  sets the minimum mark to obtain a High Distinction grade in this unit
+   *  @param cutoff float value sets mark required for the grade
    */
   public void setHdCutoff(float cutoff)
   {
     this.co3 = cutoff;
+  }
+
+
+
+  /**
+   * sets the minimum mark to qualify for an Alternative Assessment in this
+   * unit
+   * @param cutoff float value sets mark required to qualify for alternative
+   *               assessment
+   */
+  public void setAeCutoff(float cutoff)
+  {
+    this.co5 = cutoff;
   }
 
 
@@ -255,18 +285,23 @@ public class Unit
   //===========================================================================
 
   /**
-   *
+   * adds a student record to the collection of student records for this unit
+   * @param record student record to be added to collection of student records
+   *               for this unit
    */
   @Override
   public void addStudentRecord(IStudentUnitRecord record)
   {
-    rs.add(record);
+    this.rs.add(record);
   }
 
 
 
   /**
-   *
+   * sets the weightings for the 3 assessments for this unit
+   * @param a1 sets integer weighting used for assignment one
+   * @param a2 sets integer weighting used for assignment one
+   * @param ex sets integer weighting used for exam
    */
   @Override
   public void setAssessmentWeights(int a1, int a2, int ex)
@@ -288,9 +323,17 @@ public class Unit
 
 
   /**
-   *
+   * checks the minimum marks specified for each grade are within bounds and
+   * do not overlap
+   * @param ps float minimum mark to obtain a Pass grade in this unit
+   * @param cr float minimum mark to obtain a Credit grade in this unit
+   * @param di float minimum mark to obtain a Distinction grade in this unit
+   * @param hd float minimum mark to obtain a High Distinction grade in this
+   *           unit
+   * @param ae float minimum mark to qualify for an Alternative Assessment in
+   *           this unit
    */
-  private void setCutoffs( float ps, float cr, float di, float hd, float ae)
+  private void setCutoffs(float ps, float cr, float di, float hd, float ae)
   {
     if (ps < 0 || ps > 100 ||
         cr < 0 || cr > 100 ||
@@ -317,33 +360,38 @@ public class Unit
 
 
   /**
-   *
+   * calculates the correct grade for this unit (accounting for this unit's
+   * assessment weightings and specified grade minimums)
+   * @param f1 float student grade for assignment one in this unit
+   * @param f2 float student grade for assignment two in this unit
+   * @param f3 float student grade for the exam in this unit
+   * @return final unit grade e.g. "HD"
    */
   @Override
   public String getGrade(float f1, float f2, float f3)
   {
-    float t = f1 + f2 + f3;
+    float totalMark = f1 + f2 + f3;
 
-    if (f1 < 0 || f1 > a1 ||
-        f2 < 0 || f2 > a2 ||
-        f3 < 0 || f3 > ex ) {
+    if (f1 < 0 || f1 > this.a1 ||
+        f2 < 0 || f2 > this.a2 ||
+        f3 < 0 || f3 > this.ex ) {
       throw new RuntimeException("marks cannot be less than zero or greater" +
                                  " than assessment weights");
     }
 
-    if (t < co5) {
+    if (totalMark < co5) {
       return "FL";
     }
-    else if (t < co2) {
+    else if (totalMark < co2) {
       return "AE";
     }
-    else if (t < co1) {
+    else if (totalMark < co1) {
       return "PS";
     }
-    else if (t < co4) {
+    else if (totalMark < co4) {
       return "CR";
     }
-    else if (t < co3) {
+    else if (totalMark < co3) {
       return "DI";
     }
     else {
