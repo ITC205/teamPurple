@@ -2,12 +2,19 @@ package datamanagement;
 
 public class StudentProxy implements IStudent 
 {
+  //===========================================================================
+  // Variables
+  //===========================================================================
+  
   private Integer studentId_;
   private String firstName_;
   private String lastName_;
   private StudentManager studentList_;
 
   
+  //===========================================================================
+  // Constructors
+  //===========================================================================
   
   public StudentProxy( Integer studentId, String firstName, String lastName) 
   {
@@ -18,6 +25,9 @@ public class StudentProxy implements IStudent
   }
 
   
+  //===========================================================================
+  // Instance methods: accessors
+  //===========================================================================
   
   public Integer getID() 
   { 

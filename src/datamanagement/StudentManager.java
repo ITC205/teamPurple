@@ -9,6 +9,9 @@ import java.util.HashMap;
 
 public class StudentManager 
 {
+  //===========================================================================
+  // Variables
+  //===========================================================================
   
   private static StudentManager self = null;
 
@@ -16,7 +19,22 @@ public class StudentManager
   private HashMap<String, StudentMap> unitMap_;
 
   
+  //===========================================================================
+  // Constructors
+  //===========================================================================
   
+  private StudentManager() 
+  {
+    studentMap_ = new StudentMap();
+    unitMap_ = new HashMap<>();
+  }
+
+  
+  //===========================================================================
+  // Methods
+  //===========================================================================
+  
+  //Singleton class. Use getInstance
   public static StudentManager get() 
   {
     if (self == null) {
@@ -26,15 +44,9 @@ public class StudentManager
   }
 
   
-  
-  private StudentManager() 
-  {
-    studentMap_ = new StudentMap();
-    unitMap_ = new HashMap<>();
-  }
-
-  
-  
+  /**
+   * create new student or return existing student
+   */
   public IStudent getStudent(Integer studentId) 
   {
     IStudent student = studentMap_.get(studentId);
@@ -43,19 +55,25 @@ public class StudentManager
   }
 
   
-  
+  /**
+   * get student record from XML file
+   */
   private Element getStudentElement(Integer studentId) 
   {
     for (Element el : (List<Element>) XMLManager.getXML().getDocument().getRootElement().getChild("studentTable").getChildren("student")) 
+    {
       if (studentId.toString().equals(el.getAttributeValue("sid"))) {
         return el;
       }
+    }
     
     return null;
   }
 
   
-  
+  /**
+   * create new student
+   */
   private IStudent createStudent(Integer studentId) 
   {
     IStudent student;
@@ -72,7 +90,9 @@ public class StudentManager
   }
 
   
-  
+  /**
+   * create new student proxy
+   */
   private IStudent createStudentProxy(Integer studentId) 
   {
     Element el = getStudentElement(studentId);
@@ -85,7 +105,9 @@ public class StudentManager
   }
 
   
-  
+  /**
+   * return students studying unitCode
+   */
   public StudentMap getStudentsByUnit(String unitCode) 
   {
     StudentMap studentMapByUnit = unitMap_.get(unitCode);

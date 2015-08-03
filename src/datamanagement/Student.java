@@ -2,27 +2,36 @@ package datamanagement;
 
 public class Student implements IStudent 
 {
+  //===========================================================================
+  // Variables
+  //===========================================================================
   
   private Integer studentId_; 
   private String firstName_;
   private String lastName_;
-  private StudentUnitRecordList studentUnitRecordList_;
+  private StudentUnitRecordList recordList_;
 
   
+  //===========================================================================
+  // Constructors
+  //===========================================================================
   
-  public Student( Integer studentId, String firstName, String lastName, StudentUnitRecordList studentUnitRecordList ) 
+  public Student( Integer studentId, String firstName, String lastName, StudentUnitRecordList recordList ) 
   { 
     studentId_ = studentId; 
     firstName_ = firstName;
     lastName_ = lastName;
-    studentUnitRecordList_ = studentUnitRecordList == null ? new StudentUnitRecordList() : studentUnitRecordList;
+    recordList_ = recordList == null ? new StudentUnitRecordList() : recordList;
   }
 
   
+  //===========================================================================
+  // Instance methods: accessors
+  //===========================================================================
   
   public Integer getID() 
   { 
-    return this.studentId_; 
+    return studentId_; 
   } 
 
   
@@ -43,35 +52,40 @@ public class Student implements IStudent
   
   public StudentUnitRecordList getUnitRecords() 
   { 
-    return studentUnitRecordList_; 
+    return recordList_; 
   }
 
   
   
   public void setFirstName( String firstName ) 
   { 
-    this.firstName_ = firstName;
+    firstName_ = firstName;
   }
 
   
   
   public void setLastName( String lastName ) 
   { 
-    this.lastName_ = lastName; 
+    lastName_ = lastName; 
   }
 
   
+  //===========================================================================
+  // Methods
+  //===========================================================================
   
   public void addUnitRecord( IStudentUnitRecord record ) 
   { 
-    studentUnitRecordList_.add(record); 
+    recordList_.add(record); 
   }
 
   
-  
+  /**
+   * return student unit record for unitCode
+   */
   public IStudentUnitRecord getUnitRecord( String unitCode ) 
   {
-    for ( IStudentUnitRecord record : studentUnitRecordList_ ) {
+    for ( IStudentUnitRecord record : recordList_ ) {
       if ( record.getUnitCode().equals(unitCode)) {
         return record; 
       }
