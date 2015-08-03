@@ -26,6 +26,30 @@ public class Student implements IStudent
 
   
   //===========================================================================
+  // Methods: primary
+  //===========================================================================
+  
+  public void addUnitRecord( IStudentUnitRecord record ) 
+  { 
+    recordList_.add(record); 
+  }
+
+  
+  /**
+   * return student unit record for unitCode
+   */
+  public IStudentUnitRecord getUnitRecord( String unitCode ) 
+  {
+    for ( IStudentUnitRecord record : recordList_ ) {
+      if ( record.getUnitCode().equals(unitCode)) {
+        return record; 
+      }
+    }
+    return null;   
+  }
+  
+  
+  //===========================================================================
   // Instance methods: accessors
   //===========================================================================
   
@@ -67,30 +91,6 @@ public class Student implements IStudent
   public void setLastName( String lastName ) 
   { 
     lastName_ = lastName; 
-  }
-
-  
-  //===========================================================================
-  // Methods
-  //===========================================================================
-  
-  public void addUnitRecord( IStudentUnitRecord record ) 
-  { 
-    recordList_.add(record); 
-  }
-
-  
-  /**
-   * return student unit record for unitCode
-   */
-  public IStudentUnitRecord getUnitRecord( String unitCode ) 
-  {
-    for ( IStudentUnitRecord record : recordList_ ) {
-      if ( record.getUnitCode().equals(unitCode)) {
-        return record; 
-      }
-    }
-    return null;   
   }
   
   
