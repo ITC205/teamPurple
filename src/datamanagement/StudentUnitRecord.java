@@ -11,6 +11,7 @@ public class StudentUnitRecord implements IStudentUnitRecord
 	
 	private Integer studentId_;
 	private String unitCode_;
+	
 	private float assessmentOneMark_, assessmentTwoMark_, examMark_; // Separate out onto multiple lines?
 																																	 // Use 'mark' or 'grade' or some other name?
 	
