@@ -7,89 +7,113 @@ public class StudentUnitRecord implements IStudentUnitRecord
   // Variables
   //===========================================================================
 
+	
+	
 	private Integer studentId_;
 	private String unitCode_;
 	private float assessmentOneMark_, assessmentTwoMark_, examMark_; // Separate out onto multiple lines?
 																																	 // Use 'mark' or 'grade' or some other name?
-
 	
 	
 	//===========================================================================
   // Constructors
   //===========================================================================
 	
-	public StudentUnitRecord(Integer studentId, String unitCode, float assessmentOneMark, float assessmentTwoMark,
-														float examMark)
+	
+	
+	public StudentUnitRecord(Integer studentId, String unitCode, 
+			float assessmentOneMark, float assessmentTwoMark, float examMark)
 	{
 		this.studentId_ = studentId;
 		this.unitCode_ = unitCode;
-		this.setAsg1(assessmentOneMark);
-		this.setAsg2(assessmentTwoMark);
-		this.setExam(examMark);
+		this.setAssessmentOneMark(assessmentOneMark);
+		this.setAssessmentTwoMark(assessmentTwoMark);
+		this.setExamMark(examMark);
 	}
 
+	
+	
 	//===========================================================================
   // Accessors
   //===========================================================================
+	
+	
 	
 	public Integer getStudentID()
 	{
 		return studentId_;
 	}
 
+	
+	
 	public String getUnitCode()
 	{
 		return unitCode_;
 	}
 
-	public float getAsg1()
+	
+	
+	public float getAssessmentOneMark()
 	{
-
 		return assessmentOneMark_;
 	}
 	
-	public float getAsg2()
+	
+	
+	public float getAssessmentTwoMark()
 	{
 		return assessmentTwoMark_;
 	}
 
-	public float getExam()
+	
+	
+	public float getExamMark()
 	{
 		return examMark_;
 	}
 
-	public float getTotal()
+	
+	
+	public float getTotal() // Get total mark? get grade/final grade?
 	{
 		return assessmentOneMark_ + assessmentTwoMark_ + examMark_;
 
 	}
 	
-	public void setAsg1(float a1)
+	
+	
+	public void setAssessmentOneMark(float newMark) // newMark vs assessmentOneMark?
 	{
-		if (a1 < 0 || a1 > UnitManager.UM().getUnit(unitCode_).getAsg1Weight()) {
+		if (newMark < 0 || 
+				newMark > UnitManager.UM().getUnit(unitCode_).getAsg1Weight()) { // Split over two lines? Create validation method?
 			throw new RuntimeException(
 					"Mark cannot be less than zero or greater than assessment weight");
 		}
-		this.assessmentOneMark_ = a1;
+		this.assessmentOneMark_ = newMark;
 	}
 
-	public void setAsg2(float a2)
+	
+	
+	public void setAssessmentTwoMark(float newMark)
 	{
-		if (a2 < 0 || a2 > UnitManager.UM().getUnit(unitCode_).getAsg2Weight()) {
+		if (newMark < 0 || 
+				newMark > UnitManager.UM().getUnit(unitCode_).getAsg2Weight()) { // Split over two lines? Create validation method?
 			throw new RuntimeException(
 					"Mark cannot be less than zero or greater than assessment weight");
 		}
-		this.assessmentTwoMark_ = a2;
-
+		this.assessmentTwoMark_ = newMark;
 	}
 
-	public void setExam(float ex)
+	
+	
+	public void setExamMark(float newMark) // As above, or different?
 	{
-		if (ex < 0 || ex > UnitManager.UM().getUnit(unitCode_).getExamWeight()) {
+		if (newMark < 0 || 
+				newMark > UnitManager.UM().getUnit(unitCode_).getExamWeight()) { // Split over two lines? Create validation method?
 			throw new RuntimeException(
 					"Mark cannot be less than zero or greater than assessment weight");
 		}
-		this.examMark_ = ex;
+		this.examMark_ = newMark;
 	}
 
 }
