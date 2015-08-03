@@ -14,7 +14,7 @@ public class UnitManager
 
   private static UnitManager instance_ = null;
 
-  private UnitMap unitMap;
+  private UnitMap unitMap_;
 
 
   //===========================================================================
@@ -24,8 +24,9 @@ public class UnitManager
   /**
    * restricts access to create new instance, follows Singleton pattern
    */
-  private UnitManager() {
-    unitMap = new UnitMap();
+  private UnitManager()
+  {
+    unitMap_ = new UnitMap();
   }
 
 
@@ -35,9 +36,10 @@ public class UnitManager
   //===========================================================================
 
   /**
-   * returns Singleton instance
+   * ensures Singleton instance
    */
-  public static UnitManager getInstance() {
+  public static UnitManager getInstance()
+  {
     if (instance_ == null)
       instance_ = new UnitManager();
     return instance_;
@@ -50,8 +52,9 @@ public class UnitManager
    * @param unitCode
    * @return unit with given unitCode
    */
-  public IUnit getUnit(String unitCode) {
-    IUnit unit = unitMap.get(unitCode);
+  public IUnit getUnit(String unitCode)
+  {
+    IUnit unit = unitMap_.get(unitCode);
     if (unit == null) {
       createUnit(unitCode);
     }
@@ -61,15 +64,16 @@ public class UnitManager
 
 
   /**
-   *
+   * instantiates new unit from xml file
+   * and adds unit to collection
    */
-  private IUnit createUnit(String unitCode) {
+  private IUnit createUnit(String unitCode)
+  {
     IUnit unit;
-    List<Element> elements = (List<Element>)XmlManager.getInstance()
+    List<Element> elements = (List<Element>)XMLManager.getInstance()
         .getDocument().getRootElement().getChild("unitTable").getChildren("unit");
     for (Element element : elements)
       if (unitCode.equals(element.getAttributeValue("uid"))) {
-        StudentUnitRecordList studentUnitRecordList  = null;
         unit = new Unit(element.getAttributeValue("uid"),
                         element.getAttributeValue("name"),
                         Float.valueOf(element.getAttributeValue("ps")).floatValue(),
@@ -81,7 +85,7 @@ public class UnitManager
                         Integer.valueOf(element.getAttributeValue("asg2wgt")).intValue(),
                         Integer.valueOf(element.getAttributeValue("examwgt")).intValue(),
                         StudentUnitRecordManager.instance().getRecordsByUnit(unitCode));
-        unitMap.put(unit.getUnitCode(), unit);
+        unitMap_.put(unitCode, unit);
         return unit;
       }
 
@@ -91,12 +95,13 @@ public class UnitManager
 
 
   /**
-   *
+   * returns all units
    */
-  public UnitMap getUnits() {
+  public UnitMap getUnits()
+  {
     UnitMap unitMap = new UnitMap();
     IUnit unit;
-    List<Element> elements = (List<Element>)XmlManager.getInstance()
+    List<Element> elements = (List<Element>)XMLManager.getInstance()
          .getDocument().getRootElement().getChild("unitTable").getChildren("unit");
 
     for (Element element : elements) {

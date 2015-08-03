@@ -1,11 +1,11 @@
 package datamanagement;
 
-
 /**
- * all about this interface...
+ * Unit
  */
 public interface IUnit
 {
+  // TODO: should all javadoc actually be here???
   public String calculateGrade(float assignmentOneMark,
                                float assignmentTwoMark,
                                float examMark);
@@ -34,10 +34,8 @@ public interface IUnit
   public void setDistinctionMinimumMark(float mark);
   public void setHighDistinctionMinimumMark(float mark);
 
+  // TODO: rename to applyAssessmentWeights() ???
   public void setAssessmentWeights(int assignmentOneWeight,
                                    int assignmentTwoWeight,
                                    int examWeight);
-
-
-
 }
