@@ -37,7 +37,7 @@ public class StudentUnitRecordProxy implements IStudentUnitRecord
 	
 	
 	
-	public Integer getStudentID()
+	public Integer getStudentId()
 	{
 		return studentId_;
 	}

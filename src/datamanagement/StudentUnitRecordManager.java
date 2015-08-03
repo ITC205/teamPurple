@@ -62,7 +62,7 @@ public class StudentUnitRecordManager
 			String unitCode)
 	{
 		IStudentUnitRecord ir = recordMap_.get(studentID.toString() + unitCode);
-		return ir != null ? ir : createStudentUnitRecord(studentID, unitCode);
+		return ir != null ? ir : createStudentUnitRecord(studentID, unitCode); // Change to regular if/else?
 	}
 
 	
@@ -70,18 +70,26 @@ public class StudentUnitRecordManager
 	public StudentUnitRecordList getRecordsByUnit(String unitCode)
 	{
 		StudentUnitRecordList recs = ur.get(unitCode);
-		if (recs != null)
+		
+		if (recs != null) {
 			return recs;
+		}
+		
 		recs = new StudentUnitRecordList();
+		
 		for (Element el : (List<Element>) XMLManager.getXML().getDocument()
 				.getRootElement().getChild("studentUnitRecordTable")
 				.getChildren("record")) {
-			if (unitCode.equals(el.getAttributeValue("uid")))
+			if (unitCode.equals(el.getAttributeValue("uid"))) {
 				recs.add(new StudentUnitRecordProxy(new Integer(el
 						.getAttributeValue("sid")), el.getAttributeValue("uid")));
-		}
-		if (recs.size() > 0)
+			} // End if
+		} // End for
+		
+		if (recs.size() > 0) {
 			ur.put(unitCode, recs); // be careful - this could be empty
+		}
+		
 		return recs;
 	}
 
@@ -90,17 +98,26 @@ public class StudentUnitRecordManager
 	public StudentUnitRecordList getRecordsByStudent(Integer studentID)
 	{
 		StudentUnitRecordList recs = sr.get(studentID);
-		if (recs != null)
+		
+		if (recs != null) {
 			return recs;
+		}
+		
 		recs = new StudentUnitRecordList();
+		
 		for (Element el : (List<Element>) XMLManager.getXML().getDocument()
 				.getRootElement().getChild("studentUnitRecordTable")
-				.getChildren("record"))
-			if (studentID.toString().equals(el.getAttributeValue("sid")))
+				.getChildren("record")) {
+			if (studentID.toString().equals(el.getAttributeValue("sid"))) {
 				recs.add(new StudentUnitRecordProxy(new Integer(el
 						.getAttributeValue("sid")), el.getAttributeValue("uid")));
-		if (recs.size() > 0)
+			}
+		}
+		
+		if (recs.size() > 0) {
 			sr.put(studentID, recs); // be careful - this could be empty
+		}
+		
 		return recs;
 	}
 
@@ -112,23 +129,46 @@ public class StudentUnitRecordManager
 	
 	
 	
-	private IStudentUnitRecord createStudentUnitRecord(Integer uid, String sid)
+	private IStudentUnitRecord createStudentUnitRecord(Integer studentId, 
+			String unitCode)
 	{
-		IStudentUnitRecord ir;
-		for (Element el : (List<Element>) XMLManager.getXML().getDocument()
+		IStudentUnitRecord studentUnitRecord;
+		
+		List<Element> recordList = (List<Element>) XMLManager.getXML().getDocument() // recordList or studentUnitRecordList
 				.getRootElement().getChild("studentUnitRecordTable")
-				.getChildren("record")) {
-			if (uid.toString().equals(el.getAttributeValue("sid"))
-					&& sid.equals(el.getAttributeValue("uid"))) {
-				ir = new StudentUnitRecord(new Integer(el.getAttributeValue("sid")),
-						el.getAttributeValue("uid"),
-						new Float(el.getAttributeValue("asg1")).floatValue(), new Float(
-								el.getAttributeValue("asg2")).floatValue(), new Float(
-								el.getAttributeValue("exam")).floatValue());
-				recordMap_.put(ir.getStudentID().toString() + ir.getUnitCode(), ir);
-				return ir;
+				.getChildren("record");
+		
+		boolean studentIdMatch; // Extract complex conditional?
+		boolean unitCodeMatch;
+		
+		for (Element record : recordList) {
+			
+			studentIdMatch = studentId.toString()
+					.equals(record.getAttributeValue("sid"));
+			
+			unitCodeMatch = unitCode.equals(record.getAttributeValue("uid"));
+			
+			if (studentIdMatch && unitCodeMatch) {
+				Integer recordStudentId = new Integer(record.getAttributeValue("sid"));
+				String recordUnitCode = record.getAttributeValue("uid");
+				
+				Float assessmentOneMark = new Float(
+						record.getAttributeValue("asg1")).floatValue();
+				Float assessmentTwoMark = new Float(
+						record.getAttributeValue("asg2")).floatValue();
+				Float examMark = new Float(
+						record.getAttributeValue("exam")).floatValue();
+				
+				studentUnitRecord = new StudentUnitRecord(recordStudentId, recordUnitCode,
+						assessmentOneMark, assessmentTwoMark, examMark);
+				
+				recordMap_.put(studentUnitRecord.getStudentId().toString() + 
+						studentUnitRecord.getUnitCode(), studentUnitRecord);
+				
+				return studentUnitRecord;
 			} // End if
 		} // End for
+		
 		throw new RuntimeException(
 				"DBMD: createStudent : student unit record not in file");
 	}
@@ -141,10 +181,19 @@ public class StudentUnitRecordManager
 					.getRootElement().getChild("studentUnitRecordTable")
 					.getChildren("record");
 		
+		boolean studentIdMatch; // Extract complex conditional?
+		boolean unitCodeMatch;
+		
 		for (Element record : recordList) {
 			
-			if (studentUnitRecord.getStudentID().toString().equals(record.getAttributeValue("sid"))
-					&& studentUnitRecord.getUnitCode().equals(record.getAttributeValue("uid"))) {
+			studentIdMatch = studentUnitRecord.getStudentId().toString()
+					.equals(record.getAttributeValue("sid"));
+			
+			unitCodeMatch = studentUnitRecord.getUnitCode()
+					.equals(record.getAttributeValue("uid"));
+			
+			
+			if (studentIdMatch && unitCodeMatch) {
 				
 				record.setAttribute("asg1", new Float(studentUnitRecord.getAssessmentOneMark()).toString());
 				record.setAttribute("asg2", new Float(studentUnitRecord.getAssessmentTwoMark()).toString());
@@ -153,8 +202,8 @@ public class StudentUnitRecordManager
 				XMLManager.getXML().saveDocument(); // write out the XML file for
 																						// continuous save
 				return;
-			}
-		}
+			} // End if
+		} // End for
 
 		throw new RuntimeException(
 				"DBMD: saveRecord : no such student record in data");

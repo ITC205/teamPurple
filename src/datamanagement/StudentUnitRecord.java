@@ -39,7 +39,7 @@ public class StudentUnitRecord implements IStudentUnitRecord
 	
 	
 	
-	public Integer getStudentID()
+	public Integer getStudentId()
 	{
 		return studentId_;
 	}
@@ -114,8 +114,11 @@ public class StudentUnitRecord implements IStudentUnitRecord
 	
 	public void setExamMark(float newMark) // As above, or different?
 	{
-		if (newMark < 0 || 
-				newMark > UnitManager.UM().getUnit(unitCode_).getExamWeight()) { // Split over two lines? Create validation method?
+		boolean isNegative = newMark < 0;
+		boolean isGreaterThanWeight = newMark > UnitManager.UM()
+				.getUnit(unitCode_).getExamWeight();
+		
+		if (isNegative || isGreaterThanWeight) {
 			throw new RuntimeException(
 					"Mark cannot be less than zero or greater than assessment weight");
 		}
