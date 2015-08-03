@@ -84,8 +84,11 @@ public class StudentUnitRecord implements IStudentUnitRecord
 	
 	public void setAssessmentOneMark(float newMark) // newMark vs assessmentOneMark?
 	{
-		if (newMark < 0 || 
-				newMark > UnitManager.UM().getUnit(unitCode_).getAsg1Weight()) { // Split over two lines? Create validation method?
+		boolean isNegative = newMark < 0;
+		boolean isGreaterThanWeight = newMark > UnitManager.UM()
+				.getUnit(unitCode_).getAsg1Weight();
+		
+		if (isNegative || isGreaterThanWeight) {
 			throw new RuntimeException(
 					"Mark cannot be less than zero or greater than assessment weight");
 		}
@@ -93,11 +96,14 @@ public class StudentUnitRecord implements IStudentUnitRecord
 	}
 
 	
-	
-	public void setAssessmentTwoMark(float newMark)
+	// See 5.7 - #53 Complex Conditionals
+	public void setAssessmentTwoMark(float newMark) 
 	{
-		if (newMark < 0 || 
-				newMark > UnitManager.UM().getUnit(unitCode_).getAsg2Weight()) { // Split over two lines? Create validation method?
+		boolean isNegative = newMark < 0;
+		boolean isGreaterThanWeight = newMark > UnitManager.UM()
+				.getUnit(unitCode_).getAsg2Weight();
+		
+		if (isNegative || isGreaterThanWeight) { 
 			throw new RuntimeException(
 					"Mark cannot be less than zero or greater than assessment weight");
 		}
