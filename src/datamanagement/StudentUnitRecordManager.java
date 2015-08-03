@@ -97,10 +97,10 @@ public class StudentUnitRecordManager
 				.getChildren("record")) {
 			if (irec.getStudentID().toString().equals(el.getAttributeValue("sid"))
 					&& irec.getUnitCode().equals(el.getAttributeValue("uid"))) {
-				el.setAttribute("asg1", new Float(irec.getAsg1()).toString());
+				el.setAttribute("asg1", new Float(irec.getAssessmentOneMark()).toString());
 
-				el.setAttribute("asg2", new Float(irec.getAsg2()).toString());
-				el.setAttribute("exam", new Float(irec.getExam()).toString());
+				el.setAttribute("asg2", new Float(irec.getAssessmentTwoMark()).toString());
+				el.setAttribute("exam", new Float(irec.getExamMark()).toString());
 				XMLManager.getXML().saveDocument(); // write out the XML file for
 																						// continuous save
 				return;
