@@ -5,9 +5,9 @@ import java.util.List;
 import org.jdom.*;
 
 /**
- * collection of units, implemented as a Singleton
- * allows units to be created and added to the collection
- * and retrieves a specified unit or entire collection
+ * Creates and manages the collection of units.
+ * Allows units to be created and added to the collection
+ * and retrieves a specified unit or entire collection.
  */
 public class UnitManager
 {
@@ -24,7 +24,9 @@ public class UnitManager
   //===========================================================================
 
   /**
-   *
+   * Creates and initializes a new UnitManager instance following the
+   * singleton pattern.
+   * Creation of new instances is restricted through private access modifier.
    */
   private UnitManager()
   {
@@ -38,7 +40,25 @@ public class UnitManager
   //===========================================================================
 
   /**
-   *
+   * Returns the sole xmlManager instance (following the singleton pattern).
+   * @return XMLManager Returns sole XMLManager instance responsible for
+   * managing data from xml file.
+   */
+  public static UnitManager UM()
+  {
+    if (self == null) {
+      self = new UnitManager();
+    }
+    return self;
+  }
+
+
+
+  /**
+   * Returns a unit (either from collection of units in memory, or from xml
+   * file - if it exists).
+   * @param uc Unit code.
+   * @return IUnit Returns a unit.
    */
   public IUnit getUnit(String uc)
   {
@@ -53,20 +73,9 @@ public class UnitManager
   //===========================================================================
 
   /**
-   *
-   */
-  public static UnitManager UM()
-  {
-    if (self == null) {
-      self = new UnitManager();
-    }
-    return self;
-  }
-
-
-
-  /**
-   *
+   * Creates a unit from xml file representation.
+   * @param unitCode Unit code used to match uid of unit in xml file
+   * @return IUnit Returns unit.
    */
   private IUnit createUnit(String unitCode)
   {
@@ -82,10 +91,10 @@ public class UnitManager
         iu = new Unit(el.getAttributeValue("uid"),
         el.getAttributeValue("name"), Float.valueOf(
         el.getAttributeValue("ps")).floatValue(), Float
-        .valueOf( el.getAttributeValue( "cr" ) )
+        .valueOf( el.getAttributeValue("cr"))
         .floatValue(), Float.valueOf(
         el.getAttributeValue("di")).floatValue(), Float
-        .valueOf( el.getAttributeValue( "hd" ) )
+        .valueOf( el.getAttributeValue("hd"))
         .floatValue(), Float.valueOf(
         el.getAttributeValue("ae")).floatValue(),
         Integer.valueOf(el.getAttributeValue("asg1wgt"))
@@ -106,7 +115,9 @@ public class UnitManager
 
 
   /**
-   *
+   * Returns the collection of units that are represented in the xml file.
+   * @return UnitMap Returns the collection of units that are represented in
+   * the xml file.
    */
   public UnitMap getUnits()
   {
@@ -122,5 +133,7 @@ public class UnitManager
     } // unit maps are filled with PROXY units
     return uM;
   }
+
+
 
 }

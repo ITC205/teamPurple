@@ -1,9 +1,10 @@
 package datamanagement;
 
 /**
- * default implementation of IUnit interface
- * applies the specified minimum marks (for grades) and weightings for
- * assessments to this unit and calculates grades for this unit
+ * Default implementation of IUnit interface.
+ * Applies the specified minimum marks (for grades) and weightings for
+ * assessments to this unit, calculates grades for this unit and adds student
+ * records for this unit to the collection of student unit records.
  */
 public class Unit
   implements IUnit
@@ -30,7 +31,9 @@ public class Unit
   //===========================================================================
 
   /**
-   * creates a new unit
+   * Creates a new unit instance, applying specified marks required for grades
+   * and weightings for assessments and references the collection of student
+   * records.
    * @param UC this unit's code
    * @param un this unit's name
    * @param f1 minimum mark to obtain a Pass grade in this unit
@@ -66,8 +69,7 @@ public class Unit
   //===========================================================================
 
   /**
-   * returns this unit's code
-   * @return String code for unit
+   * {@inheritDoc}
    */
   @Override
   public String getUnitCode() {
@@ -77,8 +79,7 @@ public class Unit
 
 
   /**
-   * returns this unit's name
-   * @return String name of unit
+   * {@inheritDoc}
    */
   @Override
   public String getUnitName()
@@ -89,56 +90,7 @@ public class Unit
 
 
   /**
-   * returns the minimum mark to obtain a Pass grade in this unit
-   * @return float value represents mark required for the grade
-   */
-  @Override
-  public float getPsCutoff()
-  {
-    return this.co2;
-  }
-
-
-
-  /**
-   * returns the minimum mark to obtain a Credit grade in this unit
-   * @return float value represents mark required for the grade
-   */
-  @Override
-  public float getCrCutoff()
-  {
-    return this.co1;
-  }
-
-
-
-  /**
-   * returns the minimum mark to obtain a Distinction grade in this unit
-   * @return float value represents mark required for the grade
-   */
-  @Override
-  public float getDiCuttoff()
-  {
-    return this.co4;
-  }
-
-
-
-  /**
-   * returns the minimum mark to obtain a High Distinction grade in this unit
-   * @return float value represents mark required for the grade
-   */
-  @Override
-  public float getHdCutoff()
-  {
-    return this.co3;
-  }
-
-
-
-  /**
-   * returns minimum mark to qualify for an Alternative Assessment in this unit
-   * @return float value represents mark required to qualify
+   * {@inheritDoc}
    */
   @Override
   public float getAeCutoff()
@@ -149,8 +101,51 @@ public class Unit
 
 
   /**
-   * returns the weighting for assessment one in this unit
-   * @return integer weighting used for assignment one
+   * {@inheritDoc}
+   */
+  @Override
+  public float getPsCutoff()
+  {
+    return this.co2;
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public float getCrCutoff()
+  {
+    return this.co1;
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public float getDiCuttoff()
+  {
+    return this.co4;
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public float getHdCutoff()
+  {
+    return this.co3;
+  }
+
+
+
+  /**
+   * {@inheritDoc}
    */
   @Override
   public int getAsg1Weight()
@@ -161,8 +156,7 @@ public class Unit
 
 
   /**
-   * returns the weighting for assessment one in this unit
-   * @return integer weighting used for assignment two
+   * {@inheritDoc}
    */
   @Override
   public int getAsg2Weight()
@@ -173,8 +167,7 @@ public class Unit
 
 
   /**
-   * returns the weighting for assessment one in this unit
-   * @return integer weighting used for the exam
+   * {@inheritDoc}
    */
   @Override
   public int getExamWeight()
@@ -185,20 +178,7 @@ public class Unit
 
 
   /**
-   * returns the entire collection of student records for this unit
-   * @return collection of student records (grades)
-   */
-  @Override
-  public StudentUnitRecordList listStudentRecords()
-  {
-    return this.rs;
-  }
-
-
-
-  /**
-   * returns a specified student's (single) record for this unit
-   * @return student (grade) record for this unit
+   * {@inheritDoc}
    */
   public IStudentUnitRecord getStudentRecord(int studentID)
   {
@@ -212,8 +192,28 @@ public class Unit
 
 
   /**
-   * sets the minimum mark to obtain a Pass grade in this unit
-   * @param cutoff float value sets mark required for the grade
+   * {@inheritDoc}
+   */
+  @Override
+  public StudentUnitRecordList listStudentRecords()
+  {
+    return this.rs;
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setAeCutoff(float cutoff)
+  {
+    this.co5 = cutoff;
+  }
+
+
+
+  /**
+   * {@inheritDoc}
    */
   public void setPsCutoff1(float cutoff)
   {
@@ -223,8 +223,7 @@ public class Unit
 
 
   /**
-   * sets the minimum mark to obtain a Credit grade in this unit
-   * @param cutoff float value sets mark required for the grade
+   * {@inheritDoc}
    */
   @Override
   public void setCrCutoff(float cutoff)
@@ -235,8 +234,7 @@ public class Unit
 
 
   /**
-   * sets the minimum mark to obtain a Distinction grade in this unit
-   * @param cutoff float value sets mark required for the grade
+   * {@inheritDoc}
    */
   public void setDiCutoff(float cutoff)
   {
@@ -247,7 +245,6 @@ public class Unit
 
   /**
    *  unused
-   *  @param cutoff float value sets mark required for the grade
    */
   public void HDCutoff(float cutoff)
   {
@@ -257,8 +254,7 @@ public class Unit
 
 
   /**
-   *  sets the minimum mark to obtain a High Distinction grade in this unit
-   *  @param cutoff float value sets mark required for the grade
+   * {@inheritDoc}
    */
   public void setHdCutoff(float cutoff)
   {
@@ -268,49 +264,16 @@ public class Unit
 
 
   /**
-   * sets the minimum mark to qualify for an Alternative Assessment in this
-   * unit
-   * @param cutoff float value sets mark required to qualify for alternative
-   *               assessment
-   */
-  public void setAeCutoff(float cutoff)
-  {
-    this.co5 = cutoff;
-  }
-
-
-
-  //===========================================================================
-  // Methods
-  //===========================================================================
-
-  /**
-   * adds a student record to the collection of student records for this unit
-   * @param record student record to be added to collection of student records
-   *               for this unit
-   */
-  @Override
-  public void addStudentRecord(IStudentUnitRecord record)
-  {
-    this.rs.add(record);
-  }
-
-
-
-  /**
-   * sets the weightings for the 3 assessments for this unit
-   * @param a1 sets integer weighting used for assignment one
-   * @param a2 sets integer weighting used for assignment one
-   * @param ex sets integer weighting used for exam
+   * {@inheritDoc}
    */
   @Override
   public void setAssessmentWeights(int a1, int a2, int ex)
   {
     if (a1 < 0 || a1 > 100 ||
-        a2 < 0 || a2 > 100 ||
-        ex < 0 || ex > 100 ) {
+          a2 < 0 || a2 > 100 ||
+          ex < 0 || ex > 100 ) {
       throw new RuntimeException("Assessment weights cant be less than zero" +
-                                 " or greater than 100");
+                                   " or greater than 100");
     }
     if (a1 + a2 + ex != 100 ) {
       throw new RuntimeException("Assessment weights must add to 100");
@@ -322,50 +285,12 @@ public class Unit
 
 
 
-  /**
-   * checks the minimum marks specified for each grade are within bounds and
-   * do not overlap
-   * @param ps float minimum mark to obtain a Pass grade in this unit
-   * @param cr float minimum mark to obtain a Credit grade in this unit
-   * @param di float minimum mark to obtain a Distinction grade in this unit
-   * @param hd float minimum mark to obtain a High Distinction grade in this
-   *           unit
-   * @param ae float minimum mark to qualify for an Alternative Assessment in
-   *           this unit
-   */
-  private void setCutoffs(float ps, float cr, float di, float hd, float ae)
-  {
-    if (ps < 0 || ps > 100 ||
-        cr < 0 || cr > 100 ||
-        di < 0 || di > 100 ||
-        hd < 0 || hd > 100 ||
-        ae < 0 || ae > 100 ) {
-      throw new RuntimeException("Assessment cutoffs cant be less than zero" +
-                                 " or greater than 100");
-    }
-    if (ae >= ps) {
-    throw new RuntimeException("AE cutoff must be less than PS cutoff");
-    }
-    if (ps >= cr) {
-    throw new RuntimeException("PS cutoff must be less than CR cutoff");
-    }
-    if (cr >= di) {
-    throw new RuntimeException("CR cutoff must be less than DI cutoff");
-    }
-    if (di >= hd) {
-    throw new RuntimeException("DI cutoff must be less than HD cutoff");
-    }
-  }
-
-
+  //===========================================================================
+  // Methods
+  //===========================================================================
 
   /**
-   * calculates the correct grade for this unit (accounting for this unit's
-   * assessment weightings and specified grade minimums)
-   * @param f1 float student grade for assignment one in this unit
-   * @param f2 float student grade for assignment two in this unit
-   * @param f3 float student grade for the exam in this unit
-   * @return final unit grade e.g. "HD"
+   * {@inheritDoc}
    */
   @Override
   public String getGrade(float f1, float f2, float f3)
@@ -398,6 +323,55 @@ public class Unit
       return "HD";
     }
   }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addStudentRecord(IStudentUnitRecord record)
+  {
+    this.rs.add(record);
+  }
+
+
+
+  /**
+   * Checks the minimum marks specified for each grade are within bounds and
+   * do not overlap.
+   * @param ps float Minimum mark to obtain a Pass grade in this unit.
+   * @param cr float Minimum mark to obtain a Credit grade in this unit.
+   * @param di float Minimum mark to obtain a Distinction grade in this unit.
+   * @param hd float Minimum mark to obtain a High Distinction grade in this
+   *           unit.
+   * @param ae float Minimum mark to qualify for an Alternative Assessment in
+   *           this unit.
+   */
+  private void setCutoffs(float ps, float cr, float di, float hd, float ae)
+  {
+    if (ps < 0 || ps > 100 ||
+          cr < 0 || cr > 100 ||
+          di < 0 || di > 100 ||
+          hd < 0 || hd > 100 ||
+          ae < 0 || ae > 100 ) {
+      throw new RuntimeException("Assessment cutoffs cant be less than zero" +
+                                   " or greater than 100");
+    }
+    if (ae >= ps) {
+      throw new RuntimeException("AE cutoff must be less than PS cutoff");
+    }
+    if (ps >= cr) {
+      throw new RuntimeException("PS cutoff must be less than CR cutoff");
+    }
+    if (cr >= di) {
+      throw new RuntimeException("CR cutoff must be less than DI cutoff");
+    }
+    if (di >= hd) {
+      throw new RuntimeException("DI cutoff must be less than HD cutoff");
+    }
+  }
+
 
 
 }

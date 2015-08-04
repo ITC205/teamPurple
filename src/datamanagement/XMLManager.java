@@ -9,9 +9,9 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
-
 /**
- *
+ * Responsible for loading data from xml file, holding the transformed set
+ * of data used by the application and saving data back to xml file.
  */
 public class XMLManager
 {
@@ -23,13 +23,14 @@ public class XMLManager
 
   private Document doc;
 
-
   //===========================================================================
   // Constructors
   //===========================================================================
 
   /**
-   *
+   * Creates and initializes a new XMLManager instance following the singleton
+   * pattern.
+   * Creation of new instances is restricted through private access modifier.
    */
   private XMLManager()
   {
@@ -38,23 +39,26 @@ public class XMLManager
 
 
 
-
   //===========================================================================
   // Getters & setters
   //===========================================================================
 
   /**
-   *
+   * Returns the sole xmlManager instance (following the singleton pattern).
+   * @return XMLManager instance responsible for managing data from xml file.
    */
   public static XMLManager getXML()
   {
-    if (self == null ) self = new XMLManager(); return self;
+    if (self == null) self = new XMLManager(); return self;
   }
 
 
 
   /**
-   *
+   * Returns the object which holds the transformed set of data loaded from
+   * the xml file.
+   * @return Document Holds the transformed set of data constructed by
+   * SAXBuilder expanding entities from the xml file.
    */
   public Document getDocument()
   {
@@ -68,11 +72,12 @@ public class XMLManager
   //===========================================================================
 
   /**
-   *
+   * Initializes singleton instance xmlManager and loads data from xml file.
    */
   public void init()
   {
-    String s = AppProperties.getInstance().getProperties().getProperty("XMLFILE");
+    String s = AppProperties.getInstance()
+                            .getProperties().getProperty("XMLFILE");
 
     try {
       SAXBuilder b = new SAXBuilder();
@@ -80,11 +85,11 @@ public class XMLManager
       doc = b.build(s);
     }
     catch (JDOMException e) {
-      System.err.printf( "%s", "DBMD: XMLManager : init : caught JDOMException\n" );
+      System.err.printf("%s", "DBMD: XMLManager : init : caught JDOMException\n");
       throw new RuntimeException("DBMD: XMLManager : init : JDOMException");
     }
     catch (IOException e) {
-      System.err.printf( "%s", "DBMD: XMLManager : init : caught IOException\n" );
+      System.err.printf("%s", "DBMD: XMLManager : init : caught IOException\n");
       throw new RuntimeException("DBMD: XMLManager : init : IOException");
     }
   }
@@ -92,11 +97,12 @@ public class XMLManager
 
 
   /**
-   *
+   * Saves data back to xml file.
    */
   public void saveDocument()
   {
-    String xmlfile = AppProperties.getInstance().getProperties().getProperty("XMLFILE");
+    String xmlfile = AppProperties.getInstance()
+                                  .getProperties().getProperty("XMLFILE");
     try (FileWriter fout = new FileWriter(xmlfile)) {
       XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
       outputter.output(doc, fout);

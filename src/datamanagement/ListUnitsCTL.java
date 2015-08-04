@@ -16,7 +16,8 @@ public class ListUnitsCTL
   //===========================================================================
 
   /**
-   *
+   * Creates new instance and references singleton UnitManager instance
+   * in order to access the collection of units.
    */
   public ListUnitsCTL() {
     um = UnitManager.UM();

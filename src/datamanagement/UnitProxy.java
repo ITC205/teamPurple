@@ -1,7 +1,10 @@
 package datamanagement;
 
 /**
- *
+ * Acts as proxy for unit, implementing shared IUnit interface.
+ * Applies the specified minimum marks (for grades) and weightings for
+ * assessments to this unit, calculates grades for this unit and adds student
+ * records for this unit to the collection of student unit records.
  */
 public class UnitProxy implements IUnit
 {
@@ -12,14 +15,16 @@ public class UnitProxy implements IUnit
   private String UC;
   private String un;
 
-  UnitManager   um;
+  UnitManager um;
 
   //===========================================================================
   // Constructors
   //===========================================================================
 
   /**
-   *
+   * Creates a new UnitProxy instance, using just unit code and name and
+   * referencing the singleton unitManager that is used to identify the
+   * matching Unit instance.
    */
   public UnitProxy(String unitCode, String unitName)
   {
@@ -35,7 +40,7 @@ public class UnitProxy implements IUnit
   //===========================================================================
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public String getUnitCode()
@@ -46,7 +51,7 @@ public class UnitProxy implements IUnit
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public String getUnitName()
@@ -57,7 +62,7 @@ public class UnitProxy implements IUnit
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public float getAeCutoff()
@@ -79,17 +84,18 @@ public class UnitProxy implements IUnit
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
-  public float getCrCutoff() {
-  return this.um.getUnit(UC).getCrCutoff();
+  public float getCrCutoff()
+  {
+    return this.um.getUnit(UC).getCrCutoff();
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public float getDiCuttoff()
@@ -100,7 +106,7 @@ public class UnitProxy implements IUnit
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public float getHdCutoff()
@@ -111,7 +117,7 @@ public class UnitProxy implements IUnit
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public int getAsg1Weight()
@@ -122,7 +128,7 @@ public class UnitProxy implements IUnit
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public int getAsg2Weight()
@@ -133,7 +139,7 @@ public class UnitProxy implements IUnit
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public int getExamWeight()
@@ -144,7 +150,7 @@ public class UnitProxy implements IUnit
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public IStudentUnitRecord getStudentRecord(int s)
@@ -155,7 +161,7 @@ public class UnitProxy implements IUnit
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public StudentUnitRecordList listStudentRecords()
@@ -166,40 +172,40 @@ public class UnitProxy implements IUnit
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public void setAeCutoff(float cutoff)
   {
-    um.getUnit(UC).setAeCutoff( cutoff );
+    um.getUnit(UC).setAeCutoff(cutoff);
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public void setPsCutoff1(float cutoff)
   {
-    um.getUnit(UC).setPsCutoff1( cutoff );
+    um.getUnit(UC).setPsCutoff1(cutoff);
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public void setCrCutoff(float cutoff)
   {
-    um.getUnit(UC).setCrCutoff( cutoff );
+    um.getUnit(UC).setCrCutoff(cutoff);
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public void setDiCutoff(float cutoff)
@@ -210,18 +216,18 @@ public class UnitProxy implements IUnit
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public void setHdCutoff(float cutoff)
   {
-    um.getUnit(UC).setHdCutoff( cutoff );
+    um.getUnit(UC).setHdCutoff(cutoff);
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public void setAssessmentWeights(int asg1Wgt, int asg2Wgt, int examWgt)
@@ -236,7 +242,7 @@ public class UnitProxy implements IUnit
   //===========================================================================
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public String getGrade(float f1, float f2, float f3)
@@ -247,7 +253,7 @@ public class UnitProxy implements IUnit
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public void addStudentRecord(IStudentUnitRecord record)
