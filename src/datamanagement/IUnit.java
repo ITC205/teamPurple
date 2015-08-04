@@ -100,10 +100,10 @@ public interface IUnit {
 
   /**
    * Returns a specified student's (single) record for this unit.
-   * @param studentID String student identification number.
+   * @param studentId String student identification number.
    * @return IStudentUnitRecord Student record for this unit.
    */
-  public IStudentUnitRecord getStudentUnitRecord(int studentID);
+  public IStudentUnitRecord getStudentUnitRecord(int studentId);
 
 
 
@@ -118,57 +118,59 @@ public interface IUnit {
   /**
    * Sets the minimum mark required to qualify for an Alternative Assessment
    * in this unit.
-   * @param cutoff float The minimum mark required to qualify for an
+   * @param minimumMark float The minimum mark required to qualify for an
    *               Alternative Assessment in this unit.
    */
-  public void setMinimumMarkForAdditionalExamination(float cutoff);
+  public void setMinimumMarkForAdditionalExamination(float minimumMark);
 
 
 
   /**
    * Sets the minimum mark required to obtain a Pass grade in this unit.
-   * @param cutoff float The minimum mark required to obtain a Pass grade
+   * @param minimumMark float The minimum mark required to obtain a Pass grade
    *               in this unit.
    */
-  public void setMinimumMarkForPass(float cutoff);
+  public void setMinimumMarkForPass(float minimumMark);
 
 
 
   /**
    * Sets the minimum mark required to obtain a Credit grade in this unit.
-   * @param cutoff float The minimum mark required to obtain a Credit
+   * @param minimumMark float The minimum mark required to obtain a Credit
    *               grade in this unit.
    */
-  public void setMinimumMarkForCredit(float cutoff);
+  public void setMinimumMarkForCredit(float minimumMark);
 
 
 
   /**
    * Sets the minimum mark required to obtain a Distinction grade in this unit.
-   * @param cutoff float The minimum mark required to obtain a Distinction
+   * @param minimumMark float The minimum mark required to obtain a Distinction
    *               grade in this unit.
    */
-  public void setMinimumMarkForDistinction(float cutoff);
+  public void setMinimumMarkForDistinction(float minimumMark);
 
 
 
   /**
    *  Sets the minimum mark required to obtain a High Distinction grade in
    *  this unit.
-   *  @param cutoff float The minimum mark required to obtain a High
+   *  @param minimumMark float The minimum mark required to obtain a High
    *                Distinction grade in this unit.
    */
-  public void setMinimumMarkForHighDistinction(float cutoff);
+  public void setMinimumMarkForHighDistinction(float minimumMark);
 
 
 
   /**
    * Sets the weightings for the 3 assessments for this unit.
-   * @param asg1Wgt int Sets integer weighting used for assignment one.
-   * @param asg2Wgt int Sets integer weighting used for assignment one.
-   * @param examWgt int Sets integer weighting used for exam.
+   * @param weightOfAssignmentOne int Sets integer weighting used for assignment one.
+   * @param weightOfAssignmentTwo int Sets integer weighting used for assignment one.
+   * @param weightOfExam int Sets integer weighting used for exam.
    */
-  public void setWeightsOfAssessments(int asg1Wgt, int asg2Wgt, int examWgt);
+  public void setWeightsOfAssessments(int weightOfAssignmentOne,
+                                      int weightOfAssignmentTwo,
+                                      int weightOfExam);
 
 
 
@@ -179,21 +181,23 @@ public interface IUnit {
   /**
    * Computes the correct grade for this unit (accounting for this unit's
    * assessment weightings and specified grade minimums).
-   * @param asg1 float student mark for assignment one in this unit.
-   * @param asg2 float student mark for assignment two in this unit.
-   * @param exam float student mark for the exam in this unit.
+   * @param markForAssignmentOne float student mark for assignment one in this unit.
+   * @param markForAssignmentTwo float student mark for assignment two in this unit.
+   * @param markForExam float student mark for the exam in this unit.
    * @return String Final grade for this unit e.g. "HD".
    */
-  public String calculateGrade(float asg1, float asg2, float exam);
+  public String calculateGrade(float markForAssignmentOne,
+                               float markForAssignmentTwo,
+                               float markForExam);
 
 
 
   /**
    * Adds a student record to the collection of student records for this unit.
-   * @param record IStudentUnitRecord Student record to be added to the
+   * @param studentUnitRecord IStudentUnitRecord Student record to be added to the
    *               collection of student records for this unit.
    */
-  public void addStudentUnitRecord(IStudentUnitRecord record);
+  public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord);
 
 
 

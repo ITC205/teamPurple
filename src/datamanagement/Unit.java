@@ -180,10 +180,10 @@ public class Unit
   /**
    * {@inheritDoc}
    */
-  public IStudentUnitRecord getStudentUnitRecord(int studentID)
+  public IStudentUnitRecord getStudentUnitRecord(int studentId )
   {
     for (IStudentUnitRecord r : this.rs) {
-      if (r.getStudentID() == studentID)
+      if (r.getStudentID() == studentId )
         return r;
     }
     return null;
@@ -205,9 +205,9 @@ public class Unit
   /**
    * {@inheritDoc}
    */
-  public void setMinimumMarkForAdditionalExamination(float cutoff)
+  public void setMinimumMarkForAdditionalExamination(float minimumMark )
   {
-    this.co5 = cutoff;
+    this.co5 = minimumMark;
   }
 
 
@@ -215,50 +215,9 @@ public class Unit
   /**
    * {@inheritDoc}
    */
-  public void setMinimumMarkForPass(float cutoff)
+  public void setMinimumMarkForPass(float minimumMark )
   {
-    this.co2 = cutoff;
-  }
-
-
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setMinimumMarkForCredit(float cutoff)
-  {
-    this.co1 = cutoff;
-  }
-
-
-
-  /**
-   * {@inheritDoc}
-   */
-  public void setMinimumMarkForDistinction(float cutoff)
-  {
-    this.co4 = cutoff;
-  }
-
-
-
-  /**
-   *  unused
-   */
-  public void HDCutoff(float cutoff)
-  {
-    this.co3 = cutoff;
-  }
-
-
-
-  /**
-   * {@inheritDoc}
-   */
-  public void setMinimumMarkForHighDistinction(float cutoff)
-  {
-    this.co3 = cutoff;
+    this.co2 = minimumMark;
   }
 
 
@@ -267,20 +226,53 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public void setWeightsOfAssessments(int a1, int a2, int ex)
+  public void setMinimumMarkForCredit(float minimumMark )
   {
-    if (a1 < 0 || a1 > 100 ||
-          a2 < 0 || a2 > 100 ||
-          ex < 0 || ex > 100 ) {
+    this.co1 = minimumMark;
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setMinimumMarkForDistinction(float minimumMark )
+  {
+    this.co4 = minimumMark;
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  public void setMinimumMarkForHighDistinction(float minimumMark )
+  {
+    this.co3 = minimumMark;
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setWeightsOfAssessments(int weightOfAssignmentOne,
+                                      int weightOfAssignmentTwo,
+                                      int weightOfExam)
+  {
+    if ( weightOfAssignmentOne < 0 || weightOfAssignmentOne > 100 ||
+          weightOfAssignmentTwo < 0 || weightOfAssignmentTwo > 100 ||
+          weightOfExam < 0 || weightOfExam > 100 ) {
       throw new RuntimeException("Assessment weights cant be less than zero" +
                                    " or greater than 100");
     }
-    if (a1 + a2 + ex != 100 ) {
+    if ( weightOfAssignmentOne + weightOfAssignmentTwo + weightOfExam != 100 ) {
       throw new RuntimeException("Assessment weights must add to 100");
     }
-    this.a1 = a1;
-    this.a2 = a2;
-    this.ex = ex;
+    this.a1 = weightOfAssignmentOne;
+    this.a2 = weightOfAssignmentTwo;
+    this.ex = weightOfExam;
   }
 
 
@@ -293,13 +285,13 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public String calculateGrade(float f1, float f2, float f3)
+  public String calculateGrade(float markForAssignmentOne, float markForAssignmentTwo, float markForExam )
   {
-    float totalMark = f1 + f2 + f3;
+    float totalMark = markForAssignmentOne + markForAssignmentTwo + markForExam;
 
-    if (f1 < 0 || f1 > this.a1 ||
-        f2 < 0 || f2 > this.a2 ||
-        f3 < 0 || f3 > this.ex ) {
+    if ( markForAssignmentOne < 0 || markForAssignmentOne > this.a1 ||
+        markForAssignmentTwo < 0 || markForAssignmentTwo > this.a2 ||
+        markForExam < 0 || markForExam > this.ex ) {
       throw new RuntimeException("marks cannot be less than zero or greater" +
                                  " than assessment weights");
     }
@@ -330,9 +322,9 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public void addStudentUnitRecord(IStudentUnitRecord record)
+  public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord )
   {
-    this.rs.add(record);
+    this.rs.add( studentUnitRecord );
   }
 
 
@@ -372,7 +364,7 @@ public class Unit
     }
 
 
-    
+
   }
 
 
