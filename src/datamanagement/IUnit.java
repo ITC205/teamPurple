@@ -25,13 +25,15 @@ public interface IUnit {
    */
   public String getUnitName();
 
+
+
   /**
    * Returns the minimum mark required to qualify for an Alternative Assessment
    * in this unit.
    * @return float Value of mark required to qualify for an Alternative
    * Assessment in this unit.
    */
-  public float getAeCutoff();
+  public float getMinimumMarkForAdditionalExamination();
 
 
 
@@ -39,7 +41,7 @@ public interface IUnit {
    * Returns the minimum mark required to obtain a Pass grade in this unit.
    * @return float Value of mark required to obtain a Pass grade in this unit.
    */
-  public float getPsCutoff();
+  public float getMinimumMarkForPass();
 
 
 
@@ -48,7 +50,7 @@ public interface IUnit {
    * @return float Value of mark required to obtain a Credit grade in this
    * unit.
    */
-  public float getCrCutoff();
+  public float getMinimumMarkForCredit();
 
 
 
@@ -58,7 +60,7 @@ public interface IUnit {
    * @return float Value of mark required to obtain a Distinction grade in this
    * unit.
    */
-  public float getDiCuttoff();
+  public float getMinimumMarkForDistinction();
 
 
 
@@ -68,7 +70,7 @@ public interface IUnit {
    * @return float Value of mark required to obtain a High Distinction grade in
    * this unit.
    */
-  public float getHdCutoff();
+  public float getMinimumMarkForHighDistinction();
 
 
 
@@ -76,7 +78,7 @@ public interface IUnit {
    * Returns the weighting for assessment one in this unit.
    * @return int Weighting used for assignment one in this unit.
    */
-  public int getAsg1Weight();
+  public int getWeightOfAssignmentOne();
 
 
 
@@ -84,7 +86,7 @@ public interface IUnit {
    * Returns the weighting for assessment two in this unit.
    * @return int Weighting used for assignment two in this unit.
    */
-  public int getAsg2Weight();
+  public int getWeightOfAssignmentTwo();
 
 
 
@@ -92,7 +94,7 @@ public interface IUnit {
    * Returns the weighting for the exam in this unit.
    * @return int Weighting used for the exam in this unit.
    */
-  public int getExamWeight();
+  public int getWeightOfExam();
 
 
 
@@ -101,7 +103,7 @@ public interface IUnit {
    * @param studentID String student identification number.
    * @return IStudentUnitRecord Student record for this unit.
    */
-  public IStudentUnitRecord getStudentRecord(int studentID);
+  public IStudentUnitRecord getStudentUnitRecord(int studentID);
 
 
 
@@ -109,7 +111,7 @@ public interface IUnit {
    * Returns the entire collection of student records for this unit.
    * @return StudentUnitRecordList Collection of student records for this unit.
    */
-  public StudentUnitRecordList listStudentRecords();
+  public StudentUnitRecordList getStudentUnitRecordList();
 
 
 
@@ -119,7 +121,7 @@ public interface IUnit {
    * @param cutoff float The minimum mark required to qualify for an
    *               Alternative Assessment in this unit.
    */
-  public void  setAeCutoff(float cutoff);
+  public void setMinimumMarkForAdditionalExamination(float cutoff);
 
 
 
@@ -128,7 +130,7 @@ public interface IUnit {
    * @param cutoff float The minimum mark required to obtain a Pass grade
    *               in this unit.
    */
-  public void  setPsCutoff1(float cutoff);
+  public void setMinimumMarkForPass(float cutoff);
 
 
 
@@ -137,7 +139,7 @@ public interface IUnit {
    * @param cutoff float The minimum mark required to obtain a Credit
    *               grade in this unit.
    */
-  public void  setCrCutoff(float cutoff);
+  public void setMinimumMarkForCredit(float cutoff);
 
 
 
@@ -146,7 +148,7 @@ public interface IUnit {
    * @param cutoff float The minimum mark required to obtain a Distinction
    *               grade in this unit.
    */
-  public void  setDiCutoff(float cutoff);
+  public void setMinimumMarkForDistinction(float cutoff);
 
 
 
@@ -156,7 +158,7 @@ public interface IUnit {
    *  @param cutoff float The minimum mark required to obtain a High
    *                Distinction grade in this unit.
    */
-  public void  setHdCutoff(float cutoff);
+  public void setMinimumMarkForHighDistinction(float cutoff);
 
 
 
@@ -166,7 +168,7 @@ public interface IUnit {
    * @param asg2Wgt int Sets integer weighting used for assignment one.
    * @param examWgt int Sets integer weighting used for exam.
    */
-  public void setAssessmentWeights(int asg1Wgt, int asg2Wgt, int examWgt);
+  public void setWeightsOfAssessments(int asg1Wgt, int asg2Wgt, int examWgt);
 
 
 
@@ -182,7 +184,7 @@ public interface IUnit {
    * @param exam float student mark for the exam in this unit.
    * @return String Final grade for this unit e.g. "HD".
    */
-  public String getGrade(float asg1, float asg2, float exam);
+  public String calculateGrade(float asg1, float asg2, float exam);
 
 
 
@@ -191,7 +193,7 @@ public interface IUnit {
    * @param record IStudentUnitRecord Student record to be added to the
    *               collection of student records for this unit.
    */
-  public void addStudentRecord(IStudentUnitRecord record);
+  public void addStudentUnitRecord(IStudentUnitRecord record);
 
 
 

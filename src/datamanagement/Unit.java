@@ -59,7 +59,7 @@ public class Unit
     this.co4 = f3;
     this.co3 = f4;
     this.co5 = f5;
-    this.setAssessmentWeights(i1, i2, i3);
+    this.setWeightsOfAssessments(i1, i2, i3);
     this.rs = rl == null ? new StudentUnitRecordList() : rl;
   }
 
@@ -93,7 +93,7 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public float getAeCutoff()
+  public float getMinimumMarkForAdditionalExamination()
   {
     return this.co5;
   }
@@ -104,7 +104,7 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public float getPsCutoff()
+  public float getMinimumMarkForPass()
   {
     return this.co2;
   }
@@ -115,7 +115,7 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public float getCrCutoff()
+  public float getMinimumMarkForCredit()
   {
     return this.co1;
   }
@@ -126,7 +126,7 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public float getDiCuttoff()
+  public float getMinimumMarkForDistinction()
   {
     return this.co4;
   }
@@ -137,7 +137,7 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public float getHdCutoff()
+  public float getMinimumMarkForHighDistinction()
   {
     return this.co3;
   }
@@ -148,7 +148,7 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public int getAsg1Weight()
+  public int getWeightOfAssignmentOne()
   {
     return this.a1;
   }
@@ -159,7 +159,7 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public int getAsg2Weight()
+  public int getWeightOfAssignmentTwo()
   {
     return this.a2;
   }
@@ -170,7 +170,7 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public int getExamWeight()
+  public int getWeightOfExam()
   {
     return this.ex;
   }
@@ -180,7 +180,7 @@ public class Unit
   /**
    * {@inheritDoc}
    */
-  public IStudentUnitRecord getStudentRecord(int studentID)
+  public IStudentUnitRecord getStudentUnitRecord(int studentID)
   {
     for (IStudentUnitRecord r : this.rs) {
       if (r.getStudentID() == studentID)
@@ -195,7 +195,7 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public StudentUnitRecordList listStudentRecords()
+  public StudentUnitRecordList getStudentUnitRecordList()
   {
     return this.rs;
   }
@@ -205,7 +205,7 @@ public class Unit
   /**
    * {@inheritDoc}
    */
-  public void setAeCutoff(float cutoff)
+  public void setMinimumMarkForAdditionalExamination(float cutoff)
   {
     this.co5 = cutoff;
   }
@@ -215,7 +215,7 @@ public class Unit
   /**
    * {@inheritDoc}
    */
-  public void setPsCutoff1(float cutoff)
+  public void setMinimumMarkForPass(float cutoff)
   {
     this.co2 = cutoff;
   }
@@ -226,7 +226,7 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public void setCrCutoff(float cutoff)
+  public void setMinimumMarkForCredit(float cutoff)
   {
     this.co1 = cutoff;
   }
@@ -236,7 +236,7 @@ public class Unit
   /**
    * {@inheritDoc}
    */
-  public void setDiCutoff(float cutoff)
+  public void setMinimumMarkForDistinction(float cutoff)
   {
     this.co4 = cutoff;
   }
@@ -256,7 +256,7 @@ public class Unit
   /**
    * {@inheritDoc}
    */
-  public void setHdCutoff(float cutoff)
+  public void setMinimumMarkForHighDistinction(float cutoff)
   {
     this.co3 = cutoff;
   }
@@ -267,7 +267,7 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public void setAssessmentWeights(int a1, int a2, int ex)
+  public void setWeightsOfAssessments(int a1, int a2, int ex)
   {
     if (a1 < 0 || a1 > 100 ||
           a2 < 0 || a2 > 100 ||
@@ -293,7 +293,7 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public String getGrade(float f1, float f2, float f3)
+  public String calculateGrade(float f1, float f2, float f3)
   {
     float totalMark = f1 + f2 + f3;
 
@@ -330,7 +330,7 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public void addStudentRecord(IStudentUnitRecord record)
+  public void addStudentUnitRecord(IStudentUnitRecord record)
   {
     this.rs.add(record);
   }
@@ -370,6 +370,9 @@ public class Unit
     if (di >= hd) {
       throw new RuntimeException("DI cutoff must be less than HD cutoff");
     }
+
+
+    
   }
 
 

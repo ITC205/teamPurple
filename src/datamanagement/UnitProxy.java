@@ -65,9 +65,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public float getAeCutoff()
+  public float getMinimumMarkForAdditionalExamination()
   {
-    return this.um.getUnit(UC).getAeCutoff();
+    return this.um.getUnit(UC).getMinimumMarkForAdditionalExamination();
   }
 
 
@@ -76,9 +76,9 @@ public class UnitProxy implements IUnit
    *
    */
   @Override
-  public float getPsCutoff()
+  public float getMinimumMarkForPass()
   {
-    return this.um.getUnit(UC).getPsCutoff();
+    return this.um.getUnit(UC).getMinimumMarkForPass();
   }
 
 
@@ -87,9 +87,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public float getCrCutoff()
+  public float getMinimumMarkForCredit()
   {
-    return this.um.getUnit(UC).getCrCutoff();
+    return this.um.getUnit(UC).getMinimumMarkForCredit();
   }
 
 
@@ -98,9 +98,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public float getDiCuttoff()
+  public float getMinimumMarkForDistinction()
   {
-    return this.um.getUnit(UC).getDiCuttoff();
+    return this.um.getUnit(UC).getMinimumMarkForDistinction();
   }
 
 
@@ -109,9 +109,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public float getHdCutoff()
+  public float getMinimumMarkForHighDistinction()
   {
-    return um.getUnit(UC).getHdCutoff();
+    return um.getUnit(UC).getMinimumMarkForHighDistinction();
   }
 
 
@@ -120,9 +120,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public int getAsg1Weight()
+  public int getWeightOfAssignmentOne()
   {
-    return um.getUnit(UC).getAsg1Weight();
+    return um.getUnit(UC).getWeightOfAssignmentOne();
   }
 
 
@@ -131,9 +131,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public int getAsg2Weight()
+  public int getWeightOfAssignmentTwo()
   {
-    return um.getUnit(UC).getAsg2Weight();
+    return um.getUnit(UC).getWeightOfAssignmentTwo();
   }
 
 
@@ -142,9 +142,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public int getExamWeight()
+  public int getWeightOfExam()
   {
-    return um.getUnit(UC).getExamWeight();
+    return um.getUnit(UC).getWeightOfExam();
   }
 
 
@@ -153,9 +153,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public IStudentUnitRecord getStudentRecord(int s)
+  public IStudentUnitRecord getStudentUnitRecord(int s)
   {
-    return um.getUnit(UC).getStudentRecord(s);
+    return um.getUnit(UC).getStudentUnitRecord(s);
   }
 
 
@@ -164,9 +164,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public StudentUnitRecordList listStudentRecords()
+  public StudentUnitRecordList getStudentUnitRecordList()
   {
-    return um.getUnit(UC).listStudentRecords();
+    return um.getUnit(UC).getStudentUnitRecordList();
   }
 
 
@@ -175,9 +175,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public void setAeCutoff(float cutoff)
+  public void setMinimumMarkForAdditionalExamination(float cutoff)
   {
-    um.getUnit(UC).setAeCutoff(cutoff);
+    um.getUnit(UC).setMinimumMarkForAdditionalExamination(cutoff);
   }
 
 
@@ -186,9 +186,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public void setPsCutoff1(float cutoff)
+  public void setMinimumMarkForPass(float cutoff)
   {
-    um.getUnit(UC).setPsCutoff1(cutoff);
+    um.getUnit(UC).setMinimumMarkForPass(cutoff);
   }
 
 
@@ -197,9 +197,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public void setCrCutoff(float cutoff)
+  public void setMinimumMarkForCredit(float cutoff)
   {
-    um.getUnit(UC).setCrCutoff(cutoff);
+    um.getUnit(UC).setMinimumMarkForCredit(cutoff);
   }
 
 
@@ -208,9 +208,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public void setDiCutoff(float cutoff)
+  public void setMinimumMarkForDistinction(float cutoff)
   {
-    um.getUnit(UC).setDiCutoff(cutoff);
+    um.getUnit(UC).setMinimumMarkForDistinction(cutoff);
   }
 
 
@@ -219,9 +219,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public void setHdCutoff(float cutoff)
+  public void setMinimumMarkForHighDistinction(float cutoff)
   {
-    um.getUnit(UC).setHdCutoff(cutoff);
+    um.getUnit(UC).setMinimumMarkForHighDistinction(cutoff);
   }
 
 
@@ -230,9 +230,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public void setAssessmentWeights(int asg1Wgt, int asg2Wgt, int examWgt)
+  public void setWeightsOfAssessments(int asg1Wgt, int asg2Wgt, int examWgt)
   {
-    um.getUnit(UC).setAssessmentWeights(asg1Wgt, asg2Wgt, examWgt);
+    um.getUnit(UC).setWeightsOfAssessments(asg1Wgt, asg2Wgt, examWgt);
   }
 
 
@@ -245,9 +245,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public String getGrade(float f1, float f2, float f3)
+  public String calculateGrade(float f1, float f2, float f3)
   {
-    return um.getUnit(UC).getGrade(f1, f2, f3);
+    return um.getUnit(UC).calculateGrade(f1, f2, f3);
   }
 
 
@@ -256,9 +256,9 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public void addStudentRecord(IStudentUnitRecord record)
+  public void addStudentUnitRecord(IStudentUnitRecord record)
   {
-    um.getUnit(UC).addStudentRecord(record);
+    um.getUnit(UC).addStudentUnitRecord(record);
   }
 
 
