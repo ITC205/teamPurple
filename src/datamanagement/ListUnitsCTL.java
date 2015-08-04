@@ -9,7 +9,7 @@ public class ListUnitsCTL
   // Variables
   //===========================================================================
 
-  private UnitManager um;
+  private UnitManager unitManager_;
 
   //===========================================================================
   // Constructors
@@ -20,7 +20,7 @@ public class ListUnitsCTL
    * in order to access the collection of units.
    */
   public ListUnitsCTL() {
-    um = UnitManager.UM();
+    unitManager_ = UnitManager.UM();
   }
 
 
@@ -32,12 +32,12 @@ public class ListUnitsCTL
   /**
    *
    */
-  public void listUnits(IUnitLister lister)
+  public void listUnits(IUnitLister unitLister)
   {
-    lister.clearUnits();
-    UnitMap units = um.getUnits();
-    for (String s : units.keySet()) {
-      lister.addUnit(units.get(s));
+    unitLister.clearUnits();
+    UnitMap units = unitManager_.getUnits();
+    for (String unitCode : units.keySet()) {
+      unitLister.addUnit(units.get(unitCode));
     }
   }
 
