@@ -119,7 +119,7 @@ public interface IUnit {
    * Sets the minimum mark required to qualify for an Alternative Assessment
    * in this unit.
    * @param minimumMark float The minimum mark required to qualify for an
-   *               Alternative Assessment in this unit.
+   *        Alternative Assessment in this unit.
    */
   public void setMinimumMarkForAdditionalExamination(float minimumMark);
 
@@ -128,7 +128,7 @@ public interface IUnit {
   /**
    * Sets the minimum mark required to obtain a Pass grade in this unit.
    * @param minimumMark float The minimum mark required to obtain a Pass grade
-   *               in this unit.
+   *        in this unit.
    */
   public void setMinimumMarkForPass(float minimumMark);
 
@@ -137,7 +137,7 @@ public interface IUnit {
   /**
    * Sets the minimum mark required to obtain a Credit grade in this unit.
    * @param minimumMark float The minimum mark required to obtain a Credit
-   *               grade in this unit.
+   *        grade in this unit.
    */
   public void setMinimumMarkForCredit(float minimumMark);
 
@@ -146,7 +146,7 @@ public interface IUnit {
   /**
    * Sets the minimum mark required to obtain a Distinction grade in this unit.
    * @param minimumMark float The minimum mark required to obtain a Distinction
-   *               grade in this unit.
+   *        grade in this unit.
    */
   public void setMinimumMarkForDistinction(float minimumMark);
 
@@ -156,7 +156,7 @@ public interface IUnit {
    *  Sets the minimum mark required to obtain a High Distinction grade in
    *  this unit.
    *  @param minimumMark float The minimum mark required to obtain a High
-   *                Distinction grade in this unit.
+   *         Distinction grade in this unit.
    */
   public void setMinimumMarkForHighDistinction(float minimumMark);
 
@@ -164,9 +164,9 @@ public interface IUnit {
 
   /**
    * Sets the weightings for the 3 assessments for this unit.
-   * @param weightOfAssignmentOne int Sets integer weighting used for assignment one.
-   * @param weightOfAssignmentTwo int Sets integer weighting used for assignment one.
-   * @param weightOfExam int Sets integer weighting used for exam.
+   * @param weightOfAssignmentOne int Weight to apply to assignment one result.
+   * @param weightOfAssignmentTwo int Weight to apply to assignment one result.
+   * @param weightOfExam int Weight to apply to exam mark result.
    */
   public void setWeightsOfAssessments(int weightOfAssignmentOne,
                                       int weightOfAssignmentTwo,
@@ -181,9 +181,9 @@ public interface IUnit {
   /**
    * Computes the correct grade for this unit (accounting for this unit's
    * assessment weightings and specified grade minimums).
-   * @param markForAssignmentOne float student mark for assignment one in this unit.
-   * @param markForAssignmentTwo float student mark for assignment two in this unit.
-   * @param markForExam float student mark for the exam in this unit.
+   * @param markForAssignmentOne float Mark for assignment one in this unit.
+   * @param markForAssignmentTwo float Mark for assignment two in this unit.
+   * @param markForExam float Mark for the exam in this unit.
    * @return String Final grade for this unit e.g. "HD".
    */
   public String calculateGrade(float markForAssignmentOne,
@@ -194,8 +194,8 @@ public interface IUnit {
 
   /**
    * Adds a student record to the collection of student records for this unit.
-   * @param studentUnitRecord IStudentUnitRecord Student record to be added to the
-   *               collection of student records for this unit.
+   * @param studentUnitRecord IStudentUnitRecord Student record to be added to
+   *        the collection of student records for this unit.
    */
   public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord);
 

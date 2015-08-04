@@ -6,16 +6,18 @@ package datamanagement;
  * assessments to this unit, calculates grades for this unit and adds student
  * records for this unit to the collection of student unit records.
  */
-public class UnitProxy implements IUnit
+public class UnitProxy
+  implements IUnit
 {
   //===========================================================================
   // Variables
   //===========================================================================
 
-  private String UC;
-  private String un;
+  private String unitCode_;
+  private String unitName_;
 
-  UnitManager um;
+  // TODO: can this be private?
+  UnitManager unitManager_;
 
   //===========================================================================
   // Constructors
@@ -23,14 +25,14 @@ public class UnitProxy implements IUnit
 
   /**
    * Creates a new UnitProxy instance, using just unit code and name and
-   * referencing the singleton unitManager that is used to identify the
+   * referencing the singleton unitManager_ that is used to identify the
    * matching Unit instance.
    */
   public UnitProxy(String unitCode, String unitName)
   {
-    this.UC = unitCode;
-    this.un = unitName;
-    this.um = UnitManager.UM();
+    this.unitCode_ = unitCode;
+    this.unitName_ = unitName;
+    this.unitManager_ = UnitManager.UM();
   }
 
 
@@ -45,7 +47,7 @@ public class UnitProxy implements IUnit
   @Override
   public String getUnitCode()
   {
-    return this.UC;
+    return this.unitCode_;
   }
 
 
@@ -56,7 +58,7 @@ public class UnitProxy implements IUnit
   @Override
   public String getUnitName()
   {
-    return this.un;
+    return this.unitName_;
   }
 
 
@@ -67,7 +69,8 @@ public class UnitProxy implements IUnit
   @Override
   public float getMinimumMarkForAdditionalExamination()
   {
-    return this.um.getUnit(UC).getMinimumMarkForAdditionalExamination();
+    return this.unitManager_.getUnit(unitCode_)
+                           .getMinimumMarkForAdditionalExamination();
   }
 
 
@@ -78,7 +81,8 @@ public class UnitProxy implements IUnit
   @Override
   public float getMinimumMarkForPass()
   {
-    return this.um.getUnit(UC).getMinimumMarkForPass();
+    return this.unitManager_.getUnit(unitCode_)
+                           .getMinimumMarkForPass();
   }
 
 
@@ -89,7 +93,8 @@ public class UnitProxy implements IUnit
   @Override
   public float getMinimumMarkForCredit()
   {
-    return this.um.getUnit(UC).getMinimumMarkForCredit();
+    return this.unitManager_.getUnit(unitCode_)
+                           .getMinimumMarkForCredit();
   }
 
 
@@ -100,7 +105,8 @@ public class UnitProxy implements IUnit
   @Override
   public float getMinimumMarkForDistinction()
   {
-    return this.um.getUnit(UC).getMinimumMarkForDistinction();
+    return this.unitManager_.getUnit(unitCode_)
+                           .getMinimumMarkForDistinction();
   }
 
 
@@ -111,7 +117,8 @@ public class UnitProxy implements IUnit
   @Override
   public float getMinimumMarkForHighDistinction()
   {
-    return um.getUnit(UC).getMinimumMarkForHighDistinction();
+    return unitManager_.getUnit(unitCode_)
+                      .getMinimumMarkForHighDistinction();
   }
 
 
@@ -122,7 +129,8 @@ public class UnitProxy implements IUnit
   @Override
   public int getWeightOfAssignmentOne()
   {
-    return um.getUnit(UC).getWeightOfAssignmentOne();
+    return unitManager_.getUnit(unitCode_)
+                      .getWeightOfAssignmentOne();
   }
 
 
@@ -133,7 +141,8 @@ public class UnitProxy implements IUnit
   @Override
   public int getWeightOfAssignmentTwo()
   {
-    return um.getUnit(UC).getWeightOfAssignmentTwo();
+    return unitManager_.getUnit(unitCode_)
+                      .getWeightOfAssignmentTwo();
   }
 
 
@@ -144,7 +153,8 @@ public class UnitProxy implements IUnit
   @Override
   public int getWeightOfExam()
   {
-    return um.getUnit(UC).getWeightOfExam();
+    return unitManager_.getUnit(unitCode_)
+                      .getWeightOfExam();
   }
 
 
@@ -153,9 +163,10 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public IStudentUnitRecord getStudentUnitRecord(int studentId )
+  public IStudentUnitRecord getStudentUnitRecord(int studentId)
   {
-    return um.getUnit(UC).getStudentUnitRecord( studentId );
+    return unitManager_.getUnit(unitCode_)
+                      .getStudentUnitRecord(studentId);
   }
 
 
@@ -166,7 +177,8 @@ public class UnitProxy implements IUnit
   @Override
   public StudentUnitRecordList getStudentUnitRecordList()
   {
-    return um.getUnit(UC).getStudentUnitRecordList();
+    return unitManager_.getUnit(unitCode_)
+                      .getStudentUnitRecordList();
   }
 
 
@@ -175,9 +187,10 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public void setMinimumMarkForAdditionalExamination(float minimumMark )
+  public void setMinimumMarkForAdditionalExamination(float minimumMark)
   {
-    um.getUnit(UC).setMinimumMarkForAdditionalExamination( minimumMark );
+    unitManager_.getUnit(unitCode_)
+               .setMinimumMarkForAdditionalExamination(minimumMark);
   }
 
 
@@ -186,9 +199,10 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public void setMinimumMarkForPass(float minimumMark )
+  public void setMinimumMarkForPass(float minimumMark)
   {
-    um.getUnit(UC).setMinimumMarkForPass( minimumMark );
+    unitManager_.getUnit(unitCode_)
+               .setMinimumMarkForPass(minimumMark);
   }
 
 
@@ -197,9 +211,10 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public void setMinimumMarkForCredit(float minimumMark )
+  public void setMinimumMarkForCredit(float minimumMark)
   {
-    um.getUnit(UC).setMinimumMarkForCredit( minimumMark );
+    unitManager_.getUnit(unitCode_)
+               .setMinimumMarkForCredit(minimumMark);
   }
 
 
@@ -208,9 +223,10 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public void setMinimumMarkForDistinction(float minimumMark )
+  public void setMinimumMarkForDistinction(float minimumMark)
   {
-    um.getUnit(UC).setMinimumMarkForDistinction( minimumMark );
+    unitManager_.getUnit(unitCode_)
+               .setMinimumMarkForDistinction(minimumMark);
   }
 
 
@@ -219,9 +235,10 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public void setMinimumMarkForHighDistinction(float minimumMark )
+  public void setMinimumMarkForHighDistinction(float minimumMark)
   {
-    um.getUnit(UC).setMinimumMarkForHighDistinction( minimumMark );
+    unitManager_.getUnit(unitCode_)
+               .setMinimumMarkForHighDistinction(minimumMark);
   }
 
 
@@ -230,9 +247,14 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public void setWeightsOfAssessments(int weightOfAssignmentOne, int weightOfAssignmentTwo, int weightOfExam )
+  public void setWeightsOfAssessments(int weightOfAssignmentOne,
+                                      int weightOfAssignmentTwo,
+                                      int weightOfExam)
   {
-    um.getUnit(UC).setWeightsOfAssessments( weightOfAssignmentOne, weightOfAssignmentTwo, weightOfExam );
+    unitManager_.getUnit(unitCode_)
+               .setWeightsOfAssessments(weightOfAssignmentOne,
+                                        weightOfAssignmentTwo,
+                                        weightOfExam);
   }
 
 
@@ -245,9 +267,14 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public String calculateGrade(float markForAssignmentOne, float markForAssignmentTwo, float markForExam )
+  public String calculateGrade(float markForAssignmentOne,
+                               float markForAssignmentTwo,
+                               float markForExam)
   {
-    return um.getUnit(UC).calculateGrade( markForAssignmentOne, markForAssignmentTwo, markForExam );
+    return unitManager_.getUnit(unitCode_)
+                      .calculateGrade(markForAssignmentOne,
+                                      markForAssignmentTwo,
+                                      markForExam);
   }
 
 
@@ -256,9 +283,10 @@ public class UnitProxy implements IUnit
    * {@inheritDoc}
    */
   @Override
-  public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord )
+  public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord)
   {
-    um.getUnit(UC).addStudentUnitRecord( studentUnitRecord );
+    unitManager_.getUnit(unitCode_)
+               .addStudentUnitRecord(studentUnitRecord);
   }
 
 

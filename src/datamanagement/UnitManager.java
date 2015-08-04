@@ -2,7 +2,7 @@ package datamanagement;
 
 import java.util.List;
 
-import org.jdom.*;
+import org.jdom.Element;
 
 /**
  * Creates and manages the collection of units.
@@ -15,9 +15,9 @@ public class UnitManager
   // Variables
   //===========================================================================
 
-  private static UnitManager self = null;
+  private static UnitManager unitManager_ = null;
 
-  private UnitMap UM;
+  private UnitMap unitMap_;
 
   //===========================================================================
   // Constructors
@@ -30,7 +30,7 @@ public class UnitManager
    */
   private UnitManager()
   {
-    UM = new UnitMap();
+    unitMap_ = new UnitMap();
   }
 
 
@@ -46,10 +46,10 @@ public class UnitManager
    */
   public static UnitManager UM()
   {
-    if (self == null) {
-      self = new UnitManager();
+    if (unitManager_ == null) {
+      unitManager_ = new UnitManager();
     }
-    return self;
+    return unitManager_;
   }
 
 
@@ -57,13 +57,13 @@ public class UnitManager
   /**
    * Returns a unit (either from collection of units in memory, or from xml
    * file - if it exists).
-   * @param uc Unit code.
+   * @param unitCode Unit code.
    * @return IUnit Returns a unit.
    */
-  public IUnit getUnit(String uc)
+  public IUnit getUnit(String unitCode)
   {
-    IUnit iu = this.UM.get(uc);
-    return iu != null ? iu : createUnit(uc);
+    IUnit unit = this.unitMap_.get(unitCode);
+    return unit != null ? unit : createUnit(unitCode);
   }
 
 
@@ -79,34 +79,38 @@ public class UnitManager
    */
   private IUnit createUnit(String unitCode)
   {
-    IUnit iu;
+    IUnit unit;
 
-    for (Element el : (List<Element>) XMLManager.getXML().getDocument()
+    for (Element element : (List<Element>) XMLManager.getXML().getDocument()
         .getRootElement().getChild("unitTable").getChildren("unit"))
-      if (unitCode.equals(el.getAttributeValue("uid"))) {
-        StudentUnitRecordList slist;
+      if (unitCode.equals(element.getAttributeValue("uid"))) {
 
-        slist = null;
+        StudentUnitRecordList studentUnitRecordList;
+        studentUnitRecordList = null;
+        unit = new Unit(element.getAttributeValue("uid"),
+                        element.getAttributeValue("name"),
+                        Float.valueOf(element.getAttributeValue("ps"))
+                             .floatValue(),
+                        Float.valueOf( element.getAttributeValue( "cr" ) )
+                             .floatValue(),
+                        Float.valueOf(element.getAttributeValue("di"))
+                             .floatValue(),
+                        Float.valueOf( element.getAttributeValue( "hd" ) )
+                             .floatValue(),
+                        Float.valueOf(element.getAttributeValue("ae"))
+                             .floatValue(),
+                        Integer.valueOf(element.getAttributeValue("asg1wgt"))
+                               .intValue(),
+                        Integer.valueOf(element.getAttributeValue("asg2wgt"))
+                               .intValue(),
+                        Integer.valueOf(element.getAttributeValue("examwgt"))
+                               .intValue(),
+                        StudentUnitRecordManager.instance()
+                               .getRecordsByUnit( unitCode ));
 
-        iu = new Unit(el.getAttributeValue("uid"),
-        el.getAttributeValue("name"), Float.valueOf(
-        el.getAttributeValue("ps")).floatValue(), Float
-        .valueOf( el.getAttributeValue("cr"))
-        .floatValue(), Float.valueOf(
-        el.getAttributeValue("di")).floatValue(), Float
-        .valueOf( el.getAttributeValue("hd"))
-        .floatValue(), Float.valueOf(
-        el.getAttributeValue("ae")).floatValue(),
-        Integer.valueOf(el.getAttributeValue("asg1wgt"))
-        .intValue(), Integer.valueOf(
-        el.getAttributeValue("asg2wgt")).intValue(),
-        Integer.valueOf(el.getAttributeValue("examwgt"))
-        .intValue(), StudentUnitRecordManager
-        .instance().getRecordsByUnit(unitCode));
+        unitMap_.put(unit.getUnitCode(), unit);
 
-        UM.put(iu.getUnitCode(), iu);
-
-        return iu;
+        return unit;
       }
 
       throw new RuntimeException("DBMD: createUnit : unit not in file");
@@ -121,17 +125,17 @@ public class UnitManager
    */
   public UnitMap getUnits()
   {
-    UnitMap uM;
-    IUnit iu;
-    uM = new UnitMap();
+    UnitMap unitMap;
+    IUnit unit;
+    unitMap = new UnitMap();
 
     for (Element el : (List<Element>) XMLManager.getXML().getDocument()
         .getRootElement().getChild("unitTable").getChildren("unit")) {
-      iu = new UnitProxy(el.getAttributeValue("uid"),
-      el.getAttributeValue("name"));
-      uM.put(iu.getUnitCode(), iu);
+      unit = new UnitProxy(el.getAttributeValue("uid"),
+                         el.getAttributeValue("name"));
+      unitMap.put(unit.getUnitCode(), unit);
     } // unit maps are filled with PROXY units
-    return uM;
+    return unitMap;
   }
 
 
