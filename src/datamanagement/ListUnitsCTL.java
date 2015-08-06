@@ -19,8 +19,9 @@ public class ListUnitsCTL
    * Creates new instance and references singleton UnitManager instance
    * in order to access the collection of units.
    */
-  public ListUnitsCTL() {
-    unitManager_ = UnitManager.UM();
+  public ListUnitsCTL()
+  {
+    unitManager_ = UnitManager.getInstance();
   }
 
 
