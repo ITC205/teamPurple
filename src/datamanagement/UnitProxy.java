@@ -32,7 +32,7 @@ public class UnitProxy
   {
     this.unitCode_ = unitCode;
     this.unitName_ = unitName;
-    this.unitManager_ = UnitManager.UM();
+    this.unitManager_ = UnitManager.getInstance();
   }
 
 
