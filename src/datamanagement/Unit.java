@@ -52,11 +52,11 @@ public class Unit
    * @param minimumMarkForAdditionalExamination float
    *        Minimum mark to qualify for an Alternative Assessment in this unit.
    * @param weightOfAssignmentOne int
-   *        Weight for assessment one in this unit.
+   *        Weight of assessment one result in grade calculation for this unit.
    * @param weightOfAssignmentTwo int
-   *        Weight for assessment two in this unit.
+   *        Weight of assessment two result in grade calculation for this unit.
    * @param weightOfExam int
-   *        Weight for the exam in this unit.
+   *        Weight of the exam result in grade calculation for this unit.
    * @param studentUnitRecordList StudentUnitRecordList
    *        Collection of student records for this unit.
    */
