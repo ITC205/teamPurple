@@ -85,8 +85,7 @@ public class UnitManager
         .getRootElement().getChild("unitTable").getChildren("unit"))
       if (unitCode.equals(element.getAttributeValue("uid"))) {
 
-        StudentUnitRecordList studentUnitRecordList;
-        studentUnitRecordList = null;
+
         unit = new Unit(element.getAttributeValue("uid"),
                         element.getAttributeValue("name"),
                         Float.valueOf(element.getAttributeValue("ps"))
