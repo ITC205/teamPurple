@@ -15,7 +15,7 @@ public class UnitManager
   // Variables
   //===========================================================================
 
-  private static UnitManager unitManager_ = null;
+  private static UnitManager instance_ = null;
 
   private UnitMap unitMap_;
 
@@ -46,10 +46,10 @@ public class UnitManager
    */
   public static UnitManager getInstance()
   {
-    if (unitManager_ == null) {
-      unitManager_ = new UnitManager();
+    if (instance_ == null) {
+      instance_ = new UnitManager();
     }
-    return unitManager_;
+    return instance_;
   }
 
 
