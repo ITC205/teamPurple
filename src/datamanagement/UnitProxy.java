@@ -16,8 +16,7 @@ public class UnitProxy
   private String unitCode_;
   private String unitName_;
 
-  // TODO: can this be private?
-  UnitManager unitManager_;
+  private UnitManager unitManager_;
 
   //===========================================================================
   // Constructors
