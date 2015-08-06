@@ -44,7 +44,7 @@ public class UnitManager
    * @return XMLManager Returns sole XMLManager instance responsible for
    * managing data from xml file.
    */
-  public static UnitManager UM()
+  public static UnitManager getInstance()
   {
     if (unitManager_ == null) {
       unitManager_ = new UnitManager();
