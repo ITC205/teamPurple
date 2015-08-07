@@ -13,7 +13,7 @@ public class StudentManager
   // Variables
   //===========================================================================
   
-  private static StudentManager self = null;
+  private static StudentManager instance_ = null;
 
   private StudentMap studentMap_;
   private HashMap<String, StudentMap> unitMap_;
@@ -37,10 +37,10 @@ public class StudentManager
   //Singleton class. Use getInstance
   public static StudentManager get() 
   {
-    if (self == null) {
-      self = new StudentManager(); 
+    if (instance_ == null) {
+      instance_ = new StudentManager(); 
     }
-    return self; 
+    return instance_; 
   }
 
   
