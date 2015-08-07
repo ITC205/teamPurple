@@ -9,7 +9,7 @@ public class ListStudentsCTL
 
   public ListStudentsCTL()
   {
-    sm = StudentManager.get();
+    sm = StudentManager.getInstance();
   }
 
 

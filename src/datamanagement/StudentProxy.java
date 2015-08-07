@@ -21,7 +21,7 @@ public class StudentProxy implements IStudent
     studentId_ = studentId;
     firstName_ = firstName;
     lastName_ = lastName;
-    studentList_ = StudentManager.get();
+    studentList_ = StudentManager.getInstance();
   }
 
   

@@ -35,7 +35,7 @@ public class StudentManager
   //===========================================================================
   
   //Singleton class. Use getInstance
-  public static StudentManager get() 
+  public static StudentManager getInstance() 
   {
     if (instance_ == null) {
       instance_ = new StudentManager(); 
