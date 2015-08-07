@@ -19,7 +19,7 @@ public class XMLManager
   // Variables
   //===========================================================================
 
-  private static XMLManager self_ = null;
+  private static XMLManager instance_ = null;
   
   private Document document_;
 
@@ -34,7 +34,7 @@ public class XMLManager
    */
   private XMLManager()
   {
-    init();
+    initialize();
   }
 
 
@@ -49,7 +49,10 @@ public class XMLManager
    */
   public static XMLManager getXML()
   {
-    if (self_ == null) self_ = new XMLManager(); return self_;
+    if (instance_ == null) {
+      instance_ = new XMLManager();
+    }
+    return instance_;
   }
 
 
@@ -74,10 +77,10 @@ public class XMLManager
   /**
    * Initializes singleton instance xmlManager and loads data from xml file.
    */
-  public void init()
+  public void initialize()
   {
-    String xmlFileName = AppProperties.getInstance()
-                            .getProperties().getProperty("XMLFILE");
+    String xmlFileName = AppProperties.getInstance().getProperties()
+                                      .getProperty( "XMLFILE" );
 
     try {
       SAXBuilder saxBuilder = new SAXBuilder();
@@ -86,13 +89,13 @@ public class XMLManager
     }
     // TODO: name exception more specifically?
     catch (JDOMException exception) {
-      System.err.printf("%s", "DBMD: XMLManager : init : caught JDOMException\n");
-      throw new RuntimeException("DBMD: XMLManager : init : JDOMException");
+      System.err.printf("%s", "DBMD: XMLManager : initialize : caught JDOMException\n");
+      throw new RuntimeException("DBMD: XMLManager : initialize : JDOMException");
     }
     // TODO: name exception more specifically?
     catch (IOException exception) {
-      System.err.printf("%s", "DBMD: XMLManager : init : caught IOException\n");
-      throw new RuntimeException("DBMD: XMLManager : init : IOException");
+      System.err.printf("%s", "DBMD: XMLManager : initialize : caught IOException\n");
+      throw new RuntimeException("DBMD: XMLManager : initialize : IOException");
     }
   }
 
