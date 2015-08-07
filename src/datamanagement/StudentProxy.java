@@ -26,7 +26,7 @@ public class StudentProxy implements IStudent
 
   
   //===========================================================================
-  // Instance methods: accessors
+  // Getters and Setters
   //===========================================================================
   
   public Integer getID() 

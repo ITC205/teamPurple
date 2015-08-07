@@ -106,7 +106,7 @@ public class StudentManager
   
   
   //===========================================================================
-  // Instance methods: accessors
+  // Getters and Setters
   //===========================================================================
   
   public static StudentManager getInstance() 
@@ -140,7 +140,9 @@ public class StudentManager
                                                       .getChild("studentTable")
                                                       .getChildren("student")) 
     {
-      if (studentId.toString().equals(studentDetails.getAttributeValue("sid")))
+      Integer savedStudentId = new Integer(studentDetails
+                                           .getAttributeValue("sid"));
+      if (studentId.toString().equals(savedStudentId))
       {
         return studentDetails;
       }

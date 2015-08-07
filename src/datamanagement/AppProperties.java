@@ -42,7 +42,7 @@ public class AppProperties
 
 
   //===========================================================================
-  // Instance methods: accessors
+  // Getters and Setters
   //===========================================================================
   
   public Properties getProperties() 

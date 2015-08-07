@@ -51,7 +51,7 @@ public class Student implements IStudent
   
   
   //===========================================================================
-  // Instance methods: accessors
+  // Getters and Setters
   //===========================================================================
   
   public Integer getID() 
