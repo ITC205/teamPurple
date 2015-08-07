@@ -31,49 +31,8 @@ public class StudentManager
 
   
   //===========================================================================
-  // Methods
+  // Methods: primary
   //===========================================================================
-  
-  //Singleton class. Use getInstance
-  public static StudentManager getInstance() 
-  {
-    if (instance_ == null) {
-      instance_ = new StudentManager(); 
-    }
-    return instance_; 
-  }
-
-  
-  /**
-   * create new student or return existing student
-   */
-  public IStudent getStudent(Integer studentId) 
-  {
-    IStudent student = studentMap_.get(studentId);
-    
-    return student != null ? student : createStudent(studentId);
-  }
-
-  
-  /**
-   * get student record from XML file
-   */
-  private Element getStudentElement(Integer studentId) 
-  {
-    for (Element el : (List<Element>) XMLManager.getXML()
-                                                .getDocument()
-                                                .getRootElement()
-                                                .getChild("studentTable")
-                                                .getChildren("student")) 
-    {
-      if (studentId.toString().equals(el.getAttributeValue("sid"))) {
-        return el;
-      }
-    }
-    
-    return null;
-  }
-
   
   /**
    * create new student
@@ -85,12 +44,13 @@ public class StudentManager
     
     if (studentDetails != null) {
       StudentUnitRecordList recordList = StudentUnitRecordManager.instance()
-                                                                 .getRecordsByStudent(studentId);
-      Integer newStudentId = new Integer(studentDetails.getAttributeValue("sid"));
+                                               .getRecordsByStudent(studentId);
+      Integer newStudentId = new Integer(studentDetails
+                                               .getAttributeValue("sid"));
       String newFirstName = studentDetails.getAttributeValue("fname");
       String newLastName = studentDetails.getAttributeValue("lname");
       
-      student = new Student(newStudentId, newFirstName, newLastName, recordList);
+      student = new Student(newStudentId,newFirstName,newLastName,recordList);
       
       studentMap_.put(student.getID(), student);
       
@@ -131,15 +91,62 @@ public class StudentManager
     
     studentMapByUnit = new StudentMap();
     IStudent student;
-    StudentUnitRecordList recordList = StudentUnitRecordManager.instance().getRecordsByUnit(unitCode);
+    StudentUnitRecordList recordList = StudentUnitRecordManager.instance()
+                                                   .getRecordsByUnit(unitCode);
    
     for (IStudentUnitRecord studentUnitRecord : recordList) {
-      student = createStudentProxy(new Integer(studentUnitRecord.getStudentID()));
+      Integer studentId = studentUnitRecord.getStudentID();
+      student = createStudentProxy(studentId);
       studentMapByUnit.put(student.getID(), student);
     }
     
     unitMap_.put( unitCode, studentMapByUnit);
     return studentMapByUnit;
+  }
+  
+  
+  //===========================================================================
+  // Instance methods: accessors
+  //===========================================================================
+  
+  public static StudentManager getInstance() 
+  {
+    if (instance_ == null) {
+      instance_ = new StudentManager(); 
+    }
+    return instance_; 
+  }
+
+  
+  /**
+   * create new student or return existing student
+   */
+  public IStudent getStudent(Integer studentId) 
+  {
+    IStudent student = studentMap_.get(studentId);
+    
+    return student != null ? student : createStudent(studentId);
+  }
+
+  
+  /**
+   * get student record from XML file
+   */
+  private Element getStudentElement(Integer studentId) 
+  {
+    for (Element studentDetails : (List<Element>) XMLManager.getXML()
+                                                      .getDocument()
+                                                      .getRootElement()
+                                                      .getChild("studentTable")
+                                                      .getChildren("student")) 
+    {
+      if (studentId.toString().equals(studentDetails.getAttributeValue("sid")))
+      {
+        return studentDetails;
+      }
+    }
+    
+    return null;
   }
   
   

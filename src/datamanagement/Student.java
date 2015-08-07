@@ -16,7 +16,8 @@ public class Student implements IStudent
   // Constructors
   //===========================================================================
   
-  public Student( Integer studentId, String firstName, String lastName, StudentUnitRecordList recordList ) 
+  public Student( Integer studentId, String firstName, String lastName
+                                   , StudentUnitRecordList recordList )
   { 
     studentId_ = studentId; 
     firstName_ = firstName;

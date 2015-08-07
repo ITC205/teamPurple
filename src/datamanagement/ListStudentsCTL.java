@@ -27,6 +27,7 @@ public class ListStudentsCTL
   {
     studentLister.clearStudents();
     StudentMap students = studentList_.getStudentsByUnit(unitCode);
+    
     for (Integer studentId : students.keySet() ) {
       studentLister.addStudent(students.get(studentId));
     }
