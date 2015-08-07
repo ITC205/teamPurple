@@ -2,24 +2,33 @@ package datamanagement;
 
 public class ListStudentsCTL 
 {
+  //===========================================================================
+  // Variables
+  //===========================================================================
+  
+  private StudentManager studentList_;
 
-  private StudentManager sm;
 
-
-
+  //===========================================================================
+  // Constructors
+  //===========================================================================
+  
   public ListStudentsCTL()
   {
-    sm = StudentManager.getInstance();
+    studentList_ = StudentManager.getInstance();
   }
 
 
-
-  public void listStudents( IStudentLister lister, String unitCode ) 
+  //===========================================================================
+  // Methods: primary
+  //===========================================================================
+  
+  public void listStudents(IStudentLister studentLister, String unitCode) 
   {
-    lister.clearStudents();
-    StudentMap students = sm.getStudentsByUnit( unitCode );
-    for (Integer id : students.keySet() ) {
-      lister.addStudent(students.get(id));
+    studentLister.clearStudents();
+    StudentMap students = studentList_.getStudentsByUnit(unitCode);
+    for (Integer studentId : students.keySet() ) {
+      studentLister.addStudent(students.get(studentId));
     }
   }
 

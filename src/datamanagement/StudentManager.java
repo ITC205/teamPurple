@@ -60,7 +60,11 @@ public class StudentManager
    */
   private Element getStudentElement(Integer studentId) 
   {
-    for (Element el : (List<Element>) XMLManager.getXML().getDocument().getRootElement().getChild("studentTable").getChildren("student")) 
+    for (Element el : (List<Element>) XMLManager.getXML()
+                                                .getDocument()
+                                                .getRootElement()
+                                                .getChild("studentTable")
+                                                .getChildren("student")) 
     {
       if (studentId.toString().equals(el.getAttributeValue("sid"))) {
         return el;
@@ -81,7 +85,10 @@ public class StudentManager
     
     if (el != null) {
       StudentUnitRecordList studentUnitRecordList = StudentUnitRecordManager.instance().getRecordsByStudent(studentId);
-      student = new Student(new Integer(el.getAttributeValue("sid")),el.getAttributeValue("fname"),el.getAttributeValue("lname"),studentUnitRecordList);
+      Integer newStudentId = new Integer(el.getAttributeValue("sid"));
+      String newFirstName = el.getAttributeValue("fname");
+      String newLastName = el.getAttributeValue("lname");
+      student = new Student(newStudentId, newFirstName, newLastName, studentUnitRecordList);
       studentMap_.put(student.getID(), student);
       return student; 
     }
