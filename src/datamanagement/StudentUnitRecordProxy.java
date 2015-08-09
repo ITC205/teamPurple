@@ -31,7 +31,7 @@ public class StudentUnitRecordProxy implements IStudentUnitRecord
 
 
   // ===========================================================================
-  // Accessors
+  // Getters & setters
   // ===========================================================================
 
 
