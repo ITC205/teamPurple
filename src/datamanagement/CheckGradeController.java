@@ -36,19 +36,19 @@ public class CheckGradeController
   public void execute()
   {
     userInterface_ = new CheckGradeUserInterface(this);
-    userInterface_.setState1(false);
+    userInterface_.setSelectUnitComboBoxEnabled(false);
 
-    userInterface_.setState2(false);
-    userInterface_.setState3(false);
-    userInterface_.setState4(false);
-    userInterface_.setState5(false);
-    userInterface_.setState6(false);
-    userInterface_.Refresh3();
+    userInterface_.setSelectStudentComboBoxEnabled(false);
+    userInterface_.setCheckGradeButtonEnabled(false);
+    userInterface_.setChangeButtonEnabled(false);
+    userInterface_.setMarkEntryTextFieldsEnabled(false);
+    userInterface_.setSaveButtonEnabled(false);
+    userInterface_.clearDisplayedText();
 
     ListUnitsCTL luCTL = new ListUnitsCTL();
     luCTL.listUnits(userInterface_);
     userInterface_.setVisible(true);
-    userInterface_.setState1(true);
+    userInterface_.setSelectUnitComboBoxEnabled(true);
   }
 
 
@@ -57,14 +57,14 @@ public class CheckGradeController
   {
 
     if (code.equals("NONE"))
-      userInterface_.setState2(false);
+      userInterface_.setSelectStudentComboBoxEnabled(false);
     else {
       ListStudentsCTL lsCTL = new ListStudentsCTL();
       lsCTL.listStudents(userInterface_, code);
       currentUnitCode_ = code;
-      userInterface_.setState2(true);
+      userInterface_.setSelectStudentComboBoxEnabled(true);
     }
-    userInterface_.setState3(false);
+    userInterface_.setCheckGradeButtonEnabled(false);
   }
 
 
@@ -73,11 +73,11 @@ public class CheckGradeController
   {
     currentStudentId_ = id;
     if (currentStudentId_.intValue() == 0) {
-      userInterface_.Refresh3();
-      userInterface_.setState3(false);
-      userInterface_.setState4(false);
-      userInterface_.setState5(false);
-      userInterface_.setState6(false);
+      userInterface_.clearDisplayedText();
+      userInterface_.setCheckGradeButtonEnabled(false);
+      userInterface_.setChangeButtonEnabled(false);
+      userInterface_.setMarkEntryTextFieldsEnabled(false);
+      userInterface_.setSaveButtonEnabled(false);
     }
 
     else {
@@ -86,10 +86,10 @@ public class CheckGradeController
       IStudentUnitRecord r = s.getUnitRecord(currentUnitCode_);
 
       userInterface_.setRecord(r);
-      userInterface_.setState3(true);
-      userInterface_.setState4(true);
-      userInterface_.setState5(false);
-      userInterface_.setState6(false);
+      userInterface_.setCheckGradeButtonEnabled(true);
+      userInterface_.setChangeButtonEnabled(true);
+      userInterface_.setMarkEntryTextFieldsEnabled(false);
+      userInterface_.setSaveButtonEnabled(false);
       isChangesMade_ = false;
 
     }
@@ -101,10 +101,10 @@ public class CheckGradeController
   {
     IUnit u = UnitManager.getInstance().getUnit(currentUnitCode_);
     String s = u.getGrade(f, g, h);
-    userInterface_.setState4(true);
-    userInterface_.setState5(false);
+    userInterface_.setChangeButtonEnabled(true);
+    userInterface_.setMarkEntryTextFieldsEnabled(false);
     if (isChangesMade_) {
-      userInterface_.setState6(true);
+      userInterface_.setSaveButtonEnabled(true);
     }
     return s;
   }
@@ -113,9 +113,9 @@ public class CheckGradeController
 
   public void enableChangeMarks()
   {
-    userInterface_.setState4(false);
-    userInterface_.setState6(false);
-    userInterface_.setState5(true);
+    userInterface_.setChangeButtonEnabled(false);
+    userInterface_.setSaveButtonEnabled(false);
+    userInterface_.setMarkEntryTextFieldsEnabled(true);
     isChangesMade_ = true;
   }
 
@@ -132,8 +132,8 @@ public class CheckGradeController
     r.setAsg2(asg2);
     r.setExam(exam);
     StudentUnitRecordManager.instance().saveRecord(r);
-    userInterface_.setState4(true);
-    userInterface_.setState5(false);
-    userInterface_.setState6(false);
+    userInterface_.setChangeButtonEnabled(true);
+    userInterface_.setMarkEntryTextFieldsEnabled(false);
+    userInterface_.setSaveButtonEnabled(false);
   }
 }
