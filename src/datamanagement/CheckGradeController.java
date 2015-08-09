@@ -66,7 +66,7 @@ public class CheckGradeController {
 	}
 
 	public String checkGrade(float f, float g, float h) {
-		IUnit u = UnitManager.UM().getUnit(cuc);
+		IUnit u = UnitManager.getInstance().getUnit(cuc);
 		String s = u.getGrade(f, g, h);
 		CGUI.setState4(true);
 		CGUI.setState5(false);
@@ -85,7 +85,7 @@ public class CheckGradeController {
 
 	public void saveGrade(float asg1, float asg2, float exam) {
 
-		IUnit u = UnitManager.UM().getUnit(cuc);
+		IUnit u = UnitManager.getInstance().getUnit(cuc);
 		IStudent s = StudentManager.get().getStudent(currentStudentID);
 
 		IStudentUnitRecord r = s.getUnitRecord(cuc);
