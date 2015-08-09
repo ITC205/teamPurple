@@ -88,7 +88,7 @@ public class StudentUnitRecord implements IStudentUnitRecord
   public void setAssessmentOneMark(float newMark) 
   {
     boolean isNegative = newMark < 0;
-    boolean isGreaterThanWeight = newMark > UnitManager.UM().getUnit(unitCode_)
+    boolean isGreaterThanWeight = newMark > UnitManager.getInstance().getUnit(unitCode_)
             .getWeightOfAssignmentOne();
 
     if (isNegative || isGreaterThanWeight) {
@@ -105,7 +105,7 @@ public class StudentUnitRecord implements IStudentUnitRecord
   public void setAssessmentTwoMark(float newMark)
   {
     boolean isNegative = newMark < 0;
-    boolean isGreaterThanWeight = newMark > UnitManager.UM().getUnit(unitCode_)
+    boolean isGreaterThanWeight = newMark > UnitManager.getInstance().getUnit(unitCode_)
             .getWeightOfAssignmentTwo();
 
     if (isNegative || isGreaterThanWeight) {
@@ -122,7 +122,7 @@ public class StudentUnitRecord implements IStudentUnitRecord
   public void setExamMark(float newMark)
   {
     boolean isNegative = newMark < 0;
-    boolean isGreaterThanWeight = newMark > UnitManager.UM().getUnit(unitCode_)
+    boolean isGreaterThanWeight = newMark > UnitManager.getInstance().getUnit(unitCode_)
             .getWeightOfExam();
 
     if (isNegative || isGreaterThanWeight) {
