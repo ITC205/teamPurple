@@ -20,13 +20,15 @@ public class CheckGradeUserInterface extends JFrame
   
   
   
-  private CheckGradeController ctl;
-  private javax.swing.DefaultComboBoxModel uM;
-  private javax.swing.DefaultComboBoxModel rM;
-  float f1;
-  float f2;
-  float f3;
-  Integer sid;
+  private CheckGradeController controller_;
+  private javax.swing.DefaultComboBoxModel unitComboBoxModel_;
+  private javax.swing.DefaultComboBoxModel studentComboBoxModel_;
+  
+  private float assessmentOneMark_;
+  private float assessmentTwoMark_;
+  private float examMark_;
+  
+  private Integer studentId_;
 
 
   
@@ -38,12 +40,12 @@ public class CheckGradeUserInterface extends JFrame
   
   public CheckGradeUserInterface(CheckGradeController ctl)
   {
-    this.ctl = ctl;
-    uM = new javax.swing.DefaultComboBoxModel(new String[0]);
-    rM = new javax.swing.DefaultComboBoxModel(new String[0]);
+    this.controller_ = ctl;
+    unitComboBoxModel_ = new javax.swing.DefaultComboBoxModel(new String[0]);
+    studentComboBoxModel_ = new javax.swing.DefaultComboBoxModel(new String[0]);
     initComponents();
-    selectUnitComboBox.setModel(uM);
-    selectStudentComboBox.setModel(rM);
+    selectUnitComboBox.setModel(unitComboBoxModel_);
+    selectStudentComboBox.setModel(studentComboBoxModel_);
     errorMessageLabel.setText("");
   }
 
@@ -89,7 +91,7 @@ public class CheckGradeUserInterface extends JFrame
     unitSelectionPanel
             .setBorder(javax.swing.BorderFactory.createTitledBorder("Unit"));
 
-    selectUnitComboBox.setModel(uM);
+    selectUnitComboBox.setModel(unitComboBoxModel_);
     selectUnitComboBox.addItemListener(new java.awt.event.ItemListener()
     {
       public void itemStateChanged(java.awt.event.ItemEvent evt)
@@ -123,7 +125,7 @@ public class CheckGradeUserInterface extends JFrame
     studentSelectionPanel
             .setBorder(javax.swing.BorderFactory.createTitledBorder("Student"));
 
-    selectStudentComboBox.setModel(rM);
+    selectStudentComboBox.setModel(studentComboBoxModel_);
     selectStudentComboBox.addItemListener(new java.awt.event.ItemListener()
     {
       public void itemStateChanged(java.awt.event.ItemEvent evt)
@@ -398,7 +400,7 @@ public class CheckGradeUserInterface extends JFrame
       if (cU.equals((String) selectUnitComboBox.getItemAt(0))) {
         cU = "NONE";
       }
-      ctl.unitSelected(cU);
+      controller_.unitSelected(cU);
     }
   }// GEN-LAST:event_jComboBox1ItemStateChanged
 
@@ -410,13 +412,13 @@ public class CheckGradeUserInterface extends JFrame
     String cS = (String) selectStudentComboBox.getSelectedItem();
     if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
       if (cS.equals((String) selectStudentComboBox.getItemAt(0))) {
-        sid = new Integer(0);
-        ctl.studentSelected(sid);
+        studentId_ = new Integer(0);
+        controller_.studentSelected(studentId_);
       }
       else {
-        sid = new Integer(cS.split("\\s")[0]);
+        studentId_ = new Integer(cS.split("\\s")[0]);
       }
-      ctl.studentSelected(sid);
+      controller_.studentSelected(studentId_);
     }
   }// GEN-LAST:event_jComboBox2ItemStateChanged
 
@@ -424,12 +426,12 @@ public class CheckGradeUserInterface extends JFrame
 
   private void jButton3ActionPerformed(java.awt.event.ActionEvent evt)
   {// GEN-FIRST:event_jButton3ActionPerformed
-    f1 = new Float(assessementOneMarkTextField.getText()).floatValue();
-    f2 = new Float(assessmentTwoMarkTestField.getText()).floatValue();
-    f3 = new Float(examMarkTextField.getText()).floatValue();
+    assessmentOneMark_ = new Float(assessementOneMarkTextField.getText()).floatValue();
+    assessmentTwoMark_ = new Float(assessmentTwoMarkTestField.getText()).floatValue();
+    examMark_ = new Float(examMarkTextField.getText()).floatValue();
     // lblErrMsg.setText("");
     try {
-      String s = ctl.checkGrade(f1, f2, f3);
+      String s = controller_.checkGrade(assessmentOneMark_, assessmentTwoMark_, examMark_);
       gradeDisplayLabel.setText(s);
     }
     catch (RuntimeException re) {
@@ -441,7 +443,7 @@ public class CheckGradeUserInterface extends JFrame
 
   private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)
   {// GEN-FIRST:event_jButton1ActionPerformed
-    ctl.enableChangeMarks();
+    controller_.enableChangeMarks();
     gradeDisplayLabel.setText("");
     // lblErrMsg.setText("");
   }// GEN-LAST:event_jButton1ActionPerformed
@@ -463,7 +465,7 @@ public class CheckGradeUserInterface extends JFrame
     float exam = new Float(examMarkTextField.getText()).floatValue();
     errorMessageLabel.setText("");
     try {
-      ctl.saveGrade(asg1, asg2, exam);
+      controller_.saveGrade(asg1, asg2, exam);
       // jButton3ActionPerformed(null);
     }
     catch (RuntimeException re) {
@@ -475,8 +477,8 @@ public class CheckGradeUserInterface extends JFrame
 
   public void clearUnits()
   {
-    uM.removeAllElements();
-    uM.addElement("<none selected>");
+    unitComboBoxModel_.removeAllElements();
+    unitComboBoxModel_.addElement("<none selected>");
     clearStudents();
   }
 
@@ -484,7 +486,7 @@ public class CheckGradeUserInterface extends JFrame
 
   public void addUnit(IUnit u)
   {
-    uM.addElement(u.getUnitCode());
+    unitComboBoxModel_.addElement(u.getUnitCode());
   }
 
 
@@ -499,15 +501,15 @@ public class CheckGradeUserInterface extends JFrame
 
   public void clearStudents()
   {
-    rM.removeAllElements();
-    rM.addElement("<none selected>");
+    studentComboBoxModel_.removeAllElements();
+    studentComboBoxModel_.addElement("<none selected>");
   }
 
 
 
   public void addStudent(IStudent student)
   {
-    rM.addElement(student.getID().toString() + " : " + student.getFirstName()
+    studentComboBoxModel_.addElement(student.getID().toString() + " : " + student.getFirstName()
             + " " + student.getLastName());
   }
 
