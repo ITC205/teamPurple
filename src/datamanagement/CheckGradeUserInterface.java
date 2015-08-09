@@ -4,14 +4,22 @@ import javax.swing.JLabel;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JFrame;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class CheckGradeUserInterface extends javax.swing.JFrame
+public class CheckGradeUserInterface extends JFrame
         implements IUnitLister, IStudentLister
 {
+  // ===========================================================================
+  // Variables
+  // ===========================================================================
+  
+  
+  
   private CheckGradeController ctl;
   private javax.swing.DefaultComboBoxModel uM;
   private javax.swing.DefaultComboBoxModel rM;
@@ -21,7 +29,13 @@ public class CheckGradeUserInterface extends javax.swing.JFrame
   Integer sid;
 
 
-
+  
+  // ===========================================================================
+  // Constructors
+  // ===========================================================================
+  
+  
+  
   public CheckGradeUserInterface(CheckGradeController ctl)
   {
     this.ctl = ctl;
@@ -34,7 +48,13 @@ public class CheckGradeUserInterface extends javax.swing.JFrame
   }
 
 
-
+  
+  // ===========================================================================
+  // Methods
+  // ===========================================================================
+  
+  
+  
   /**
    * This method is called from within the constructor to initialize the form.
    * WARNING: Do NOT modify this code. The content of this method is always
