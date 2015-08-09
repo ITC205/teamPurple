@@ -3,10 +3,10 @@ package datamanagement;
 public class CheckGradeController
 {
 
-  CheckGradeUserInterface CGUI;
-  String cuc = null;
-  Integer currentStudentID = null;
-  boolean changed = false;
+  private CheckGradeUserInterface userInterface_;
+  private String currentUnitCode_ = null;
+  private Integer currentStudentId_ = null;
+  private boolean isChangesMade_ = false;
 
 
 
@@ -18,20 +18,20 @@ public class CheckGradeController
 
   public void execute()
   {
-    CGUI = new CheckGradeUserInterface(this);
-    CGUI.setState1(false);
+    userInterface_ = new CheckGradeUserInterface(this);
+    userInterface_.setState1(false);
 
-    CGUI.setState2(false);
-    CGUI.setState3(false);
-    CGUI.setState4(false);
-    CGUI.setState5(false);
-    CGUI.setState6(false);
-    CGUI.Refresh3();
+    userInterface_.setState2(false);
+    userInterface_.setState3(false);
+    userInterface_.setState4(false);
+    userInterface_.setState5(false);
+    userInterface_.setState6(false);
+    userInterface_.Refresh3();
 
     ListUnitsCTL luCTL = new ListUnitsCTL();
-    luCTL.listUnits(CGUI);
-    CGUI.setVisible(true);
-    CGUI.setState1(true);
+    luCTL.listUnits(userInterface_);
+    userInterface_.setVisible(true);
+    userInterface_.setState1(true);
   }
 
 
@@ -40,40 +40,40 @@ public class CheckGradeController
   {
 
     if (code.equals("NONE"))
-      CGUI.setState2(false);
+      userInterface_.setState2(false);
     else {
       ListStudentsCTL lsCTL = new ListStudentsCTL();
-      lsCTL.listStudents(CGUI, code);
-      cuc = code;
-      CGUI.setState2(true);
+      lsCTL.listStudents(userInterface_, code);
+      currentUnitCode_ = code;
+      userInterface_.setState2(true);
     }
-    CGUI.setState3(false);
+    userInterface_.setState3(false);
   }
 
 
 
   public void studentSelected(Integer id)
   {
-    currentStudentID = id;
-    if (currentStudentID.intValue() == 0) {
-      CGUI.Refresh3();
-      CGUI.setState3(false);
-      CGUI.setState4(false);
-      CGUI.setState5(false);
-      CGUI.setState6(false);
+    currentStudentId_ = id;
+    if (currentStudentId_.intValue() == 0) {
+      userInterface_.Refresh3();
+      userInterface_.setState3(false);
+      userInterface_.setState4(false);
+      userInterface_.setState5(false);
+      userInterface_.setState6(false);
     }
 
     else {
       IStudent s = StudentManager.get().getStudent(id);
 
-      IStudentUnitRecord r = s.getUnitRecord(cuc);
+      IStudentUnitRecord r = s.getUnitRecord(currentUnitCode_);
 
-      CGUI.setRecord(r);
-      CGUI.setState3(true);
-      CGUI.setState4(true);
-      CGUI.setState5(false);
-      CGUI.setState6(false);
-      changed = false;
+      userInterface_.setRecord(r);
+      userInterface_.setState3(true);
+      userInterface_.setState4(true);
+      userInterface_.setState5(false);
+      userInterface_.setState6(false);
+      isChangesMade_ = false;
 
     }
   }
@@ -82,12 +82,12 @@ public class CheckGradeController
 
   public String checkGrade(float f, float g, float h)
   {
-    IUnit u = UnitManager.getInstance().getUnit(cuc);
+    IUnit u = UnitManager.getInstance().getUnit(currentUnitCode_);
     String s = u.getGrade(f, g, h);
-    CGUI.setState4(true);
-    CGUI.setState5(false);
-    if (changed) {
-      CGUI.setState6(true);
+    userInterface_.setState4(true);
+    userInterface_.setState5(false);
+    if (isChangesMade_) {
+      userInterface_.setState6(true);
     }
     return s;
   }
@@ -96,10 +96,10 @@ public class CheckGradeController
 
   public void enableChangeMarks()
   {
-    CGUI.setState4(false);
-    CGUI.setState6(false);
-    CGUI.setState5(true);
-    changed = true;
+    userInterface_.setState4(false);
+    userInterface_.setState6(false);
+    userInterface_.setState5(true);
+    isChangesMade_ = true;
   }
 
 
@@ -107,16 +107,16 @@ public class CheckGradeController
   public void saveGrade(float asg1, float asg2, float exam)
   {
 
-    IUnit u = UnitManager.getInstance().getUnit(cuc);
-    IStudent s = StudentManager.get().getStudent(currentStudentID);
+    IUnit u = UnitManager.getInstance().getUnit(currentUnitCode_);
+    IStudent s = StudentManager.get().getStudent(currentStudentId_);
 
-    IStudentUnitRecord r = s.getUnitRecord(cuc);
+    IStudentUnitRecord r = s.getUnitRecord(currentUnitCode_);
     r.setAsg1(asg1);
     r.setAsg2(asg2);
     r.setExam(exam);
     StudentUnitRecordManager.instance().saveRecord(r);
-    CGUI.setState4(true);
-    CGUI.setState5(false);
-    CGUI.setState6(false);
+    userInterface_.setState4(true);
+    userInterface_.setState5(false);
+    userInterface_.setState6(false);
   }
 }

@@ -53,7 +53,7 @@ public class StudentUnitRecordProxy implements IStudentUnitRecord
   {
 
     return manager_.getStudentUnitRecord(studentId_, unitCode_)
-            .getAssessmentOneMark(); // Okay?
+            .getAssessmentOneMark();
   }
 
 
@@ -91,7 +91,7 @@ public class StudentUnitRecordProxy implements IStudentUnitRecord
   public void setAssessmentTwoMark(float newMark)
   {
     manager_.getStudentUnitRecord(studentId_, unitCode_)
-            .setAssessmentTwoMark(newMark); // Okay? Double tab
+            .setAssessmentTwoMark(newMark);
   }
 
 
