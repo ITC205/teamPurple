@@ -1,17 +1,17 @@
 package datamanagement;
 
-public class cgCTL {
+public class CheckGradeController {
 
-	cgUI CGUI;
+	CheckGradeUserInterface CGUI;
 	String cuc = null;
 	Integer currentStudentID = null;
 	boolean changed = false;
 
-	public cgCTL() {
+	public CheckGradeController() {
 	}
 
 	public void execute() {
-		CGUI = new cgUI(this);
+		CGUI = new CheckGradeUserInterface(this);
 		CGUI.setState1(false);
 
 		CGUI.setState2(false);
