@@ -16,8 +16,8 @@ public class StudentUnitRecordManager
   
   private static StudentUnitRecordManager manager_ = null;
   private StudentUnitRecordMap recordMap_;
-  private HashMap<String, StudentUnitRecordList> ur; // What is this?
-  private HashMap<Integer, StudentUnitRecordList> sr; // And this?
+  private HashMap<String, StudentUnitRecordList> unitRecord_;
+  private HashMap<Integer, StudentUnitRecordList> studentRecord_;
 
   
   
@@ -30,8 +30,8 @@ public class StudentUnitRecordManager
   private StudentUnitRecordManager()
   {
     recordMap_ = new StudentUnitRecordMap();
-    ur = new HashMap<>();
-    sr = new HashMap<>();
+    unitRecord_ = new HashMap<>();
+    studentRecord_ = new HashMap<>();
   }
 
   
@@ -68,7 +68,7 @@ public class StudentUnitRecordManager
 
   public StudentUnitRecordList getRecordsByUnit(String unitCode)
   {
-    StudentUnitRecordList recs = ur.get(unitCode);
+    StudentUnitRecordList recs = unitRecord_.get(unitCode);
 
     if (recs != null) {
       return recs;
@@ -76,7 +76,7 @@ public class StudentUnitRecordManager
 
     recs = new StudentUnitRecordList();
 
-    for (Element el : (List<Element>) XMLManager.getXML().getDocument()
+    for (Element el : (List<Element>) XMLManager.getInstance().getDocument()
         .getRootElement().getChild("studentUnitRecordTable")
         .getChildren("record")) {
       if (unitCode.equals(el.getAttributeValue("uid"))) {
@@ -86,7 +86,7 @@ public class StudentUnitRecordManager
     } // End for
 
     if (recs.size() > 0) {
-      ur.put(unitCode, recs); // be careful - this could be empty
+      unitRecord_.put(unitCode, recs); // be careful - this could be empty
     }
 
     return recs;
@@ -94,7 +94,7 @@ public class StudentUnitRecordManager
 
   public StudentUnitRecordList getRecordsByStudent(Integer studentID)
   {
-    StudentUnitRecordList recs = sr.get(studentID);
+    StudentUnitRecordList recs = studentRecord_.get(studentID);
 
     if (recs != null) {
       return recs;
@@ -102,7 +102,7 @@ public class StudentUnitRecordManager
 
     recs = new StudentUnitRecordList();
 
-    for (Element el : (List<Element>) XMLManager.getXML().getDocument()
+    for (Element el : (List<Element>) XMLManager.getInstance().getDocument()
         .getRootElement().getChild("studentUnitRecordTable")
         .getChildren("record")) {
       if (studentID.toString().equals(el.getAttributeValue("sid"))) {
@@ -112,7 +112,7 @@ public class StudentUnitRecordManager
     }
 
     if (recs.size() > 0) {
-      sr.put(studentID, recs); // be careful - this could be empty
+      studentRecord_.put(studentID, recs); // be careful - this could be empty
     }
 
     return recs;
@@ -127,23 +127,22 @@ public class StudentUnitRecordManager
   {
     IStudentUnitRecord studentUnitRecord;
 
-    List<Element> recordList = (List<Element>) XMLManager.getXML()
+    List<Element> recordList = (List<Element>) XMLManager.getInstance()
         .getDocument()
-        // recordList or studentUnitRecordList
         .getRootElement().getChild("studentUnitRecordTable")
         .getChildren("record");
 
-    boolean studentIdMatch; // Extract complex conditional?
-    boolean unitCodeMatch;
+    boolean isStudentIdMatch;
+    boolean isUnitCodeMatch;
 
     for (Element record : recordList) {
 
-      studentIdMatch = studentId.toString().equals(
+      isStudentIdMatch = studentId.toString().equals(
           record.getAttributeValue("sid"));
 
-      unitCodeMatch = unitCode.equals(record.getAttributeValue("uid"));
+      isUnitCodeMatch = unitCode.equals(record.getAttributeValue("uid"));
 
-      if (studentIdMatch && unitCodeMatch) {
+      if (isStudentIdMatch && isUnitCodeMatch) {
         Integer recordStudentId = new Integer(record.getAttributeValue("sid"));
         String recordUnitCode = record.getAttributeValue("uid");
 
@@ -172,24 +171,23 @@ public class StudentUnitRecordManager
   
   public void saveRecord(IStudentUnitRecord studentUnitRecord)
   {
-    List<Element> recordList = (List<Element>) XMLManager.getXML()
+    List<Element> recordList = (List<Element>) XMLManager.getInstance()
         .getDocument()
         .getRootElement().getChild("studentUnitRecordTable")
         .getChildren("record");
 
-    boolean studentIdMatch;
-    boolean unitCodeMatch;
+    boolean isStudentIdMatch;
+    boolean isUnitCodeMatch;
 
     for (Element record : recordList) {
 
-      studentIdMatch = studentUnitRecord.getStudentId().toString()
+      isStudentIdMatch = studentUnitRecord.getStudentId().toString()
           .equals(record.getAttributeValue("sid"));
 
-      unitCodeMatch = studentUnitRecord.getUnitCode().equals(
+      isUnitCodeMatch = studentUnitRecord.getUnitCode().equals(
           record.getAttributeValue("uid"));
 
-      if (studentIdMatch && unitCodeMatch) {
-
+      if (isStudentIdMatch && isUnitCodeMatch) {
         record.setAttribute("asg1",
             new Float(studentUnitRecord.getAssessmentOneMark()).toString());
         record.setAttribute("asg2",
@@ -197,9 +195,9 @@ public class StudentUnitRecordManager
         record.setAttribute("exam",
             new Float(studentUnitRecord.getExamMark()).toString());
 
-        XMLManager.getXML().saveDocument(); // write out the XML file for
-                                            // continuous save
-        return;
+        XMLManager.getInstance().saveDocument(); // write out the XML file for                  
+                                                 // continuous save
+        return;                             
       } // End if
     } // End for
 
