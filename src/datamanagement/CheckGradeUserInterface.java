@@ -5,6 +5,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JFrame;
+import javax.swing.DefaultComboBoxModel;
 
 import java.awt.Font;
 import java.awt.Color;
@@ -21,8 +22,8 @@ public class CheckGradeUserInterface extends JFrame
   
   
   private CheckGradeController controller_;
-  private javax.swing.DefaultComboBoxModel unitComboBoxModel_;
-  private javax.swing.DefaultComboBoxModel studentComboBoxModel_;
+  private DefaultComboBoxModel unitComboBoxModel_;    // Parameterize model to <String>?
+  private DefaultComboBoxModel studentComboBoxModel_;
   
   private float assessmentOneMark_;
   private float assessmentTwoMark_;
@@ -41,8 +42,8 @@ public class CheckGradeUserInterface extends JFrame
   public CheckGradeUserInterface(CheckGradeController ctl)
   {
     this.controller_ = ctl;
-    unitComboBoxModel_ = new javax.swing.DefaultComboBoxModel(new String[0]);
-    studentComboBoxModel_ = new javax.swing.DefaultComboBoxModel(new String[0]);
+    unitComboBoxModel_ = new DefaultComboBoxModel(new String[0]);
+    studentComboBoxModel_ = new DefaultComboBoxModel(new String[0]);
     initComponents();
     selectUnitComboBox.setModel(unitComboBoxModel_);
     selectStudentComboBox.setModel(studentComboBoxModel_);
@@ -525,9 +526,9 @@ public class CheckGradeUserInterface extends JFrame
 
   public void setRecord(IStudentUnitRecord record)
   {
-    assessementOneMarkTextField.setText(new Float(record.getAsg1()).toString());
-    assessmentTwoMarkTestField.setText(new Float(record.getAsg2()).toString());
-    examMarkTextField.setText(new Float(record.getExam()).toString());
+    assessementOneMarkTextField.setText(new Float(record.getAssessmentOneMark()).toString());
+    assessmentTwoMarkTestField.setText(new Float(record.getAssessmentTwoMark()).toString());
+    examMarkTextField.setText(new Float(record.getExamMark()).toString());
     gradeDisplayLabel.setText("");
   }
 
