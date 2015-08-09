@@ -2,7 +2,6 @@ package datamanagement;
 
 public class StudentUnitRecord implements IStudentUnitRecord
 {
-
   // ===========================================================================
   // Variables
   // ===========================================================================

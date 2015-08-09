@@ -2,7 +2,6 @@ package datamanagement;
 
 public class StudentUnitRecordProxy implements IStudentUnitRecord
 {
-
   // ===========================================================================
   // Variables
   // ===========================================================================
