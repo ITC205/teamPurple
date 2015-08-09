@@ -2,20 +2,37 @@ package datamanagement;
 
 public class CheckGradeController
 {
-
+  // ===========================================================================
+  // Variables
+  // ===========================================================================
+  
+  
+  
   private CheckGradeUserInterface userInterface_;
   private String currentUnitCode_ = null;
   private Integer currentStudentId_ = null;
   private boolean isChangesMade_ = false;
 
+  
 
-
+  // ===========================================================================
+  // Constructors
+  // ===========================================================================
+  
+  
+  
   public CheckGradeController()
   {
   }
 
 
-
+  
+  // ===========================================================================
+  // Methods
+  // ===========================================================================
+  
+  
+  
   public void execute()
   {
     userInterface_ = new CheckGradeUserInterface(this);
