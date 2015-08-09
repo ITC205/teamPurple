@@ -89,7 +89,7 @@ public class StudentUnitRecord implements IStudentUnitRecord
   {
     boolean isNegative = newMark < 0;
     boolean isGreaterThanWeight = newMark > UnitManager.UM().getUnit(unitCode_)
-            .getAsg1Weight();
+            .getWeightOfAssignmentOne();
 
     if (isNegative || isGreaterThanWeight) {
       throw new RuntimeException(
@@ -106,7 +106,7 @@ public class StudentUnitRecord implements IStudentUnitRecord
   {
     boolean isNegative = newMark < 0;
     boolean isGreaterThanWeight = newMark > UnitManager.UM().getUnit(unitCode_)
-            .getAsg2Weight();
+            .getWeightOfAssignmentTwo();
 
     if (isNegative || isGreaterThanWeight) {
       throw new RuntimeException(
@@ -123,7 +123,7 @@ public class StudentUnitRecord implements IStudentUnitRecord
   {
     boolean isNegative = newMark < 0;
     boolean isGreaterThanWeight = newMark > UnitManager.UM().getUnit(unitCode_)
-            .getExamWeight();
+            .getWeightOfExam();
 
     if (isNegative || isGreaterThanWeight) {
       throw new RuntimeException(
