@@ -103,11 +103,12 @@ public class CheckGradeController
           float examMark)
   {
     IUnit unit = UnitManager.getInstance().getUnit(currentUnitCode_);
-    String grade = unit.calculateGrade(assessmentOneMark, assessmentTwoMark, examMark);
-    
+    String grade = unit.calculateGrade(assessmentOneMark, assessmentTwoMark,
+            examMark);
+
     userInterface_.setChangeButtonEnabled(true);
     userInterface_.setMarkEntryTextFieldsEnabled(false);
-    
+
     if (isChangesMade_) {
       userInterface_.setSaveButtonEnabled(true);
     }
