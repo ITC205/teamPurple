@@ -85,10 +85,9 @@ public class CheckGradeController
 
     else {
       IStudent student = StudentManager.get().getStudent(studentId);
+      IStudentUnitRecord record = student.getUnitRecord(currentUnitCode_);
 
-      IStudentUnitRecord r = student.getUnitRecord(currentUnitCode_);
-
-      userInterface_.setRecord(r);
+      userInterface_.setRecord(record);
       userInterface_.setCheckGradeButtonEnabled(true);
       userInterface_.setChangeButtonEnabled(true);
       userInterface_.setMarkEntryTextFieldsEnabled(false);
@@ -104,7 +103,7 @@ public class CheckGradeController
           float examMark)
   {
     IUnit unit = UnitManager.getInstance().getUnit(currentUnitCode_);
-    String grade = unit.getGrade(assessmentOneMark, assessmentTwoMark, examMark);
+    String grade = unit.calculateGrade(assessmentOneMark, assessmentTwoMark, examMark);
     
     userInterface_.setChangeButtonEnabled(true);
     userInterface_.setMarkEntryTextFieldsEnabled(false);
