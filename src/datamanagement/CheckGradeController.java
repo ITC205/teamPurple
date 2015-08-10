@@ -33,7 +33,7 @@ public class CheckGradeController
   
   
   
-  public void execute()
+  public void initialize()
   {
     userInterface_ = new CheckGradeUserInterface(this);
     ListUnitsCTL listUnitsController = new ListUnitsCTL();
