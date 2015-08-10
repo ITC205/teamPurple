@@ -73,18 +73,6 @@ public class UnitManager
 
 
   /**
-   * Sets the collection of all units held by this unitManager singleton.
-   * Private access restricts use to this instance only.
-   * @param unitMap Updates the collection of units.
-   */
-  private void setUnits(UnitMap unitMap)
-  {
-    this.unitMap_ = unitMap;
-  }
-
-
-
-  /**
    * Returns the collection of all units held by this unitManager singleton.
    * Private access restricts use to this instance only.
    * @return UnitMap Returns a UnitMap.
@@ -92,6 +80,18 @@ public class UnitManager
   private UnitMap getUnits()
   {
     return this.unitMap_;
+  }
+
+
+
+  /**
+   * Sets the collection of all units held by this unitManager singleton.
+   * Private access restricts use to this instance only.
+   * @param unitMap Updates the collection of units.
+   */
+  private void setUnits(UnitMap unitMap)
+  {
+    this.unitMap_ = unitMap;
   }
 
 
@@ -157,6 +157,7 @@ public class UnitManager
     List listOfXmlNodes = XMLManager.getInstance().getDocument().getRootElement()
                                     .getChild("unitTable").getChildren("unit");
 
+    // TODO: remove null returns and throw if cannot cast?
     // if list is empty return null reference
     if (listOfXmlNodes.isEmpty()) {
       return unitElements;
@@ -201,7 +202,7 @@ public class UnitManager
   {
     // TODO: this changes the collection using the accessor method
     // TODO: should use set, and a copy of collection?
-    this.getUnits().put(unit.getUnitCode(), unit);
+    this.getUnits().put( unit.getUnitCode(), unit );
   }
 
 
