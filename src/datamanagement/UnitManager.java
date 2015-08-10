@@ -130,7 +130,7 @@ public class UnitManager
   private List<Element> retrieveUnitElements()
   {
     List<Element> unitElements = null;
-    List listOfXmlNodes = XMLManager.getXML().getDocument().getRootElement()
+    List listOfXmlNodes = XMLManager.getInstance().getDocument().getRootElement()
                                     .getChild("unitTable").getChildren("unit");
 
     // if list is empty return null reference
