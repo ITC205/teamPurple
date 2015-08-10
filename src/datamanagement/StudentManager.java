@@ -44,9 +44,9 @@ public class StudentManager
     
     if (studentDetails != null) {
       StudentUnitRecordList recordList = StudentUnitRecordManager.instance()
-                                               .getRecordsByStudent(studentId);
+                                           .getRecordsByStudent(studentId);
       Integer newStudentId = new Integer(studentDetails
-                                               .getAttributeValue("sid"));
+                                           .getAttributeValue("sid"));
       String newFirstName = studentDetails.getAttributeValue("fname");
       String newLastName = studentDetails.getAttributeValue("lname");
       
@@ -73,7 +73,6 @@ public class StudentManager
     if (studentDetails != null) {
       return new StudentProxy(studentId, newFirstName, newLastName);
     }
-    
     throw new RuntimeException("DBMD: createStudent : student not in file");
   }
 
@@ -105,29 +104,6 @@ public class StudentManager
   }
   
   
-  //===========================================================================
-  // Getters and Setters
-  //===========================================================================
-  
-  public static StudentManager getInstance() 
-  {
-    if (instance_ == null) {
-      instance_ = new StudentManager(); 
-    }
-    return instance_; 
-  }
-
-  
-  /**
-   * create new student or return existing student
-   */
-  public IStudent getStudent(Integer studentId) 
-  {
-    IStudent student = studentMap_.get(studentId);
-    
-    return student != null ? student : createStudent(studentId);
-  }
-
   
   /**
    * get student record from XML file
@@ -149,6 +125,30 @@ public class StudentManager
     }
     
     return null;
+  }
+  
+  
+  //===========================================================================
+  // Getters and Setters
+  //===========================================================================
+  
+  public static StudentManager getInstance() 
+  {
+    if (instance_ == null) {
+      instance_ = new StudentManager(); 
+    }
+    return instance_; 
+  }
+
+  
+  /**
+   * create new student or return existing student
+   */
+  public IStudent getStudent(Integer studentId) 
+  {
+    IStudent student = studentMap_.get(studentId);
+    
+    return student != null ? student : createStudent(studentId);
   }
   
   
