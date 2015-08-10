@@ -65,7 +65,7 @@ public class XMLManager
    */
   public Document getDocument()
   {
-    return document_;
+    return this.document_;
   }
 
 
