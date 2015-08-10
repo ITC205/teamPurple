@@ -36,8 +36,9 @@ public class CheckGradeController
   public void execute()
   {
     userInterface_ = new CheckGradeUserInterface(this);
+    ListUnitsCTL listUnitsController = new ListUnitsCTL();
+    
     userInterface_.setSelectUnitComboBoxEnabled(false);
-
     userInterface_.setSelectStudentComboBoxEnabled(false);
     userInterface_.setCheckGradeButtonEnabled(false);
     userInterface_.setChangeButtonEnabled(false);
@@ -45,8 +46,7 @@ public class CheckGradeController
     userInterface_.setSaveButtonEnabled(false);
     userInterface_.clearDisplayedText();
 
-    ListUnitsCTL luCTL = new ListUnitsCTL();
-    luCTL.listUnits(userInterface_);
+    listUnitsController.listUnits(userInterface_);
     userInterface_.setVisible(true);
     userInterface_.setSelectUnitComboBoxEnabled(true);
   }
