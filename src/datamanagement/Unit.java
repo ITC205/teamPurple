@@ -166,11 +166,6 @@ public class Unit
 
 
 
-  // TODO: this is a temporary hack for renamed method used elsewhere
-  // TODO: delete this post merge, after method calls are renamed
-  public int getAsg1Weight() {
-    return getWeightOfAssignmentOne();
-  }
   /**
    * {@inheritDoc}
    */
@@ -182,11 +177,6 @@ public class Unit
 
 
 
-  // TODO: this is a temporary hack for renamed method used elsewhere
-  // TODO: delete this post merge, after method calls are renamed
-  public int getAsg2Weight() {
-    return getWeightOfAssignmentTwo();
-  }
   /**
    * {@inheritDoc}
    */
@@ -198,11 +188,6 @@ public class Unit
 
 
 
-  // TODO: this is a temporary hack for renamed method used elsewhere
-  // TODO: delete this post merge, after method calls are renamed
-  public int getExamWeight() {
-    return getWeightOfExam();
-  }
   /**
    * {@inheritDoc}
    */
@@ -318,12 +303,6 @@ public class Unit
   // Methods
   //===========================================================================
 
-  // TODO: this is a temporary hack for renamed method used elsewhere
-  // TODO: delete this post merge, after method calls are renamed
-  public String getGrade(float m, float n, float p)
-  {
-    return calculateGrade( m, n, p);
-  }
   /**
    * {@inheritDoc}
    */

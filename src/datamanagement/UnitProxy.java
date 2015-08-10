@@ -122,11 +122,6 @@ public class UnitProxy
 
 
 
-  // TODO: this is a temporary hack for renamed method used elsewhere
-  // TODO: delete this post merge, after method calls are renamed
-  public int getAsg1Weight() {
-    return getWeightOfAssignmentOne();
-  }
   /**
    * {@inheritDoc}
    */
@@ -139,11 +134,6 @@ public class UnitProxy
 
 
 
-  // TODO: this is a temporary hack for renamed method used elsewhere
-  // TODO: delete this post merge, after method calls are renamed
-  public int getAsg2Weight() {
-    return getWeightOfAssignmentTwo();
-  }
   /**
    * {@inheritDoc}
    */
@@ -156,14 +146,9 @@ public class UnitProxy
 
 
 
-  // TODO: this is a temporary hack for renamed method used elsewhere
-  // TODO: delete this post merge, after method calls are renamed
-  public int getExamWeight() {
-    return getWeightOfExam();
-  }
-    /**
-     * {@inheritDoc}
-     */
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public int getWeightOfExam()
   {
@@ -277,12 +262,6 @@ public class UnitProxy
   // Methods
   //===========================================================================
 
-  // TODO: this is a temporary hack for renamed method used elsewhere
-  // TODO: delete this post merge, after method calls are renamed
-  public String getGrade(float m, float n, float p)
-  {
-    return calculateGrade( m, n, p);
-  }
   /**
    * {@inheritDoc}
    */

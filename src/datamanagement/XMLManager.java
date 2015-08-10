@@ -43,17 +43,11 @@ public class XMLManager
   // Getters & setters
   //===========================================================================
 
-  // TODO: this is a temporary hack for renamed method used elsewhere
-  // TODO: delete this post merge, after method calls are renamed
-  public static XMLManager getXML()
-  {
-    return getInstance();
-  }
   /**
    * Returns the sole xmlManager instance (following the singleton pattern).
    * @return XMLManager instance responsible for managing data from xml file.
    */
-  public static XMLManager getInstance()
+  public static XMLManager getXML()
   {
     if (instance_ == null) {
       instance_ = new XMLManager();

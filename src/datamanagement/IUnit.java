@@ -74,9 +74,6 @@ public interface IUnit {
 
 
 
-  // TODO: this is a temporary hack for renamed method used elsewhere
-  // TODO: delete this post merge, after method calls are renamed
-  public int  getAsg1Weight();
   /**
    * Returns the weighting for assessment one in this unit.
    * @return int Weighting used for assignment one in this unit.
@@ -85,9 +82,6 @@ public interface IUnit {
 
 
 
-  // TODO: this is a temporary hack for renamed method used elsewhere
-  // TODO: delete this post merge, after method calls are renamed
-  public int  getAsg2Weight();
   /**
    * Returns the weighting for assessment two in this unit.
    * @return int Weighting used for assignment two in this unit.
@@ -96,9 +90,6 @@ public interface IUnit {
 
 
 
-  // TODO: this is a temporary hack for renamed method used elsewhere
-  // TODO: delete this post merge, after method calls are renamed
-  public int  getExamWeight();
   /**
    * Returns the weighting for the exam in this unit.
    * @return int Weighting used for the exam in this unit.
@@ -187,11 +178,6 @@ public interface IUnit {
   // Methods
   //===========================================================================
 
-  // TODO: this is a temporary hack for renamed method used elsewhere
-  // TODO: delete this post merge, after method calls are renamed
-  public String getGrade(float markForAssignmentOne,
-                               float markForAssignmentTwo,
-                               float markForExam);
   /**
    * Computes the correct grade for this unit (accounting for this unit's
    * assessment weightings and specified grade minimums).

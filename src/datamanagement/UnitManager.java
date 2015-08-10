@@ -39,12 +39,6 @@ public class UnitManager
   // Getters & setters
   //===========================================================================
 
-  // TODO: this is a temporary hack for renamed method used elsewhere
-  // TODO: delete this post merge, after method calls are renamed
-  public static UnitManager UM()
-  {
-    return getInstance();
-  }
   /**
    * Returns the sole xmlManager instance (following the singleton pattern).
    * @return XMLManager Returns sole XMLManager instance responsible for
@@ -136,7 +130,7 @@ public class UnitManager
   private List<Element> retrieveUnitElements()
   {
     List<Element> unitElements = null;
-    List listOfXmlNodes = XMLManager.getInstance().getDocument().getRootElement()
+    List listOfXmlNodes = XMLManager.getXML().getDocument().getRootElement()
                                     .getChild("unitTable").getChildren("unit");
 
     // if list is empty return null reference
