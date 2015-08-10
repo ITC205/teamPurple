@@ -154,8 +154,11 @@ public class UnitManager
   private List<Element> retrieveUnitElements()
   {
     List<Element> unitElements = null;
-    List listOfXmlNodes = XMLManager.getInstance().getDocument().getRootElement()
-                                    .getChild("unitTable").getChildren("unit");
+
+    // TODO: XMLManager.getUnitElements() and Students() etc?
+    List listOfXmlNodes = XMLManager.getInstance().getDocument()
+                                    .getRootElement().getChild("unitTable")
+                                    .getChildren("unit");
 
     // TODO: remove null returns and throw if cannot cast?
     // if list is empty return null reference
