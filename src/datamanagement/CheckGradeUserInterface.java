@@ -58,9 +58,9 @@ public class CheckGradeUserInterface extends JFrame
     unitComboBoxModel_ = new DefaultComboBoxModel(new String[0]);
     studentComboBoxModel_ = new DefaultComboBoxModel(new String[0]);
     initComponents();
-    selectUnitComboBox.setModel(unitComboBoxModel_);
-    selectStudentComboBox.setModel(studentComboBoxModel_);
-    errorMessageLabel.setText("");
+    selectUnitComboBox_.setModel(unitComboBoxModel_);
+    selectStudentComboBox_.setModel(studentComboBoxModel_);
+    errorMessageLabel_.setText("");
   }
 
 
@@ -81,31 +81,31 @@ public class CheckGradeUserInterface extends JFrame
   private void initComponents()
   {
 
-    checkGradeTitleLabel = new JLabel();
-    unitSelectionPanel = new JPanel();
-    selectUnitComboBox = new JComboBox();
-    studentSelectionPanel = new JPanel();
-    selectStudentComboBox = new JComboBox();
-    markDisplayPanel = new JPanel();
-    assessmentOneLabel = new JLabel();
-    assessmentTwoLabel = new JLabel();
-    examLabel = new JLabel();
-    assessementOneMarkTextField = new JTextField();
-    assessmentTwoMarkTextField = new JTextField();
-    examMarkTextField = new JTextField();
-    changeButton = new JButton();
-    gradeDisplayPanel = new JPanel();
-    gradeDisplayLabel = new JLabel();
+    checkGradeTitleLabel_ = new JLabel();
+    unitSelectionPanel_ = new JPanel();
+    selectUnitComboBox_ = new JComboBox();
+    studentSelectionPanel_ = new JPanel();
+    selectStudentComboBox_ = new JComboBox();
+    markDisplayPanel_ = new JPanel();
+    assessmentOneLabel_ = new JLabel();
+    assessmentTwoLabel_ = new JLabel();
+    examLabel_ = new JLabel();
+    assessementOneMarkTextField_ = new JTextField();
+    assessmentTwoMarkTextField_ = new JTextField();
+    examMarkTextField_ = new JTextField();
+    changeButton_ = new JButton();
+    gradeDisplayPanel_ = new JPanel();
+    gradeDisplayLabel_ = new JLabel();
 
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-    checkGradeTitleLabel.setFont(new Font("Tahoma", 0, 16)); // NOI18N
-    checkGradeTitleLabel.setText("Check Grade UI");
+    checkGradeTitleLabel_.setFont(new Font("Tahoma", 0, 16)); // NOI18N
+    checkGradeTitleLabel_.setText("Check Grade UI");
 
-    unitSelectionPanel.setBorder(BorderFactory.createTitledBorder("Unit"));
+    unitSelectionPanel_.setBorder(BorderFactory.createTitledBorder("Unit"));
 
-    selectUnitComboBox.setModel(unitComboBoxModel_);
-    selectUnitComboBox.addItemListener(new ItemListener()
+    selectUnitComboBox_.setModel(unitComboBoxModel_);
+    selectUnitComboBox_.addItemListener(new ItemListener()
     {
       public void itemStateChanged(ItemEvent evt)
       {
@@ -113,31 +113,31 @@ public class CheckGradeUserInterface extends JFrame
       }
     });
 
-    GroupLayout gl_unitSelectionPanel = new GroupLayout(unitSelectionPanel);
-    unitSelectionPanel.setLayout(gl_unitSelectionPanel);
-    gl_unitSelectionPanel.setHorizontalGroup(
-            gl_unitSelectionPanel.createParallelGroup(Alignment.LEADING)
-                    .addGroup(gl_unitSelectionPanel.createSequentialGroup()
+    GroupLayout gl_unitSelectionPanel_ = new GroupLayout(unitSelectionPanel_);
+    unitSelectionPanel_.setLayout(gl_unitSelectionPanel_);
+    gl_unitSelectionPanel_.setHorizontalGroup(
+            gl_unitSelectionPanel_.createParallelGroup(Alignment.LEADING)
+                    .addGroup(gl_unitSelectionPanel_.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(selectUnitComboBox,
+                            .addComponent(selectUnitComboBox_,
                                     GroupLayout.PREFERRED_SIZE, 185,
                                     GroupLayout.PREFERRED_SIZE)
                             .addContainerGap(GroupLayout.DEFAULT_SIZE,
                                     Short.MAX_VALUE)));
-    gl_unitSelectionPanel.setVerticalGroup(
-            gl_unitSelectionPanel.createParallelGroup(Alignment.LEADING)
-                    .addGroup(gl_unitSelectionPanel.createSequentialGroup()
-                            .addComponent(selectUnitComboBox,
+    gl_unitSelectionPanel_.setVerticalGroup(
+            gl_unitSelectionPanel_.createParallelGroup(Alignment.LEADING)
+                    .addGroup(gl_unitSelectionPanel_.createSequentialGroup()
+                            .addComponent(selectUnitComboBox_,
                                     GroupLayout.PREFERRED_SIZE,
                                     GroupLayout.DEFAULT_SIZE,
                                     GroupLayout.PREFERRED_SIZE)
                             .addContainerGap(GroupLayout.DEFAULT_SIZE,
                                     Short.MAX_VALUE)));
 
-    studentSelectionPanel.setBorder(BorderFactory.createTitledBorder("Student"));
+    studentSelectionPanel_.setBorder(BorderFactory.createTitledBorder("Student"));
 
-    selectStudentComboBox.setModel(studentComboBoxModel_);
-    selectStudentComboBox.addItemListener(new ItemListener()
+    selectStudentComboBox_.setModel(studentComboBoxModel_);
+    selectStudentComboBox_.addItemListener(new ItemListener()
     {
       public void itemStateChanged(ItemEvent evt)
       {
@@ -145,38 +145,38 @@ public class CheckGradeUserInterface extends JFrame
       }
     });
 
-    GroupLayout gl_studentSelectionPanel = new GroupLayout(
-            studentSelectionPanel);
-    studentSelectionPanel.setLayout(gl_studentSelectionPanel);
-    gl_studentSelectionPanel.setHorizontalGroup(gl_studentSelectionPanel
+    GroupLayout gl_studentSelectionPanel_ = new GroupLayout(
+            studentSelectionPanel_);
+    studentSelectionPanel_.setLayout(gl_studentSelectionPanel_);
+    gl_studentSelectionPanel_.setHorizontalGroup(gl_studentSelectionPanel_
             .createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(gl_studentSelectionPanel.createSequentialGroup()
+            .addGroup(gl_studentSelectionPanel_.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(selectStudentComboBox,
+                    .addComponent(selectStudentComboBox_,
                             GroupLayout.PREFERRED_SIZE, 185,
                             GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(GroupLayout.DEFAULT_SIZE,
                             Short.MAX_VALUE)));
-    gl_studentSelectionPanel.setVerticalGroup(gl_studentSelectionPanel
+    gl_studentSelectionPanel_.setVerticalGroup(gl_studentSelectionPanel_
             .createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(gl_studentSelectionPanel.createSequentialGroup()
-                    .addComponent(selectStudentComboBox,
+            .addGroup(gl_studentSelectionPanel_.createSequentialGroup()
+                    .addComponent(selectStudentComboBox_,
                             GroupLayout.PREFERRED_SIZE,
                             GroupLayout.DEFAULT_SIZE,
                             GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(GroupLayout.DEFAULT_SIZE,
                             Short.MAX_VALUE)));
 
-    markDisplayPanel.setBorder(BorderFactory.createTitledBorder("Marks"));
+    markDisplayPanel_.setBorder(BorderFactory.createTitledBorder("Marks"));
 
-    assessmentOneLabel.setText("Asg1:");
+    assessmentOneLabel_.setText("Asg1:");
 
-    assessmentTwoLabel.setText("Asg2:");
+    assessmentTwoLabel_.setText("Asg2:");
 
-    examLabel.setText("Exam:");
+    examLabel_.setText("Exam:");
 
-    assessementOneMarkTextField.setEditable(false);
-    assessementOneMarkTextField.addKeyListener(new KeyAdapter()
+    assessementOneMarkTextField_.setEditable(false);
+    assessementOneMarkTextField_.addKeyListener(new KeyAdapter()
     {
       public void keyTyped(KeyEvent evt)
       {
@@ -184,8 +184,8 @@ public class CheckGradeUserInterface extends JFrame
       }
     });
 
-    assessmentTwoMarkTextField.setEditable(false);
-    assessmentTwoMarkTextField.addKeyListener(new KeyAdapter()
+    assessmentTwoMarkTextField_.setEditable(false);
+    assessmentTwoMarkTextField_.addKeyListener(new KeyAdapter()
     {
       public void keyTyped(KeyEvent evt)
       {
@@ -193,8 +193,8 @@ public class CheckGradeUserInterface extends JFrame
       }
     });
 
-    examMarkTextField.setEditable(false);
-    examMarkTextField.addKeyListener(new KeyAdapter()
+    examMarkTextField_.setEditable(false);
+    examMarkTextField_.addKeyListener(new KeyAdapter()
     {
       public void keyTyped(KeyEvent evt)
       {
@@ -202,19 +202,19 @@ public class CheckGradeUserInterface extends JFrame
       }
     });
 
-    changeButton.setText("Change");
-    changeButton.addActionListener(new ActionListener()
+    changeButton_.setText("Change");
+    changeButton_.addActionListener(new ActionListener()
     {
       public void actionPerformed(ActionEvent evt)
       {
         jButton1ActionPerformed(evt);
       }
     });
-    checkGradeButton = new JButton();
+    checkGradeButton_ = new JButton();
 
-    checkGradeButton.setText("Check Grade");
-    checkGradeButton.setActionCommand("checkGrade");
-    checkGradeButton.addActionListener(new ActionListener()
+    checkGradeButton_.setText("Check Grade");
+    checkGradeButton_.setActionCommand("checkGrade");
+    checkGradeButton_.addActionListener(new ActionListener()
     {
       public void actionPerformed(ActionEvent evt)
       {
@@ -222,95 +222,95 @@ public class CheckGradeUserInterface extends JFrame
       }
     });
 
-    GroupLayout gl_markDisplayPanel = new GroupLayout(markDisplayPanel);
-    gl_markDisplayPanel.setHorizontalGroup(gl_markDisplayPanel
+    GroupLayout gl_markDisplayPanel_ = new GroupLayout(markDisplayPanel_);
+    gl_markDisplayPanel_.setHorizontalGroup(gl_markDisplayPanel_
             .createParallelGroup(Alignment.LEADING)
-            .addGroup(gl_markDisplayPanel.createSequentialGroup()
-                    .addGroup(gl_markDisplayPanel
+            .addGroup(gl_markDisplayPanel_.createSequentialGroup()
+                    .addGroup(gl_markDisplayPanel_
                             .createParallelGroup(Alignment.LEADING)
-                            .addGroup(gl_markDisplayPanel
+                            .addGroup(gl_markDisplayPanel_
                                     .createSequentialGroup().addContainerGap()
-                                    .addComponent(assessmentOneLabel)
+                                    .addComponent(assessmentOneLabel_)
                                     .addPreferredGap(ComponentPlacement.RELATED)
-                                    .addComponent(assessementOneMarkTextField,
+                                    .addComponent(assessementOneMarkTextField_,
                                             GroupLayout.PREFERRED_SIZE, 59,
                                             GroupLayout.PREFERRED_SIZE)
                                     .addGap(18)
-                                    .addComponent(assessmentTwoLabel))
-                            .addGroup(gl_markDisplayPanel
+                                    .addComponent(assessmentTwoLabel_))
+                            .addGroup(gl_markDisplayPanel_
                                     .createSequentialGroup().addGap(85)
-                                    .addComponent(changeButton,
+                                    .addComponent(changeButton_,
                                             GroupLayout.PREFERRED_SIZE, 84,
                                             GroupLayout.PREFERRED_SIZE)))
                     .addGap(18)
-                    .addGroup(gl_markDisplayPanel
+                    .addGroup(gl_markDisplayPanel_
                             .createParallelGroup(Alignment.TRAILING)
-                            .addGroup(gl_markDisplayPanel
+                            .addGroup(gl_markDisplayPanel_
                                     .createSequentialGroup()
-                                    .addComponent(assessmentTwoMarkTextField,
+                                    .addComponent(assessmentTwoMarkTextField_,
                                             GroupLayout.PREFERRED_SIZE, 59,
                                             GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18).addComponent(examLabel))
-                            .addComponent(checkGradeButton))
+                                    .addGap(18).addComponent(examLabel_))
+                            .addComponent(checkGradeButton_))
                     .addGap(18)
-                    .addComponent(examMarkTextField, GroupLayout.PREFERRED_SIZE,
+                    .addComponent(examMarkTextField_, GroupLayout.PREFERRED_SIZE,
                             59, GroupLayout.PREFERRED_SIZE)
                     .addGap(15)));
-    gl_markDisplayPanel.setVerticalGroup(
-            gl_markDisplayPanel.createParallelGroup(Alignment.LEADING)
-                    .addGroup(gl_markDisplayPanel.createSequentialGroup()
-                            .addGroup(gl_markDisplayPanel
+    gl_markDisplayPanel_.setVerticalGroup(
+            gl_markDisplayPanel_.createParallelGroup(Alignment.LEADING)
+                    .addGroup(gl_markDisplayPanel_.createSequentialGroup()
+                            .addGroup(gl_markDisplayPanel_
                                     .createParallelGroup(Alignment.BASELINE)
-                                    .addComponent(assessmentOneLabel)
-                                    .addComponent(assessementOneMarkTextField,
+                                    .addComponent(assessmentOneLabel_)
+                                    .addComponent(assessementOneMarkTextField_,
                                             GroupLayout.PREFERRED_SIZE,
                                             GroupLayout.DEFAULT_SIZE,
                                             GroupLayout.PREFERRED_SIZE)
-                            .addComponent(assessmentTwoLabel)
-                            .addComponent(assessmentTwoMarkTextField,
+                            .addComponent(assessmentTwoLabel_)
+                            .addComponent(assessmentTwoMarkTextField_,
                                     GroupLayout.PREFERRED_SIZE,
                                     GroupLayout.DEFAULT_SIZE,
                                     GroupLayout.PREFERRED_SIZE)
-                            .addComponent(examLabel)
-                            .addComponent(examMarkTextField,
+                            .addComponent(examLabel_)
+                            .addComponent(examMarkTextField_,
                                     GroupLayout.PREFERRED_SIZE,
                                     GroupLayout.DEFAULT_SIZE,
                                     GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(ComponentPlacement.UNRELATED)
-                    .addGroup(gl_markDisplayPanel
+                    .addGroup(gl_markDisplayPanel_
                             .createParallelGroup(Alignment.BASELINE)
-                            .addComponent(changeButton)
-                            .addComponent(checkGradeButton))
+                            .addComponent(changeButton_)
+                            .addComponent(checkGradeButton_))
                     .addContainerGap()));
-    markDisplayPanel.setLayout(gl_markDisplayPanel);
+    markDisplayPanel_.setLayout(gl_markDisplayPanel_);
 
-    gradeDisplayPanel.setBorder(BorderFactory.createTitledBorder("Grade"));
+    gradeDisplayPanel_.setBorder(BorderFactory.createTitledBorder("Grade"));
 
-    gradeDisplayLabel.setFont(new Font("Tahoma", 0, 24)); // NOI18N
-    gradeDisplayLabel.setForeground(new Color(255, 0, 0));
-    gradeDisplayLabel.setHorizontalAlignment(SwingConstants.CENTER);
-    gradeDisplayLabel.setText("grade");
+    gradeDisplayLabel_.setFont(new Font("Tahoma", 0, 24)); // NOI18N
+    gradeDisplayLabel_.setForeground(new Color(255, 0, 0));
+    gradeDisplayLabel_.setHorizontalAlignment(SwingConstants.CENTER);
+    gradeDisplayLabel_.setText("grade");
 
-    GroupLayout gl_gradeDisplayPanel = new GroupLayout(gradeDisplayPanel);
-    gradeDisplayPanel.setLayout(gl_gradeDisplayPanel);
-    gl_gradeDisplayPanel.setHorizontalGroup(gl_gradeDisplayPanel
+    GroupLayout gl_gradeDisplayPanel_ = new GroupLayout(gradeDisplayPanel_);
+    gradeDisplayPanel_.setLayout(gl_gradeDisplayPanel_);
+    gl_gradeDisplayPanel_.setHorizontalGroup(gl_gradeDisplayPanel_
             .createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(gradeDisplayLabel, GroupLayout.Alignment.TRAILING,
+            .addComponent(gradeDisplayLabel_, GroupLayout.Alignment.TRAILING,
                     GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE));
-    gl_gradeDisplayPanel.setVerticalGroup(gl_gradeDisplayPanel
+    gl_gradeDisplayPanel_.setVerticalGroup(gl_gradeDisplayPanel_
             .createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(gl_gradeDisplayPanel.createSequentialGroup()
-                    .addGap(34, 34, 34).addComponent(gradeDisplayLabel)
+            .addGroup(gl_gradeDisplayPanel_.createSequentialGroup()
+                    .addGap(34, 34, 34).addComponent(gradeDisplayLabel_)
                     .addContainerGap(43, Short.MAX_VALUE)));
 
-    errorMessageLabel = new JLabel();
-    errorMessageLabel.setText("Error message");
-    errorMessageLabel.setForeground(Color.RED);
-    errorMessageLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-    saveButton = new JButton();
+    errorMessageLabel_ = new JLabel();
+    errorMessageLabel_.setText("Error message");
+    errorMessageLabel_.setForeground(Color.RED);
+    errorMessageLabel_.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    saveButton_ = new JButton();
 
-    saveButton.setText("Save");
-    saveButton.addActionListener(new ActionListener()
+    saveButton_.setText("Save");
+    saveButton_.addActionListener(new ActionListener()
     {
       public void actionPerformed(ActionEvent evt)
       {
@@ -323,14 +323,14 @@ public class CheckGradeUserInterface extends JFrame
             .addGroup(layout.createSequentialGroup().addGroup(layout
                     .createParallelGroup(Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup().addContainerGap()
-                            .addComponent(errorMessageLabel,
+                            .addComponent(errorMessageLabel_,
                                     GroupLayout.DEFAULT_SIZE, 400,
                                     Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup().addContainerGap()
                             .addGroup(layout
                                     .createParallelGroup(Alignment.LEADING,
                                             false)
-                                    .addComponent(markDisplayPanel,
+                                    .addComponent(markDisplayPanel_,
                                             GroupLayout.DEFAULT_SIZE,
                                             GroupLayout.DEFAULT_SIZE,
                                             Short.MAX_VALUE)
@@ -339,53 +339,53 @@ public class CheckGradeUserInterface extends JFrame
                                                     .createParallelGroup(
                                                             Alignment.LEADING)
                                                     .addComponent(
-                                                            unitSelectionPanel,
+                                                            unitSelectionPanel_,
                                                             GroupLayout.PREFERRED_SIZE,
                                                             GroupLayout.DEFAULT_SIZE,
                                                             GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(
-                                                            studentSelectionPanel,
+                                                            studentSelectionPanel_,
                                                             GroupLayout.PREFERRED_SIZE,
                                                             GroupLayout.DEFAULT_SIZE,
                                                             GroupLayout.PREFERRED_SIZE))
                                             .addGap(18)
-                                            .addComponent(gradeDisplayPanel,
+                                            .addComponent(gradeDisplayPanel_,
                                                     GroupLayout.PREFERRED_SIZE,
                                                     GroupLayout.DEFAULT_SIZE,
                                                     GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup().addGap(157)
-                            .addComponent(checkGradeTitleLabel))
+                            .addComponent(checkGradeTitleLabel_))
                     .addGroup(layout.createSequentialGroup().addGap(165)
-                            .addComponent(saveButton,
+                            .addComponent(saveButton_,
                                     GroupLayout.PREFERRED_SIZE, 86,
                                     GroupLayout.PREFERRED_SIZE)))
                     .addContainerGap()));
     layout.setVerticalGroup(layout.createParallelGroup(Alignment.LEADING)
             .addGroup(layout.createSequentialGroup().addContainerGap()
-                    .addComponent(checkGradeTitleLabel).addGap(13)
+                    .addComponent(checkGradeTitleLabel_).addGap(13)
                     .addGroup(layout.createParallelGroup(Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                    .addComponent(unitSelectionPanel,
+                                    .addComponent(unitSelectionPanel_,
                                             GroupLayout.PREFERRED_SIZE,
                                             GroupLayout.DEFAULT_SIZE,
                                             GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(ComponentPlacement.RELATED)
-                                    .addComponent(studentSelectionPanel,
+                                    .addComponent(studentSelectionPanel_,
                                             GroupLayout.PREFERRED_SIZE,
                                             GroupLayout.DEFAULT_SIZE,
                                             GroupLayout.PREFERRED_SIZE))
-                            .addComponent(gradeDisplayPanel,
+                            .addComponent(gradeDisplayPanel_,
                                     GroupLayout.PREFERRED_SIZE,
                                     GroupLayout.DEFAULT_SIZE,
                                     GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(ComponentPlacement.RELATED,
                             GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(markDisplayPanel, GroupLayout.PREFERRED_SIZE,
+                    .addComponent(markDisplayPanel_, GroupLayout.PREFERRED_SIZE,
                             GroupLayout.DEFAULT_SIZE,
                             GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(saveButton).addGap(11)
-                    .addComponent(errorMessageLabel, GroupLayout.PREFERRED_SIZE,
+                    .addComponent(saveButton_).addGap(11)
+                    .addComponent(errorMessageLabel_, GroupLayout.PREFERRED_SIZE,
                             30, GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()));
     getContentPane().setLayout(layout);
@@ -397,11 +397,11 @@ public class CheckGradeUserInterface extends JFrame
 
   private void jComboBox1ItemStateChanged(ItemEvent evt)
   {// GEN-FIRST:event_jComboBox1ItemStateChanged
-    String cU = (String) selectUnitComboBox.getSelectedItem();
+    String cU = (String) selectUnitComboBox_.getSelectedItem();
     clearDisplayedText();
     clearStudents();
     if (evt.getStateChange() == ItemEvent.SELECTED) {
-      if (cU.equals((String) selectUnitComboBox.getItemAt(0))) {
+      if (cU.equals((String) selectUnitComboBox_.getItemAt(0))) {
         cU = "NONE";
       }
       controller_.unitSelected(cU);
@@ -413,9 +413,9 @@ public class CheckGradeUserInterface extends JFrame
   private void jComboBox2ItemStateChanged(ItemEvent evt)
   {// GEN-FIRST:event_jComboBox2ItemStateChanged
     clearDisplayedText();
-    String cS = (String) selectStudentComboBox.getSelectedItem();
+    String cS = (String) selectStudentComboBox_.getSelectedItem();
     if (evt.getStateChange() == ItemEvent.SELECTED) {
-      if (cS.equals((String) selectStudentComboBox.getItemAt(0))) {
+      if (cS.equals((String) selectStudentComboBox_.getItemAt(0))) {
         studentId_ = new Integer(0);
         controller_.studentSelected(studentId_);
       }
@@ -430,19 +430,19 @@ public class CheckGradeUserInterface extends JFrame
 
   private void jButton3ActionPerformed(ActionEvent evt)
   {// GEN-FIRST:event_jButton3ActionPerformed
-    assessmentOneMark_ = new Float(assessementOneMarkTextField.getText())
+    assessmentOneMark_ = new Float(assessementOneMarkTextField_.getText())
             .floatValue();
-    assessmentTwoMark_ = new Float(assessmentTwoMarkTextField.getText())
+    assessmentTwoMark_ = new Float(assessmentTwoMarkTextField_.getText())
             .floatValue();
-    examMark_ = new Float(examMarkTextField.getText()).floatValue();
+    examMark_ = new Float(examMarkTextField_.getText()).floatValue();
     // lblErrMsg.setText("");
     try {
       String s = controller_.checkGrade(assessmentOneMark_, assessmentTwoMark_,
               examMark_);
-      gradeDisplayLabel.setText(s);
+      gradeDisplayLabel_.setText(s);
     }
     catch (RuntimeException re) {
-      errorMessageLabel.setText(re.getMessage());
+      errorMessageLabel_.setText(re.getMessage());
     }
   }// GEN-LAST:event_jButton3ActionPerformed
 
@@ -451,7 +451,7 @@ public class CheckGradeUserInterface extends JFrame
   private void jButton1ActionPerformed(ActionEvent evt)
   {// GEN-FIRST:event_jButton1ActionPerformed
     controller_.enableChangeMarks();
-    gradeDisplayLabel.setText("");
+    gradeDisplayLabel_.setText("");
     // lblErrMsg.setText("");
   }// GEN-LAST:event_jButton1ActionPerformed
 
@@ -459,24 +459,24 @@ public class CheckGradeUserInterface extends JFrame
 
   private void jTextFieldKeyTyped(KeyEvent evt)
   {// GEN-FIRST:event_jTextField1KeyTyped
-    gradeDisplayLabel.setText("");
-    errorMessageLabel.setText("");
+    gradeDisplayLabel_.setText("");
+    errorMessageLabel_.setText("");
   }// GEN-LAST:event_jTextField1KeyTyped
 
 
 
   private void jButton2ActionPerformed(ActionEvent evt)
   {// GEN-FIRST:event_jButton2ActionPerformed
-    float asg1 = new Float(assessementOneMarkTextField.getText()).floatValue();
-    float asg2 = new Float(assessmentTwoMarkTextField.getText()).floatValue();
-    float exam = new Float(examMarkTextField.getText()).floatValue();
-    errorMessageLabel.setText("");
+    float asg1 = new Float(assessementOneMarkTextField_.getText()).floatValue();
+    float asg2 = new Float(assessmentTwoMarkTextField_.getText()).floatValue();
+    float exam = new Float(examMarkTextField_.getText()).floatValue();
+    errorMessageLabel_.setText("");
     try {
       controller_.saveGrade(asg1, asg2, exam);
       // jButton3ActionPerformed(null);
     }
     catch (RuntimeException re) {
-      errorMessageLabel.setText(re.getMessage());
+      errorMessageLabel_.setText(re.getMessage());
     }
   }// GEN-LAST:event_jButton2ActionPerformed
 
@@ -516,56 +516,57 @@ public class CheckGradeUserInterface extends JFrame
 
   public void setRecord(IStudentUnitRecord record)
   {
-    assessementOneMarkTextField
+    assessementOneMarkTextField_
             .setText(new Float(record.getAssessmentOneMark()).toString());
-    assessmentTwoMarkTextField
+    assessmentTwoMarkTextField_
             .setText(new Float(record.getAssessmentTwoMark()).toString());
-    examMarkTextField.setText(new Float(record.getExamMark()).toString());
-    gradeDisplayLabel.setText("");
+    examMarkTextField_.setText(new Float(record.getExamMark()).toString());
+    gradeDisplayLabel_.setText("");
   }
 
 
 
   public void clearDisplayedText()
   {
-    assessementOneMarkTextField.setText("");
-    assessmentTwoMarkTextField.setText("");
-    examMarkTextField.setText("");
-    gradeDisplayLabel.setText("");
-    errorMessageLabel.setText("");
-    assessementOneMarkTextField.setEditable(false);
-    assessmentTwoMarkTextField.setEditable(false);
-    examMarkTextField.setEditable(false);
+    assessementOneMarkTextField_.setText("");
+    assessmentTwoMarkTextField_.setText("");
+    examMarkTextField_.setText("");
+    gradeDisplayLabel_.setText("");
+    errorMessageLabel_.setText("");
+    
+    assessementOneMarkTextField_.setEditable(false);
+    assessmentTwoMarkTextField_.setEditable(false);
+    examMarkTextField_.setEditable(false);
   }
 
 
 
   public void setSelectUnitComboBoxEnabled(boolean shouldEnable)
   {
-    selectUnitComboBox.setEnabled(shouldEnable);
-    errorMessageLabel.setText("");
+    selectUnitComboBox_.setEnabled(shouldEnable);
+    errorMessageLabel_.setText("");
   }
 
 
 
-  public void setCheckGradeButtonEnabled(boolean b)
+  public void setCheckGradeButtonEnabled(boolean shouldEnable)
   {
-    checkGradeButton.setEnabled(b);
+    checkGradeButton_.setEnabled(shouldEnable);
   }
 
 
 
   public void setSelectStudentComboBoxEnabled(boolean shouldEnable)
   {
-    selectStudentComboBox.setEnabled(shouldEnable);
-    errorMessageLabel.setText("");
+    selectStudentComboBox_.setEnabled(shouldEnable);
+    errorMessageLabel_.setText("");
   }
 
 
 
   public void setChangeButtonEnabled(boolean shouldEnable)
   {
-    changeButton.setEnabled(shouldEnable);
+    changeButton_.setEnabled(shouldEnable);
     // gradeLB.setText("");
   }
 
@@ -573,35 +574,35 @@ public class CheckGradeUserInterface extends JFrame
 
   public void setMarkEntryTextFieldsEnabled(boolean shouldEnable)
   {
-    assessementOneMarkTextField.setEditable(shouldEnable);
-    assessmentTwoMarkTextField.setEditable(shouldEnable);
-    examMarkTextField.setEditable(shouldEnable);
+    assessementOneMarkTextField_.setEditable(shouldEnable);
+    assessmentTwoMarkTextField_.setEditable(shouldEnable);
+    examMarkTextField_.setEditable(shouldEnable);
   }
 
 
 
   public void setSaveButtonEnabled(boolean shouldEnable)
   {
-    saveButton.setEnabled(shouldEnable);
+    saveButton_.setEnabled(shouldEnable);
   }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private JButton changeButton;
-  private JButton checkGradeButton;
-  private JButton saveButton;
-  private JComboBox selectUnitComboBox;
-  private JComboBox selectStudentComboBox;
-  private JLabel checkGradeTitleLabel;
-  private JLabel assessmentOneLabel;
-  private JLabel assessmentTwoLabel;
-  private JLabel examLabel;
-  private JLabel gradeDisplayLabel;
-  private JLabel errorMessageLabel;
-  private JPanel unitSelectionPanel;
-  private JPanel studentSelectionPanel;
-  private JPanel markDisplayPanel;
-  private JPanel gradeDisplayPanel;
-  private JTextField assessementOneMarkTextField;
-  private JTextField assessmentTwoMarkTextField;
-  private JTextField examMarkTextField;
+  private JButton changeButton_;
+  private JButton checkGradeButton_;
+  private JButton saveButton_;
+  private JComboBox selectUnitComboBox_;
+  private JComboBox selectStudentComboBox_;
+  private JLabel checkGradeTitleLabel_;
+  private JLabel assessmentOneLabel_;
+  private JLabel assessmentTwoLabel_;
+  private JLabel examLabel_;
+  private JLabel gradeDisplayLabel_;
+  private JLabel errorMessageLabel_;
+  private JPanel unitSelectionPanel_;
+  private JPanel studentSelectionPanel_;
+  private JPanel markDisplayPanel_;
+  private JPanel gradeDisplayPanel_;
+  private JTextField assessementOneMarkTextField_;
+  private JTextField assessmentTwoMarkTextField_;
+  private JTextField examMarkTextField_;
 }
