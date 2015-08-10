@@ -63,11 +63,35 @@ public class UnitManager
    */
   public IUnit getUnit(String unitCode)
   {
-    IUnit unit = this.unitMap_.get(unitCode);
+    IUnit unit = this.getUnits().get(unitCode);
     if (unit == null) {
       unit = loadUnit(unitCode);
     }
     return unit;
+  }
+
+
+
+  /**
+   * Sets the collection of all units held by this unitManager singleton.
+   * Private access restricts use to this instance only.
+   * @param unitMap Updates the collection of units.
+   */
+  private void setUnits(UnitMap unitMap)
+  {
+    this.unitMap_ = unitMap;
+  }
+
+
+
+  /**
+   * Returns the collection of all units held by this unitManager singleton.
+   * Private access restricts use to this instance only.
+   * @return UnitMap Returns a UnitMap.
+   */
+  private UnitMap getUnits()
+  {
+    return this.unitMap_;
   }
 
 
@@ -175,7 +199,9 @@ public class UnitManager
    */
   private void addUnitToCollection(IUnit unit)
   {
-    this.unitMap_.put(unit.getUnitCode(), unit);
+    // TODO: this changes the collection using the accessor method
+    // TODO: should use set, and a copy of collection?
+    this.getUnits().put(unit.getUnitCode(), unit);
   }
 
 
