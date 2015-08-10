@@ -53,15 +53,17 @@ public class CheckGradeController
 
 
 
-  public void unitSelected(String code)
+  public void unitSelected(String unitCode)
   {
 
-    if (code.equals("NONE"))
+    if (unitCode.equals("NONE")) {
       userInterface_.setSelectStudentComboBoxEnabled(false);
+    }
     else {
-      ListStudentsCTL lsCTL = new ListStudentsCTL();
-      lsCTL.listStudents(userInterface_, code);
-      currentUnitCode_ = code;
+      ListStudentsCTL listStudentsController = new ListStudentsCTL();
+      
+      listStudentsController.listStudents(userInterface_, unitCode);
+      currentUnitCode_ = unitCode;
       userInterface_.setSelectStudentComboBoxEnabled(true);
     }
     userInterface_.setCheckGradeButtonEnabled(false);
@@ -69,9 +71,10 @@ public class CheckGradeController
 
 
 
-  public void studentSelected(Integer id)
+  public void studentSelected(Integer studentId)
   {
-    currentStudentId_ = id;
+    currentStudentId_ = studentId;
+    
     if (currentStudentId_.intValue() == 0) {
       userInterface_.clearDisplayedText();
       userInterface_.setCheckGradeButtonEnabled(false);
@@ -81,17 +84,17 @@ public class CheckGradeController
     }
 
     else {
-      IStudent s = StudentManager.get().getStudent(id);
+      IStudent student = StudentManager.get().getStudent(studentId);
 
-      IStudentUnitRecord r = s.getUnitRecord(currentUnitCode_);
+      IStudentUnitRecord r = student.getUnitRecord(currentUnitCode_);
 
       userInterface_.setRecord(r);
       userInterface_.setCheckGradeButtonEnabled(true);
       userInterface_.setChangeButtonEnabled(true);
       userInterface_.setMarkEntryTextFieldsEnabled(false);
       userInterface_.setSaveButtonEnabled(false);
+      
       isChangesMade_ = false;
-
     }
   }
 
