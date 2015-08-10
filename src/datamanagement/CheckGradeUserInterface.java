@@ -35,9 +35,8 @@ public class CheckGradeUserInterface extends JFrame
 
   private CheckGradeController controller_;
   private DefaultComboBoxModel unitComboBoxModel_;    // Parameterize model to
-                                                      // <String>?
-  private DefaultComboBoxModel studentComboBoxModel_;
-
+  private DefaultComboBoxModel studentComboBoxModel_; // <String>?
+  
   private float assessmentOneMark_;
   private float assessmentTwoMark_;
   private float examMark_;
@@ -52,12 +51,14 @@ public class CheckGradeUserInterface extends JFrame
 
 
 
-  public CheckGradeUserInterface(CheckGradeController ctl)
+  public CheckGradeUserInterface(CheckGradeController controller)
   {
-    this.controller_ = ctl;
+    this.controller_ = controller;
     unitComboBoxModel_ = new DefaultComboBoxModel(new String[0]);
     studentComboBoxModel_ = new DefaultComboBoxModel(new String[0]);
+    
     initComponents();
+    
     selectUnitComboBox_.setModel(unitComboBoxModel_);
     selectStudentComboBox_.setModel(studentComboBoxModel_);
     errorMessageLabel_.setText("");
