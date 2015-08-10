@@ -16,8 +16,8 @@ public class Student implements IStudent
   // Constructors
   //===========================================================================
   
-  public Student( Integer studentId, String firstName, String lastName
-                                   , StudentUnitRecordList recordList )
+  public Student(Integer studentId, String firstName, String lastName
+                                   , StudentUnitRecordList recordList)
   { 
     studentId_ = studentId; 
     firstName_ = firstName;
@@ -30,7 +30,7 @@ public class Student implements IStudent
   // Methods: primary
   //===========================================================================
   
-  public void addUnitRecord( IStudentUnitRecord record ) 
+  public void addUnitRecord(IStudentUnitRecord record) 
   { 
     recordList_.add(record); 
   }
@@ -39,10 +39,10 @@ public class Student implements IStudent
   /**
    * return student unit record for unitCode
    */
-  public IStudentUnitRecord getUnitRecord( String unitCode ) 
+  public IStudentUnitRecord getUnitRecord(String unitCode) 
   {
-    for ( IStudentUnitRecord record : recordList_ ) {
-      if ( record.getUnitCode().equals(unitCode)) {
+    for (IStudentUnitRecord record : recordList_) {
+      if (record.getUnitCode().equals(unitCode)) {
         return record; 
       }
     }
@@ -82,14 +82,14 @@ public class Student implements IStudent
 
   
   
-  public void setFirstName( String firstName ) 
+  public void setFirstName(String firstName) 
   { 
     firstName_ = firstName;
   }
 
   
   
-  public void setLastName( String lastName ) 
+  public void setLastName(String lastName) 
   { 
     lastName_ = lastName; 
   }

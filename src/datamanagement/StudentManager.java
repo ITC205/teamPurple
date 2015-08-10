@@ -100,7 +100,7 @@ public class StudentManager
       studentMapByUnit.put(student.getID(), student);
     }
     
-    unitMap_.put( unitCode, studentMapByUnit);
+    unitMap_.put(unitCode, studentMapByUnit);
     return studentMapByUnit;
   }
   

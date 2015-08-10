@@ -21,7 +21,7 @@ public class AppProperties
   
   public static AppProperties getInstance() 
   {
-    if (instance_ == null ) { 
+    if (instance_ == null) { 
       instance_ = new AppProperties(); 
     } 
     return instance_;

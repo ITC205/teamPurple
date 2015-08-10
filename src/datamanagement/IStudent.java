@@ -13,7 +13,7 @@ public interface IStudent
   public void setFirstName(String firstName);
   public void setLastName(String lastName);
 
-  public void addUnitRecord( IStudentUnitRecord record );
-  public IStudentUnitRecord getUnitRecord( String unitCode );
+  public void addUnitRecord(IStudentUnitRecord record);
+  public IStudentUnitRecord getUnitRecord(String unitCode);
   
 }

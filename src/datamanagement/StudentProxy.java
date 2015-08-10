@@ -16,7 +16,7 @@ public class StudentProxy implements IStudent
   // Constructors
   //===========================================================================
   
-  public StudentProxy( Integer studentId, String firstName, String lastName) 
+  public StudentProxy(Integer studentId, String firstName, String lastName) 
   {
     studentId_ = studentId;
     firstName_ = firstName;
