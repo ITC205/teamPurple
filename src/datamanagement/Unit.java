@@ -202,7 +202,8 @@ public class Unit
   @Override
   public IStudentUnitRecord getStudentUnitRecord(int studentId)
   {
-    for (IStudentUnitRecord studentUnitRecord : this.allStudentUnitRecords_ ) {
+    for (IStudentUnitRecord studentUnitRecord :
+        this.getAllStudentUnitRecords()) {
       if (studentUnitRecord.getStudentID() == studentId)
         return studentUnitRecord;
     }
