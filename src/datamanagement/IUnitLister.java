@@ -1,8 +1,26 @@
 package datamanagement;
 
-public interface IUnitLister {
+/**
+ * Clears and updates display of selected unit
+ */
+public interface IUnitLister
+{
+  //===========================================================================
+  // Methods
+  //===========================================================================
 
-    public void clearUnits();
-    public void addUnit(IUnit unit);
+  /**
+   * Clears display of units.
+   */
+  public void clearAllUnits();
+
+
+
+  /**
+   * Displays selected unit.
+   */
+  public void addUnit(IUnit unit);
+
+
 
 }

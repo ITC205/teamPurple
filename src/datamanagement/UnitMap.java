@@ -1,9 +1,10 @@
 package datamanagement;
 
 /**
- * Collection of units
+ * Stores units (unit proxy instances) in a hashMap
+ * using the unit code (String) as the identifier.
  */
 public class UnitMap extends java.util.HashMap<String, IUnit>
 {
-  // TODO: should this have an explicit constructor?
+  //
 }

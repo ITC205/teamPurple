@@ -1,7 +1,10 @@
 package datamanagement;
 
 /**
- * Proxy class for Unit
+ * Acts as proxy for unit, implementing shared IUnit interface.
+ * Applies the specified minimum marks (for grades) and weightings for
+ * assessments to this unit, calculates grades for this unit and adds student
+ * records for this unit to the collection of student unit records.
  */
 public class UnitProxy
   implements IUnit
@@ -13,14 +16,16 @@ public class UnitProxy
   private String unitCode_;
   private String unitName_;
 
-  UnitManager unitManager_;
+  private UnitManager unitManager_;
 
   //===========================================================================
   // Constructors
   //===========================================================================
 
   /**
-   * Creates a new UnitProxy with a singleton unitManager
+   * Creates a new UnitProxy instance, using just unit code and name and
+   * referencing the singleton unitManager_ that is used to identify the
+   * matching Unit instance.
    */
   public UnitProxy(String unitCode, String unitName)
   {
@@ -29,233 +34,258 @@ public class UnitProxy
     this.unitManager_ = UnitManager.getInstance();
   }
 
+
+
   //===========================================================================
-  // Methods
+  // Getters & setters
   //===========================================================================
 
   /**
-   * calculates the correct grade for this unit
-   * @param assignmentOneMark student's mark (float) for assignment one
-   * @param assignmentTwoMark student's mark (float) for assignment two
-   * @param examMark student's mark (float) for the exam
+   * {@inheritDoc}
    */
-  public String calculateGrade(float assignmentOneMark,
-                               float assignmentTwoMark, float examMark)
-  {
-    // TODO: refactor ref to: this.unitManager_.getUnit(this.unitCode_)
-    return this.unitManager_.getUnit(this.unitCode_)
-                            .calculateGrade(assignmentOneMark,
-                                            assignmentTwoMark, examMark);
-  }
-
-
-
-  /**
-   * adds a student's record to the unit records
-   * @param record studentUnitRecord
-   */
-  public void addStudentRecord(IStudentUnitRecord record)
-  {
-    this.unitManager_.getUnit(this.unitCode_)
-                     .addStudentRecord(record);
-  }
-
-
-
-
-  /**
-   * returns this unit's code
-   * @return unitCode (String)
-   */
+  @Override
   public String getUnitCode()
   {
     return this.unitCode_;
   }
 
 
+
   /**
-   * returns this unit's name
-   * @return unitName (String)
+   * {@inheritDoc}
    */
+  @Override
   public String getUnitName()
   {
     return this.unitName_;
   }
 
 
+
   /**
-   * returns the minimum mark required to qualify for an additional examination
-   * @return mark (float)
+   * {@inheritDoc}
    */
-  public float getAdditionalExaminationMinimumMark()
+  @Override
+  public float getMinimumMarkForAdditionalExamination()
   {
-    return this.unitManager_.getUnit(this.unitCode_)
-                            .getAdditionalExaminationMinimumMark();
+    return this.unitManager_.getUnit(unitCode_)
+                           .getMinimumMarkForAdditionalExamination();
   }
 
 
 
   /**
-   * returns the minimum mark required to attain a Pass grade
-   * @return mark (float)
+   *
    */
-  public float getPassMinimumMark()
+  @Override
+  public float getMinimumMarkForPass()
   {
-    return this.unitManager_.getUnit(this.unitCode_)
-                            .getPassMinimumMark();
+    return this.unitManager_.getUnit(unitCode_)
+                           .getMinimumMarkForPass();
   }
 
 
 
   /**
-   * returns the minimum mark required to attain a Credit grade
-   * @return mark (float)
+   * {@inheritDoc}
    */
-  public float getCreditMinimumMark()
+  @Override
+  public float getMinimumMarkForCredit()
   {
-    return this.unitManager_.getUnit(this.unitCode_)
-                            .getCreditMinimumMark();
+    return this.unitManager_.getUnit(unitCode_)
+                           .getMinimumMarkForCredit();
   }
 
 
 
   /**
-   * returns the minimum mark required to attain a Distinction grade
-   * @return mark (float)
+   * {@inheritDoc}
    */
-  public float getDistinctionMinimumMark()
+  @Override
+  public float getMinimumMarkForDistinction()
   {
-    return this.unitManager_.getUnit(this.unitCode_)
-                            .getDistinctionMinimumMark();
+    return this.unitManager_.getUnit(unitCode_)
+                           .getMinimumMarkForDistinction();
   }
 
 
 
   /**
-   * returns the minimum mark required to attain a High Distinction grade
-   * for this unit
-   * @return mark (float)
+   * {@inheritDoc}
    */
-  public float getHighDistinctionMinimumMark()
+  @Override
+  public float getMinimumMarkForHighDistinction()
   {
-    return this.unitManager_.getUnit(this.unitCode_)
-                            .getHighDistinctionMinimumMark();
+    return unitManager_.getUnit(unitCode_)
+                      .getMinimumMarkForHighDistinction();
   }
 
 
 
   /**
-   * returns the weighting for assignment one in this unit
-   * @return weight (int)
+   * {@inheritDoc}
    */
-  public int getAssignmentOneWeight()
+  @Override
+  public int getWeightOfAssignmentOne()
   {
-    return this.unitManager_.getUnit(this.unitCode_)
-                            .getAssignmentOneWeight();
+    return unitManager_.getUnit(unitCode_)
+                      .getWeightOfAssignmentOne();
   }
 
 
 
   /**
-   * returns the weighting for assignment two in this unit
-   * @return weight (int)
+   * {@inheritDoc}
    */
-  public int getAssignmentTwoWeight()
+  @Override
+  public int getWeightOfAssignmentTwo()
   {
-    return this.unitManager_.getUnit(this.unitCode_)
-                            .getAssignmentTwoWeight();
+    return unitManager_.getUnit(unitCode_)
+                      .getWeightOfAssignmentTwo();
   }
 
 
 
   /**
-   * returns the weighting for the exam in this unit
-   * @return weight (int)
+   * {@inheritDoc}
    */
-  public int getExamWeight()
+  @Override
+  public int getWeightOfExam()
   {
-    return this.unitManager_.getUnit(this.unitCode_)
-                            .getExamWeight();
+    return unitManager_.getUnit(unitCode_)
+                      .getWeightOfExam();
   }
 
 
+
   /**
-   * returns a student's record for this unit
-   * @param studentId identifies student
-   * @return studentUnitRecord
+   * {@inheritDoc}
    */
+  @Override
   public IStudentUnitRecord getStudentUnitRecord(int studentId)
   {
-    return this.unitManager_.getUnit(this.unitCode_)
-                            .getStudentUnitRecord(studentId);
+    return unitManager_.getUnit(unitCode_)
+                      .getStudentUnitRecord(studentId);
   }
 
 
 
   /**
-   * returns all students' records for this unit
-   * @return studentUnitRecordList
+   * {@inheritDoc}
    */
-  public StudentUnitRecordList getStudentUnitRecords()
+  @Override
+  public StudentUnitRecordList getAllStudentUnitRecords()
   {
-    return this.unitManager_.getUnit(this.unitCode_)
-                            .getStudentUnitRecords();
-  }
-
-
-
-  public void setAdditionalExaminationMinimumMark(float mark)
-  {
-    this.unitManager_.getUnit(this.unitCode_)
-                     .setAdditionalExaminationMinimumMark(mark);
-  }
-
-
-
-  public void setPassMinimumMark(float mark)
-  {
-    this.unitManager_.getUnit(this.unitCode_)
-                     .setPassMinimumMark(mark);
-  }
-
-
-
-  public void setCreditMinimumMark(float mark)
-  {
-    this.unitManager_.getUnit(this.unitCode_)
-                     .setCreditMinimumMark(mark);
-  }
-
-
-
-  public void setDistinctionMinimumMark(float mark)
-  {
-    this.unitManager_.getUnit(this.unitCode_)
-                     .setDistinctionMinimumMark(mark);
-  }
-
-
-
-  public void setHighDistinctionMinimumMark(float mark)
-  {
-    this.unitManager_.getUnit(this.unitCode_)
-                     .setHighDistinctionMinimumMark(mark);
+    return unitManager_.getUnit(unitCode_)
+                      .getAllStudentUnitRecords();
   }
 
 
 
   /**
-   * sets this unit's weightings
-   * @param assignmentOneWeight weight of assignment one in overall mark
-   * @param assignmentTwoWeight weight of assignment two in overall mark
-   * @param examWeight weight of the exam in overall mark
+   * {@inheritDoc}
    */
-  public void setAssessmentWeights(int assignmentOneWeight,
-                                   int assignmentTwoWeight, int examWeight)
+  @Override
+  public void setMinimumMarkForAdditionalExamination(float minimumMark)
   {
-    this.unitManager_.getUnit(this.unitCode_)
-                     .setAssessmentWeights(assignmentOneWeight,
-                                           assignmentTwoWeight, examWeight);
+    unitManager_.getUnit(unitCode_)
+               .setMinimumMarkForAdditionalExamination(minimumMark);
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMinimumMarkForPass(float minimumMark)
+  {
+    unitManager_.getUnit(unitCode_)
+               .setMinimumMarkForPass(minimumMark);
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMinimumMarkForCredit(float minimumMark)
+  {
+    unitManager_.getUnit(unitCode_)
+               .setMinimumMarkForCredit(minimumMark);
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMinimumMarkForDistinction(float minimumMark)
+  {
+    unitManager_.getUnit(unitCode_)
+               .setMinimumMarkForDistinction(minimumMark);
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMinimumMarkForHighDistinction(float minimumMark)
+  {
+    unitManager_.getUnit(unitCode_)
+               .setMinimumMarkForHighDistinction(minimumMark);
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setWeightsOfAssessments(int weightOfAssignmentOne,
+                                      int weightOfAssignmentTwo,
+                                      int weightOfExam)
+  {
+    unitManager_.getUnit(unitCode_)
+               .setWeightsOfAssessments(weightOfAssignmentOne,
+                                        weightOfAssignmentTwo,
+                                        weightOfExam);
+  }
+
+
+
+  //===========================================================================
+  // Methods
+  //===========================================================================
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String calculateGrade(float markForAssignmentOne,
+                               float markForAssignmentTwo,
+                               float markForExam)
+  {
+    return unitManager_.getUnit(unitCode_)
+                      .calculateGrade(markForAssignmentOne,
+                                      markForAssignmentTwo,
+                                      markForExam);
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord)
+  {
+    unitManager_.getUnit(unitCode_)
+               .addStudentUnitRecord(studentUnitRecord);
   }
 
 

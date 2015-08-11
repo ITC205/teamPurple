@@ -1,9 +1,10 @@
 package datamanagement;
 
 /**
- * default implementation of IUnit interface
- * applies the specified minimum marks (for grades) and weightings for
- * assessments to this unit
+ * Default implementation of IUnit interface.
+ * Applies the specified minimum marks (for grades) and weightings for
+ * assessments to this unit, calculates grades for this unit and adds student
+ * records for this unit to the collection of student unit records.
  */
 public class Unit
   implements IUnit
@@ -12,172 +13,95 @@ public class Unit
   // Variables
   //===========================================================================
 
-  private static final String GRADE_FAIL = "FL";                    // new
-  private static final String GRADE_ADDITIONAL_EXAMINATION = "AE";
-  private static final String GRADE_PASS = "PS";
-  private static final String GRADE_CREDIT = "CR";
-  private static final String GRADE_DISTINCTION = "DI";
-  private static final String GRADE_HIGH_DISTINCTION = "HD";
-
   private String unitCode_;
   private String unitName_;
 
-  // TODO: - names? additionalExaminationCutoffMark_
-  // TODO: suffix cutoff used in UI descriptions
-  private float additionalExaminationMinimumMark_;
-  private float passMinimumMark_;
-  private float creditMinimumMark_;
-  private float distinctionMinimumMark_;
-  private float highDistinctionMinimumMark_;
+  private float minimumMarkForPass_;
+  private float minimumMarkForCredit_;
+  private float minimumMarkForDistinction_;
+  private float minimumMarkForHighDistinction_;
 
-  private int assignmentOneWeight_;
-  private int assignmentTwoWeight_;
-  private int examWeight_;
+  private float minimumMarkForAdditionalExamination_;
 
-  private StudentUnitRecordList studentUnitRecords_; // not List
+  private int weightOfAssignmentOne_;
+  private int weightOfAssignmentTwo_;
+  private int weightOfExam_;
+
+  private StudentUnitRecordList studentUnitRecordList_;
 
   //===========================================================================
   // Constructors
   //===========================================================================
 
   /**
-   * Creates a new unit
+   * Creates a new unit instance, applying specified marks required for grades
+   * and weightings for assessments and references the collection of student
+   * records.
+   * @param unitCode String
+   *        This unit's code.
+   * @param unitName String
+   *        This unit's name.
+   * @param minimumMarkForPass float
+   *        Minimum mark to obtain a Pass grade in this unit.
+   * @param minimumMarkForCredit float
+   *        Minimum mark to obtain a Credit grade in this unit.
+   * @param minimumMarkForDistinction float
+   *        Minimum mark to obtain a Distinction grade in this unit.
+   * @param minimumMarkForHighDistinction float
+   *        Minimum mark to obtain a High Distinction grade in this unit.
+   * @param minimumMarkForAdditionalExamination float
+   *        Minimum mark to qualify for an Alternative Assessment in this unit.
+   * @param weightOfAssignmentOne int
+   *        Weight of assessment one result in grade calculation for this unit.
+   * @param weightOfAssignmentTwo int
+   *        Weight of assessment two result in grade calculation for this unit.
+   * @param weightOfExam int
+   *        Weight of the exam result in grade calculation for this unit.
+   * @param studentUnitRecordList StudentUnitRecordList
+   *        Collection of student records for this unit.
    */
   public Unit(String unitCode, String unitName,
-              float passMinimumMark, float creditMinimumMark,
-              float distinctionMinimumMark, float highDistinctionMinimumMark,
-              float additionalExaminationMinimumMark,
-              int assignmentOneWeight, int assignmentTwoWeight, int examWeight,
-              StudentUnitRecordList studentUnitRecordList)
+              float minimumMarkForPass, float minimumMarkForCredit,
+              float minimumMarkForDistinction,
+              float minimumMarkForHighDistinction,
+              float minimumMarkForAdditionalExamination,
+              int weightOfAssignmentOne, int weightOfAssignmentTwo,
+              int weightOfExam, StudentUnitRecordList studentUnitRecordList)
   {
-    // TODO: this. is not needed due to _ suffix
     this.unitCode_ = unitCode;
     this.unitName_ = unitName;
 
-    this.setAdditionalExaminationMinimumMark(additionalExaminationMinimumMark);
-    this.setPassMinimumMark(passMinimumMark);
-    this.setCreditMinimumMark(creditMinimumMark);
-    this.setDistinctionMinimumMark(distinctionMinimumMark);
-    this.setHighDistinctionMinimumMark( highDistinctionMinimumMark );
+    this.minimumMarkForPass_ = minimumMarkForPass;
+    this.minimumMarkForCredit_ = minimumMarkForCredit;
+    this.minimumMarkForDistinction_ = minimumMarkForDistinction;
+    this.minimumMarkForHighDistinction_ = minimumMarkForHighDistinction;
 
-    this.setAssessmentWeights(assignmentOneWeight, assignmentTwoWeight,
-                              examWeight);
+    this.minimumMarkForAdditionalExamination_ =
+        minimumMarkForAdditionalExamination;
 
-    if (studentUnitRecordList == null) {
-      studentUnitRecordList = new StudentUnitRecordList();
-    }
-    this.studentUnitRecords_ = studentUnitRecordList;
+    this.setWeightsOfAssessments(weightOfAssignmentOne, weightOfAssignmentTwo,
+                                 weightOfExam);
+
+    this.studentUnitRecordList_ = studentUnitRecordList == null ? new StudentUnitRecordList() : studentUnitRecordList;
   }
-
 
 
   //===========================================================================
-  // Methods
+  // Getters & setters
   //===========================================================================
 
   /**
-   * returns correct grade for the unit (accounting for marks and weightings)
-   * @param assignmentOneMark student mark (float) for assignment one
-   * @param assignmentTwoMark  student mark (float) for assignment two
-   * @param examMark  student mark (float) for the exam
-   * @return student's grade for unit (String)
+   * {@inheritDoc}
    */
   @Override
-  public String calculateGrade(float assignmentOneMark, float assignmentTwoMark,
-                               float examMark)
-  {
-    float totalMark = assignmentOneMark + assignmentTwoMark + examMark;
-    String studentGrade = "";
-
-    if ((assignmentOneMark < 0 || assignmentOneMark > assignmentOneWeight_) ||
-        (assignmentTwoMark < 0 || assignmentTwoMark > assignmentTwoWeight_) ||
-        (examMark < 0          || examMark > examWeight_)) {
-      throw new RuntimeException("marks cannot be less than zero or greater " +
-                                 "than assessment weights" );
-    }
-
-    if (totalMark < this.getAdditionalExaminationMinimumMark()) {
-      studentGrade = GRADE_FAIL;
-    }
-    else if (totalMark < this.getPassMinimumMark()) {
-      studentGrade = GRADE_ADDITIONAL_EXAMINATION;
-    }
-    else if (totalMark < this.getCreditMinimumMark()) {
-      studentGrade = GRADE_PASS;
-    }
-    else if (totalMark < this.getDistinctionMinimumMark()) {
-      studentGrade = GRADE_CREDIT;
-    }
-    else if (totalMark < this.getHighDistinctionMinimumMark()) {
-      studentGrade = GRADE_DISTINCTION;
-    }
-    else {
-      studentGrade = GRADE_HIGH_DISTINCTION;
-    }
-    return studentGrade;
-  }
-
-
-
-/**
- *
- */
- private void checkMinimumMarks(float alternativeAssessmentMinimumMark,
-                                 float passMinimumMark, float creditMinimumMark,
-                                 float distinctionMinimumMark,
-                                 float highDistinctionMinimumMark)
- {
-    // could refactor for range check
-    if ((alternativeAssessmentMinimumMark < 0 ||
-           alternativeAssessmentMinimumMark > 100) ||
-        (passMinimumMark < 0            || passMinimumMark > 100) ||
-        (creditMinimumMark < 0          || creditMinimumMark > 100) ||
-        (distinctionMinimumMark < 0     || distinctionMinimumMark > 100) ||
-        (highDistinctionMinimumMark < 0 || highDistinctionMinimumMark > 100)) {
-      throw new RuntimeException( "Assessment cutoffs cant be less than zero" +
-                                    " or greater than 100");
-    }
-
-    if (alternativeAssessmentMinimumMark >= passMinimumMark) {
-      throw new RuntimeException( "AE cutoff must be less than PS cutoff");
-    }
-    if (passMinimumMark >= creditMinimumMark) {
-      throw new RuntimeException( "PS cutoff must be less than CR cutoff" );
-    }
-    if (creditMinimumMark >= distinctionMinimumMark) {
-      throw new RuntimeException( "CR cutoff must be less than DI cutoff" );
-    }
-    if (distinctionMinimumMark >= highDistinctionMinimumMark) {
-      throw new RuntimeException( "DI cutoff must be less than HD cutoff" );
-    }
-  }
-
-
-
-  /**
-   *
-   */
-  @Override
-  public void addStudentRecord(IStudentUnitRecord record)
-  {
-    this.getStudentUnitRecords().add(record);
-  }
-
-
-
-  /**
-   *
-   */
-  @Override
-  public String getUnitCode()
-  {
+  public String getUnitCode() {
     return this.unitCode_;
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public String getUnitName()
@@ -188,103 +112,101 @@ public class Unit
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
-  public float getAdditionalExaminationMinimumMark()
+  public float getMinimumMarkForAdditionalExamination()
   {
-    return this.additionalExaminationMinimumMark_;
+    return this.minimumMarkForAdditionalExamination_;
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
-  public float getPassMinimumMark()
+  public float getMinimumMarkForPass()
   {
-    return this.passMinimumMark_;
+    return this.minimumMarkForPass_;
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
-  public float getCreditMinimumMark()
+  public float getMinimumMarkForCredit()
   {
-    return this.creditMinimumMark_;
+    return this.minimumMarkForCredit_;
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
-  public float getDistinctionMinimumMark()
+  public float getMinimumMarkForDistinction()
   {
-    return this.distinctionMinimumMark_;
+    return this.minimumMarkForDistinction_;
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
-  public float getHighDistinctionMinimumMark()
+  public float getMinimumMarkForHighDistinction()
   {
-    return this.highDistinctionMinimumMark_;
+    return this.minimumMarkForHighDistinction_;
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
-  public int getAssignmentOneWeight()
+  public int getWeightOfAssignmentOne()
   {
-    return this.assignmentOneWeight_;
+    return this.weightOfAssignmentOne_;
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
-  public int getAssignmentTwoWeight()
+  public int getWeightOfAssignmentTwo()
   {
-    return this.assignmentTwoWeight_;
+    return this.weightOfAssignmentTwo_;
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
-  public int getExamWeight()
+  public int getWeightOfExam()
   {
-    return this.examWeight_;
+    return this.weightOfExam_;
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
-  @Override
   public IStudentUnitRecord getStudentUnitRecord(int studentId)
   {
-    for (IStudentUnitRecord record : this.getStudentUnitRecords()) {
-      if (record.getStudentID() == studentId) {
-        return record;
-      }
+    for (IStudentUnitRecord studentUnitRecord : this.studentUnitRecordList_) {
+      if (studentUnitRecord.getStudentID() == studentId)
+        return studentUnitRecord;
     }
     return null;
   }
@@ -292,93 +214,190 @@ public class Unit
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
-  public StudentUnitRecordList getStudentUnitRecords()
+  public StudentUnitRecordList getAllStudentUnitRecords()
   {
-    return this.studentUnitRecords_;
+    return this.studentUnitRecordList_;
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
-  @Override
-  public void setAdditionalExaminationMinimumMark(float mark)
+  public void setMinimumMarkForAdditionalExamination(float minimumMark)
   {
-    this.additionalExaminationMinimumMark_ = mark;
+    this.minimumMarkForAdditionalExamination_ = minimumMark;
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
-  @Override
-  public void setPassMinimumMark(float mark)
+  public void setMinimumMarkForPass(float minimumMark)
   {
-    this.passMinimumMark_ = mark;
+    this.minimumMarkForPass_ = minimumMark;
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
-  public void setCreditMinimumMark(float mark)
+  public void setMinimumMarkForCredit(float minimumMark)
   {
-    this.creditMinimumMark_ = mark;
+    this.minimumMarkForCredit_ = minimumMark;
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
-  @Override
-  public void setDistinctionMinimumMark(float mark)
+  public void setMinimumMarkForDistinction(float minimumMark)
   {
-    this.distinctionMinimumMark_ = mark;
+    this.minimumMarkForDistinction_ = minimumMark;
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
-  public void setHighDistinctionMinimumMark(float mark)
+  public void setMinimumMarkForHighDistinction(float minimumMark)
   {
-    this.highDistinctionMinimumMark_ = mark;
+    this.minimumMarkForHighDistinction_ = minimumMark;
   }
 
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
-  public void setAssessmentWeights(int assignmentOneWeight,
-                                   int assignmentTwoWeight, int examWeight)
+  public void setWeightsOfAssessments(int weightOfAssignmentOne,
+                                      int weightOfAssignmentTwo,
+                                      int weightOfExam)
   {
-    if ((assignmentOneWeight < 0 || assignmentOneWeight > 100) ||
-        (assignmentTwoWeight < 0 || assignmentTwoWeight > 100) ||
-        (examWeight < 0          || examWeight > 100)) {
-      throw new RuntimeException("Assessment weights cant be less than " +
-                                 "zero or greater than 100" );
+    if ( weightOfAssignmentOne < 0 || weightOfAssignmentOne > 100 ||
+          weightOfAssignmentTwo < 0 || weightOfAssignmentTwo > 100 ||
+          weightOfExam < 0 || weightOfExam > 100 ) {
+      throw new RuntimeException("Assessment weights cant be less than zero" +
+                                   " or greater than 100");
     }
-
-    // TODO: will 3 floats cause rounding errors???
-    if (assignmentOneWeight + assignmentTwoWeight + examWeight != 100) {
+    if ( weightOfAssignmentOne + weightOfAssignmentTwo + weightOfExam != 100 ) {
       throw new RuntimeException("Assessment weights must add to 100");
     }
-
-    this.assignmentOneWeight_ = assignmentOneWeight;
-    this.assignmentTwoWeight_ = assignmentTwoWeight;
-    this.examWeight_ = examWeight;
+    this.weightOfAssignmentOne_ = weightOfAssignmentOne;
+    this.weightOfAssignmentTwo_ = weightOfAssignmentTwo;
+    this.weightOfExam_ = weightOfExam;
   }
+
+
+
+  //===========================================================================
+  // Methods
+  //===========================================================================
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String calculateGrade(float markForAssignmentOne,
+                               float markForAssignmentTwo,
+                               float markForExam)
+  {
+    float totalMark = markForAssignmentOne + markForAssignmentTwo +
+                      markForExam;
+
+    if (markForAssignmentOne < 0 || markForAssignmentOne > this.weightOfAssignmentOne_ ||
+        markForAssignmentTwo < 0 || markForAssignmentTwo > this.weightOfAssignmentTwo_ ||
+        markForExam < 0 || markForExam > this.weightOfExam_) {
+      throw new RuntimeException("marks cannot be less than zero or greater" +
+                                 " than assessment weights");
+    }
+
+    if (totalMark < minimumMarkForAdditionalExamination_ ) {
+      return "FL";
+    }
+    else if (totalMark < minimumMarkForPass_ ) {
+      return "AE";
+    }
+    else if (totalMark < minimumMarkForCredit_ ) {
+      return "PS";
+    }
+    else if (totalMark < minimumMarkForDistinction_ ) {
+      return "CR";
+    }
+    else if (totalMark < minimumMarkForHighDistinction_ ) {
+      return "DI";
+    }
+    else {
+      return "HD";
+    }
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord)
+  {
+    this.studentUnitRecordList_.add(studentUnitRecord);
+  }
+
+
+
+  /**
+   * Checks the minimum marks specified for each grade are within bounds and
+   * do not overlap.
+   * @param minimumMarkForPass float
+   *        Minimum mark to obtain a Pass grade in this unit.
+   * @param minimumMarkForCredit float
+   *        Minimum mark to obtain a Credit grade in this unit.
+   * @param minimumMarkForDistinction float
+   *        Minimum mark to obtain a Distinction grade in this unit.
+   * @param minimumMarkForHighDistinction float
+   *        Minimum mark to obtain a High Distinction grade in this unit.
+   * @param minimumMarkForAdditionalExamination float
+   *        Minimum mark to qualify for an Alternative Assessment in this unit.
+   */
+  private void setCutoffs(float minimumMarkForPass, float minimumMarkForCredit,
+                          float minimumMarkForDistinction,
+                          float minimumMarkForHighDistinction,
+                          float minimumMarkForAdditionalExamination)
+  {
+    if (minimumMarkForPass < 0 || minimumMarkForPass > 100 ||
+          minimumMarkForCredit < 0 || minimumMarkForCredit > 100 ||
+          minimumMarkForDistinction < 0 || minimumMarkForDistinction > 100 ||
+          minimumMarkForHighDistinction < 0 || minimumMarkForHighDistinction > 100 ||
+          minimumMarkForAdditionalExamination < 0 || minimumMarkForAdditionalExamination > 100 ) {
+      throw new RuntimeException("Assessment cutoffs cant be less than zero" +
+                                   " or greater than 100");
+    }
+    if (minimumMarkForAdditionalExamination >= minimumMarkForPass) {
+      throw new RuntimeException("AE cutoff must be less than PS cutoff");
+    }
+    if (minimumMarkForPass >= minimumMarkForCredit) {
+      throw new RuntimeException("PS cutoff must be less than CR cutoff");
+    }
+    if (minimumMarkForCredit >= minimumMarkForDistinction) {
+      throw new RuntimeException("CR cutoff must be less than DI cutoff");
+    }
+    if (minimumMarkForDistinction >= minimumMarkForHighDistinction) {
+      throw new RuntimeException("DI cutoff must be less than HD cutoff");
+    }
+
+
+
+  }
+
 
 
 }

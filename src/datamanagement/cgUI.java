@@ -365,7 +365,7 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister,
 		}
 	}// GEN-LAST:event_jButton2ActionPerformed
 
-	public void clearUnits() {
+	public void clearAllUnits() {
 		uM.removeAllElements();
 		uM.addElement("<none selected>");
 		clearStudents();
