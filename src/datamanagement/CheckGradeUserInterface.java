@@ -135,7 +135,7 @@ public class CheckGradeUserInterface extends JFrame
     {
       public void itemStateChanged(ItemEvent evt)
       {
-        jComboBox1ItemStateChanged(evt);
+        selectUnitComboBoxItemStateChanged(evt);
       }
     });
 
@@ -167,7 +167,7 @@ public class CheckGradeUserInterface extends JFrame
     {
       public void itemStateChanged(ItemEvent evt)
       {
-        jComboBox2ItemStateChanged(evt);
+        selectStudentComboBoxItemStateChanged(evt);
       }
     });
 
@@ -204,36 +204,36 @@ public class CheckGradeUserInterface extends JFrame
     assessementOneMarkTextField_.setEditable(false);
     assessementOneMarkTextField_.addKeyListener(new KeyAdapter()
     {
-      public void keyTyped(KeyEvent evt)
+      public void keyTyped(KeyEvent event)
       {
-        jTextFieldKeyTyped(evt);
+        jTextFieldKeyTyped(event);
       }
     });
 
     assessmentTwoMarkTextField_.setEditable(false);
     assessmentTwoMarkTextField_.addKeyListener(new KeyAdapter()
     {
-      public void keyTyped(KeyEvent evt)
+      public void keyTyped(KeyEvent event)
       {
-        jTextFieldKeyTyped(evt);
+        jTextFieldKeyTyped(event);
       }
     });
 
     examMarkTextField_.setEditable(false);
     examMarkTextField_.addKeyListener(new KeyAdapter()
     {
-      public void keyTyped(KeyEvent evt)
+      public void keyTyped(KeyEvent event)
       {
-        jTextFieldKeyTyped(evt);
+        jTextFieldKeyTyped(event);
       }
     });
 
     changeButton_.setText("Change");
     changeButton_.addActionListener(new ActionListener()
     {
-      public void actionPerformed(ActionEvent evt)
+      public void actionPerformed(ActionEvent event)
       {
-        jButton1ActionPerformed(evt);
+        changeButtonActionPerformed(event);
       }
     });
     checkGradeButton_ = new JButton();
@@ -242,9 +242,9 @@ public class CheckGradeUserInterface extends JFrame
     checkGradeButton_.setActionCommand("checkGrade");
     checkGradeButton_.addActionListener(new ActionListener()
     {
-      public void actionPerformed(ActionEvent evt)
+      public void actionPerformed(ActionEvent event)
       {
-        jButton3ActionPerformed(evt);
+        checkGradeButtonActionPerformed(event);
       }
     });
 
@@ -338,9 +338,9 @@ public class CheckGradeUserInterface extends JFrame
     saveButton_.setText("Save");
     saveButton_.addActionListener(new ActionListener()
     {
-      public void actionPerformed(ActionEvent evt)
+      public void actionPerformed(ActionEvent event)
       {
-        jButton2ActionPerformed(evt);
+        saveButtonActionPerformed(event);
       }
     });
 
@@ -421,32 +421,35 @@ public class CheckGradeUserInterface extends JFrame
 
 
 
-  private void jComboBox1ItemStateChanged(ItemEvent evt)
+  private void selectUnitComboBoxItemStateChanged(ItemEvent event)
   {// GEN-FIRST:event_jComboBox1ItemStateChanged
-    String cU = (String) selectUnitComboBox_.getSelectedItem();
+    String selectedUnit = (String) selectUnitComboBox_.getSelectedItem();
+    
     clearDisplayedText();
     clearStudents();
-    if (evt.getStateChange() == ItemEvent.SELECTED) {
-      if (cU.equals((String) selectUnitComboBox_.getItemAt(0))) {
-        cU = "NONE";
+    
+    if (event.getStateChange() == ItemEvent.SELECTED) {
+      if (selectedUnit.equals((String) selectUnitComboBox_.getItemAt(0))) {
+        selectedUnit = "NONE";
       }
-      controller_.unitSelected(cU);
+      controller_.unitSelected(selectedUnit);
     }
   }// GEN-LAST:event_jComboBox1ItemStateChanged
 
 
 
-  private void jComboBox2ItemStateChanged(ItemEvent evt)
+  private void selectStudentComboBoxItemStateChanged(ItemEvent event)
   {// GEN-FIRST:event_jComboBox2ItemStateChanged
     clearDisplayedText();
-    String cS = (String) selectStudentComboBox_.getSelectedItem();
-    if (evt.getStateChange() == ItemEvent.SELECTED) {
-      if (cS.equals((String) selectStudentComboBox_.getItemAt(0))) {
+    String selectedStudent = (String) selectStudentComboBox_.getSelectedItem();
+    
+    if (event.getStateChange() == ItemEvent.SELECTED) {
+      if (selectedStudent.equals((String) selectStudentComboBox_.getItemAt(0))) {
         studentId_ = new Integer(0);
         controller_.studentSelected(studentId_);
       }
       else {
-        studentId_ = new Integer(cS.split("\\s")[0]);
+        studentId_ = new Integer(selectedStudent.split("\\s")[0]);
       }
       controller_.studentSelected(studentId_);
     }
@@ -454,57 +457,59 @@ public class CheckGradeUserInterface extends JFrame
 
 
 
-  private void jButton3ActionPerformed(ActionEvent evt)
+  private void checkGradeButtonActionPerformed(ActionEvent event)
   {// GEN-FIRST:event_jButton3ActionPerformed
     assessmentOneMark_ = new Float(assessementOneMarkTextField_.getText())
-            .floatValue();
+                             .floatValue();
     assessmentTwoMark_ = new Float(assessmentTwoMarkTextField_.getText())
-            .floatValue();
+                             .floatValue();
     examMark_ = new Float(examMarkTextField_.getText()).floatValue();
-    // lblErrMsg.setText("");
+    
     try {
       String s = controller_.checkGrade(assessmentOneMark_, assessmentTwoMark_,
               examMark_);
       gradeDisplayLabel_.setText(s);
     }
-    catch (RuntimeException re) {
-      errorMessageLabel_.setText(re.getMessage());
+    catch (RuntimeException runtimeException) {
+      errorMessageLabel_.setText(runtimeException.getMessage());
     }
   }// GEN-LAST:event_jButton3ActionPerformed
 
 
 
-  private void jButton1ActionPerformed(ActionEvent evt)
+  private void changeButtonActionPerformed(ActionEvent event)
   {// GEN-FIRST:event_jButton1ActionPerformed
     controller_.enableChangeMarks();
     gradeDisplayLabel_.setText("");
-    // lblErrMsg.setText("");
   }// GEN-LAST:event_jButton1ActionPerformed
 
 
+  
+  private void saveButtonActionPerformed(ActionEvent event)
+  {// GEN-FIRST:event_jButton2ActionPerformed
+    float assessmentOneMark = new Float(assessementOneMarkTextField_.getText())
+                                  .floatValue();
+    float assessmentTwoMark = new Float(assessmentTwoMarkTextField_.getText())
+                                  .floatValue();
+    float examMark = new Float(examMarkTextField_.getText()).floatValue();
+   
+    errorMessageLabel_.setText("");
+    
+    try {
+      controller_.saveGrade(assessmentOneMark, assessmentTwoMark, examMark);
+    }
+    catch (RuntimeException runtimeException) {
+      errorMessageLabel_.setText(runtimeException.getMessage());
+    }
+  }// GEN-LAST:event_jButton2ActionPerformed
 
-  private void jTextFieldKeyTyped(KeyEvent evt)
+  
+  
+  private void jTextFieldKeyTyped(KeyEvent event)
   {// GEN-FIRST:event_jTextField1KeyTyped
     gradeDisplayLabel_.setText("");
     errorMessageLabel_.setText("");
   }// GEN-LAST:event_jTextField1KeyTyped
-
-
-
-  private void jButton2ActionPerformed(ActionEvent evt)
-  {// GEN-FIRST:event_jButton2ActionPerformed
-    float asg1 = new Float(assessementOneMarkTextField_.getText()).floatValue();
-    float asg2 = new Float(assessmentTwoMarkTextField_.getText()).floatValue();
-    float exam = new Float(examMarkTextField_.getText()).floatValue();
-    errorMessageLabel_.setText("");
-    try {
-      controller_.saveGrade(asg1, asg2, exam);
-      // jButton3ActionPerformed(null);
-    }
-    catch (RuntimeException re) {
-      errorMessageLabel_.setText(re.getMessage());
-    }
-  }// GEN-LAST:event_jButton2ActionPerformed
 
 
 
@@ -535,7 +540,8 @@ public class CheckGradeUserInterface extends JFrame
   public void addStudent(IStudent student)
   {
     studentComboBoxModel_.addElement(student.getID().toString() + " : "
-            + student.getFirstName() + " " + student.getLastName());
+                         + student.getFirstName() + " " 
+                         + student.getLastName());
   }
 
 
@@ -593,7 +599,6 @@ public class CheckGradeUserInterface extends JFrame
   public void setChangeButtonEnabled(boolean shouldEnable)
   {
     changeButton_.setEnabled(shouldEnable);
-    // gradeLB.setText("");
   }
 
 
