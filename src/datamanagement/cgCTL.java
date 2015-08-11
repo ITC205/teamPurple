@@ -22,7 +22,7 @@ public class cgCTL {
 		CGUI.Refresh3();
 
 		ListUnitsCTL luCTL = new ListUnitsCTL();
-		luCTL.listUnits(CGUI);
+		luCTL.listUnits( CGUI );
 		CGUI.setVisible(true);
 		CGUI.setState1(true);
 	}
@@ -66,8 +66,8 @@ public class cgCTL {
 	}
 
 	public String checkGrade(float f, float g, float h) {
-		IUnit u = UnitManager.UM().getUnit(cuc);
-		String s = u.getGrade(f, g, h);
+		IUnit u = UnitManager.getInstance().getUnit(cuc);
+		String s = u.calculateGrade( f, g, h );
 		CGUI.setState4(true);
 		CGUI.setState5(false);
 		if (changed) {
@@ -85,7 +85,7 @@ public class cgCTL {
 
 	public void saveGrade(float asg1, float asg2, float exam) {
 
-		IUnit u = UnitManager.UM().getUnit(cuc);
+		IUnit u = UnitManager.getInstance().getUnit(cuc);
 		IStudent s = StudentManager.get().getStudent(currentStudentID);
 
 		IStudentUnitRecord r = s.getUnitRecord(cuc);
