@@ -27,7 +27,7 @@ public class Unit
   private int weightOfAssignmentTwo_;
   private int weightOfExam_;
 
-  private StudentUnitRecordList allStudentUnitRecords_;
+  private StudentUnitRecordList studentUnitRecordList_;
 
   //===========================================================================
   // Constructors
@@ -71,15 +71,18 @@ public class Unit
     this.unitCode_ = unitCode;
     this.unitName_ = unitName;
 
-    this.setMinimumMarksForGrades( minimumMarkForPass, minimumMarkForCredit,
-                                   minimumMarkForDistinction,
-                                   minimumMarkForHighDistinction,
-                                   minimumMarkForAdditionalExamination );
+    this.minimumMarkForPass_ = minimumMarkForPass;
+    this.minimumMarkForCredit_ = minimumMarkForCredit;
+    this.minimumMarkForDistinction_ = minimumMarkForDistinction;
+    this.minimumMarkForHighDistinction_ = minimumMarkForHighDistinction;
+
+    this.minimumMarkForAdditionalExamination_ =
+        minimumMarkForAdditionalExamination;
 
     this.setWeightsOfAssessments(weightOfAssignmentOne, weightOfAssignmentTwo,
                                  weightOfExam);
 
-    this.allStudentUnitRecords_ = studentUnitRecordList == null ? new StudentUnitRecordList() : studentUnitRecordList;
+    this.studentUnitRecordList_ = studentUnitRecordList == null ? new StudentUnitRecordList() : studentUnitRecordList;
   }
 
 
@@ -199,11 +202,9 @@ public class Unit
   /**
    * {@inheritDoc}
    */
-  @Override
   public IStudentUnitRecord getStudentUnitRecord(int studentId)
   {
-    for (IStudentUnitRecord studentUnitRecord :
-         this.getAllStudentUnitRecords()) {
+    for (IStudentUnitRecord studentUnitRecord : this.studentUnitRecordList_) {
       if (studentUnitRecord.getStudentID() == studentId)
         return studentUnitRecord;
     }
@@ -218,7 +219,7 @@ public class Unit
   @Override
   public StudentUnitRecordList getAllStudentUnitRecords()
   {
-    return this.allStudentUnitRecords_;
+    return this.studentUnitRecordList_;
   }
 
 
@@ -226,7 +227,6 @@ public class Unit
   /**
    * {@inheritDoc}
    */
-  @Override
   public void setMinimumMarkForAdditionalExamination(float minimumMark)
   {
     this.minimumMarkForAdditionalExamination_ = minimumMark;
@@ -237,7 +237,6 @@ public class Unit
   /**
    * {@inheritDoc}
    */
-  @Override
   public void setMinimumMarkForPass(float minimumMark)
   {
     this.minimumMarkForPass_ = minimumMark;
@@ -259,7 +258,6 @@ public class Unit
   /**
    * {@inheritDoc}
    */
-  @Override
   public void setMinimumMarkForDistinction(float minimumMark)
   {
     this.minimumMarkForDistinction_ = minimumMark;
@@ -270,7 +268,6 @@ public class Unit
   /**
    * {@inheritDoc}
    */
-  @Override
   public void setMinimumMarkForHighDistinction(float minimumMark)
   {
     this.minimumMarkForHighDistinction_ = minimumMark;
@@ -352,7 +349,7 @@ public class Unit
   @Override
   public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord)
   {
-    this.allStudentUnitRecords_.add( studentUnitRecord );
+    this.studentUnitRecordList_.add(studentUnitRecord);
   }
 
 
@@ -371,12 +368,10 @@ public class Unit
    * @param minimumMarkForAdditionalExamination float
    *        Minimum mark to qualify for an Alternative Assessment in this unit.
    */
-  private void setMinimumMarksForGrades(float minimumMarkForPass,
-                                        float minimumMarkForCredit,
-                                        float minimumMarkForDistinction,
-                                        float minimumMarkForHighDistinction,
-                                        float
-                                           minimumMarkForAdditionalExamination)
+  private void setCutoffs(float minimumMarkForPass, float minimumMarkForCredit,
+                          float minimumMarkForDistinction,
+                          float minimumMarkForHighDistinction,
+                          float minimumMarkForAdditionalExamination)
   {
     if (minimumMarkForPass < 0 || minimumMarkForPass > 100 ||
           minimumMarkForCredit < 0 || minimumMarkForCredit > 100 ||
