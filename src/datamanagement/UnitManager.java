@@ -84,16 +84,14 @@ public class UnitManager
 
 
 
-  //TODO: is this actually a getter?
   /**
    * Adds a unit to collection of all units held by this unitManager singleton.
    * Private access restricts use to this instance only.
-   * @param unit Unit is added to the collection of units.
+   * @param unitMap unitMap replaces the current collection of units.
    */
-  private void setUnit(IUnit unit)
+  private void setUnits(UnitMap unitMap)
   {
-    UnitMap unitMap = this.getUnits();
-    unitMap.put(unit.getUnitCode(), unit);
+    this.units_ = unitMap;
   }
 
 
@@ -231,7 +229,9 @@ public class UnitManager
    */
   private void addUnitToCollection(IUnit unit)
   {
-    this.setUnit(unit);
+    UnitMap unitMap = this.getUnits();
+    unitMap.put(unit.getUnitCode(), unit);
+    this.setUnits(unitMap);
   }
 
 
