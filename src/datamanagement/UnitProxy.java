@@ -174,10 +174,10 @@ public class UnitProxy
    * {@inheritDoc}
    */
   @Override
-  public StudentUnitRecordList getStudentUnitRecordList()
+  public StudentUnitRecordList getAllStudentUnitRecords()
   {
     return unitManager_.getUnit(unitCode_)
-                      .getStudentUnitRecordList();
+                      .getAllStudentUnitRecords();
   }
 
 
