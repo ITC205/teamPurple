@@ -300,7 +300,7 @@ public class Unit
     this.weightOfExam_ = weightOfExam;
   }
 
-
+  
 
   //===========================================================================
   // Methods
@@ -352,7 +352,7 @@ public class Unit
   @Override
   public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord)
   {
-    this.allStudentUnitRecords_.add( studentUnitRecord );
+    this.getAllStudentUnitRecords().add(studentUnitRecord);
   }
 
 
