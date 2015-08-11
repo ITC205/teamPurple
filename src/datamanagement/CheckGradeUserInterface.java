@@ -34,14 +34,39 @@ public class CheckGradeUserInterface extends JFrame
 
 
   private CheckGradeController controller_;
-  private DefaultComboBoxModel unitComboBoxModel_;    // Parameterize model to
-  private DefaultComboBoxModel studentComboBoxModel_; // <String>?
+  
+  private DefaultComboBoxModel unitComboBoxModel_;   
+  private DefaultComboBoxModel studentComboBoxModel_; 
   
   private float assessmentOneMark_;
   private float assessmentTwoMark_;
   private float examMark_;
 
   private Integer studentId_;
+  
+  // Variables declaration - do not modify//GEN-BEGIN:variables
+  private JButton changeButton_;
+  private JButton checkGradeButton_;
+  private JButton saveButton_;
+  
+  private JComboBox selectUnitComboBox_;
+  private JComboBox selectStudentComboBox_;
+  
+  private JLabel checkGradeTitleLabel_;
+  private JLabel assessmentOneLabel_;
+  private JLabel assessmentTwoLabel_;
+  private JLabel examLabel_;
+  private JLabel gradeDisplayLabel_;
+  private JLabel errorMessageLabel_;
+  
+  private JPanel unitSelectionPanel_;
+  private JPanel studentSelectionPanel_;
+  private JPanel markDisplayPanel_;
+  private JPanel gradeDisplayPanel_;
+  
+  private JTextField assessementOneMarkTextField_;
+  private JTextField assessmentTwoMarkTextField_;
+  private JTextField examMarkTextField_;
 
 
 
@@ -586,24 +611,4 @@ public class CheckGradeUserInterface extends JFrame
   {
     saveButton_.setEnabled(shouldEnable);
   }
-
-  // Variables declaration - do not modify//GEN-BEGIN:variables
-  private JButton changeButton_;
-  private JButton checkGradeButton_;
-  private JButton saveButton_;
-  private JComboBox selectUnitComboBox_;
-  private JComboBox selectStudentComboBox_;
-  private JLabel checkGradeTitleLabel_;
-  private JLabel assessmentOneLabel_;
-  private JLabel assessmentTwoLabel_;
-  private JLabel examLabel_;
-  private JLabel gradeDisplayLabel_;
-  private JLabel errorMessageLabel_;
-  private JPanel unitSelectionPanel_;
-  private JPanel studentSelectionPanel_;
-  private JPanel markDisplayPanel_;
-  private JPanel gradeDisplayPanel_;
-  private JTextField assessementOneMarkTextField_;
-  private JTextField assessmentTwoMarkTextField_;
-  private JTextField examMarkTextField_;
 }
