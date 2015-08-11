@@ -17,7 +17,7 @@ public class UnitManager
 
   private static UnitManager instance_ = null;
 
-  private UnitMap unitMap_;
+  private UnitMap units_;
 
   //===========================================================================
   // Constructors
@@ -30,7 +30,7 @@ public class UnitManager
    */
   private UnitManager()
   {
-    unitMap_ = new UnitMap();
+    units_ = new UnitMap();
   }
 
 
@@ -79,19 +79,21 @@ public class UnitManager
    */
   private UnitMap getUnits()
   {
-    return this.unitMap_;
+    return this.units_;
   }
 
 
 
+  //TODO: is this actually a getter?
   /**
-   * Sets the collection of all units held by this unitManager singleton.
+   * Adds a unit to collection of all units held by this unitManager singleton.
    * Private access restricts use to this instance only.
-   * @param unitMap Updates the collection of units.
+   * @param unit Unit is added to the collection of units.
    */
-  private void setUnits(UnitMap unitMap)
+  private void setUnit(IUnit unit)
   {
-    this.unitMap_ = unitMap;
+    UnitMap unitMap = this.getUnits();
+    unitMap.put(unit.getUnitCode(), unit);
   }
 
 
@@ -105,19 +107,44 @@ public class UnitManager
    * are stored in the persistence layer.
    * The collection of units managed by this DAO instance is NOT updated.
    * @return UnitMap Returns the collection of units that are represented in
-   * the xml file.
+   * the persistence layer.
    */
-  public UnitMap retrieveUnits()
+  public UnitMap retrieveAllUnits()
+  {
+    List<Element> unitElements = retrieveAllUnitElements();
+    UnitMap unitMap = createAllRetrievedUnitProxies(unitElements);
+    return unitMap;
+  }
+
+
+
+  /**
+   * Returns the xml Elements that represent the persisted unit objects.
+   * @return List<Element> Returns the list of Elements that represent units.
+   */
+  private List<Element> retrieveAllUnitElements()
+  {
+    return XMLManager.getInstance().retrieveAllUnitElements();
+  }
+
+
+
+  /**
+   * Creates a collection of all the unit proxies from the representation in
+   * the persistence layer.
+   * @param allUnitElements List<Element> List of Elements that represents
+   *                        the units in the persistence layer.
+   * @return UnitMap Returns UnitMap containing all the instantiated Unit
+   *         Proxy objects.
+   */
+  private UnitMap createAllRetrievedUnitProxies( List<Element> allUnitElements )
   {
     UnitMap unitMap = new UnitMap();
     IUnit unit;
-    List<Element> unitElements = retrieveUnitElements();
 
-    // for each unit in the xml file, create a new unit proxy and add to
-    // collection of units
-    for (Element el : unitElements) {
-      unit = new UnitProxy(el.getAttributeValue("uid"),
-                           el.getAttributeValue("name"));
+    for (Element unitElement : allUnitElements) {
+      unit = new UnitProxy(unitElement.getAttributeValue("uid"),
+                           unitElement.getAttributeValue("name"));
       unitMap.put(unit.getUnitCode(), unit);
     }
     return unitMap;
@@ -133,46 +160,16 @@ public class UnitManager
    */
   private IUnit loadUnit(String unitCode) {
 
-    Element unitElement = retrieveUnitElement(unitCode);
+    Element unitElement = retrieveUnitElement( unitCode );
 
     if (unitElement == null) {
-      throw new RuntimeException("DBMD: loadUnit : unit not in file");
+      throw new RuntimeException("UnitManager: loadUnit : unit not in file");
     }
     else {
-      IUnit unit = createUnit(unitElement, unitCode);
+      IUnit unit = createRetrievedUnit(unitElement, unitCode);
       addUnitToCollection(unit);
       return unit;
     }
-  }
-
-
-
-  /**
-   * Returns the xml Elements that represent the persisted unit objects.
-   * @return List<Element> Returns the list of Elements that represent units.
-   */
-  private List<Element> retrieveUnitElements()
-  {
-    List<Element> unitElements = null;
-
-    // TODO: XMLManager.getUnitElements() and Students() etc?
-    List listOfXmlNodes = XMLManager.getInstance().getDocument()
-                                    .getRootElement().getChild("unitTable")
-                                    .getChildren("unit");
-
-    // TODO: remove null returns and throw if cannot cast?
-    // if list is empty return null reference
-    if (listOfXmlNodes.isEmpty()) {
-      return unitElements;
-    }
-
-    // otherwise check first node is an instance of Element before casting list
-    if (listOfXmlNodes.get(0) instanceof Element) {
-      unitElements = listOfXmlNodes;
-    }
-
-    // return list of Elements (or null if nodes are not Elements)
-    return unitElements;
   }
 
 
@@ -184,7 +181,7 @@ public class UnitManager
    */
   private Element retrieveUnitElement(String unitCode)
   {
-    List<Element> unitElements = this.retrieveUnitElements();
+    List<Element> unitElements = this.retrieveAllUnitElements();
     for (Element element : unitElements) {
       if (unitCode.equals(element.getAttributeValue("uid"))) {
         return element;
@@ -194,29 +191,13 @@ public class UnitManager
   }
 
 
-
-  /**
-   * Adds the specified unit to the collection of units managed by this DAO
-   * instance.
-   * @param unit Unit The unit to add to the collection managed by this DAO
-   * instance.
-   */
-  private void addUnitToCollection(IUnit unit)
-  {
-    // TODO: this changes the collection using the accessor method
-    // TODO: should use set, and a copy of collection?
-    this.getUnits().put( unit.getUnitCode(), unit );
-  }
-
-
-
   /**
    * Creates a unit object from the representation in the persistence layer.
    * @param unitElement Element XML Element that represents the unit.
    * @param unitCode Unit code used to match unit in persistence layer.
    * @return IUnit Returns unit.
    */
-  private IUnit createUnit(Element unitElement, String unitCode)
+  private IUnit createRetrievedUnit( Element unitElement, String unitCode )
   {
     return new Unit(unitElement.getAttributeValue("uid"),
                     unitElement.getAttributeValue("name"),
@@ -238,6 +219,19 @@ public class UnitManager
                            .intValue(),
                     StudentUnitRecordManager.instance()
                                             .getRecordsByUnit(unitCode));
+  }
+
+
+
+  /**
+   * Adds the specified unit to the collection of units managed by this DAO
+   * instance.
+   * @param unit Unit The unit to add to the collection managed by this DAO
+   * instance.
+   */
+  private void addUnitToCollection(IUnit unit)
+  {
+    this.setUnit(unit);
   }
 
 
