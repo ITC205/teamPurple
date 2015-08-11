@@ -111,7 +111,7 @@ public interface IUnit {
    * Returns the entire collection of student records for this unit.
    * @return StudentUnitRecordList Collection of student records for this unit.
    */
-  public StudentUnitRecordList getStudentUnitRecordList();
+  public StudentUnitRecordList getAllStudentUnitRecords();
 
 
 
