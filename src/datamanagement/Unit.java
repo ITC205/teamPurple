@@ -27,7 +27,7 @@ public class Unit
   private int weightOfAssignmentTwo_;
   private int weightOfExam_;
 
-  private StudentUnitRecordList studentUnitRecordList_;
+  private StudentUnitRecordList allStudentUnitRecords_;
 
   //===========================================================================
   // Constructors
@@ -71,18 +71,15 @@ public class Unit
     this.unitCode_ = unitCode;
     this.unitName_ = unitName;
 
-    this.minimumMarkForPass_ = minimumMarkForPass;
-    this.minimumMarkForCredit_ = minimumMarkForCredit;
-    this.minimumMarkForDistinction_ = minimumMarkForDistinction;
-    this.minimumMarkForHighDistinction_ = minimumMarkForHighDistinction;
-
-    this.minimumMarkForAdditionalExamination_ =
-        minimumMarkForAdditionalExamination;
+    this.setMinimumMarksForGrades( minimumMarkForPass, minimumMarkForCredit,
+                                   minimumMarkForDistinction,
+                                   minimumMarkForHighDistinction,
+                                   minimumMarkForAdditionalExamination );
 
     this.setWeightsOfAssessments(weightOfAssignmentOne, weightOfAssignmentTwo,
                                  weightOfExam);
 
-    this.studentUnitRecordList_ = studentUnitRecordList == null ? new StudentUnitRecordList() : studentUnitRecordList;
+    this.allStudentUnitRecords_ = studentUnitRecordList == null ? new StudentUnitRecordList() : studentUnitRecordList;
   }
 
 
@@ -202,9 +199,11 @@ public class Unit
   /**
    * {@inheritDoc}
    */
+  @Override
   public IStudentUnitRecord getStudentUnitRecord(int studentId)
   {
-    for (IStudentUnitRecord studentUnitRecord : this.studentUnitRecordList_) {
+    for (IStudentUnitRecord studentUnitRecord :
+         this.getAllStudentUnitRecords()) {
       if (studentUnitRecord.getStudentID() == studentId)
         return studentUnitRecord;
     }
@@ -217,9 +216,9 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public StudentUnitRecordList getStudentUnitRecordList()
+  public StudentUnitRecordList getAllStudentUnitRecords()
   {
-    return this.studentUnitRecordList_;
+    return this.allStudentUnitRecords_;
   }
 
 
@@ -227,6 +226,7 @@ public class Unit
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setMinimumMarkForAdditionalExamination(float minimumMark)
   {
     this.minimumMarkForAdditionalExamination_ = minimumMark;
@@ -237,6 +237,7 @@ public class Unit
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setMinimumMarkForPass(float minimumMark)
   {
     this.minimumMarkForPass_ = minimumMark;
@@ -258,6 +259,7 @@ public class Unit
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setMinimumMarkForDistinction(float minimumMark)
   {
     this.minimumMarkForDistinction_ = minimumMark;
@@ -268,6 +270,7 @@ public class Unit
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setMinimumMarkForHighDistinction(float minimumMark)
   {
     this.minimumMarkForHighDistinction_ = minimumMark;
@@ -349,7 +352,7 @@ public class Unit
   @Override
   public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord)
   {
-    this.studentUnitRecordList_.add(studentUnitRecord);
+    this.allStudentUnitRecords_.add( studentUnitRecord );
   }
 
 
@@ -368,10 +371,12 @@ public class Unit
    * @param minimumMarkForAdditionalExamination float
    *        Minimum mark to qualify for an Alternative Assessment in this unit.
    */
-  private void setCutoffs(float minimumMarkForPass, float minimumMarkForCredit,
-                          float minimumMarkForDistinction,
-                          float minimumMarkForHighDistinction,
-                          float minimumMarkForAdditionalExamination)
+  private void setMinimumMarksForGrades(float minimumMarkForPass,
+                                        float minimumMarkForCredit,
+                                        float minimumMarkForDistinction,
+                                        float minimumMarkForHighDistinction,
+                                        float
+                                           minimumMarkForAdditionalExamination)
   {
     if (minimumMarkForPass < 0 || minimumMarkForPass > 100 ||
           minimumMarkForCredit < 0 || minimumMarkForCredit > 100 ||
