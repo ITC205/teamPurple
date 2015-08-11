@@ -199,6 +199,7 @@ public class Unit
   /**
    * {@inheritDoc}
    */
+  @Override
   public IStudentUnitRecord getStudentUnitRecord(int studentId)
   {
     for (IStudentUnitRecord studentUnitRecord : this.allStudentUnitRecords_ ) {
@@ -224,6 +225,7 @@ public class Unit
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setMinimumMarkForAdditionalExamination(float minimumMark)
   {
     this.minimumMarkForAdditionalExamination_ = minimumMark;
@@ -234,6 +236,7 @@ public class Unit
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setMinimumMarkForPass(float minimumMark)
   {
     this.minimumMarkForPass_ = minimumMark;
@@ -255,6 +258,7 @@ public class Unit
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setMinimumMarkForDistinction(float minimumMark)
   {
     this.minimumMarkForDistinction_ = minimumMark;
@@ -265,6 +269,7 @@ public class Unit
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setMinimumMarkForHighDistinction(float minimumMark)
   {
     this.minimumMarkForHighDistinction_ = minimumMark;
