@@ -36,7 +36,7 @@ public class ListUnitsCTL
   public void listUnits(IUnitLister unitLister)
   {
     unitLister.clearUnits();
-    UnitMap units = this.unitManager_.retrieveUnits();
+    UnitMap units = this.unitManager_.retrieveAllUnits();
     for (String unitCode : units.keySet()) {
       unitLister.addUnit(units.get(unitCode));
     }
