@@ -3,7 +3,7 @@ package datamanagement;
 /**
  *
  */
-public class ListUnitsCTL
+public class ListUnitsController
 {
   //===========================================================================
   // Variables
@@ -19,7 +19,7 @@ public class ListUnitsCTL
    * Creates new instance and references singleton UnitManager instance
    * in order to access the collection of units.
    */
-  public ListUnitsCTL()
+  public ListUnitsController()
   {
     unitManager_ = UnitManager.getInstance();
   }
