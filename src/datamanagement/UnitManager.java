@@ -124,7 +124,7 @@ public class UnitManager
    */
   private List<Element> retrieveAllUnitElements()
   {
-    return XMLManager.getInstance().retrieveAllUnitElements();
+    return XmlManager.getInstance().retrieveAllUnitElements();
   }
 
 
