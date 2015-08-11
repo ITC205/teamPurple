@@ -27,16 +27,30 @@ public class ListUnitsController
 
 
   //===========================================================================
+  // Getters and Setters
+  //===========================================================================
+
+  /**
+   *
+   */
+  private UnitManager getUnitManager()
+  {
+    return this.unitManager_;
+  }
+
+
+
+  //===========================================================================
   // Methods
   //===========================================================================
 
   /**
    *
    */
-  public void listUnits(IUnitLister unitLister)
+  public void listAllUnits(IUnitLister unitLister)
   {
-    unitLister.clearUnits();
-    UnitMap units = this.unitManager_.retrieveAllUnits();
+    unitLister.clearAllUnits();
+    UnitMap units = this.getUnitManager().retrieveAllUnits();
     for (String unitCode : units.keySet()) {
       unitLister.addUnit(units.get(unitCode));
     }
