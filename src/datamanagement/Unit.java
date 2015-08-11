@@ -27,7 +27,7 @@ public class Unit
   private int weightOfAssignmentTwo_;
   private int weightOfExam_;
 
-  private StudentUnitRecordList studentUnitRecordList_;
+  private StudentUnitRecordList allStudentUnitRecords_;
 
   //===========================================================================
   // Constructors
@@ -82,7 +82,7 @@ public class Unit
     this.setWeightsOfAssessments(weightOfAssignmentOne, weightOfAssignmentTwo,
                                  weightOfExam);
 
-    this.studentUnitRecordList_ = studentUnitRecordList == null ? new StudentUnitRecordList() : studentUnitRecordList;
+    this.allStudentUnitRecords_ = studentUnitRecordList == null ? new StudentUnitRecordList() : studentUnitRecordList;
   }
 
 
@@ -204,7 +204,7 @@ public class Unit
    */
   public IStudentUnitRecord getStudentUnitRecord(int studentId)
   {
-    for (IStudentUnitRecord studentUnitRecord : this.studentUnitRecordList_) {
+    for (IStudentUnitRecord studentUnitRecord : this.allStudentUnitRecords_ ) {
       if (studentUnitRecord.getStudentID() == studentId)
         return studentUnitRecord;
     }
@@ -219,7 +219,7 @@ public class Unit
   @Override
   public StudentUnitRecordList getAllStudentUnitRecords()
   {
-    return this.studentUnitRecordList_;
+    return this.allStudentUnitRecords_;
   }
 
 
@@ -349,7 +349,7 @@ public class Unit
   @Override
   public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord)
   {
-    this.studentUnitRecordList_.add(studentUnitRecord);
+    this.allStudentUnitRecords_.add( studentUnitRecord );
   }
 
 
