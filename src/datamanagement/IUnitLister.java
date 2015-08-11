@@ -12,7 +12,7 @@ public interface IUnitLister
   /**
    * Clears display of units.
    */
-  public void clearUnits();
+  public void clearAllUnits();
 
 
 
