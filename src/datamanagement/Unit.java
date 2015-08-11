@@ -71,13 +71,10 @@ public class Unit
     this.unitCode_ = unitCode;
     this.unitName_ = unitName;
 
-    this.minimumMarkForPass_ = minimumMarkForPass;
-    this.minimumMarkForCredit_ = minimumMarkForCredit;
-    this.minimumMarkForDistinction_ = minimumMarkForDistinction;
-    this.minimumMarkForHighDistinction_ = minimumMarkForHighDistinction;
-
-    this.minimumMarkForAdditionalExamination_ =
-        minimumMarkForAdditionalExamination;
+    this.setMinimumMarksForGrades( minimumMarkForPass,  minimumMarkForCredit,
+     minimumMarkForDistinction,
+     minimumMarkForHighDistinction,
+     minimumMarkForAdditionalExamination);
 
     this.setWeightsOfAssessments(weightOfAssignmentOne, weightOfAssignmentTwo,
                                  weightOfExam);
@@ -368,7 +365,7 @@ public class Unit
    * @param minimumMarkForAdditionalExamination float
    *        Minimum mark to qualify for an Alternative Assessment in this unit.
    */
-  private void setCutoffs(float minimumMarkForPass, float minimumMarkForCredit,
+  private void setMinimumMarksForGrades(float minimumMarkForPass, float minimumMarkForCredit,
                           float minimumMarkForDistinction,
                           float minimumMarkForHighDistinction,
                           float minimumMarkForAdditionalExamination)
@@ -394,7 +391,13 @@ public class Unit
       throw new RuntimeException("DI cutoff must be less than HD cutoff");
     }
 
+    this.minimumMarkForPass_ = minimumMarkForPass;
+    this.minimumMarkForCredit_ = minimumMarkForCredit;
+    this.minimumMarkForDistinction_ = minimumMarkForDistinction;
+    this.minimumMarkForHighDistinction_ = minimumMarkForHighDistinction;
 
+    this.minimumMarkForAdditionalExamination_ =
+      minimumMarkForAdditionalExamination;
 
   }
 
