@@ -9,7 +9,7 @@ private String UC;
     public UnitProxy( String unitCode, String unitName ) {
         this.UC = unitCode;
             this.un = unitName;
-                um = UnitManager.UM(); }
+                um = UnitManager.getInstance(); }
     public String getUnitCode() { 
         return this.UC;}
         public String getUnitName() { 
@@ -36,8 +36,8 @@ public void setHdCutoff(float cutoff) {
 public void setAeCutoff(float cutoff) {um.getUnit(UC).setAeCutoff(cutoff);
     }
     public float getAeCutoff() {return um.getUnit(UC).getAeCutoff();}
-public String getGrade(float f1, float f2, float f3) {
-return um.getUnit(UC).getGrade(f1, f2, f3);
+public String calculateGrade(float f1, float f2, float f3) {
+return um.getUnit(UC).calculateGrade(f1, f2, f3);
     }
     public void addStudentRecord(IStudentUnitRecord record) 
 { 
@@ -47,14 +47,14 @@ um.getUnit(UC).addStudentRecord(record);
 public StudentUnitRecordList listStudentRecords() {
     return um.getUnit(UC).listStudentRecords();
 }
-public int getAsg1Weight() {
-	return um.getUnit(UC).getAsg1Weight();
+public int getWeightOfAssignmentOne() {
+	return um.getUnit(UC).getWeightOfAssignmentOne();
 }
-public int getAsg2Weight() {
-	return um.getUnit(UC).getAsg2Weight();
+public int getWeightOfAssignmentTwo() {
+	return um.getUnit(UC).getWeightOfAssignmentTwo();
 }
-public int getExamWeight() {
-	return um.getUnit(UC).getExamWeight();
+public int getWeightOfExam() {
+	return um.getUnit(UC).getWeightOfExam();
 }
 public void setAssessmentWeights(int asg1Wgt, int asg2Wgt, int examWgt) {
 	um.getUnit(UC).setAssessmentWeights(asg1Wgt, asg2Wgt, examWgt);

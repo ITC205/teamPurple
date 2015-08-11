@@ -86,7 +86,7 @@ public class Unit implements IUnit {
 
 	public IStudentUnitRecord getStudentRecord(int studentID) {
 		for (IStudentUnitRecord r : rs) {
-			if (r.getStudentID() == studentID)
+			if (r.getStudentId() == studentID)
 				return r;
 		}
 		return null;
@@ -97,17 +97,17 @@ public class Unit implements IUnit {
 	}
 
 	@Override
-	public int getAsg1Weight() {
+	public int getWeightOfAssignmentOne() {
 		return a1;
 	}
 
 	@Override
-	public int getAsg2Weight() {
+	public int getWeightOfAssignmentTwo() {
 		return a2;
 	}
 
 	@Override
-	public int getExamWeight() {
+	public int getWeightOfExam() {
 		return ex;
 	}
 
@@ -149,7 +149,7 @@ public class Unit implements IUnit {
 
 	}
 	
-	public String getGrade(float f1, float f2, float f3) {
+	public String calculateGrade(float f1, float f2, float f3) {
 		float t = f1 + f2 + f3;
 		
 		if (f1 < 0 || f1 > a1 ||

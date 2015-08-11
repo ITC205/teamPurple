@@ -132,6 +132,7 @@ public class StudentUnitRecordManager
   {
     if (manager_ == null) {
       manager_ = new StudentUnitRecordManager();
+      return manager_;
     }
     else {
       return manager_;

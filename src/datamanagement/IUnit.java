@@ -20,12 +20,12 @@ public interface IUnit {
     public float getAeCutoff();    
     public void  setAeCutoff(float cutoff);
     
-    public int getAsg1Weight();
-    public int getAsg2Weight();
-    public int getExamWeight();
+    public int getWeightOfAssignmentOne();
+    public int getWeightOfAssignmentTwo();
+    public int getWeightOfExam();
     public void setAssessmentWeights(int asg1Wgt, int asg2Wgt, int examWgt);
 
-    public String getGrade(float asg1, float asg2, float exam);
+    public String calculateGrade(float asg1, float asg2, float exam);
 
     public void addStudentRecord(IStudentUnitRecord record );
     public IStudentUnitRecord getStudentRecord(int studentID );
