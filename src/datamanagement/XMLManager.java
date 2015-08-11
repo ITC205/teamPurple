@@ -1,10 +1,13 @@
 package datamanagement;
 
+import java.util.List;
+
 import java.io.IOException;
 import java.io.FileWriter;
 
 import org.jdom.JDOMException;
 import org.jdom.Document;
+import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
@@ -129,7 +132,7 @@ public class XMLManager
   {
     // TODO: see initialize;
     String xmlFileName = AppProperties.getInstance()
-                                  .getProperties().getProperty("XMLFILE");
+                                  .getProperties().getProperty( "XMLFILE" );
 
     try (FileWriter fileWriter = new FileWriter(xmlFileName)) {
       XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
@@ -143,6 +146,48 @@ public class XMLManager
       throw new RuntimeException("DBMD: XMLManager : saveDocument : error " +
                                  "writing to file");
     }
+  }
+
+
+
+  /**
+   *
+   */
+  public List<Element> retrieveAllUnitElements()
+  {
+    List<Element> allUnitElements = this.getDocument()
+                                        .getRootElement()
+                                        .getChild( "unitTable" )
+                                        .getChildren( "unit" );
+    return allUnitElements;
+  }
+
+
+
+  /**
+   *
+   */
+  public List<Element> retrieveAllStudentUnitRecordElements()
+  {
+    List<Element> allUnitElements = this.getDocument()
+                                        .getRootElement()
+                                        .getChild("studentUnitRecordTable")
+                                        .getChildren( "record" );
+    return allUnitElements;
+  }
+
+
+
+  /**
+   *
+   */
+  public List<Element> retrieveAllStudentElements()
+  {
+    List<Element> allUnitElements = this.getDocument()
+                                        .getRootElement()
+                                        .getChild("studentTable")
+                                        .getChildren("student");
+    return allUnitElements;
   }
 
 
