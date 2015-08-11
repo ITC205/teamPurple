@@ -16,13 +16,13 @@ import org.jdom.output.XMLOutputter;
  * Responsible for loading data from xml file, holding the transformed set
  * of data used by the application and saving data back to xml file.
  */
-public class XMLManager
+public class XmlManager
 {
   //===========================================================================
   // Variables
   //===========================================================================
 
-  private static XMLManager instance_ = null;
+  private static XmlManager instance_ = null;
   
   private Document document_;
 
@@ -35,7 +35,7 @@ public class XMLManager
    * pattern.
    * Creation of new instances is restricted through private access modifier.
    */
-  private XMLManager()
+  private XmlManager()
   {
     initialize();
   }
@@ -50,10 +50,10 @@ public class XMLManager
    * Returns the sole xmlManager instance (following the singleton pattern).
    * @return XMLManager instance responsible for managing data from xml file.
    */
-  public static XMLManager getInstance()
+  public static XmlManager getInstance()
   {
     if (instance_ == null) {
-      instance_ = new XMLManager();
+      instance_ = new XmlManager();
     }
     return instance_;
   }
@@ -171,7 +171,7 @@ public class XMLManager
   {
     List<Element> allUnitElements = this.getDocument()
                                         .getRootElement()
-                                        .getChild("studentUnitRecordTable")
+                                        .getChild( "studentUnitRecordTable" )
                                         .getChildren( "record" );
     return allUnitElements;
   }
@@ -185,7 +185,7 @@ public class XMLManager
   {
     List<Element> allUnitElements = this.getDocument()
                                         .getRootElement()
-                                        .getChild("studentTable")
+                                        .getChild( "studentTable" )
                                         .getChildren("student");
     return allUnitElements;
   }
