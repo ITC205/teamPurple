@@ -13,7 +13,7 @@ public class StudentUnitRecordManager
 
 
 
-  private static StudentUnitRecordManager manager_ = null;
+  private static StudentUnitRecordManager instance_ = null;
   private StudentUnitRecordMap recordMap_;
   private HashMap<String, StudentUnitRecordList> unitRecord_;
   private HashMap<Integer, StudentUnitRecordList> studentRecord_;
@@ -66,12 +66,12 @@ public class StudentUnitRecordManager
     }
     else {
       allStudentUnitRecords = new StudentUnitRecordList();
-      List<Element> allRecords = (List<Element>) XMLManager.getInstance()
+      List<Element> allRecordElements = (List<Element>) XMLManager.getInstance()
                                 .getDocument().getRootElement()
                                 .getChild("studentUnitRecordTable")
                                 .getChildren("record");
 
-      for (Element record : allRecords) {
+      for (Element record : allRecordElements) {
         if (unitCode.equals(record.getAttributeValue("uid"))) {
           allStudentUnitRecords.add(new StudentUnitRecordProxy(
                   new Integer(record.getAttributeValue("sid")),
@@ -97,12 +97,12 @@ public class StudentUnitRecordManager
     }
     else {
       allStudentUnitRecords = new StudentUnitRecordList();
-      List<Element> allRecords = (List<Element>) XMLManager.getInstance()
+      List<Element> allRecordElements = (List<Element>) XMLManager.getInstance()
                                  .getDocument().getRootElement()
                                  .getChild("studentUnitRecordTable")
                                  .getChildren("record");
 
-      for (Element record : allRecords) {
+      for (Element record : allRecordElements) {
         boolean isStudentIdMatch = studentID.toString()
                 .equals(record.getAttributeValue("sid"));
 
@@ -130,13 +130,10 @@ public class StudentUnitRecordManager
 
   public static StudentUnitRecordManager getInstance()
   {
-    if (manager_ == null) {
-      manager_ = new StudentUnitRecordManager();
-      return manager_;
+    if (instance_ == null) {
+      instance_ = new StudentUnitRecordManager();
     }
-    else {
-      return manager_;
-    }
+    return instance_;
   }
   
   
@@ -146,7 +143,7 @@ public class StudentUnitRecordManager
   {
     IStudentUnitRecord studentUnitRecord;
 
-    List<Element> allRecords = (List<Element>) XMLManager.getInstance()
+    List<Element> allRecordElements = (List<Element>) XMLManager.getInstance()
                                .getDocument().getRootElement()
                                .getChild("studentUnitRecordTable")
                                .getChildren("record");
@@ -154,7 +151,7 @@ public class StudentUnitRecordManager
     boolean isStudentIdMatch;
     boolean isUnitCodeMatch;
 
-    for (Element record : allRecords) {
+    for (Element record : allRecordElements) {
       isStudentIdMatch = studentId.toString()
                          .equals(record.getAttributeValue("sid"));
 
@@ -186,14 +183,14 @@ public class StudentUnitRecordManager
     }  // End for
 
     throw new RuntimeException(
-            "DBMD: createStudent : student unit record not in file");
+            "StudentUnitRecordManager: createStudentUnitRecord : student unit record not in file");
   }
 
 
 
   public void saveRecord(IStudentUnitRecord studentUnitRecord)
   {
-    List<Element> recordList = (List<Element>) XMLManager.getInstance()
+    List<Element> allrecordElements = (List<Element>) XMLManager.getInstance()
                                .getDocument().getRootElement()
                                .getChild("studentUnitRecordTable")
                                .getChildren("record");
@@ -201,7 +198,7 @@ public class StudentUnitRecordManager
     boolean isStudentIdMatch;
     boolean isUnitCodeMatch;
 
-    for (Element record : recordList) {
+    for (Element record : allrecordElements) {
       isStudentIdMatch = studentUnitRecord.getStudentId().toString()
                                            .equals(record
                                            .getAttributeValue("sid"));
@@ -225,6 +222,6 @@ public class StudentUnitRecordManager
     }  // End for
 
     throw new RuntimeException(
-            "DBMD: saveRecord : no such student record in data");
+            "StudentUnitRecordManager: saveRecord : no such student record in data");
   }
 }

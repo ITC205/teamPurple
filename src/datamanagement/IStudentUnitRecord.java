@@ -22,7 +22,7 @@ public interface IStudentUnitRecord
 
 
 
-  public float getTotal();
+  public float getTotalMark();
 
 
 

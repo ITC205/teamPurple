@@ -73,9 +73,9 @@ public class StudentUnitRecordProxy implements IStudentUnitRecord
 
 
 
-  public float getTotal()
+  public float getTotalMark()
   {
-    return manager_.getStudentUnitRecord(studentId_, unitCode_).getTotal();
+    return manager_.getStudentUnitRecord(studentId_, unitCode_).getTotalMark();
   }
 
 
