@@ -39,6 +39,16 @@ public class UnitProxy
   //===========================================================================
 
   /**
+   * Returns actual unit that this object proxies.
+   * @return IUnit Actual unit that this object proxies.
+   */
+  private IUnit getActualUnit() {
+    return this.unitManager_.getUnit(unitCode_);
+  }
+
+
+
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -66,8 +76,7 @@ public class UnitProxy
   @Override
   public float getMinimumMarkForAdditionalExamination()
   {
-    return this.unitManager_.getUnit(unitCode_)
-                           .getMinimumMarkForAdditionalExamination();
+    return getActualUnit().getMinimumMarkForAdditionalExamination();
   }
 
 
@@ -78,8 +87,7 @@ public class UnitProxy
   @Override
   public float getMinimumMarkForPass()
   {
-    return this.unitManager_.getUnit(unitCode_)
-                           .getMinimumMarkForPass();
+    return getActualUnit().getMinimumMarkForPass();
   }
 
 
@@ -90,8 +98,7 @@ public class UnitProxy
   @Override
   public float getMinimumMarkForCredit()
   {
-    return this.unitManager_.getUnit(unitCode_)
-                           .getMinimumMarkForCredit();
+    return getActualUnit().getMinimumMarkForCredit();
   }
 
 
@@ -102,8 +109,7 @@ public class UnitProxy
   @Override
   public float getMinimumMarkForDistinction()
   {
-    return this.unitManager_.getUnit(unitCode_)
-                           .getMinimumMarkForDistinction();
+    return getActualUnit().getMinimumMarkForDistinction();
   }
 
 
@@ -114,8 +120,7 @@ public class UnitProxy
   @Override
   public float getMinimumMarkForHighDistinction()
   {
-    return unitManager_.getUnit(unitCode_)
-                      .getMinimumMarkForHighDistinction();
+    return getActualUnit().getMinimumMarkForHighDistinction();
   }
 
 
@@ -126,8 +131,7 @@ public class UnitProxy
   @Override
   public int getWeightOfAssignmentOne()
   {
-    return unitManager_.getUnit(unitCode_)
-                      .getWeightOfAssignmentOne();
+    return getActualUnit().getWeightOfAssignmentOne();
   }
 
 
@@ -138,8 +142,7 @@ public class UnitProxy
   @Override
   public int getWeightOfAssignmentTwo()
   {
-    return unitManager_.getUnit(unitCode_)
-                      .getWeightOfAssignmentTwo();
+    return getActualUnit().getWeightOfAssignmentTwo();
   }
 
 
@@ -150,8 +153,7 @@ public class UnitProxy
   @Override
   public int getWeightOfExam()
   {
-    return unitManager_.getUnit(unitCode_)
-                      .getWeightOfExam();
+    return getActualUnit().getWeightOfExam();
   }
 
 
@@ -162,8 +164,7 @@ public class UnitProxy
   @Override
   public IStudentUnitRecord getStudentUnitRecord(int studentId)
   {
-    return unitManager_.getUnit(unitCode_)
-                      .getStudentUnitRecord( studentId );
+    return getActualUnit().getStudentUnitRecord( studentId );
   }
 
 
@@ -174,8 +175,7 @@ public class UnitProxy
   @Override
   public StudentUnitRecordList getAllStudentUnitRecords()
   {
-    return unitManager_.getUnit(unitCode_)
-                      .getAllStudentUnitRecords();
+    return getActualUnit().getAllStudentUnitRecords();
   }
 
 
@@ -212,8 +212,7 @@ public class UnitProxy
   @Override
   public void setMinimumMarkForAdditionalExamination(float minimumMark)
   {
-    unitManager_.getUnit(unitCode_)
-               .setMinimumMarkForAdditionalExamination(minimumMark);
+    getActualUnit().setMinimumMarkForAdditionalExamination(minimumMark);
   }
 
 
@@ -224,8 +223,7 @@ public class UnitProxy
   @Override
   public void setMinimumMarkForPass(float minimumMark)
   {
-    unitManager_.getUnit(unitCode_)
-               .setMinimumMarkForPass(minimumMark);
+    getActualUnit().setMinimumMarkForPass(minimumMark);
   }
 
 
@@ -236,8 +234,7 @@ public class UnitProxy
   @Override
   public void setMinimumMarkForCredit(float minimumMark)
   {
-    unitManager_.getUnit(unitCode_)
-               .setMinimumMarkForCredit(minimumMark);
+    getActualUnit().setMinimumMarkForCredit(minimumMark);
   }
 
 
@@ -248,8 +245,7 @@ public class UnitProxy
   @Override
   public void setMinimumMarkForDistinction(float minimumMark)
   {
-    unitManager_.getUnit(unitCode_)
-               .setMinimumMarkForDistinction(minimumMark);
+    getActualUnit().setMinimumMarkForDistinction(minimumMark);
   }
 
 
@@ -260,8 +256,7 @@ public class UnitProxy
   @Override
   public void setMinimumMarkForHighDistinction(float minimumMark)
   {
-    unitManager_.getUnit(unitCode_)
-               .setMinimumMarkForHighDistinction(minimumMark);
+    getActualUnit().setMinimumMarkForHighDistinction(minimumMark);
   }
 
 
@@ -274,10 +269,9 @@ public class UnitProxy
                                       int weightOfAssignmentTwo,
                                       int weightOfExam)
   {
-    unitManager_.getUnit(unitCode_)
-               .setWeightsOfAssessments(weightOfAssignmentOne,
-                                        weightOfAssignmentTwo,
-                                        weightOfExam);
+    getActualUnit().setWeightsOfAssessments(weightOfAssignmentOne,
+                                            weightOfAssignmentTwo,
+                                            weightOfExam);
   }
 
 
@@ -294,10 +288,9 @@ public class UnitProxy
                                float markForAssignmentTwo,
                                float markForExam)
   {
-    return unitManager_.getUnit(unitCode_)
-                      .calculateGrade(markForAssignmentOne,
-                                      markForAssignmentTwo,
-                                      markForExam);
+    return getActualUnit().calculateGrade(markForAssignmentOne,
+                                          markForAssignmentTwo,
+                                          markForExam);
   }
 
 
@@ -308,9 +301,9 @@ public class UnitProxy
   @Override
   public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord)
   {
-    unitManager_.getUnit(unitCode_)
-               .addStudentUnitRecord(studentUnitRecord);
+    getActualUnit().addStudentUnitRecord(studentUnitRecord);
   }
+
 
 
 
