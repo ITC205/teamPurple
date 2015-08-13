@@ -15,7 +15,6 @@ public class UnitProxy
 
   private String unitCode_;
   private String unitName_;
-
   private UnitManager unitManager_;
 
   //===========================================================================
@@ -29,11 +28,10 @@ public class UnitProxy
    */
   public UnitProxy(String unitCode, String unitName)
   {
-    this.unitCode_ = unitCode;
-    this.unitName_ = unitName;
-    this.unitManager_ = UnitManager.getInstance();
+    setUnitCode(unitCode);
+    setUnitName(unitName);
+    setUnitManager(UnitManager.getInstance());
   }
-
 
 
   //===========================================================================
@@ -75,7 +73,7 @@ public class UnitProxy
 
 
   /**
-   *
+   * {@inheritDoc}
    */
   @Override
   public float getMinimumMarkForPass()
@@ -165,7 +163,7 @@ public class UnitProxy
   public IStudentUnitRecord getStudentUnitRecord(int studentId)
   {
     return unitManager_.getUnit(unitCode_)
-                      .getStudentUnitRecord(studentId);
+                      .getStudentUnitRecord( studentId );
   }
 
 
@@ -181,6 +179,32 @@ public class UnitProxy
   }
 
 
+
+
+  /**
+   *
+   */
+  private void setUnitCode(String unitCode)
+  {
+    this.unitCode_ = unitCode;
+  }
+
+
+
+  /**
+   *
+   */
+  private void setUnitName(String unitName)
+  {
+    this.unitName_ = unitName;
+  }
+
+
+
+  private void setUnitManager(UnitManager unitManager)
+  {
+    this.unitManager_= unitManager;
+  }
 
   /**
    * {@inheritDoc}
