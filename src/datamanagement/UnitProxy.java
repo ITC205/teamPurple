@@ -43,7 +43,7 @@ public class UnitProxy
    * @return IUnit Actual unit that this object proxies.
    */
   private IUnit getActualUnit() {
-    return this.unitManager_.getUnit(unitCode_);
+    return this.getUnitManager().getUnit(this.getUnitCode());
   }
 
 
@@ -66,6 +66,18 @@ public class UnitProxy
   public String getUnitName()
   {
     return this.unitName_;
+  }
+
+
+
+  /**
+   * Returns the UnitManger instance that manages the collection of all units.
+   * @return UnitManager The UnitManger instance that manages the collection
+   *                     of all units.
+   */
+  private UnitManager getUnitManager()
+  {
+    return this.unitManager_;
   }
 
 
@@ -303,7 +315,6 @@ public class UnitProxy
   {
     getActualUnit().addStudentUnitRecord(studentUnitRecord);
   }
-
 
 
 
