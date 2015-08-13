@@ -29,7 +29,7 @@ public class StudentProxy implements IStudent
   // Getters and Setters
   //===========================================================================
   
-  public Integer getID() 
+  public Integer getStudentId() 
   { 
     return studentId_; 
   }
@@ -50,16 +50,16 @@ public class StudentProxy implements IStudent
   
   
   
-  public IStudentUnitRecord getUnitRecord(String unitCode) 
+  public IStudentUnitRecord retrieveStudentUnitRecord(String unitCode) 
   {
-    return studentList_.getStudent(studentId_).getUnitRecord(unitCode);
+    return studentList_.getStudent(studentId_).retrieveStudentUnitRecord(unitCode);
   }
   
   
   
-  public StudentUnitRecordList getUnitRecords() 
+  public StudentUnitRecordList getStudentUnitRecords() 
   { 
-    return studentList_.getStudent(studentId_).getUnitRecords();
+    return studentList_.getStudent(studentId_).getStudentUnitRecords();
   }
 
   

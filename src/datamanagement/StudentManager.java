@@ -52,7 +52,7 @@ public class StudentManager
       
       student = new Student(newStudentId,newFirstName,newLastName,recordList);
       
-      studentMap_.put(student.getID(), student);
+      studentMap_.put(student.getStudentId(), student);
       
       return student; 
     } //  End if
@@ -96,7 +96,7 @@ public class StudentManager
     for (IStudentUnitRecord studentUnitRecord : recordList) {
       Integer studentId = studentUnitRecord.getStudentID();
       student = createStudentProxy(studentId);
-      studentMapByUnit.put(student.getID(), student);
+      studentMapByUnit.put(student.getStudentId(), student);
     }
     
     unitMap_.put(unitCode, studentMapByUnit);

@@ -39,7 +39,7 @@ public class Student implements IStudent
   /**
    * return student unit record for unitCode
    */
-  public IStudentUnitRecord getUnitRecord(String unitCode) 
+  public IStudentUnitRecord retrieveStudentUnitRecord(String unitCode) 
   {
     for (IStudentUnitRecord record : recordList_) {
       if (record.getUnitCode().equals(unitCode)) {
@@ -54,7 +54,7 @@ public class Student implements IStudent
   // Getters and Setters
   //===========================================================================
   
-  public Integer getID() 
+  public Integer getStudentId() 
   { 
     return studentId_; 
   } 
@@ -75,7 +75,7 @@ public class Student implements IStudent
 
   
   
-  public StudentUnitRecordList getUnitRecords() 
+  public StudentUnitRecordList getStudentUnitRecords() 
   { 
     return recordList_; 
   }

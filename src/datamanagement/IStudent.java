@@ -5,15 +5,15 @@ package datamanagement;
 public interface IStudent
 {
   
-  public Integer getID();
+  public Integer getStudentId();
   public String getFirstName();
   public String getLastName();
-  public StudentUnitRecordList getUnitRecords();
+  public StudentUnitRecordList getStudentUnitRecords();
 
   public void setFirstName(String firstName);
   public void setLastName(String lastName);
 
   public void addUnitRecord(IStudentUnitRecord record);
-  public IStudentUnitRecord getUnitRecord(String unitCode);
+  public IStudentUnitRecord retrieveStudentUnitRecord(String unitCode);
   
 }
