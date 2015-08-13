@@ -71,15 +71,18 @@ public class Unit
     this.unitCode_ = unitCode;
     this.unitName_ = unitName;
 
-    this.setMinimumMarksForGrades( minimumMarkForPass,  minimumMarkForCredit,
-     minimumMarkForDistinction,
-     minimumMarkForHighDistinction,
-     minimumMarkForAdditionalExamination);
+    this.setMinimumMarksForGrades( minimumMarkForPass, minimumMarkForCredit,
+                                   minimumMarkForDistinction,
+                                   minimumMarkForHighDistinction,
+                                   minimumMarkForAdditionalExamination );
 
     this.setWeightsOfAssessments(weightOfAssignmentOne, weightOfAssignmentTwo,
                                  weightOfExam);
 
-    this.allStudentUnitRecords_ = studentUnitRecordList == null ? new StudentUnitRecordList() : studentUnitRecordList;
+    if (studentUnitRecordList == null) {
+      studentUnitRecordList = new StudentUnitRecordList();
+    }
+    this.allStudentUnitRecords_ = studentUnitRecordList;
   }
 
 
