@@ -17,7 +17,7 @@ public class UnitManager
 
   private static UnitManager instance_ = null;
 
-  private UnitMap units_;
+  private UnitMap allUnits_;
 
   //===========================================================================
   // Constructors
@@ -30,7 +30,7 @@ public class UnitManager
    */
   private UnitManager()
   {
-    units_ = new UnitMap();
+    allUnits_ = new UnitMap();
   }
 
 
@@ -79,7 +79,7 @@ public class UnitManager
    */
   private UnitMap getUnits()
   {
-    return this.units_;
+    return this.allUnits_;
   }
 
 
@@ -91,7 +91,7 @@ public class UnitManager
    */
   private void setUnits(UnitMap unitMap)
   {
-    this.units_ = unitMap;
+    this.allUnits_ = unitMap;
   }
 
 
