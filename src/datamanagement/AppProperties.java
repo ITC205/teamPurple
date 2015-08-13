@@ -19,16 +19,6 @@ public class AppProperties
   // Constructors
   //===========================================================================
   
-  public static AppProperties getInstance() 
-  {
-    if (instance_ == null) { 
-      instance_ = new AppProperties(); 
-    } 
-    return instance_;
-  }
-
-
-
   private AppProperties() 
   {
     properties_ = new Properties();
@@ -44,6 +34,17 @@ public class AppProperties
   //===========================================================================
   // Getters and Setters
   //===========================================================================
+  
+  
+  public static AppProperties getInstance() 
+  {
+    if (instance_ == null) { 
+      instance_ = new AppProperties(); 
+    } 
+    return instance_;
+  }
+
+
   
   public Properties getProperties() 
   {

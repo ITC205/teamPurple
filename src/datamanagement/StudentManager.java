@@ -57,7 +57,7 @@ public class StudentManager
       return student; 
     } //  End if
     
-    throw new RuntimeException("DBMD: createStudent : student not in file");
+    throw new RuntimeException("DBMD: createStudent: Student not in file");
   }
 
   
@@ -70,10 +70,10 @@ public class StudentManager
     String newFirstName = studentDetails.getAttributeValue("fname");
     String newLastName = studentDetails.getAttributeValue("lname");
 
-    if (studentDetails != null) {
+    if (getStudentElement(studentId) != null) {
       return new StudentProxy(studentId, newFirstName, newLastName);
     }
-    throw new RuntimeException("DBMD: createStudent : student not in file");
+    throw new RuntimeException("StudentManager: createStudentProxy: Student not in file");
   }
 
   
