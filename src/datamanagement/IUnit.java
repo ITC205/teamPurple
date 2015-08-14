@@ -5,8 +5,8 @@ package datamanagement;
  * assessments to this unit, calculates grades for this unit and adds student
  * records for this unit to the collection of student unit records.
  */
-public interface IUnit {
-
+public interface IUnit
+{
   //===========================================================================
   // Getters & setters
   //===========================================================================
