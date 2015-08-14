@@ -396,7 +396,7 @@ public class Unit
    */
   private float[] getWeightsOfAssessments()
   {
-    return new float[]{getWeightOfAssignmentOne(), getWeightOfAssignmentOne(),
+    return new float[]{getWeightOfAssignmentOne(), getWeightOfAssignmentTwo(),
                          getWeightOfExam()};
   }
 
