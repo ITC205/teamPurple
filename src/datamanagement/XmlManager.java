@@ -100,13 +100,13 @@ public class XmlManager
     String xmlFileName = AppProperties.getInstance().getProperties()
                                       .getProperty("XMLFILE");
     try {
-      buildAndLoadDocument(xmlFileName);
+      buildFromXmlAndLoadDocument(xmlFileName);
     }
     catch (JDOMException exception) {
-      logAndThrowException("JDOMException");
+      logAndThrowException("initialize: JDOMException");
     }
     catch (IOException exception) {
-      logAndThrowException("IOException");
+      logAndThrowException("initialize: IOException");
     }
   }
 
@@ -115,7 +115,7 @@ public class XmlManager
   /**
    *
    */
-  private void buildAndLoadDocument(String xmlFileName)
+  private void buildFromXmlAndLoadDocument(String xmlFileName)
     throws JDOMException, IOException
   {
     SAXBuilder saxBuilder = new SAXBuilder();
@@ -129,11 +129,12 @@ public class XmlManager
   /**
    *
    */
-  private void logAndThrowException(String exceptionType)
+  private void logAndThrowException(String callingMethodAndExceptionMessage)
   {
-    String errorMessageStart = "DBMD: XMLManager : initialize : ";
-    System.err.printf("%s", errorMessageStart + exceptionType + "\n");
-    throw new RuntimeException(errorMessageStart + exceptionType);
+    String errorMessage = "DBMD: XMLManager : " +
+                          callingMethodAndExceptionMessage;
+    System.err.printf("%s", errorMessage + "\n");
+    throw new RuntimeException(errorMessage);
   }
 
 
@@ -145,22 +146,25 @@ public class XmlManager
   {
     // TODO: see initialize;
     String xmlFileName = AppProperties.getInstance()
-                                  .getProperties().getProperty( "XMLFILE" );
+                                  .getProperties().getProperty("XMLFILE");
 
     try (FileWriter fileWriter = new FileWriter(xmlFileName)) {
-      XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
-      xmlOutputter.output(this.getDocument(), fileWriter);
-      fileWriter.close();
+      convertDocumentToXmlAndSaveFile(fileWriter);
     }
     catch (IOException exception) {
-      // TODO: message, refactor logging and throw
-      System.err.printf("%s\n", "DBMD : XMLManager : saveDocument : Error " +
-                        "saving XML to " + xmlFileName);
-      throw new RuntimeException("DBMD: XMLManager : saveDocument : error " +
-                                 "writing to file");
+      logAndThrowException("saveDocument : error writing to file");
     }
   }
 
+
+
+  private void convertDocumentToXmlAndSaveFile(FileWriter fileWriter)
+    throws IOException
+  {
+    XMLOutputter xmlOutputter = new XMLOutputter( Format.getPrettyFormat() );
+    xmlOutputter.output(this.getDocument(), fileWriter);
+    fileWriter.close();
+  }
 
 
   /**
