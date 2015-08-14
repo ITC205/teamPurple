@@ -72,6 +72,7 @@ public class XmlManager
   }
 
 
+
   /**
    * Sets the object which holds the transformed set of data loaded from
    * the xml file.
@@ -98,29 +99,41 @@ public class XmlManager
     // TODO: prefer a AppProperties.getInstance().getXmlFileName();
     String xmlFileName = AppProperties.getInstance().getProperties()
                                       .getProperty("XMLFILE");
-
     try {
-      SAXBuilder saxBuilder = new SAXBuilder();
-      saxBuilder.setExpandEntities(true);
-      Document document = saxBuilder.build(xmlFileName);
-      this.setDocument(document);
+      buildAndLoadDocument(xmlFileName);
     }
-    // TODO: name exception more specifically?
     catch (JDOMException exception) {
-      // TODO: message, refactor logging and throw
-      System.err.printf("%s", "DBMD: XMLManager : initialize : caught " +
-                        "JDOMException\n");
-      throw new RuntimeException("DBMD: XMLManager : initialize : " +
-                                 "JDOMException");
+      logAndThrowException("JDOMException");
     }
-    // TODO: name exception more specifically?
     catch (IOException exception) {
-      // TODO: message, refactor logging and throw
-      System.err.printf("%s", "DBMD: XMLManager : initialize : caught " +
-                        "IOException\n");
-      throw new RuntimeException("DBMD: XMLManager : initialize : " +
-                                 "IOException");
+      logAndThrowException("IOException");
     }
+  }
+
+
+
+  /**
+   *
+   */
+  private void buildAndLoadDocument(String xmlFileName)
+    throws JDOMException, IOException
+  {
+    SAXBuilder saxBuilder = new SAXBuilder();
+    saxBuilder.setExpandEntities(true);
+    Document document = saxBuilder.build(xmlFileName);
+    this.setDocument(document);
+  }
+
+
+
+  /**
+   *
+   */
+  private void logAndThrowException(String exceptionType)
+  {
+    String errorMessageStart = "DBMD: XMLManager : initialize : ";
+    System.err.printf("%s", errorMessageStart + exceptionType + "\n");
+    throw new RuntimeException(errorMessageStart + exceptionType);
   }
 
 
@@ -157,8 +170,8 @@ public class XmlManager
   {
     List<Element> allUnitElements = this.getDocument()
                                         .getRootElement()
-                                        .getChild( "unitTable" )
-                                        .getChildren( "unit" );
+                                        .getChild("unitTable")
+                                        .getChildren("unit");
     return allUnitElements;
   }
 
@@ -171,8 +184,8 @@ public class XmlManager
   {
     List<Element> allUnitElements = this.getDocument()
                                         .getRootElement()
-                                        .getChild( "studentUnitRecordTable" )
-                                        .getChildren( "record" );
+                                        .getChild("studentUnitRecordTable")
+                                        .getChildren("record");
     return allUnitElements;
   }
 
@@ -185,7 +198,7 @@ public class XmlManager
   {
     List<Element> allUnitElements = this.getDocument()
                                         .getRootElement()
-                                        .getChild( "studentTable" )
+                                        .getChild("studentTable")
                                         .getChildren("student");
     return allUnitElements;
   }
