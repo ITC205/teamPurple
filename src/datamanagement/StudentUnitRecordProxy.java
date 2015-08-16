@@ -1,6 +1,7 @@
 package datamanagement;
 
-public class StudentUnitRecordProxy implements IStudentUnitRecord
+public class StudentUnitRecordProxy 
+implements IStudentUnitRecord
 {
   // ===========================================================================
   // Variables
@@ -20,11 +21,11 @@ public class StudentUnitRecordProxy implements IStudentUnitRecord
 
 
 
-  public StudentUnitRecordProxy(Integer id, String code)
+  public StudentUnitRecordProxy(Integer studentId, String unitCode)
   {
-    this.studentId_ = id;
-    this.unitCode_ = code;
-    this.manager_ = StudentUnitRecordManager.getInstance();
+    studentId_ = studentId;
+    unitCode_ = unitCode;
+    manager_ = StudentUnitRecordManager.getInstance();
   }
 
 
@@ -49,56 +50,59 @@ public class StudentUnitRecordProxy implements IStudentUnitRecord
 
 
 
-  public float getAssessmentOneMark()
+  public float getMarkForAssignmentOne()
   {
 
     return manager_.getStudentUnitRecord(studentId_, unitCode_)
-            .getAssessmentOneMark();
+                   .getMarkForAssignmentOne();
   }
 
 
 
-  public float getAssessmentTwoMark()
+  public float getMarkForAssignmentTwo()
   {
     return manager_.getStudentUnitRecord(studentId_, unitCode_)
-            .getAssessmentTwoMark();
+                   .getMarkForAssignmentTwo();
   }
 
 
 
-  public float getExamMark()
+  public float getMarkForExam()
   {
-    return manager_.getStudentUnitRecord(studentId_, unitCode_).getExamMark();
+    return manager_.getStudentUnitRecord(studentId_, unitCode_)
+                   .getMarkForExam();
   }
 
 
 
-  public float getTotalMark()
+  public float calculateTotalMark()
   {
-    return manager_.getStudentUnitRecord(studentId_, unitCode_).getTotalMark();
+    return manager_.getStudentUnitRecord(studentId_, unitCode_)
+                   .calculateTotalMark();
   }
 
 
 
-  public void setAssessmentOneMark(float newMark)
-  {
-    manager_.getStudentUnitRecord(studentId_, unitCode_)
-            .setAssessmentOneMark(newMark);
-  }
-
-
-
-  public void setAssessmentTwoMark(float newMark)
+  public void setMarkForAssignmentOne(float newMark)
   {
     manager_.getStudentUnitRecord(studentId_, unitCode_)
-            .setAssessmentTwoMark(newMark);
+            .setMarkForAssignmentOne(newMark);
   }
 
 
 
-  public void setExamMark(float newMark)
+  public void setMarkForAssignmentTwo(float newMark)
   {
-    manager_.getStudentUnitRecord(studentId_, unitCode_).setExamMark(newMark);
+    manager_.getStudentUnitRecord(studentId_, unitCode_)
+            .setMarkForAssignmentTwo(newMark);
+  }
+
+
+
+  public void setMarkForExam(float newMark)
+  {
+    manager_.getStudentUnitRecord(studentId_, unitCode_)
+            .setMarkForExam(newMark);
   }
 
 }

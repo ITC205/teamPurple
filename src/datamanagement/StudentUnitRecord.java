@@ -1,6 +1,7 @@
 package datamanagement;
 
-public class StudentUnitRecord implements IStudentUnitRecord
+public class StudentUnitRecord 
+implements IStudentUnitRecord
 {
   // ===========================================================================
   // Variables
@@ -11,9 +12,9 @@ public class StudentUnitRecord implements IStudentUnitRecord
   private Integer studentId_;
   private String unitCode_;
 
-  private float assessmentOneMark_;
-  private float assessmentTwoMark_;
-  private float examMark_;
+  private float markForAssignmentOne_;
+  private float markForAssignmentTwo_;
+  private float markForExam_;
 
 
   
@@ -23,14 +24,16 @@ public class StudentUnitRecord implements IStudentUnitRecord
 
 
 
-  public StudentUnitRecord(Integer studentId, String unitCode, 
-          float assessmentOneMark, float assessmentTwoMark, float examMark)
+  public StudentUnitRecord(Integer studentId, String unitCode,
+                            float markForAssignmentOne, 
+                            float markForAssignmentTwo,
+                            float markForExam)
   {
     studentId_ = studentId;
     unitCode_ = unitCode;
-    setAssessmentOneMark(assessmentOneMark);
-    setAssessmentTwoMark(assessmentTwoMark);
-    setExamMark(examMark);
+    setMarkForAssignmentOne(markForAssignmentOne);
+    setMarkForAssignmentTwo(markForAssignmentTwo);
+    setMarkForExam(markForExam);
   }
 
 
@@ -55,35 +58,35 @@ public class StudentUnitRecord implements IStudentUnitRecord
 
 
 
-  public float getAssessmentOneMark()
+  public float getMarkForAssignmentOne()
   {
-    return assessmentOneMark_;
+    return markForAssignmentOne_;
   }
 
 
 
-  public float getAssessmentTwoMark()
+  public float getMarkForAssignmentTwo()
   {
-    return assessmentTwoMark_;
+    return markForAssignmentTwo_;
   }
 
 
 
-  public float getExamMark()
+  public float getMarkForExam()
   {
-    return examMark_;
+    return markForExam_;
   }
 
 
 
-  public float getTotalMark()
+  public float calculateTotalMark()
   {
-    return assessmentOneMark_ + assessmentTwoMark_ + examMark_;
+    return markForAssignmentOne_ + markForAssignmentTwo_ + markForExam_;
   }
 
 
 
-  public void setAssessmentOneMark(float newMark) 
+  public void setMarkForAssignmentOne(float newMark) 
   {
     boolean isNegative = newMark < 0;
     boolean isGreaterThanWeight = newMark > UnitManager.getInstance()
@@ -95,13 +98,13 @@ public class StudentUnitRecord implements IStudentUnitRecord
               "Mark cannot be less than zero or greater than assessment weight");
     }
     else {
-      this.assessmentOneMark_ = newMark;
+      this.markForAssignmentOne_ = newMark;
     }
   }
 
 
 
-  public void setAssessmentTwoMark(float newMark)
+  public void setMarkForAssignmentTwo(float newMark)
   {
     boolean isNegative = newMark < 0;
     boolean isGreaterThanWeight = newMark > UnitManager.getInstance()
@@ -113,13 +116,13 @@ public class StudentUnitRecord implements IStudentUnitRecord
               "Mark cannot be less than zero or greater than assessment weight");
     }
     else {
-      this.assessmentTwoMark_ = newMark;
+      this.markForAssignmentTwo_ = newMark;
     }
   }
 
 
 
-  public void setExamMark(float newMark)
+  public void setMarkForExam(float newMark)
   {
     boolean isNegative = newMark < 0;
     boolean isGreaterThanWeight = newMark > UnitManager.getInstance()
@@ -131,7 +134,7 @@ public class StudentUnitRecord implements IStudentUnitRecord
               "Mark cannot be less than zero or greater than assessment weight");
     }
     else {
-      this.examMark_ = newMark;
+      this.markForExam_ = newMark;
     }
   }
 

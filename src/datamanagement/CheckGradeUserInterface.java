@@ -38,9 +38,9 @@ public class CheckGradeUserInterface extends JFrame
   private DefaultComboBoxModel unitComboBoxModel_;   
   private DefaultComboBoxModel studentComboBoxModel_; 
   
-  private float assessmentOneMark_;
-  private float assessmentTwoMark_;
-  private float examMark_;
+  private float markForAssignmentOne_;
+  private float markForAssignmentTwo_;
+  private float markForExam_;
 
   private Integer studentId_;
   
@@ -64,8 +64,8 @@ public class CheckGradeUserInterface extends JFrame
   private JPanel markDisplayPanel_;
   private JPanel gradeDisplayPanel_;
   
-  private JTextField assessementOneMarkTextField_;
-  private JTextField assessmentTwoMarkTextField_;
+  private JTextField assignmentOneMarkTextField_;
+  private JTextField assignmentTwoMarkTextField_;
   private JTextField examMarkTextField_;
 
 
@@ -116,8 +116,8 @@ public class CheckGradeUserInterface extends JFrame
     assessmentOneLabel_ = new JLabel();
     assessmentTwoLabel_ = new JLabel();
     examLabel_ = new JLabel();
-    assessementOneMarkTextField_ = new JTextField();
-    assessmentTwoMarkTextField_ = new JTextField();
+    assignmentOneMarkTextField_ = new JTextField();
+    assignmentTwoMarkTextField_ = new JTextField();
     examMarkTextField_ = new JTextField();
     changeButton_ = new JButton();
     gradeDisplayPanel_ = new JPanel();
@@ -133,9 +133,9 @@ public class CheckGradeUserInterface extends JFrame
     selectUnitComboBox_.setModel(unitComboBoxModel_);
     selectUnitComboBox_.addItemListener(new ItemListener()
     {
-      public void itemStateChanged(ItemEvent evt)
+      public void itemStateChanged(ItemEvent event)
       {
-        selectUnitComboBoxItemStateChanged(evt);
+        selectUnitComboBoxItemStateChanged(event);
       }
     });
 
@@ -165,9 +165,9 @@ public class CheckGradeUserInterface extends JFrame
     selectStudentComboBox_.setModel(studentComboBoxModel_);
     selectStudentComboBox_.addItemListener(new ItemListener()
     {
-      public void itemStateChanged(ItemEvent evt)
+      public void itemStateChanged(ItemEvent event)
       {
-        selectStudentComboBoxItemStateChanged(evt);
+        selectStudentComboBoxItemStateChanged(event);
       }
     });
 
@@ -201,8 +201,8 @@ public class CheckGradeUserInterface extends JFrame
 
     examLabel_.setText("Exam:");
 
-    assessementOneMarkTextField_.setEditable(false);
-    assessementOneMarkTextField_.addKeyListener(new KeyAdapter()
+    assignmentOneMarkTextField_.setEditable(false);
+    assignmentOneMarkTextField_.addKeyListener(new KeyAdapter()
     {
       public void keyTyped(KeyEvent event)
       {
@@ -210,8 +210,8 @@ public class CheckGradeUserInterface extends JFrame
       }
     });
 
-    assessmentTwoMarkTextField_.setEditable(false);
-    assessmentTwoMarkTextField_.addKeyListener(new KeyAdapter()
+    assignmentTwoMarkTextField_.setEditable(false);
+    assignmentTwoMarkTextField_.addKeyListener(new KeyAdapter()
     {
       public void keyTyped(KeyEvent event)
       {
@@ -258,7 +258,7 @@ public class CheckGradeUserInterface extends JFrame
                                     .createSequentialGroup().addContainerGap()
                                     .addComponent(assessmentOneLabel_)
                                     .addPreferredGap(ComponentPlacement.RELATED)
-                                    .addComponent(assessementOneMarkTextField_,
+                                    .addComponent(assignmentOneMarkTextField_,
                                             GroupLayout.PREFERRED_SIZE, 59,
                                             GroupLayout.PREFERRED_SIZE)
                                     .addGap(18)
@@ -273,7 +273,7 @@ public class CheckGradeUserInterface extends JFrame
                             .createParallelGroup(Alignment.TRAILING)
                             .addGroup(gl_markDisplayPanel_
                                     .createSequentialGroup()
-                                    .addComponent(assessmentTwoMarkTextField_,
+                                    .addComponent(assignmentTwoMarkTextField_,
                                             GroupLayout.PREFERRED_SIZE, 59,
                                             GroupLayout.PREFERRED_SIZE)
                                     .addGap(18).addComponent(examLabel_))
@@ -288,12 +288,12 @@ public class CheckGradeUserInterface extends JFrame
                             .addGroup(gl_markDisplayPanel_
                                     .createParallelGroup(Alignment.BASELINE)
                                     .addComponent(assessmentOneLabel_)
-                                    .addComponent(assessementOneMarkTextField_,
+                                    .addComponent(assignmentOneMarkTextField_,
                                             GroupLayout.PREFERRED_SIZE,
                                             GroupLayout.DEFAULT_SIZE,
                                             GroupLayout.PREFERRED_SIZE)
                             .addComponent(assessmentTwoLabel_)
-                            .addComponent(assessmentTwoMarkTextField_,
+                            .addComponent(assignmentTwoMarkTextField_,
                                     GroupLayout.PREFERRED_SIZE,
                                     GroupLayout.DEFAULT_SIZE,
                                     GroupLayout.PREFERRED_SIZE)
@@ -426,13 +426,13 @@ public class CheckGradeUserInterface extends JFrame
     String selectedUnit = (String) selectUnitComboBox_.getSelectedItem();
     
     clearDisplayedText();
-    clearStudents();
+    clearStudentsFromComboBox();
     
     if (event.getStateChange() == ItemEvent.SELECTED) {
       if (selectedUnit.equals((String) selectUnitComboBox_.getItemAt(0))) {
         selectedUnit = "NONE";
       }
-      controller_.unitSelected(selectedUnit);
+      controller_.unitSelectedHandler(selectedUnit);
     }
   }// GEN-LAST:event_jComboBox1ItemStateChanged
 
@@ -442,16 +442,17 @@ public class CheckGradeUserInterface extends JFrame
   {// GEN-FIRST:event_jComboBox2ItemStateChanged
     clearDisplayedText();
     String selectedStudent = (String) selectStudentComboBox_.getSelectedItem();
-    
+
     if (event.getStateChange() == ItemEvent.SELECTED) {
-      if (selectedStudent.equals((String) selectStudentComboBox_.getItemAt(0))) {
+      if (selectedStudent
+              .equals((String) selectStudentComboBox_.getItemAt(0))) {
         studentId_ = new Integer(0);
-        controller_.studentSelected(studentId_);
+        controller_.studentSelectedHandler(studentId_);
       }
       else {
         studentId_ = new Integer(selectedStudent.split("\\s")[0]);
       }
-      controller_.studentSelected(studentId_);
+      controller_.studentSelectedHandler(studentId_);
     }
   }// GEN-LAST:event_jComboBox2ItemStateChanged
 
@@ -459,16 +460,17 @@ public class CheckGradeUserInterface extends JFrame
 
   private void checkGradeButtonActionPerformed(ActionEvent event)
   {// GEN-FIRST:event_jButton3ActionPerformed
-    assessmentOneMark_ = new Float(assessementOneMarkTextField_.getText())
-                             .floatValue();
-    assessmentTwoMark_ = new Float(assessmentTwoMarkTextField_.getText())
-                             .floatValue();
-    examMark_ = new Float(examMarkTextField_.getText()).floatValue();
-    
+    markForAssignmentOne_ = new Float(assignmentOneMarkTextField_.getText())
+            .floatValue();
+    markForAssignmentTwo_ = new Float(assignmentTwoMarkTextField_.getText())
+            .floatValue();
+    markForExam_ = new Float(examMarkTextField_.getText()).floatValue();
+
     try {
-      String s = controller_.checkGrade(assessmentOneMark_, assessmentTwoMark_,
-              examMark_);
-      gradeDisplayLabel_.setText(s);
+      String grade = controller_.checkGradeHandler(markForAssignmentOne_,
+                                                   markForAssignmentTwo_, 
+                                                   markForExam_);
+      gradeDisplayLabel_.setText(grade);
     }
     catch (RuntimeException runtimeException) {
       errorMessageLabel_.setText(runtimeException.getMessage());
@@ -487,16 +489,17 @@ public class CheckGradeUserInterface extends JFrame
   
   private void saveButtonActionPerformed(ActionEvent event)
   {// GEN-FIRST:event_jButton2ActionPerformed
-    float assessmentOneMark = new Float(assessementOneMarkTextField_.getText())
-                                  .floatValue();
-    float assessmentTwoMark = new Float(assessmentTwoMarkTextField_.getText())
-                                  .floatValue();
-    float examMark = new Float(examMarkTextField_.getText()).floatValue();
-   
+    float markForAssignmentOne = new Float(
+            assignmentOneMarkTextField_.getText()).floatValue();
+    float markForAssignmentTwo = new Float(
+            assignmentTwoMarkTextField_.getText()).floatValue();
+    float markForExam = new Float(examMarkTextField_.getText()).floatValue();
+
     errorMessageLabel_.setText("");
-    
+
     try {
-      controller_.saveGrade(assessmentOneMark, assessmentTwoMark, examMark);
+      controller_.saveGradeHandler(markForAssignmentOne, markForAssignmentTwo,
+                            markForExam);
     }
     catch (RuntimeException runtimeException) {
       errorMessageLabel_.setText(runtimeException.getMessage());
@@ -513,16 +516,16 @@ public class CheckGradeUserInterface extends JFrame
 
 
 
-  public void clearUnits()
+  public void clearUnitsFromComboBox()
   {
     unitComboBoxModel_.removeAllElements();
     unitComboBoxModel_.addElement("<none selected>");
-    clearStudents();
+    clearStudentsFromComboBox();
   }
 
 
 
-  public void clearStudents()
+  public void clearStudentsFromComboBox()
   {
     studentComboBoxModel_.removeAllElements();
     studentComboBoxModel_.addElement("<none selected>");
@@ -530,29 +533,29 @@ public class CheckGradeUserInterface extends JFrame
 
 
 
-  public void addUnit(IUnit unit)
+  public void addUnitToComboBox(IUnit unit)
   {
     unitComboBoxModel_.addElement(unit.getUnitCode());
   }
 
 
 
-  public void addStudent(IStudent student)
+  public void addStudentToComboBox(IStudent student)
   {
     studentComboBoxModel_.addElement(student.getID().toString() + " : "
-                         + student.getFirstName() + " " 
-                         + student.getLastName());
+            + student.getFirstName() + " " + student.getLastName());
   }
 
 
 
-  public void setRecord(IStudentUnitRecord record)
+  public void setStudentUnitRecord(IStudentUnitRecord studentUnitRecord)
   {
-    assessementOneMarkTextField_
-            .setText(new Float(record.getAssessmentOneMark()).toString());
-    assessmentTwoMarkTextField_
-            .setText(new Float(record.getAssessmentTwoMark()).toString());
-    examMarkTextField_.setText(new Float(record.getExamMark()).toString());
+    assignmentOneMarkTextField_.setText(
+            new Float(studentUnitRecord.getMarkForAssignmentOne()).toString());
+    assignmentTwoMarkTextField_.setText(
+            new Float(studentUnitRecord.getMarkForAssignmentTwo()).toString());
+    examMarkTextField_
+            .setText(new Float(studentUnitRecord.getMarkForExam()).toString());
     gradeDisplayLabel_.setText("");
   }
 
@@ -560,14 +563,14 @@ public class CheckGradeUserInterface extends JFrame
 
   public void clearDisplayedText()
   {
-    assessementOneMarkTextField_.setText("");
-    assessmentTwoMarkTextField_.setText("");
+    assignmentOneMarkTextField_.setText("");
+    assignmentTwoMarkTextField_.setText("");
     examMarkTextField_.setText("");
     gradeDisplayLabel_.setText("");
     errorMessageLabel_.setText("");
     
-    assessementOneMarkTextField_.setEditable(false);
-    assessmentTwoMarkTextField_.setEditable(false);
+    assignmentOneMarkTextField_.setEditable(false);
+    assignmentTwoMarkTextField_.setEditable(false);
     examMarkTextField_.setEditable(false);
   }
 
@@ -605,8 +608,8 @@ public class CheckGradeUserInterface extends JFrame
 
   public void setMarkEntryTextFieldsEnabled(boolean shouldEnable)
   {
-    assessementOneMarkTextField_.setEditable(shouldEnable);
-    assessmentTwoMarkTextField_.setEditable(shouldEnable);
+    assignmentOneMarkTextField_.setEditable(shouldEnable);
+    assignmentTwoMarkTextField_.setEditable(shouldEnable);
     examMarkTextField_.setEditable(shouldEnable);
   }
 

@@ -53,7 +53,7 @@ public class CheckGradeController
 
 
 
-  public void unitSelected(String unitCode)
+  public void unitSelectedHandler(String unitCode)
   {
 
     if (unitCode.equals("NONE")) {
@@ -71,7 +71,7 @@ public class CheckGradeController
 
 
 
-  public void studentSelected(Integer studentId)
+  public void studentSelectedHandler(Integer studentId)
   {
     currentStudentId_ = studentId;
     
@@ -85,26 +85,27 @@ public class CheckGradeController
 
     else {
       IStudent student = StudentManager.get().getStudent(studentId);
-      IStudentUnitRecord record = student.getUnitRecord(currentUnitCode_);
+      IStudentUnitRecord studentUnitRecord = student
+                                             .getUnitRecord(currentUnitCode_);
 
-      userInterface_.setRecord(record);
+      userInterface_.setStudentUnitRecord(studentUnitRecord);
       userInterface_.setCheckGradeButtonEnabled(true);
       userInterface_.setChangeButtonEnabled(true);
       userInterface_.setMarkEntryTextFieldsEnabled(false);
       userInterface_.setSaveButtonEnabled(false);
-      
+
       isChangesMade_ = false;
     }
   }
 
 
 
-  public String checkGrade(float assessmentOneMark, float assessmentTwoMark,
-          float examMark)
+  public String checkGradeHandler(float markForAssignmentOne,
+                                  float markForAssignmentTwo, float markForExam)
   {
     IUnit unit = UnitManager.getInstance().getUnit(currentUnitCode_);
-    String grade = unit.calculateGrade(assessmentOneMark, assessmentTwoMark,
-            examMark);
+    String grade = unit.calculateGrade(markForAssignmentOne,
+                                       markForAssignmentTwo, markForExam);
 
     userInterface_.setChangeButtonEnabled(true);
     userInterface_.setMarkEntryTextFieldsEnabled(false);
@@ -116,7 +117,28 @@ public class CheckGradeController
   }
 
 
+  
+  public void saveGradeHandler(float markForAssignmentOne, 
+                               float markForAssignmentTwo, float markForExam)
+  {
 
+    IUnit unit = UnitManager.getInstance().getUnit(currentUnitCode_);
+    IStudent student = StudentManager.get().getStudent(currentStudentId_);
+    IStudentUnitRecord studentUnitrecord = student
+                                           .getUnitRecord(currentUnitCode_);
+
+    studentUnitrecord.setMarkForAssignmentOne(markForAssignmentOne);
+    studentUnitrecord.setMarkForAssignmentTwo(markForAssignmentTwo);
+    studentUnitrecord.setMarkForExam(markForExam);
+
+    StudentUnitRecordManager.getInstance().saveRecord(studentUnitrecord);
+    userInterface_.setChangeButtonEnabled(true);
+    userInterface_.setMarkEntryTextFieldsEnabled(false);
+    userInterface_.setSaveButtonEnabled(false);
+  }
+  
+  
+  
   public void enableChangeMarks()
   {
     userInterface_.setChangeButtonEnabled(false);
@@ -124,24 +146,5 @@ public class CheckGradeController
     userInterface_.setMarkEntryTextFieldsEnabled(true);
     
     isChangesMade_ = true;
-  }
-
-
-
-  public void saveGrade(float assessmentOneMark, float assessmentTwoMark, float examMark)
-  {
-
-    IUnit unit = UnitManager.getInstance().getUnit(currentUnitCode_);
-    IStudent student = StudentManager.get().getStudent(currentStudentId_);
-    IStudentUnitRecord record = student.getUnitRecord(currentUnitCode_);
-    
-    record.setAssessmentOneMark(assessmentOneMark);
-    record.setAssessmentTwoMark(assessmentTwoMark);
-    record.setExamMark(examMark);
-    
-    StudentUnitRecordManager.getInstance().saveRecord(record);
-    userInterface_.setChangeButtonEnabled(true);
-    userInterface_.setMarkEntryTextFieldsEnabled(false);
-    userInterface_.setSaveButtonEnabled(false);
   }
 }

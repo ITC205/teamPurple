@@ -44,14 +44,16 @@ public class StudentUnitRecordManager
   public IStudentUnitRecord getStudentUnitRecord(Integer studentID,
           String unitCode)
   {
-    IStudentUnitRecord record = recordMap_.get(studentID.toString() + unitCode);
-    
-    if(record != null) {
-      return record;
+    IStudentUnitRecord studentUnitRecord = recordMap_
+                                           .get(studentID.toString() + 
+                                           unitCode);
+
+    if (studentUnitRecord != null) {
+      return studentUnitRecord;
     }
     else {
-      IStudentUnitRecord newRecord = createStudentUnitRecord(studentID, unitCode);
-      return newRecord;
+      studentUnitRecord = createStudentUnitRecord(studentID, unitCode);
+      return studentUnitRecord;
     }
   }
 
@@ -71,17 +73,17 @@ public class StudentUnitRecordManager
                                 .getChild("studentUnitRecordTable")
                                 .getChildren("record");
 
-      for (Element record : allRecordElements) {
-        if (unitCode.equals(record.getAttributeValue("uid"))) {
+      for (Element recordElement : allRecordElements) {
+        if (unitCode.equals(recordElement.getAttributeValue("uid"))) {
           allStudentUnitRecords.add(new StudentUnitRecordProxy(
-                  new Integer(record.getAttributeValue("sid")),
-                              record.getAttributeValue("uid")));
+                  new Integer(recordElement.getAttributeValue("sid")),
+                              recordElement.getAttributeValue("uid")));
         } // End if
       } // End for
 
       if (allStudentUnitRecords.size() > 0) {
         unitRecord_.put(unitCode, allStudentUnitRecords); // be careful - this
-      }                                                // could be empty
+      }                                                   // could be empty
       return allStudentUnitRecords;
     } // End else
   }
@@ -102,14 +104,15 @@ public class StudentUnitRecordManager
                                  .getChild("studentUnitRecordTable")
                                  .getChildren("record");
 
-      for (Element record : allRecordElements) {
+      for (Element recordElement : allRecordElements) {
         boolean isStudentIdMatch = studentID.toString()
-                .equals(record.getAttributeValue("sid"));
+                                   .equals(recordElement
+                                   .getAttributeValue("sid"));
 
         if (isStudentIdMatch) {
           allStudentUnitRecords.add(new StudentUnitRecordProxy(
-                  new Integer(record.getAttributeValue("sid")),
-                              record.getAttributeValue("uid")));
+                  new Integer(recordElement.getAttributeValue("sid")),
+                              recordElement.getAttributeValue("uid")));
         } // End if
       } // End for
 
@@ -151,39 +154,43 @@ public class StudentUnitRecordManager
     boolean isStudentIdMatch;
     boolean isUnitCodeMatch;
 
-    for (Element record : allRecordElements) {
+    for (Element recordElement : allRecordElements) {
       isStudentIdMatch = studentId.toString()
-                         .equals(record.getAttributeValue("sid"));
+              .equals(recordElement.getAttributeValue("sid"));
 
-      isUnitCodeMatch = unitCode.equals(record.getAttributeValue("uid"));
+      isUnitCodeMatch = unitCode.equals(recordElement.getAttributeValue("uid"));
 
       if (isStudentIdMatch && isUnitCodeMatch) {
-        Integer recordStudentId = new Integer(record.getAttributeValue("sid"));
-        String recordUnitCode = record.getAttributeValue("uid");
+        Integer recordStudentId = new Integer(recordElement
+                                              .getAttributeValue("sid"));
+        String recordUnitCode = recordElement.getAttributeValue("uid");
 
-        Float assessmentOneMark = new Float(record.getAttributeValue("asg1"))
+        Float markForAssignmentOne = new Float(recordElement
+                                            .getAttributeValue("asg1"))
                                             .floatValue();
-        Float assessmentTwoMark = new Float(record.getAttributeValue("asg2"))
+        Float markForAssignmentTwo = new Float(recordElement
+                                            .getAttributeValue("asg2"))
                                             .floatValue();
-        Float examMark = new Float(record.getAttributeValue("exam"))
-                                            .floatValue();
+        Float markForExam = new Float(recordElement.getAttributeValue("exam"))
+                                   .floatValue();
 
         studentUnitRecord = new StudentUnitRecord(recordStudentId,
                                                   recordUnitCode, 
-                                                  assessmentOneMark, 
-                                                  assessmentTwoMark, 
-                                                  examMark);
+                                                  markForAssignmentOne, 
+                                                  markForAssignmentTwo, 
+                                                  markForExam);
 
         recordMap_.put(studentUnitRecord.getStudentId().toString()
                      + studentUnitRecord.getUnitCode(), 
                        studentUnitRecord);
 
         return studentUnitRecord;
-      }  // End if
-    }  // End for
+      }    // End if
+    }    // End for
 
     throw new RuntimeException(
-            "StudentUnitRecordManager: createStudentUnitRecord : student unit record not in file");
+            "StudentUnitRecordManager: createStudentUnitRecord : "
+            + "student unit record not in file");
   }
 
 
@@ -198,30 +205,33 @@ public class StudentUnitRecordManager
     boolean isStudentIdMatch;
     boolean isUnitCodeMatch;
 
-    for (Element record : allrecordElements) {
+    for (Element recordElement : allrecordElements) {
       isStudentIdMatch = studentUnitRecord.getStudentId().toString()
-                                           .equals(record
+                                           .equals(recordElement
                                            .getAttributeValue("sid"));
 
       isUnitCodeMatch = studentUnitRecord.getUnitCode()
-                                         .equals(record
+                                         .equals(recordElement
                                          .getAttributeValue("uid"));
 
       if (isStudentIdMatch && isUnitCodeMatch) {
-        record.setAttribute("asg1",
-                new Float(studentUnitRecord.getAssessmentOneMark()).toString());
-        record.setAttribute("asg2",
-                new Float(studentUnitRecord.getAssessmentTwoMark()).toString());
-        record.setAttribute("exam",
-                new Float(studentUnitRecord.getExamMark()).toString());
+        recordElement.setAttribute("asg1",
+                new Float(studentUnitRecord.getMarkForAssignmentOne())
+                          .toString());
+        recordElement.setAttribute("asg2",
+                new Float(studentUnitRecord.getMarkForAssignmentTwo())
+                        .toString());
+        recordElement.setAttribute("exam",
+                new Float(studentUnitRecord.getMarkForExam()).toString());
 
         XMLManager.getInstance().saveDocument(); // write out the XML file for
                                                  // continuous save
         return;
-      }  // End if
-    }  // End for
+      }   // End if
+    }   // End for
 
     throw new RuntimeException(
-            "StudentUnitRecordManager: saveRecord : no such student record in data");
+            "StudentUnitRecordManager: saveRecord : "
+            + "no such student record in data");
   }
 }

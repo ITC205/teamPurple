@@ -10,31 +10,31 @@ public interface IStudentUnitRecord
 
 
 
-  public float getAssessmentOneMark();
+  public float getMarkForAssignmentOne();
 
 
 
-  public float getAssessmentTwoMark();
+  public float getMarkForAssignmentTwo();
 
 
 
-  public float getExamMark();
+  public float getMarkForExam();
 
 
 
-  public float getTotalMark();
+  public float calculateTotalMark();
 
 
 
-  public void setAssessmentOneMark(float newMark);
+  public void setMarkForAssignmentOne(float newMark);
 
 
 
-  public void setAssessmentTwoMark(float newMark);
+  public void setMarkForAssignmentTwo(float newMark);
 
 
 
-  public void setExamMark(float newMark);
+  public void setMarkForExam(float newMark);
 
 
 }
