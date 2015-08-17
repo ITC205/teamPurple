@@ -197,7 +197,7 @@ public class StudentUnitRecordManager
 
   public void saveStudentUnitRecord(IStudentUnitRecord studentUnitRecord)
   {
-    List<Element> studentUnitRecordElements = (List<Element>) XMLManager
+    List<Element> allStudentUnitRecordElements = (List<Element>) XMLManager
                                              .getInstance()
                                              .getDocument().getRootElement()
                                              .getChild("studentUnitRecordTable")
@@ -206,7 +206,7 @@ public class StudentUnitRecordManager
     boolean isStudentIdMatch;
     boolean isUnitCodeMatch;
 
-    for (Element studentUnitRecordElement : studentUnitRecordElements) {
+    for (Element studentUnitRecordElement : allStudentUnitRecordElements) {
       isStudentIdMatch = studentUnitRecord.getStudentId().toString()
                                           .equals(studentUnitRecordElement
                                           .getAttributeValue("sid"));
