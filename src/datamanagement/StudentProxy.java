@@ -9,7 +9,7 @@ public class StudentProxy implements IStudent
   private Integer studentId_;
   private String firstName_;
   private String lastName_;
-  private StudentManager studentList_;
+  private StudentManager allStudents_;
 
   
   //===========================================================================
@@ -21,7 +21,7 @@ public class StudentProxy implements IStudent
     studentId_ = studentId;
     firstName_ = firstName;
     lastName_ = lastName;
-    studentList_ = StudentManager.getInstance();
+    allStudents_ = StudentManager.getInstance();
   }
 
   
@@ -47,44 +47,45 @@ public class StudentProxy implements IStudent
   { 
     return lastName_; 
   }
-  
-  
-  
-  public IStudentUnitRecord retrieveStudentUnitRecord(String unitCode) 
-  {
-    return studentList_.getStudent(studentId_).retrieveStudentUnitRecord(unitCode);
-  }
-  
-  
-  
-  public StudentUnitRecordList getStudentUnitRecords() 
-  { 
-    return studentList_.getStudent(studentId_).getStudentUnitRecords();
-  }
 
   
   
   public void setFirstName(String firstName) 
   {
-    studentList_.getStudent(studentId_).setFirstName(firstName);
+    allStudents_.getStudent(studentId_).setFirstName(firstName);
   }
 
   
   
   public void setLastName(String lastName) 
   {
-    studentList_.getStudent(studentId_).setLastName(lastName);
+    allStudents_.getStudent(studentId_).setLastName(lastName);
   }
 
   
   
   public void addStudentUnitRecord(IStudentUnitRecord record) 
   {
-    studentList_.getStudent(studentId_).addStudentUnitRecord(record);
+    allStudents_.getStudent(studentId_).addStudentUnitRecord(record);
   }
   
   
   
+  //===========================================================================
+  // Methods: primary
+  //===========================================================================
+  
+  public IStudentUnitRecord retrieveStudentUnitRecord(String unitCode) 
+  {
+    return allStudents_.getStudent(studentId_).retrieveStudentUnitRecord(unitCode);
+  }
+  
+  
+  
+  public StudentUnitRecordList retrieveAllStudentUnitRecords() 
+  { 
+    return allStudents_.getStudent(studentId_).retrieveAllStudentUnitRecords();
+  }
 }
 
 

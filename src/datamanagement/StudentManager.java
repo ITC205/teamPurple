@@ -68,14 +68,14 @@ public class StudentManager
     Element studentElement = getStudentElement(studentId);
     
     if (studentElement != null) {
-      StudentUnitRecordList studentUnitRecordList = StudentUnitRecordManager.instance()
+      StudentUnitRecordList allStudentUnitRecords = StudentUnitRecordManager.instance()
                                            .getRecordsByStudent(studentId);
       Integer newStudentId = new Integer(studentElement
                                            .getAttributeValue("sid"));
       String firstName = studentElement.getAttributeValue("fname");
       String lastName = studentElement.getAttributeValue("lname");
       
-      student = new Student(newStudentId,firstName,lastName,studentUnitRecordList);
+      student = new Student(newStudentId,firstName,lastName,allStudentUnitRecords);
       
       studentMap_.put(student.getStudentId(), student);
       

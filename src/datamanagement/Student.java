@@ -9,7 +9,7 @@ public class Student implements IStudent
   private Integer studentId_; 
   private String firstName_;
   private String lastName_;
-  private StudentUnitRecordList recordList_;
+  private StudentUnitRecordList allStudentUnitRecords_;
 
   
   //===========================================================================
@@ -17,12 +17,17 @@ public class Student implements IStudent
   //===========================================================================
   
   public Student(Integer studentId, String firstName, String lastName
-                                   , StudentUnitRecordList recordList)
+                   , StudentUnitRecordList allStudentUnitRecords)
   { 
     studentId_ = studentId; 
     firstName_ = firstName;
     lastName_ = lastName;
-    recordList_ = recordList == null ? new StudentUnitRecordList() : recordList;
+    if (allStudentUnitRecords == null) {
+      allStudentUnitRecords_ = new StudentUnitRecordList();
+    }
+    else {
+      allStudentUnitRecords_ = allStudentUnitRecords;
+    }
   }
 
   
@@ -52,9 +57,9 @@ public class Student implements IStudent
 
   
   
-  public StudentUnitRecordList getStudentUnitRecords() 
+  public StudentUnitRecordList getAllStudentUnitRecords() 
   { 
-    return recordList_; 
+    return allStudentUnitRecords_; 
   }
 
   
@@ -77,9 +82,9 @@ public class Student implements IStudent
   // Methods: primary
   //===========================================================================
   
-  public void addStudentUnitRecord(IStudentUnitRecord record) 
+  public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord) 
   { 
-    recordList_.add(record); 
+    allStudentUnitRecords_.add(studentUnitRecord); 
   }
 
   
@@ -87,9 +92,9 @@ public class Student implements IStudent
   // Return student unit record for unitCode
   public IStudentUnitRecord retrieveStudentUnitRecord(String unitCode) 
   {
-    for (IStudentUnitRecord record : recordList_) {
-      if (record.getUnitCode().equals(unitCode)) {
-        return record; 
+    for (IStudentUnitRecord studentUnitRecord : allStudentUnitRecords_) {
+      if (studentUnitRecord.getUnitCode().equals(unitCode)) {
+        return studentUnitRecord; 
       }
     }
     return null;   
