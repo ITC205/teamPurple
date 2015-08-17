@@ -1,29 +1,29 @@
 package datamanagement;
+
 import java.util.*;
 import java.io.*;
+
+
+
 public class AppProperties
 {
-
+  //===========================================================================
+  // Variables
+  //===========================================================================
+  
   private static AppProperties instance_ = null;
-  private Properties properties;
+  private Properties properties_;
 
 
-
-  public static AppProperties getInstance() 
-  {
-    if (instance_ == null ) { 
-      instance_ = new AppProperties(); 
-    } 
-    return instance_;
-  }
-
-
-
+  //===========================================================================
+  // Constructors
+  //===========================================================================
+  
   private AppProperties() 
   {
-    properties = new Properties();
+    properties_ = new Properties();
     try {
-      properties.load(new FileInputStream("Properties.prop"));
+      properties_.load(new FileInputStream("Properties.prop"));
     } 
     catch (IOException e) {
       throw new RuntimeException("Could not read property file");
@@ -31,10 +31,24 @@ public class AppProperties
   }
 
 
+  //===========================================================================
+  // Getters and Setters
+  //===========================================================================
+  
+  
+  public static AppProperties getInstance() 
+  {
+    if (instance_ == null) { 
+      instance_ = new AppProperties(); 
+    } 
+    return instance_;
+  }
 
+
+  
   public Properties getProperties() 
   {
-    return properties;
+    return properties_;
   }
 
 
