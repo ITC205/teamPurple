@@ -78,9 +78,9 @@ public class StudentProxy implements IStudent
 
   
   
-  public void addUnitRecord(IStudentUnitRecord record) 
+  public void addStudentUnitRecord(IStudentUnitRecord record) 
   {
-    studentList_.getStudent(studentId_).addUnitRecord(record);
+    studentList_.getStudent(studentId_).addStudentUnitRecord(record);
   }
   
   

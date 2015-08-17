@@ -26,29 +26,6 @@ public class Student implements IStudent
   }
 
   
-  //===========================================================================
-  // Methods: primary
-  //===========================================================================
-  
-  public void addUnitRecord(IStudentUnitRecord record) 
-  { 
-    recordList_.add(record); 
-  }
-
-  
-  /**
-   * return student unit record for unitCode
-   */
-  public IStudentUnitRecord retrieveStudentUnitRecord(String unitCode) 
-  {
-    for (IStudentUnitRecord record : recordList_) {
-      if (record.getUnitCode().equals(unitCode)) {
-        return record; 
-      }
-    }
-    return null;   
-  }
-  
   
   //===========================================================================
   // Getters and Setters
@@ -96,4 +73,28 @@ public class Student implements IStudent
   
   
   
+  //===========================================================================
+  // Methods: primary
+  //===========================================================================
+  
+  public void addStudentUnitRecord(IStudentUnitRecord record) 
+  { 
+    recordList_.add(record); 
+  }
+
+  
+
+  // Return student unit record for unitCode
+  public IStudentUnitRecord retrieveStudentUnitRecord(String unitCode) 
+  {
+    for (IStudentUnitRecord record : recordList_) {
+      if (record.getUnitCode().equals(unitCode)) {
+        return record; 
+      }
+    }
+    return null;   
+  }
+  
+  
+
 }

@@ -28,27 +28,48 @@ public class StudentManager
     studentMap_ = new StudentMap();
     unitMap_ = new HashMap<>();
   }
+  
+  
+  
+  //===========================================================================
+  // Getters and Setters
+  //===========================================================================
+  
+  public static StudentManager getInstance() 
+  {
+    if (instance_ == null) {
+      instance_ = new StudentManager(); 
+    }
+    return instance_; 
+  }
 
   
+  // Create new student or return existing student
+  public IStudent getStudent(Integer studentId) 
+  {
+    IStudent student = studentMap_.get(studentId);
+    
+    return student != null ? student : createStudent(studentId);
+  }
+  
+
   //===========================================================================
   // Methods: primary
   //===========================================================================
   
-  /**
-   * create new student
-   */
+  // Create new student
   private IStudent createStudent(Integer studentId) 
   {
     IStudent student;
-    Element studentDetails = getStudentElement(studentId);
+    Element studentElement = getStudentElement(studentId);
     
-    if (studentDetails != null) {
+    if (studentElement != null) {
       StudentUnitRecordList recordList = StudentUnitRecordManager.instance()
                                            .getRecordsByStudent(studentId);
-      Integer newStudentId = new Integer(studentDetails
+      Integer newStudentId = new Integer(studentElement
                                            .getAttributeValue("sid"));
-      String newFirstName = studentDetails.getAttributeValue("fname");
-      String newLastName = studentDetails.getAttributeValue("lname");
+      String newFirstName = studentElement.getAttributeValue("fname");
+      String newLastName = studentElement.getAttributeValue("lname");
       
       student = new Student(newStudentId,newFirstName,newLastName,recordList);
       
@@ -61,14 +82,12 @@ public class StudentManager
   }
 
   
-  /**
-   * create new student proxy
-   */
+  // Create new student proxy
   private IStudent createStudentProxy(Integer studentId) 
   {
-    Element studentDetails = getStudentElement(studentId);
-    String newFirstName = studentDetails.getAttributeValue("fname");
-    String newLastName = studentDetails.getAttributeValue("lname");
+    Element studentElement = getStudentElement(studentId);
+    String newFirstName = studentElement.getAttributeValue("fname");
+    String newLastName = studentElement.getAttributeValue("lname");
 
     if (getStudentElement(studentId) != null) {
       return new StudentProxy(studentId, newFirstName, newLastName);
@@ -77,9 +96,7 @@ public class StudentManager
   }
 
   
-  /**
-   * return students studying unitCode
-   */
+  // Return students studying unitCode
   public StudentMap getStudentsByUnit(String unitCode) 
   {
     StudentMap studentMapByUnit = unitMap_.get(unitCode);
@@ -90,11 +107,12 @@ public class StudentManager
     
     studentMapByUnit = new StudentMap();
     IStudent student;
-    StudentUnitRecordList recordList = StudentUnitRecordManager.instance()
+    StudentUnitRecordList allStudentUnitRecords = StudentUnitRecordManager
+                                                   .instance()
                                                    .getRecordsByUnit(unitCode);
    
-    for (IStudentUnitRecord studentUnitRecord : recordList) {
-      Integer studentId = studentUnitRecord.getStudentID();
+    for (IStudentUnitRecord studentUnitRecord : allStudentUnitRecords) {
+      Integer studentId = studentUnitRecord.getStudentId();
       student = createStudentProxy(studentId);
       studentMapByUnit.put(student.getStudentId(), student);
     }
@@ -105,9 +123,7 @@ public class StudentManager
   
   
   
-  /**
-   * get student record from XML file
-   */
+  // Get student record from XML file
   private Element getStudentElement(Integer studentId) 
   {
     for (Element studentDetails : (List<Element>) XMLManager.getXML()
@@ -128,29 +144,5 @@ public class StudentManager
   }
   
   
-  //===========================================================================
-  // Getters and Setters
-  //===========================================================================
-  
-  public static StudentManager getInstance() 
-  {
-    if (instance_ == null) {
-      instance_ = new StudentManager(); 
-    }
-    return instance_; 
-  }
 
-  
-  /**
-   * create new student or return existing student
-   */
-  public IStudent getStudent(Integer studentId) 
-  {
-    IStudent student = studentMap_.get(studentId);
-    
-    return student != null ? student : createStudent(studentId);
-  }
-  
-  
-  
 }
