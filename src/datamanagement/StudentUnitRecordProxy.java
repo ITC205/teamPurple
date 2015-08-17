@@ -53,7 +53,7 @@ public class StudentUnitRecordProxy
   public float getMarkForAssignmentOne()
   {
 
-    return manager_.getStudentUnitRecord(studentId_, unitCode_)
+    return manager_.findStudentUnitRecord(studentId_, unitCode_)
                    .getMarkForAssignmentOne();
   }
 
@@ -61,7 +61,7 @@ public class StudentUnitRecordProxy
 
   public float getMarkForAssignmentTwo()
   {
-    return manager_.getStudentUnitRecord(studentId_, unitCode_)
+    return manager_.findStudentUnitRecord(studentId_, unitCode_)
                    .getMarkForAssignmentTwo();
   }
 
@@ -69,7 +69,7 @@ public class StudentUnitRecordProxy
 
   public float getMarkForExam()
   {
-    return manager_.getStudentUnitRecord(studentId_, unitCode_)
+    return manager_.findStudentUnitRecord(studentId_, unitCode_)
                    .getMarkForExam();
   }
 
@@ -77,7 +77,7 @@ public class StudentUnitRecordProxy
 
   public float calculateTotalMark()
   {
-    return manager_.getStudentUnitRecord(studentId_, unitCode_)
+    return manager_.findStudentUnitRecord(studentId_, unitCode_)
                    .calculateTotalMark();
   }
 
@@ -85,7 +85,7 @@ public class StudentUnitRecordProxy
 
   public void setMarkForAssignmentOne(float newMark)
   {
-    manager_.getStudentUnitRecord(studentId_, unitCode_)
+    manager_.findStudentUnitRecord(studentId_, unitCode_)
             .setMarkForAssignmentOne(newMark);
   }
 
@@ -93,7 +93,7 @@ public class StudentUnitRecordProxy
 
   public void setMarkForAssignmentTwo(float newMark)
   {
-    manager_.getStudentUnitRecord(studentId_, unitCode_)
+    manager_.findStudentUnitRecord(studentId_, unitCode_)
             .setMarkForAssignmentTwo(newMark);
   }
 
@@ -101,7 +101,7 @@ public class StudentUnitRecordProxy
 
   public void setMarkForExam(float newMark)
   {
-    manager_.getStudentUnitRecord(studentId_, unitCode_)
+    manager_.findStudentUnitRecord(studentId_, unitCode_)
             .setMarkForExam(newMark);
   }
 

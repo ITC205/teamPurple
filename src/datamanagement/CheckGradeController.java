@@ -131,7 +131,7 @@ public class CheckGradeController
     studentUnitrecord.setMarkForAssignmentTwo(markForAssignmentTwo);
     studentUnitrecord.setMarkForExam(markForExam);
 
-    StudentUnitRecordManager.getInstance().saveRecord(studentUnitrecord);
+    StudentUnitRecordManager.getInstance().saveStudentUnitRecord(studentUnitrecord);
     userInterface_.setChangeButtonEnabled(true);
     userInterface_.setMarkEntryTextFieldsEnabled(false);
     userInterface_.setSaveButtonEnabled(false);
