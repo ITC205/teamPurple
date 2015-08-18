@@ -57,7 +57,7 @@ public class Student implements IStudent
 
   
   
-  public StudentUnitRecordList getAllStudentUnitRecords() 
+  public StudentUnitRecordList retrieveAllStudentUnitRecords() 
   { 
     return allStudentUnitRecords_; 
   }
