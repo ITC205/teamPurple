@@ -28,3 +28,8 @@ hs_err_pid*
 # Maven
 log/
 target/
+/bin/
+<<<<<<< HEAD
+=======
+/lib/
+>>>>>>> 93c8df23ec7cd3762970a8bfd22918218052f3a1

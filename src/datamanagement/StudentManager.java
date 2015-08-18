@@ -43,6 +43,7 @@ public class StudentManager
     return instance_; 
   }
 
+
   
   // Create new student or return existing student
   public IStudent getStudent(Integer studentId) 
@@ -56,6 +57,7 @@ public class StudentManager
     }
   }
   
+
 
   //===========================================================================
   // Methods: primary
@@ -86,6 +88,7 @@ public class StudentManager
   }
 
   
+  
   // Create new student proxy
   private IStudent createStudentProxy(Integer studentId) 
   {
@@ -98,6 +101,7 @@ public class StudentManager
     throw new RuntimeException("StudentManager: createStudentProxy: Student not in file");
   }
 
+  
   
   // Return students studying unitCode
   public StudentMap findStudentsByUnit(String unitCode) 

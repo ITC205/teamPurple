@@ -1,26 +1,108 @@
 package datamanagement;
-public class StudentUnitRecordProxy implements IStudentUnitRecord {
-private Integer studentID;
-private String unitCode;
-private StudentUnitRecordManager mngr;
-public StudentUnitRecordProxy( Integer id, String code ) 
+
+public class StudentUnitRecordProxy 
+  implements IStudentUnitRecord
 {
-this.studentID = id;this.unitCode = code;
-this.mngr = StudentUnitRecordManager.instance();}
-public Integer getStudentID() { return studentID;}
-public String getUnitCode() { return unitCode; 
+  // ===========================================================================
+  // Variables
+  // ===========================================================================
+
+
+
+  private Integer studentId_;
+  private String unitCode_;
+  private StudentUnitRecordManager manager_;
+
+
+
+  // ===========================================================================
+  // Constructors
+  // ===========================================================================
+
+
+
+  public StudentUnitRecordProxy(Integer studentId, String unitCode)
+  {
+    studentId_ = studentId;
+    unitCode_ = unitCode;
+    manager_ = StudentUnitRecordManager.getInstance();
+  }
+
+
+
+  // ===========================================================================
+  // Getters & setters
+  // ===========================================================================
+
+
+
+  public Integer getStudentId()
+  {
+    return studentId_;
+  }
+
+
+
+  public String getUnitCode()
+  {
+    return unitCode_;
+  }
+
+
+
+  public float getMarkForAssignmentOne()
+  {
+
+    return manager_.findStudentUnitRecord(studentId_, unitCode_)
+                   .getMarkForAssignmentOne();
+  }
+
+
+
+  public float getMarkForAssignmentTwo()
+  {
+    return manager_.findStudentUnitRecord(studentId_, unitCode_)
+                   .getMarkForAssignmentTwo();
+  }
+
+
+
+  public float getMarkForExam()
+  {
+    return manager_.findStudentUnitRecord(studentId_, unitCode_)
+                   .getMarkForExam();
+  }
+
+
+
+  public float calculateTotalMark()
+  {
+    return manager_.findStudentUnitRecord(studentId_, unitCode_)
+                   .calculateTotalMark();
+  }
+
+
+
+  public void setMarkForAssignmentOne(float newMark)
+  {
+    manager_.findStudentUnitRecord(studentId_, unitCode_)
+            .setMarkForAssignmentOne(newMark);
+  }
+
+
+
+  public void setMarkForAssignmentTwo(float newMark)
+  {
+    manager_.findStudentUnitRecord(studentId_, unitCode_)
+            .setMarkForAssignmentTwo(newMark);
+  }
+
+
+
+  public void setMarkForExam(float newMark)
+  {
+    manager_.findStudentUnitRecord(studentId_, unitCode_)
+            .setMarkForExam(newMark);
+  }
+
 }
-public void setAsg1(float mark) {
-mngr.getStudentUnitRecord( studentID, unitCode ).setAsg1(mark);}
-public float getAsg1() 
-{
-return mngr.getStudentUnitRecord( studentID, unitCode ).getAsg1();}
-public void setAsg2(float mark) { mngr.getStudentUnitRecord( studentID, unitCode ).setAsg2(mark);}
-public float getAsg2() {return mngr.getStudentUnitRecord( studentID, unitCode ).getAsg2();
-}
-public void setExam(float mark) {mngr.getStudentUnitRecord( studentID, unitCode ).setExam(mark);
-}
-public float getExam() 
-{
-return mngr.getStudentUnitRecord( studentID, unitCode ).getExam();}
-public float getTotal() {return mngr.getStudentUnitRecord( studentID, unitCode ).getTotal();}}

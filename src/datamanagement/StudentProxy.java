@@ -1,5 +1,6 @@
 package datamanagement;
 
+
 public class StudentProxy implements IStudent 
 {
   //===========================================================================
@@ -23,6 +24,7 @@ public class StudentProxy implements IStudent
     lastName_ = lastName;
     allStudents_ = StudentManager.getInstance();
   }
+
 
   
   //===========================================================================
@@ -87,5 +89,7 @@ public class StudentProxy implements IStudent
     return allStudents_.getStudent(studentId_).retrieveAllStudentUnitRecords();
   }
 }
+
+
 
 
