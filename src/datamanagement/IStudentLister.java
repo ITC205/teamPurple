@@ -9,7 +9,7 @@ package datamanagement;
 public interface IStudentLister
 {
   
-  public void clearStudents();
+  public void clearStudentsFromComboBox();
   
   
   

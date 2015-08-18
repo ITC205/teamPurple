@@ -90,17 +90,24 @@ public class StudentManager
   
   
   // Create new student proxy
+//  private IStudent createStudentProxy(Integer studentId) 
+//  {
+//    if (getStudentElement(studentId) != null) {
+//      Element studentElement = getStudentElement(studentId);
+//      String firstName = studentElement.getAttributeValue("fname");
+//      String lastName = studentElement.getAttributeValue("lname");
+//      return new StudentProxy(studentId, firstName, lastName);
+//    }
+//    throw new RuntimeException("StudentManager: createStudentProxy: Student not in file");
+//  }
   private IStudent createStudentProxy(Integer studentId) 
   {
-    if (getStudentElement(studentId) != null) {
-      Element studentElement = getStudentElement(studentId);
-      String firstName = studentElement.getAttributeValue("fname");
-      String lastName = studentElement.getAttributeValue("lname");
-      return new StudentProxy(studentId, firstName, lastName);
+    Element studentElement = getStudentElement(studentId);
+    if (studentElement != null) {
+      return new StudentProxy(studentId, studentElement.getAttributeValue("fname"), studentElement.getAttributeValue("lname"));
     }
-    throw new RuntimeException("StudentManager: createStudentProxy: Student not in file");
+    throw new RuntimeException("DBMD: createStudent : student not in file");
   }
-
   
   
   // Return students studying unitCode
