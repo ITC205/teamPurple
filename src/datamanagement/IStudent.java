@@ -2,7 +2,7 @@ package datamanagement;
 
 public interface IStudent {
 
-  public Integer getID();
+  public Integer getStudentId();
 
   public String getFirstName();
   public void setFirstName(String firstName);
@@ -10,9 +10,9 @@ public interface IStudent {
   public String getLastName();
   public void setLastName(String lastName);
 
-  public void addUnitRecord( IStudentUnitRecord record );
-  public IStudentUnitRecord getUnitRecord( String unitCode );
+  public void addStudentUnitRecord( IStudentUnitRecord record );
+  public IStudentUnitRecord retrieveStudentUnitRecord( String unitCode );
 
-  public StudentUnitRecordList getUnitRecords();
+  public StudentUnitRecordList retrieveAllStudentUnitRecords();
 
 }

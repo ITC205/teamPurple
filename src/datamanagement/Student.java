@@ -5,13 +5,14 @@ public class Student implements IStudent {
   private String studentLastName;
   private StudentUnitRecordList su;
 
-  public Student( Integer studentId, String studentFirstName, String studentLastName, StudentUnitRecordList su ) { this.studentId = studentId; this.studentFirstName = studentFirstName;
+  public Student( Integer studentId, String studentFirstName, String studentLastName, StudentUnitRecordList su ) 
+  { this.studentId = studentId; this.studentFirstName = studentFirstName;
   this.studentLastName = studentLastName;this.su = 
       su == null ? new StudentUnitRecordList() : 
         su;
   }
 
-  public Integer getID() { return this.studentId; 
+  public Integer getStudentId() { return this.studentId; 
   } public String getFirstName() { 
     return studentFirstName; }
 
@@ -25,8 +26,8 @@ public class Student implements IStudent {
 
     this.studentLastName = studentLastName; }
 
-  public void addUnitRecord( IStudentUnitRecord record ) { su.add(record); }
-  public IStudentUnitRecord getUnitRecord( String unitCode ) {
+  public void addStudentUnitRecord( IStudentUnitRecord record ) { su.add(record); }
+  public IStudentUnitRecord retrieveStudentUnitRecord( String unitCode ) {
     for ( IStudentUnitRecord r : su ) 
       if ( r.getUnitCode().equals(unitCode)) 
         return r; 
@@ -35,4 +36,4 @@ public class Student implements IStudent {
 
   }
 
-  public StudentUnitRecordList getUnitRecords() { return su; }}
+  public StudentUnitRecordList retrieveAllStudentUnitRecords() { return su; }}

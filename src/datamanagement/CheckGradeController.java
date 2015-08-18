@@ -84,9 +84,9 @@ public class CheckGradeController
     }
 
     else {
-      IStudent student = StudentManager.get().getStudent(studentId);
+      IStudent student = StudentManager.getInstance().getStudent(studentId);
       IStudentUnitRecord studentUnitRecord = student
-                                             .getUnitRecord(currentUnitCode_);
+                                             .retrieveStudentUnitRecord(currentUnitCode_);
 
       userInterface_.setStudentUnitRecord(studentUnitRecord);
       userInterface_.setCheckGradeButtonEnabled(true);
@@ -123,9 +123,9 @@ public class CheckGradeController
   {
 
     IUnit unit = UnitManager.getInstance().getUnit(currentUnitCode_);
-    IStudent student = StudentManager.get().getStudent(currentStudentId_);
+    IStudent student = StudentManager.getInstance().getStudent(currentStudentId_);
     IStudentUnitRecord studentUnitrecord = student
-                                           .getUnitRecord(currentUnitCode_);
+                                           .retrieveStudentUnitRecord(currentUnitCode_);
 
     studentUnitrecord.setMarkForAssignmentOne(markForAssignmentOne);
     studentUnitrecord.setMarkForAssignmentTwo(markForAssignmentTwo);

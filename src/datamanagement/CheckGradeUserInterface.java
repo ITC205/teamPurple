@@ -542,7 +542,7 @@ public class CheckGradeUserInterface extends JFrame
 
   public void addStudentToComboBox(IStudent student)
   {
-    studentComboBoxModel_.addElement(student.getID().toString() + " : "
+    studentComboBoxModel_.addElement(student.getStudentId().toString() + " : "
             + student.getFirstName() + " " + student.getLastName());
   }
 

@@ -13,9 +13,9 @@ public class StudentProxy implements IStudent {
 
 
     this.Il = Il;
-    this.lI = StudentManager.get();}
+    this.lI = StudentManager.getInstance();}
 
-  public Integer getID() { return I; 
+  public Integer getStudentId() { return I; 
 
 
 
@@ -40,9 +40,9 @@ public class StudentProxy implements IStudent {
 
 
 
-  public void addUnitRecord(IStudentUnitRecord record) {
-    lI.getStudent(I).addUnitRecord(record);}
-  public IStudentUnitRecord getUnitRecord(String unitCode) {
+  public void addStudentUnitRecord(IStudentUnitRecord record) {
+    lI.getStudent(I).addStudentUnitRecord(record);}
+  public IStudentUnitRecord retrieveStudentUnitRecord(String unitCode) {
 
 
 
@@ -51,7 +51,7 @@ public class StudentProxy implements IStudent {
 
 
 
-    return lI.getStudent(I).getUnitRecord(unitCode);}
+    return lI.getStudent(I).retrieveStudentUnitRecord(unitCode);}
 
 
 
@@ -60,4 +60,4 @@ public class StudentProxy implements IStudent {
 
 
 
-  public StudentUnitRecordList getUnitRecords() { return lI.getStudent(I).getUnitRecords();}}
+  public StudentUnitRecordList retrieveAllStudentUnitRecords() { return lI.getStudent(I).retrieveAllStudentUnitRecords();}}
