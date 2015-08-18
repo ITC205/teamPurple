@@ -3,6 +3,6 @@ package datamanagement;
 private StudentManager sm;
 public ListStudentsCTL() {sm = StudentManager.get();}
             public void listStudents( IStudentLister lister, String unitCode ) {
-    lister.clearStudents();
+    lister.clearStudentsFromComboBox();
                 StudentMap students = sm.getStudentsByUnit( unitCode );
-for (Integer id : students.keySet() ) lister.addStudent(students.get(id));}}
+for (Integer id : students.keySet() ) lister.addStudentToComboBox(students.get(id));}}

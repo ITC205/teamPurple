@@ -9,7 +9,7 @@ public class UnitManager {
 
 	private UnitMap UM;
 
-	public static UnitManager UM() {
+	public static UnitManager getInstance() {
 		if (self == null)
 			self = new UnitManager();
 		return self;
@@ -29,7 +29,7 @@ public class UnitManager {
 
 		IUnit iu;
 
-		for (Element el : (List<Element>) XMLManager.getXML().getDocument()
+		for (Element el : (List<Element>) XMLManager.getInstance().getDocument()
 				.getRootElement().getChild("unitTable").getChildren("unit"))
 			if (unitCode.equals(el.getAttributeValue("uid"))) {
 				StudentUnitRecordList slist;
@@ -49,7 +49,7 @@ public class UnitManager {
 								el.getAttributeValue("asg2wgt")).intValue(),
 						Integer.valueOf(el.getAttributeValue("examwgt"))
 								.intValue(), StudentUnitRecordManager
-								.instance().getRecordsByUnit(unitCode));
+								.getInstance().findStudentRecordsByUnit(unitCode));
 				UM.put(iu.getUnitCode(), iu);
 				return iu;
 			}
@@ -63,7 +63,7 @@ public class UnitManager {
 		IUnit iu;
 
 		uM = new UnitMap();
-		for (Element el : (List<Element>) XMLManager.getXML().getDocument()
+		for (Element el : (List<Element>) XMLManager.getInstance().getDocument()
 				.getRootElement().getChild("unitTable").getChildren("unit")) {
 			iu = new UnitProxy(el.getAttributeValue("uid"),
 					el.getAttributeValue("name"));

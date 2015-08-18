@@ -6,6 +6,6 @@ package datamanagement;
 
 public interface IStudentLister {
 
-    public void clearStudents();
-    public void addStudent(IStudent student);
+    public void clearStudentsFromComboBox();
+    public void addStudentToComboBox(IStudent student);
 }
