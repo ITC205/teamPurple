@@ -70,8 +70,8 @@ public class StudentManager
     Element studentElement = getStudentElement(studentId);
     
     if (studentElement != null) {
-      StudentUnitRecordList allStudentUnitRecords = StudentUnitRecordManager.instance()
-                                           .getRecordsByStudent(studentId);
+      StudentUnitRecordList allStudentUnitRecords = StudentUnitRecordManager.getInstance()
+                                           .findUnitRecordsByStudent(studentId);
       Integer newStudentId = new Integer(studentElement
                                            .getAttributeValue("sid"));
       String firstName = studentElement.getAttributeValue("fname");
@@ -115,8 +115,8 @@ public class StudentManager
     studentMapByUnit = new StudentMap();
     IStudent student;
     StudentUnitRecordList allStudentUnitRecords = StudentUnitRecordManager
-                                                   .instance()
-                                                   .getRecordsByUnit(unitCode);
+                                                   .getInstance()
+                                                   .findStudentRecordsByUnit(unitCode);
    
     for (IStudentUnitRecord studentUnitRecord : allStudentUnitRecords) {
       Integer studentId = studentUnitRecord.getStudentId();
@@ -133,7 +133,7 @@ public class StudentManager
   // Get student record from XML file
   private Element getStudentElement(Integer studentId) 
   {
-    for (Element studentElement : (List<Element>) XMLManager.getXML()
+    for (Element studentElement : (List<Element>) XMLManager.getInstance()
                                                       .getDocument()
                                                       .getRootElement()
                                                       .getChild("studentTable")
