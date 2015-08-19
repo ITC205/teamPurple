@@ -11,17 +11,23 @@ import org.jdom.Element;
  */
 public class UnitManager
 {
-  //===========================================================================
+  //============================================================================
   // Variables
-  //===========================================================================
+  //============================================================================
+
+
 
   private static UnitManager instance_ = null;
 
   private UnitMap allUnits_;
 
-  //===========================================================================
+
+
+  //============================================================================
   // Constructors
-  //===========================================================================
+  //============================================================================
+
+
 
   /**
    * Creates and initializes a new UnitManager instance following the
@@ -35,9 +41,11 @@ public class UnitManager
 
 
 
-  //===========================================================================
+  //============================================================================
   // Getters & setters
-  //===========================================================================
+  //============================================================================
+
+
 
   /**
    * Returns the sole xmlManager instance (following the singleton pattern).
@@ -96,9 +104,9 @@ public class UnitManager
 
 
 
-  //===========================================================================
+  //============================================================================
   // Methods
-  //===========================================================================
+  //============================================================================
 
   /**
    * Returns (after instantiation of the objects) the collection of units that
@@ -189,6 +197,7 @@ public class UnitManager
   }
 
 
+
   /**
    * Creates a unit object from the representation in the persistence layer.
    * @param unitElement Element XML Element that represents the unit.
@@ -215,8 +224,8 @@ public class UnitManager
                            .intValue(),
                     Integer.valueOf(unitElement.getAttributeValue("examwgt"))
                            .intValue(),
-                    StudentUnitRecordManager.instance()
-                                            .getRecordsByUnit(unitCode));
+                    StudentUnitRecordManager.getInstance()
+                           .findStudentRecordsByUnit(unitCode));
   }
 
 
@@ -233,7 +242,5 @@ public class UnitManager
     unitMap.put(unit.getUnitCode(), unit);
     this.setUnits(unitMap);
   }
-
-
-
+  
 }
