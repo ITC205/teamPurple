@@ -242,5 +242,5 @@ public class UnitManager
     unitMap.put(unit.getUnitCode(), unit);
     this.setUnits(unitMap);
   }
-  
+
 }
