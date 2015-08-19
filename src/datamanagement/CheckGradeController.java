@@ -84,7 +84,7 @@ public class CheckGradeController
     }
 
     else {
-      IStudent student = StudentManager.getInstance().getStudent(studentId);
+      IStudent student = StudentManager.getInstance().findStudent(studentId);
       IStudentUnitRecord studentUnitRecord = student
                                              .retrieveStudentUnitRecord(currentUnitCode_);
 
@@ -123,7 +123,7 @@ public class CheckGradeController
   {
 
     IUnit unit = UnitManager.getInstance().getUnit(currentUnitCode_);
-    IStudent student = StudentManager.getInstance().getStudent(currentStudentId_);
+    IStudent student = StudentManager.getInstance().findStudent(currentStudentId_);
     IStudentUnitRecord studentUnitrecord = student
                                            .retrieveStudentUnitRecord(currentUnitCode_);
 

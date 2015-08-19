@@ -54,21 +54,21 @@ public class StudentProxy implements IStudent
   
   public void setFirstName(String firstName) 
   {
-    allStudents_.getStudent(studentId_).setFirstName(firstName);
+    allStudents_.findStudent(studentId_).setFirstName(firstName);
   }
 
   
   
   public void setLastName(String lastName) 
   {
-    allStudents_.getStudent(studentId_).setLastName(lastName);
+    allStudents_.findStudent(studentId_).setLastName(lastName);
   }
 
   
   
   public void addStudentUnitRecord(IStudentUnitRecord record) 
   {
-    allStudents_.getStudent(studentId_).addStudentUnitRecord(record);
+    allStudents_.findStudent(studentId_).addStudentUnitRecord(record);
   }
   
   
@@ -79,14 +79,14 @@ public class StudentProxy implements IStudent
   
   public IStudentUnitRecord retrieveStudentUnitRecord(String unitCode) 
   {
-    return allStudents_.getStudent(studentId_).retrieveStudentUnitRecord(unitCode);
+    return allStudents_.findStudent(studentId_).retrieveStudentUnitRecord(unitCode);
   }
   
   
   
   public StudentUnitRecordList retrieveAllStudentUnitRecords() 
   { 
-    return allStudents_.getStudent(studentId_).retrieveAllStudentUnitRecords();
+    return allStudents_.findStudent(studentId_).retrieveAllStudentUnitRecords();
   }
 }
 
