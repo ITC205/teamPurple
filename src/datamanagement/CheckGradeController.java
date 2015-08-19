@@ -36,7 +36,7 @@ public class CheckGradeController
   public void initialize()
   {
     userInterface_ = new CheckGradeUserInterface(this);
-    ListUnitsCTL listUnitsController = new ListUnitsCTL();
+    ListUnitsController listUnitsController = new ListUnitsController();
     
     userInterface_.setSelectUnitComboBoxEnabled(false);
     userInterface_.setSelectStudentComboBoxEnabled(false);
@@ -46,7 +46,7 @@ public class CheckGradeController
     userInterface_.setSaveButtonEnabled(false);
     userInterface_.clearDisplayedText();
 
-    listUnitsController.listUnits(userInterface_);
+    listUnitsController.listAllUnits(userInterface_);
     userInterface_.setVisible(true);
     userInterface_.setSelectUnitComboBoxEnabled(true);
   }
@@ -124,14 +124,15 @@ public class CheckGradeController
 
     IUnit unit = UnitManager.getInstance().getUnit(currentUnitCode_);
     IStudent student = StudentManager.get().getStudent(currentStudentId_);
-    IStudentUnitRecord studentUnitrecord = student
-                                           .getUnitRecord(currentUnitCode_);
+    IStudentUnitRecord studentUnitRecord =
+        student.getUnitRecord(currentUnitCode_);
 
-    studentUnitrecord.setMarkForAssignmentOne(markForAssignmentOne);
-    studentUnitrecord.setMarkForAssignmentTwo(markForAssignmentTwo);
-    studentUnitrecord.setMarkForExam(markForExam);
+    studentUnitRecord.setMarkForAssignmentOne(markForAssignmentOne);
+    studentUnitRecord.setMarkForAssignmentTwo(markForAssignmentTwo);
+    studentUnitRecord.setMarkForExam(markForExam);
 
-    StudentUnitRecordManager.getInstance().saveStudentUnitRecord(studentUnitrecord);
+    StudentUnitRecordManager.getInstance()
+                            .saveStudentUnitRecord(studentUnitRecord);
     userInterface_.setChangeButtonEnabled(true);
     userInterface_.setMarkEntryTextFieldsEnabled(false);
     userInterface_.setSaveButtonEnabled(false);
@@ -147,4 +148,5 @@ public class CheckGradeController
     
     isChangesMade_ = true;
   }
+
 }
