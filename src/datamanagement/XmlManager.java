@@ -53,7 +53,7 @@ public class XmlManager
   //============================================================================
 
 
-  
+
   /**
    * Returns the sole xmlManager instance (following the singleton pattern).
    * @return XMLManager instance responsible for managing data from xml file.
