@@ -571,5 +571,5 @@ public class Unit
       throw new RuntimeException("Assessment weights must add to 100");
     }
   }
-  
+
 }
