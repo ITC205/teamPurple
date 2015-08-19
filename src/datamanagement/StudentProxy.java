@@ -1,11 +1,12 @@
 package datamanagement;
 
-
 public class StudentProxy implements IStudent 
 {
   //===========================================================================
   // Variables
   //===========================================================================
+  
+  
   
   private Integer studentId_;
   private String firstName_;
@@ -13,9 +14,12 @@ public class StudentProxy implements IStudent
   private StudentManager allStudents_;
 
   
+  
   //===========================================================================
   // Constructors
   //===========================================================================
+  
+  
   
   public StudentProxy(Integer studentId, String firstName, String lastName) 
   {
@@ -30,6 +34,8 @@ public class StudentProxy implements IStudent
   //===========================================================================
   // Getters and Setters
   //===========================================================================
+  
+  
   
   public Integer getStudentId() 
   { 
@@ -63,13 +69,6 @@ public class StudentProxy implements IStudent
   {
     allStudents_.findStudent(studentId_).setLastName(lastName);
   }
-
-  
-  
-  public void addStudentUnitRecord(IStudentUnitRecord record) 
-  {
-    allStudents_.findStudent(studentId_).addStudentUnitRecord(record);
-  }
   
   
   
@@ -77,10 +76,19 @@ public class StudentProxy implements IStudent
   // Methods: primary
   //===========================================================================
   
+  
+  
   public IStudentUnitRecord retrieveStudentUnitRecord(String unitCode) 
   {
     return allStudents_.findStudent(studentId_)
                                 .retrieveStudentUnitRecord(unitCode);
+  }
+  
+  
+  
+  public void addStudentUnitRecord(IStudentUnitRecord record) 
+  {
+    allStudents_.findStudent(studentId_).addStudentUnitRecord(record);
   }
   
   

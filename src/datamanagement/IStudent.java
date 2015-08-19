@@ -1,6 +1,5 @@
 package datamanagement;
 
-
 public interface IStudent
 {
   
@@ -13,10 +12,6 @@ public interface IStudent
   
   
   public String getLastName();
-  
-  
-  
-  public StudentUnitRecordList retrieveAllStudentUnitRecords();
 
   
   
@@ -25,6 +20,10 @@ public interface IStudent
   
   
   public void setLastName(String lastName);
+  
+  
+  
+  public StudentUnitRecordList retrieveAllStudentUnitRecords();
 
   
   

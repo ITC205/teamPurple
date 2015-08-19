@@ -6,12 +6,17 @@ public class ListStudentsController
   // Variables
   //===========================================================================
   
+  
+  
   private StudentManager studentList_;
 
 
+  
   //===========================================================================
   // Constructors
   //===========================================================================
+  
+  
   
   public ListStudentsController()
   {
@@ -19,17 +24,20 @@ public class ListStudentsController
   }
 
 
+  
   //===========================================================================
   // Methods: primary
   //===========================================================================
   
+  
+  
   public void listStudents(IStudentLister studentLister, String unitCode) 
   {
     studentLister.clearStudentsFromComboBox();
-    StudentMap students = studentList_.findStudentsByUnit(unitCode);
+    StudentMap studentsByUnit = studentList_.findStudentsByUnit(unitCode);
     
-    for (Integer studentId : students.keySet() ) {
-      studentLister.addStudentToComboBox(students.get(studentId));
+    for (Integer studentId : studentsByUnit.keySet() ) {
+      studentLister.addStudentToComboBox(studentsByUnit.get(studentId));
     }
   }
 

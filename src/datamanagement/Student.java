@@ -1,11 +1,12 @@
 package datamanagement;
 
-
 public class Student implements IStudent 
 {
   //===========================================================================
   // Variables
   //===========================================================================
+  
+  
   
   private Integer studentId_; 
   private String firstName_;
@@ -13,9 +14,12 @@ public class Student implements IStudent
   private StudentUnitRecordList allStudentUnitRecords_;
 
   
+  
   //===========================================================================
   // Constructors
   //===========================================================================
+  
+  
   
   public Student(Integer studentId, String firstName, String lastName
                    , StudentUnitRecordList allStudentUnitRecords)
@@ -36,6 +40,8 @@ public class Student implements IStudent
   //===========================================================================
   // Getters and Setters
   //===========================================================================
+  
+  
   
   public Integer getStudentId() 
   { 
@@ -58,13 +64,6 @@ public class Student implements IStudent
 
   
   
-  public StudentUnitRecordList retrieveAllStudentUnitRecords() 
-  { 
-    return allStudentUnitRecords_; 
-  }
-
-  
-  
   public void setFirstName(String firstName) 
   { 
     firstName_ = firstName;
@@ -82,6 +81,15 @@ public class Student implements IStudent
   //===========================================================================
   // Methods: primary
   //===========================================================================
+  
+  
+  
+  public StudentUnitRecordList retrieveAllStudentUnitRecords() 
+  { 
+    return allStudentUnitRecords_; 
+  }
+  
+  
   
   public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord) 
   { 

@@ -25,7 +25,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class CheckGradeUserInterface extends JFrame
-        implements IUnitLister, IStudentLister
+  implements IUnitLister, IStudentLister
 {
   // ===========================================================================
   // Variables
@@ -78,7 +78,7 @@ public class CheckGradeUserInterface extends JFrame
 
   public CheckGradeUserInterface(CheckGradeController controller)
   {
-    this.controller_ = controller;
+    controller_ = controller;
     unitComboBoxModel_ = new DefaultComboBoxModel(new String[0]);
     studentComboBoxModel_ = new DefaultComboBoxModel(new String[0]);
     

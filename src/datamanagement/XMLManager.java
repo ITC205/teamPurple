@@ -26,7 +26,7 @@ private static XMLManager self = null;
     
     
 public void init() {
-        String s = AppProperties.getInstance().getProperties().getProperty("XMLFILE");
+        String s = ApplicationProperties.getInstance().getProperties().getProperty("XMLFILE");
 try {
             SAXBuilder b = new SAXBuilder();
     b.setExpandEntities(true);
@@ -50,7 +50,7 @@ throw new RuntimeException("DBMD: XMLManager : init : IOException");
     }
     
     public void saveDocument() {
-        String xmlfile = AppProperties.getInstance().getProperties().getProperty("XMLFILE");
+        String xmlfile = ApplicationProperties.getInstance().getProperties().getProperty("XMLFILE");
                 try (FileWriter fout = new FileWriter(xmlfile)) {
 XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
     outputter.output(doc, fout);

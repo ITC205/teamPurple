@@ -1,9 +1,9 @@
 package datamanagement;
 
-import org.jdom.*;
-
 import java.util.List;
 import java.util.HashMap;
+
+import org.jdom.Element;
 
 
 
@@ -13,15 +13,20 @@ public class StudentManager
   // Variables
   //===========================================================================
   
+  
+  
   private static StudentManager instance_ = null;
 
   private StudentMap studentMap_;
   private HashMap<String, StudentMap> unitMap_;
 
   
+  
   //===========================================================================
   // Constructors
   //===========================================================================
+  
+  
   
   private StudentManager() 
   {
@@ -30,11 +35,13 @@ public class StudentManager
   }
 
   
+  
   //===========================================================================
   // Getters and Setters
   //===========================================================================
   
-  //Singleton class. Use getInstance
+  
+  
   public static StudentManager getInstance() 
   {
     if (instance_ == null) {
@@ -44,9 +51,12 @@ public class StudentManager
   }
   
   
+  
   //===========================================================================
   // Methods
   //===========================================================================
+  
+  
   
   // Create new student or return existing student
   public IStudent findStudent(Integer studentId) 
@@ -102,6 +112,7 @@ public class StudentManager
                           + " : student not in file");
   }
 
+  
   
   // Create new student proxy
   private IStudent createStudentProxy(Integer studentId) 
