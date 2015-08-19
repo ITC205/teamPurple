@@ -5,22 +5,22 @@ package datamanagement;
  */
 public interface IUnitLister
 {
-  //===========================================================================
+  //============================================================================
   // Methods
-  //===========================================================================
+  //============================================================================
+
+
 
   /**
    * Clears display of units.
    */
-  public void clearAllUnits();
+  public void clearUnitsFromComboBox();
 
 
 
   /**
    * Displays selected unit.
    */
-  public void addUnit(IUnit unit);
-
-
+  public void addUnitToComboBox(IUnit unit);
 
 }
