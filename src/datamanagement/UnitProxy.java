@@ -326,5 +326,5 @@ public class UnitProxy
   {
     getActualUnit().addStudentUnitRecord(studentUnitRecord);
   }
-  
+
 }
