@@ -25,9 +25,9 @@ public class StudentUnitRecord
 
 
   public StudentUnitRecord(Integer studentId, String unitCode,
-                            float markForAssignmentOne, 
-                            float markForAssignmentTwo,
-                            float markForExam)
+                           float markForAssignmentOne, 
+                           float markForAssignmentTwo,
+                           float markForExam)
   {
     studentId_ = studentId;
     unitCode_ = unitCode;
@@ -79,13 +79,6 @@ public class StudentUnitRecord
 
 
 
-  public float calculateTotalMark()
-  {
-    return markForAssignmentOne_ + markForAssignmentTwo_ + markForExam_;
-  }
-
-
-
   public void setMarkForAssignmentOne(float newMark) 
   {
     boolean isNegative = newMark < 0;
@@ -98,7 +91,7 @@ public class StudentUnitRecord
               "Mark cannot be less than zero or greater than assessment weight");
     }
     else {
-      this.markForAssignmentOne_ = newMark;
+      markForAssignmentOne_ = newMark;
     }
   }
 
@@ -116,7 +109,7 @@ public class StudentUnitRecord
               "Mark cannot be less than zero or greater than assessment weight");
     }
     else {
-      this.markForAssignmentTwo_ = newMark;
+      markForAssignmentTwo_ = newMark;
     }
   }
 
@@ -134,8 +127,21 @@ public class StudentUnitRecord
               "Mark cannot be less than zero or greater than assessment weight");
     }
     else {
-      this.markForExam_ = newMark;
+      markForExam_ = newMark;
     }
+  }
+  
+  
+  
+  //===========================================================================
+  // Methods
+  //===========================================================================
+
+  
+
+  public float calculateTotalMark()
+  {
+    return markForAssignmentOne_ + markForAssignmentTwo_ + markForExam_;
   }
 
 }

@@ -21,8 +21,8 @@ public class Student implements IStudent
   
   
   
-  public Student(Integer studentId, String firstName, String lastName
-                   , StudentUnitRecordList allStudentUnitRecords)
+  public Student(Integer studentId, String firstName, String lastName,
+                 StudentUnitRecordList allStudentUnitRecords)
   { 
     studentId_ = studentId; 
     firstName_ = firstName;
@@ -79,7 +79,7 @@ public class Student implements IStudent
   
   
   //===========================================================================
-  // Methods: primary
+  // Methods
   //===========================================================================
   
   

@@ -5,8 +5,6 @@ import java.util.HashMap;
 
 import org.jdom.Element;
 
-
-
 public class StudentManager 
 {
   //===========================================================================
@@ -64,7 +62,7 @@ public class StudentManager
     IStudent student = studentMap_.get(studentId);
     
     if (student == null) {
-      return createStudent(studentId);
+      return loadStudent(studentId);
     }
     else {
       return student;
@@ -77,9 +75,9 @@ public class StudentManager
   private Element getStudentElement(Integer studentId) 
   {
     for (Element studentElement : (List<Element>) XMLManager.getInstance()
-                                     .getDocument().getRootElement()
-                                     .getChild("studentTable")
-                                     .getChildren("student")) 
+                                   .getDocument().getRootElement()
+                                   .getChild("studentTable")
+                                   .getChildren("student")) 
     {
       if (studentId.toString().equals(studentElement.getAttributeValue("sid")))
       {
@@ -91,25 +89,26 @@ public class StudentManager
 
   
 
-  // Create new student
-  private IStudent createStudent(Integer studentId) 
+  // Retrieve student from XML file and create new student instance
+  private IStudent loadStudent(Integer studentId) 
   {
     IStudent student;
     Element studentElement = getStudentElement(studentId);
     
     if (studentElement != null) {
       StudentUnitRecordList studentUnitRecordList = StudentUnitRecordManager
-                         .getInstance().findUnitRecordsByStudent(studentId);
+                            .getInstance()
+                            .findUnitRecordsByStudent(studentId);
       student = new Student(new Integer(studentElement
-                         .getAttributeValue("sid")),studentElement
-                         .getAttributeValue("fname"),studentElement
-                         .getAttributeValue("lname"),studentUnitRecordList);
+                            .getAttributeValue("sid")),studentElement
+                            .getAttributeValue("fname"),studentElement
+                            .getAttributeValue("lname"),studentUnitRecordList);
       studentMap_.put(student.getStudentId(), student);
       return student; 
     }
     
-    throw new RuntimeException("StudentManager: createStudent"
-                          + " : student not in file");
+    throw new RuntimeException("StudentManager: createStudent" +
+                               " : student not in file");
   }
 
   
@@ -121,12 +120,12 @@ public class StudentManager
 
     if (studentElement != null) {
       return new StudentProxy(studentId, studentElement
-                           .getAttributeValue("fname"), studentElement
-                           .getAttributeValue("lname"));
+                              .getAttributeValue("fname"), studentElement
+                              .getAttributeValue("lname"));
     }
     
-    throw new RuntimeException("StudentManager: createStudentProxy"
-                           + " : student not in file");
+    throw new RuntimeException("StudentManager: createStudentProxy" +
+                               " : student not in file");
   }
   
   
@@ -142,10 +141,13 @@ public class StudentManager
     
     studentMapByUnit = new StudentMap();
     IStudent student;
-    StudentUnitRecordList studentUnitRecordList = StudentUnitRecordManager.getInstance().findStudentRecordsByUnit(unitCode);
+    StudentUnitRecordList studentUnitRecordList = StudentUnitRecordManager
+                          .getInstance()
+                          .findStudentRecordsByUnit(unitCode);
    
     for (IStudentUnitRecord studentUnitRecord : studentUnitRecordList) {
-      student = createStudentProxy(new Integer(studentUnitRecord.getStudentId()));
+      student = createStudentProxy(new Integer(studentUnitRecord
+                                               .getStudentId()));
       studentMapByUnit.put(student.getStudentId(), student);
     }
     

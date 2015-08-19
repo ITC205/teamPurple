@@ -20,10 +20,6 @@ public interface IStudentUnitRecord
 
 
   public float getMarkForExam();
-  
-  
-  
-  public float calculateTotalMark();
 
 
 
@@ -36,5 +32,9 @@ public interface IStudentUnitRecord
 
 
   public void setMarkForExam(float newMark);
+  
+  
+  
+  public float calculateTotalMark();
 
 }

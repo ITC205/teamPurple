@@ -75,14 +75,6 @@ public class StudentUnitRecordProxy
 
 
 
-  public float calculateTotalMark()
-  {
-    return manager_.findStudentUnitRecord(studentId_, unitCode_)
-                   .calculateTotalMark();
-  }
-
-
-
   public void setMarkForAssignmentOne(float newMark)
   {
     manager_.findStudentUnitRecord(studentId_, unitCode_)
@@ -104,5 +96,19 @@ public class StudentUnitRecordProxy
     manager_.findStudentUnitRecord(studentId_, unitCode_)
             .setMarkForExam(newMark);
   }
+  
+  
+  
+  //===========================================================================
+  // Methods
+  //===========================================================================
 
+  
+
+  public float calculateTotalMark()
+  {
+    return manager_.findStudentUnitRecord(studentId_, unitCode_)
+                   .calculateTotalMark();
+  }
+  
 }

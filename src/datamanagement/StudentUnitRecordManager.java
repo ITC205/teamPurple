@@ -62,7 +62,7 @@ public class StudentUnitRecordManager
       return studentUnitRecord;
     }
     else {
-      studentUnitRecord = createStudentUnitRecord(studentId, unitCode);
+      studentUnitRecord = loadStudentUnitRecord(studentId, unitCode);
       return studentUnitRecord;
     }
   }
@@ -140,7 +140,7 @@ public class StudentUnitRecordManager
   
   
   
-  private IStudentUnitRecord createStudentUnitRecord(Integer studentId,
+  private IStudentUnitRecord loadStudentUnitRecord(Integer studentId,
           String unitCode)
   {
     IStudentUnitRecord studentUnitRecord;
