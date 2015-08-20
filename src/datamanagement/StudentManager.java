@@ -72,7 +72,7 @@ public class StudentManager
   
   
   // Get student record from XML file
-  private Element getStudentElement(Integer studentId) 
+  private Element retrieveStudentElement(Integer studentId) 
   {
     for (Element studentElement : (List<Element>) XMLManager.getInstance()
                                    .getDocument().getRootElement()
@@ -93,7 +93,7 @@ public class StudentManager
   private IStudent loadStudent(Integer studentId) 
   {
     IStudent student;
-    Element studentElement = getStudentElement(studentId);
+    Element studentElement = retrieveStudentElement(studentId);
     
     if (studentElement != null) {
       StudentUnitRecordList studentUnitRecordList = StudentUnitRecordManager
@@ -107,7 +107,7 @@ public class StudentManager
       return student; 
     }
     
-    throw new RuntimeException("StudentManager: createStudent" +
+    throw new RuntimeException("StudentManager : createStudent" +
                                " : student not in file");
   }
 
@@ -116,7 +116,7 @@ public class StudentManager
   // Create new student proxy
   private IStudent createStudentProxy(Integer studentId) 
   {
-    Element studentElement = getStudentElement(studentId);
+    Element studentElement = retrieveStudentElement(studentId);
 
     if (studentElement != null) {
       return new StudentProxy(studentId, studentElement
@@ -124,7 +124,7 @@ public class StudentManager
                               .getAttributeValue("lname"));
     }
     
-    throw new RuntimeException("StudentManager: createStudentProxy" +
+    throw new RuntimeException("StudentManager : createStudentProxy" +
                                " : student not in file");
   }
   

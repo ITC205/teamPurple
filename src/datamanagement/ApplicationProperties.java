@@ -32,7 +32,9 @@ public class ApplicationProperties
       properties_.load(new FileInputStream("Properties.prop"));
     } 
     catch (IOException e) {
-      throw new RuntimeException("Could not read property file");
+      throw new RuntimeException("ApplicationProperties : " +
+                                 "ApplicationProperties : " +
+                                 "Could not read property file");
     }
   }
 

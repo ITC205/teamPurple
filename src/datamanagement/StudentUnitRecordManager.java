@@ -94,9 +94,12 @@ public class StudentUnitRecordManager
         } // End if
       } // End for
 
-      if (studentRecordsByUnit.size() > 0) {
-        unitRecord_.put(unitCode, studentRecordsByUnit); // be careful - this
-      }                                                   // could be empty
+      boolean isThereRecordsToAdd = studentRecordsByUnit.size() > 0;
+      
+      if (isThereRecordsToAdd) {
+        unitRecord_.put(unitCode, studentRecordsByUnit);
+      }
+      
       return studentRecordsByUnit;
     } // End else
   }
@@ -130,10 +133,13 @@ public class StudentUnitRecordManager
                   studentUnitRecordElement.getAttributeValue("uid")));
         } // End if
       } // End for
+      
+      boolean isThereRecordsToAdd = unitRecordsByStudent.size() > 0;
+      
+      if (isThereRecordsToAdd) {
+      studentRecord_.put(studentId, unitRecordsByStudent);
+      }
 
-      if (unitRecordsByStudent.size() > 0) {
-        studentRecord_.put(studentId, unitRecordsByStudent); // be careful - this
-      }                                                       // could be empty
       return unitRecordsByStudent;
     } // End else
   }

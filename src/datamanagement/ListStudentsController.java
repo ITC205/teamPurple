@@ -8,7 +8,7 @@ public class ListStudentsController
   
   
   
-  private StudentManager studentList_;
+  private StudentManager studentManager_;
 
 
   
@@ -20,7 +20,7 @@ public class ListStudentsController
   
   public ListStudentsController()
   {
-    studentList_ = StudentManager.getInstance();
+    studentManager_ = StudentManager.getInstance();
   }
 
 
@@ -34,7 +34,7 @@ public class ListStudentsController
   public void listStudents(IStudentLister studentLister, String unitCode) 
   {
     studentLister.clearStudentsFromComboBox();
-    StudentMap studentsByUnit = studentList_.findStudentsByUnit(unitCode);
+    StudentMap studentsByUnit = studentManager_.findStudentsByUnit(unitCode);
     
     for (Integer studentId : studentsByUnit.keySet() ) {
       studentLister.addStudentToComboBox(studentsByUnit.get(studentId));
