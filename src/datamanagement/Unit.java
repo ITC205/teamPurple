@@ -109,7 +109,7 @@ public class Unit
    */
   @Override
   public String getUnitCode() {
-    return this.unitCode_;
+    return unitCode_;
   }
 
 
@@ -120,7 +120,7 @@ public class Unit
   @Override
   public String getUnitName()
   {
-    return this.unitName_;
+    return unitName_;
   }
 
 
@@ -131,7 +131,7 @@ public class Unit
   @Override
   public float getMinimumMarkForAdditionalExamination()
   {
-    return this.minimumMarkForAdditionalExamination_;
+    return minimumMarkForAdditionalExamination_;
   }
 
 
@@ -142,7 +142,7 @@ public class Unit
   @Override
   public float getMinimumMarkForPass()
   {
-    return this.minimumMarkForPass_;
+    return minimumMarkForPass_;
   }
 
 
@@ -153,7 +153,7 @@ public class Unit
   @Override
   public float getMinimumMarkForCredit()
   {
-    return this.minimumMarkForCredit_;
+    return minimumMarkForCredit_;
   }
 
 
@@ -164,7 +164,7 @@ public class Unit
   @Override
   public float getMinimumMarkForDistinction()
   {
-    return this.minimumMarkForDistinction_;
+    return minimumMarkForDistinction_;
   }
 
 
@@ -175,7 +175,7 @@ public class Unit
   @Override
   public float getMinimumMarkForHighDistinction()
   {
-    return this.minimumMarkForHighDistinction_;
+    return minimumMarkForHighDistinction_;
   }
 
 
@@ -186,7 +186,7 @@ public class Unit
   @Override
   public int getWeightOfAssignmentOne()
   {
-    return this.weightOfAssignmentOne_;
+    return weightOfAssignmentOne_;
   }
 
 
@@ -197,7 +197,7 @@ public class Unit
   @Override
   public int getWeightOfAssignmentTwo()
   {
-    return this.weightOfAssignmentTwo_;
+    return weightOfAssignmentTwo_;
   }
 
 
@@ -208,7 +208,7 @@ public class Unit
   @Override
   public int getWeightOfExam()
   {
-    return this.weightOfExam_;
+    return weightOfExam_;
   }
 
 
@@ -219,8 +219,7 @@ public class Unit
   @Override
   public IStudentUnitRecord getStudentUnitRecord(int studentId)
   {
-    for (IStudentUnitRecord studentUnitRecord :
-        this.getAllStudentUnitRecords()) {
+    for (IStudentUnitRecord studentUnitRecord : getAllStudentUnitRecords()) {
       if (studentUnitRecord.getStudentId() == studentId)
         return studentUnitRecord;
     }
@@ -235,7 +234,7 @@ public class Unit
   @Override
   public StudentUnitRecordList getAllStudentUnitRecords()
   {
-    return this.allStudentUnitRecords_;
+    return allStudentUnitRecords_;
   }
 
 
@@ -244,7 +243,7 @@ public class Unit
    *
    */
   private void setUnitCode(String unitCode) {
-    this.unitCode_ = unitCode;
+    unitCode_ = unitCode;
   }
 
 
@@ -254,7 +253,7 @@ public class Unit
    */
   private void setUnitName(String unitName)
   {
-    this.unitName_ = unitName;
+    unitName_ = unitName;
   }
 
 
@@ -265,7 +264,7 @@ public class Unit
   private void setAllStudentUnitRecords(StudentUnitRecordList
                                         allStudentUnitRecords)
   {
-    this.allStudentUnitRecords_ = allStudentUnitRecords;
+    allStudentUnitRecords_ = allStudentUnitRecords;
   }
 
 
@@ -276,7 +275,7 @@ public class Unit
   @Override
   public void setMinimumMarkForAdditionalExamination(float minimumMark)
   {
-    this.minimumMarkForAdditionalExamination_ = minimumMark;
+    minimumMarkForAdditionalExamination_ = minimumMark;
   }
 
 
@@ -287,7 +286,7 @@ public class Unit
   @Override
   public void setMinimumMarkForPass(float minimumMark)
   {
-    this.minimumMarkForPass_ = minimumMark;
+    minimumMarkForPass_ = minimumMark;
   }
 
 
@@ -298,7 +297,7 @@ public class Unit
   @Override
   public void setMinimumMarkForCredit(float minimumMark)
   {
-    this.minimumMarkForCredit_ = minimumMark;
+    minimumMarkForCredit_ = minimumMark;
   }
 
 
@@ -309,7 +308,7 @@ public class Unit
   @Override
   public void setMinimumMarkForDistinction(float minimumMark)
   {
-    this.minimumMarkForDistinction_ = minimumMark;
+    minimumMarkForDistinction_ = minimumMark;
   }
 
 
@@ -320,7 +319,7 @@ public class Unit
   @Override
   public void setMinimumMarkForHighDistinction(float minimumMark)
   {
-    this.minimumMarkForHighDistinction_ = minimumMark;
+    minimumMarkForHighDistinction_ = minimumMark;
   }
 
 
@@ -340,12 +339,12 @@ public class Unit
                                    weightOfAssignmentTwo + weightOfExam;
 
 
-    throwIfWeightsOfAssessmentsAreOutsideValidRange( weightsForAssessments );
+    throwIfWeightsOfAssessmentsAreOutsideValidRange(weightsForAssessments);
     throwIfTotalOfAssessmentWeightsIsInvalid(totalOfAssessmentWeights);
 
-    this.weightOfAssignmentOne_ = weightOfAssignmentOne;
-    this.weightOfAssignmentTwo_ = weightOfAssignmentTwo;
-    this.weightOfExam_ = weightOfExam;
+    weightOfAssignmentOne_ = weightOfAssignmentOne;
+    weightOfAssignmentTwo_ = weightOfAssignmentTwo;
+    weightOfExam_ = weightOfExam;
   }
 
   
@@ -377,61 +376,40 @@ public class Unit
 
 
 
-  /**
-   *
-   */
   private void throwIfMarksForAssessmentsAreInvalid(float[] marksForAssessments)
   {
-    boolean markIsLessThanMinimumValidMark;
-    boolean markIsGreaterThanAssessmentWeight;
+    boolean isMarkLessThanMinimumValidMark;
+    boolean isMarkGreaterThanAssessmentWeight;
     float[] weightsOfAssessments = getWeightsOfAssessments();
 
+    // check if each mark is valid and less than assessment weight
     for (int i = 0; i < marksForAssessments.length; i++) {
 
-      markIsLessThanMinimumValidMark =
-        marksForAssessments[i] < MINIMUM_VALID_MARK;
-      markIsGreaterThanAssessmentWeight =
-        marksForAssessments[i] > weightsOfAssessments[i];
+      isMarkLessThanMinimumValidMark = marksForAssessments[i] <
+                                       MINIMUM_VALID_MARK;
+      isMarkGreaterThanAssessmentWeight = marksForAssessments[i] >
+                                          weightsOfAssessments[i];
 
-      if (markIsLessThanMinimumValidMark || markIsGreaterThanAssessmentWeight) {
-        throw new RuntimeException( "marks cannot be less than zero or " +
-                                      "greater than assessment weights" );
+      if (isMarkLessThanMinimumValidMark || isMarkGreaterThanAssessmentWeight) {
+        throw new RuntimeException("marks cannot be less than zero or " +
+                                   "greater than assessment weights");
       }
     }
   }
 
 
 
-  /**
-   *
-   */
   private float[] getWeightsOfAssessments()
   {
     return new float[]{getWeightOfAssignmentOne(), getWeightOfAssignmentTwo(),
-                         getWeightOfExam()};
+                       getWeightOfExam()};
   }
 
 
 
-  /**
-   *
-   */
-  private float[] getMinimumMarksForGrades()
-  {
-    return new float[]{getMinimumMarkForAdditionalExamination(),
-                       getMinimumMarkForPass(),
-                       getMinimumMarkForCredit(),
-                       getMinimumMarkForDistinction(),
-                       getMinimumMarkForHighDistinction()};
-  }
-
-
-
-  /**
-   *
-   */
-  private String compareTotalMarkToGradeMinimums( float totalMark ) {
+  private String compareTotalMarkToGradeMinimums(float totalMark) {
     float[] minimumMarksForGrades = getMinimumMarksForGrades();
+
     for (int i = 0; i < minimumMarksForGrades.length; i++) {
       if (totalMark < minimumMarksForGrades[i]) {
         // Grade will be one position lower than minimum mark for next grade
@@ -443,7 +421,18 @@ public class Unit
   }
 
 
-  
+
+  private float[] getMinimumMarksForGrades()
+  {
+    return new float[]{getMinimumMarkForAdditionalExamination(),
+                       getMinimumMarkForPass(),
+                       getMinimumMarkForCredit(),
+                       getMinimumMarkForDistinction(),
+                       getMinimumMarkForHighDistinction()};
+  }
+
+
+
   /**
    * {@inheritDoc}
    */
@@ -481,26 +470,36 @@ public class Unit
             minimumMarkForCredit, minimumMarkForDistinction,
             minimumMarkForHighDistinction};
 
-    throwIfMarksAreOutsideValidRange( minimumMarksForGrades );
+    throwIfMarksAreOutsideValidRange(minimumMarksForGrades);
+    throwIfMinimumMarkForGradeIsHigherThanNextGrade(minimumMarksForGrades);
 
-    throwIfMinimumMarkForGradeHigherThanNextGrade(minimumMarksForGrades);
-
-    this.setMinimumMarkForPass(minimumMarkForPass);
-    this.setMinimumMarkForCredit(minimumMarkForCredit);
-    this.setMinimumMarkForDistinction(minimumMarkForDistinction);
-    this.setMinimumMarkForHighDistinction(minimumMarkForHighDistinction);
-    this.setMinimumMarkForAdditionalExamination(
-         minimumMarkForAdditionalExamination);
+    setMinimumMarkForPass(minimumMarkForPass);
+    setMinimumMarkForCredit(minimumMarkForCredit);
+    setMinimumMarkForDistinction(minimumMarkForDistinction);
+    setMinimumMarkForHighDistinction(minimumMarkForHighDistinction);
+    setMinimumMarkForAdditionalExamination(minimumMarkForAdditionalExamination);
   }
 
 
 
-  /**
-   *
-   */
-  private void throwIfMinimumMarkForGradeHigherThanNextGrade(
+  private void throwIfMarksAreOutsideValidRange(float[] minimumMarksForGrades)
+  {
+    // check if each minimum mark is valid
+    for (float minimumMark : minimumMarksForGrades) {
+
+      if (isMarkOutsideValidRange(minimumMark)) {
+        throw new RuntimeException("Assessment cutoffs cant be less than zero" +
+                                     " or greater than 100");
+      }
+    }
+  }
+
+
+
+  private void throwIfMinimumMarkForGradeIsHigherThanNextGrade(
                float[] minimumMarksForGrades)
   {
+    // check if each minimum mark is lower than the next
     for (int i = 0; i < minimumMarksForGrades.length - 1; i++) {
 
       // compare current grade minimum mark to next grade minimum grade
@@ -515,32 +514,14 @@ public class Unit
 
 
 
-  /**
-   *
-   */
-  private void throwIfMarksAreOutsideValidRange(float[] minimumMarksForGrades)
-  {
-    for (int i = 0; i < minimumMarksForGrades.length; i++) {
-
-      if (isMarkOutsideValidRange(minimumMarksForGrades[i])) {
-        throw new RuntimeException("Assessment cutoffs cant be less than zero" +
-                                   " or greater than 100");
-      }
-    }
-  }
-
-
-
-  /**
-   *
-   */
   private void throwIfWeightsOfAssessmentsAreOutsideValidRange(
                int[] weightsForAssessments)
   {
-    for (int i = 0; i < weightsForAssessments.length; i++) {
+    // check each weight is valid
+    for (int weight : weightsForAssessments) {
 
       // cast int to float in order to reuse helper method
-      if (isMarkOutsideValidRange((float)weightsForAssessments[i])) {
+      if (isMarkOutsideValidRange((float)weight)) {
         throw new RuntimeException("Assessment weights cant be less than " +
                                      "zero or greater than 100");
       }
@@ -549,15 +530,12 @@ public class Unit
 
 
 
-  /**
-   *
-   */
   private boolean isMarkOutsideValidRange(float markForAssessment)
   {
-    boolean isLowerThanMinimumValidMark =
-      markForAssessment < MINIMUM_VALID_MARK;
-    boolean isGreaterThanMaximumValidMark
-      = markForAssessment > MAXIMUM_VALID_MARK;
+    boolean isLowerThanMinimumValidMark = markForAssessment <
+                                          MINIMUM_VALID_MARK;
+    boolean isGreaterThanMaximumValidMark = markForAssessment >
+                                            MAXIMUM_VALID_MARK;
 
     return isLowerThanMinimumValidMark || isGreaterThanMaximumValidMark;
   }
