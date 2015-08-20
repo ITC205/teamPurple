@@ -38,8 +38,8 @@ public class XmlManager
 
   /**
    * Creates and initializes a new XMLManager instance following the singleton
-   * pattern.
-   * Creation of new instances is restricted through private access modifier.
+   * pattern. Creation of new instances is restricted through private access
+   * modifier.
    */
   private XmlManager()
   {
@@ -56,7 +56,7 @@ public class XmlManager
 
   /**
    * Returns the sole xmlManager instance (following the singleton pattern).
-   * @return XMLManager instance responsible for managing data from xml file.
+   * @return XmlManager instance responsible for managing data from XML file.
    */
   public static XmlManager getInstance()
   {
@@ -70,9 +70,9 @@ public class XmlManager
 
   /**
    * Returns the object which holds the transformed set of data loaded from
-   * the xml file.
+   * the XML file.
    * @return Document Holds the transformed set of data constructed by
-   * SAXBuilder expanding entities from the xml file.
+   * SAXBuilder expanding entities from the XML file.
    */
   public Document getDocument()
   {
@@ -83,10 +83,10 @@ public class XmlManager
 
   /**
    * Sets the object which holds the transformed set of data loaded from
-   * the xml file.
-   * Private access restricts use to the XMLManger instance itslef.
+   * the XML file. Private access restricts use to the XmlManger instance
+   * itself.
    * @param document Document Holds the transformed set of data constructed by
-   * SAXBuilder expanding entities from the xml file.
+   * SAXBuilder expanding entities from the XML file.
    */
   private void setDocument(Document document)
   {
@@ -102,11 +102,11 @@ public class XmlManager
 
 
   /**
-   * Initializes singleton instance xmlManager and loads data from xml file.
+   * Initializes singleton instance XmlManager, attempts to load data from
+   * XML file, logging and throwing any exceptions this causes.
    */
   public void initialize()
   {
-    // TODO: prefer a AppProperties.getInstance().getXmlFileName();
     String xmlFileName = AppProperties.getInstance().getProperties()
                                       .getProperty("XMLFILE");
     try {
@@ -122,9 +122,6 @@ public class XmlManager
 
 
 
-  /**
-   *
-   */
   private void buildFromXmlAndLoadDocument(String xmlFileName)
     throws JDOMException, IOException
   {
@@ -136,9 +133,6 @@ public class XmlManager
 
 
 
-  /**
-   *
-   */
   private void logAndThrowException(String callingMethodAndExceptionMessage)
   {
     String errorMessage = "DBMD: XMLManager : " +
@@ -150,11 +144,11 @@ public class XmlManager
 
 
   /**
-   * Saves data back to xml file.
+   * Attempts to save data back to XML file, logging and throwing any
+   * exceptions this causes.
    */
   public void saveDocument()
   {
-    // TODO: see initialize;
     String xmlFileName = AppProperties.getInstance()
                                   .getProperties().getProperty("XMLFILE");
 
@@ -178,7 +172,10 @@ public class XmlManager
 
 
   /**
-   *
+   * Transforms (and returns) the collection of Units that are stored in the
+   * XML file into a List of JDOM Elements.
+   * @return List<Element> List of JDOM Elements which represent the collection
+   * of Units from the XML file.
    */
   public List<Element> retrieveAllUnitElements()
   {
@@ -192,7 +189,10 @@ public class XmlManager
 
 
   /**
-   *
+   * Transforms (and returns) the collection of Student Unit Records that are
+   * stored in the XML file into a List of JDOM Elements.
+   * @return List<Element> List of JDOM Elements which represent the collection
+   * of Student Unit Records from the XML file.
    */
   public List<Element> retrieveAllStudentUnitRecordElements()
   {
@@ -206,7 +206,10 @@ public class XmlManager
 
 
   /**
-   *
+   * Transforms (and returns) the collection of Students that are stored in the
+   * XML file into a List of JDOM Elements.
+   * @return List<Element> List of JDOM Elements which represent the collection
+   * of Students from the XML file.
    */
   public List<Element> retrieveAllStudentElements()
   {
