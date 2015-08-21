@@ -14,7 +14,7 @@ public class Unit
   //============================================================================
 
 
-  
+
   // these static variables are all used for validation purposes
   private static final float MINIMUM_VALID_MARK = 0;
   private static final float MAXIMUM_VALID_MARK = 100;
