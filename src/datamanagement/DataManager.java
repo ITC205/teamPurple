@@ -16,7 +16,7 @@ import org.jdom.output.XMLOutputter;
  * Responsible for loading data from xml file, holding the transformed set
  * of data used by the application and saving data back to xml file.
  */
-public class XmlManager
+public class DataManager
 {
   //============================================================================
   // Variables
@@ -24,7 +24,7 @@ public class XmlManager
 
 
 
-  private static XmlManager instance_ = null;
+  private static DataManager instance_ = null;
   
   private Document document_;
 
@@ -41,7 +41,7 @@ public class XmlManager
    * pattern. Creation of new instances is restricted through private access
    * modifier.
    */
-  private XmlManager()
+  private DataManager()
   {
     initialize();
   }
@@ -58,10 +58,10 @@ public class XmlManager
    * Returns the sole xmlManager instance (following the singleton pattern).
    * @return XmlManager instance responsible for managing data from XML file.
    */
-  public static XmlManager getInstance()
+  public static DataManager getInstance()
   {
     if (instance_ == null) {
-      instance_ = new XmlManager();
+      instance_ = new DataManager();
     }
     return instance_;
   }
