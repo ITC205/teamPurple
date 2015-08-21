@@ -48,9 +48,9 @@ public class UnitManager
 
 
   /**
-   * Returns the sole xmlManager instance (following the singleton pattern).
-   * @return XMLManager Returns sole XMLManager instance responsible for
-   * managing data from xml file.
+   * Returns the sole XmlManager instance (following the singleton pattern).
+   * @return XmlManager Returns sole XmlManager instance responsible for
+   * managing data from XML file.
    */
   public static UnitManager getInstance()
   {
@@ -63,25 +63,7 @@ public class UnitManager
 
 
   /**
-   * Returns a unit from the collection of units, and if not not in the
-   * collection it checks if the unit exists in the xml file (and if so,
-   * instantiates it and adds it to the collection)
-   * @param unitCode Unit code.
-   * @return IUnit Returns a unit.
-   */
-  public IUnit getUnit(String unitCode)
-  {
-    IUnit unit = this.getUnits().get(unitCode);
-    if (unit == null) {
-      unit = loadUnit(unitCode);
-    }
-    return unit;
-  }
-
-
-
-  /**
-   * Returns the collection of all units held by this unitManager singleton.
+   * Returns the collection of all units held by this UnitManager singleton.
    * Private access restricts use to this instance only.
    * @return UnitMap Returns a UnitMap.
    */
@@ -93,7 +75,7 @@ public class UnitManager
 
 
   /**
-   * Adds a unit to collection of all units held by this unitManager singleton.
+   * Adds a unit to collection of all units held by this UnitManager singleton.
    * Private access restricts use to this instance only.
    * @param unitMap unitMap replaces the current collection of units.
    */
@@ -107,6 +89,25 @@ public class UnitManager
   //============================================================================
   // Methods
   //============================================================================
+
+  /**
+   * Returns a unit from the collection of units, and if not not in the
+   * collection it checks if the unit exists in the XML file (and if so,
+   * instantiates it and adds it to the collection)
+   * @param unitCode Unit code.
+   * @return IUnit Returns a unit.
+   */
+  public IUnit findUnit(String unitCode)
+  {
+    IUnit unit = this.getUnits().get(unitCode);
+    // if not in collection, load it from XML file (if it exists)
+    if (unit == null) {
+      unit = loadUnit(unitCode);
+    }
+    return unit;
+  }
+
+
 
   /**
    * Returns (after instantiation of the objects) the collection of units that
@@ -125,7 +126,7 @@ public class UnitManager
 
 
   /**
-   * Returns the xml Elements that represent the persisted unit objects.
+   * Returns the JDOM Elements that represent the persisted unit objects.
    * @return List<Element> Returns the list of Elements that represent units.
    */
   private List<Element> retrieveAllUnitElements()
@@ -138,8 +139,8 @@ public class UnitManager
   /**
    * Creates a collection of all the unit proxies from the representation in
    * the persistence layer.
-   * @param allUnitElements List<Element> List of Elements that represents
-   *                        the units in the persistence layer.
+   * @param allUnitElements List<Element> List of JDOM Elements that represents
+   *                        the units from the persistence layer.
    * @return UnitMap Returns UnitMap containing all the instantiated Unit
    *         Proxy objects.
    */
@@ -181,7 +182,7 @@ public class UnitManager
 
 
   /**
-   * Returns the xml Element that represents the persisted unit object.
+   * Returns the JDOM Element that represents the persisted unit object.
    * @param unitCode String Unit code.
    * @return Element Returns the Element that represents the specified unit.
    */
@@ -200,7 +201,7 @@ public class UnitManager
 
   /**
    * Creates a unit object from the representation in the persistence layer.
-   * @param unitElement Element XML Element that represents the unit.
+   * @param unitElement Element JDOM Element that represents the unit.
    * @param unitCode Unit code used to match unit in persistence layer.
    * @return IUnit Returns unit.
    */
