@@ -14,11 +14,11 @@ public class Unit
   //============================================================================
 
 
-
+  // these static variables are all used for validation purposes
   private static final float MINIMUM_VALID_MARK = 0;
   private static final float MAXIMUM_VALID_MARK = 100;
   private static final int TOTAL_OF_ASSESSMENT_WEIGHTS = 100;
-  private static final String[] GRADES = {"FL","AE","PS","CR","DI","HD"};
+  private static final String[] GRADES = {"FL", "AE", "PS", "CR", "DI", "HD"};
 
   private String unitCode_;
   private String unitName_;
@@ -79,21 +79,21 @@ public class Unit
               int weightOfAssignmentOne, int weightOfAssignmentTwo,
               int weightOfExam, StudentUnitRecordList studentUnitRecordList)
   {
-    this.setUnitCode(unitCode);
-    this.setUnitName(unitName);
+    setUnitCode( unitCode );
+    setUnitName( unitName );
 
-    this.setMinimumMarksForGrades(minimumMarkForPass, minimumMarkForCredit,
-                                  minimumMarkForDistinction,
-                                  minimumMarkForHighDistinction,
-                                  minimumMarkForAdditionalExamination);
+    setMinimumMarksForGrades( minimumMarkForPass, minimumMarkForCredit,
+                              minimumMarkForDistinction,
+                              minimumMarkForHighDistinction,
+                              minimumMarkForAdditionalExamination );
 
-    this.setWeightsOfAssessments(weightOfAssignmentOne, weightOfAssignmentTwo,
-                                 weightOfExam);
+    setWeightsOfAssessments( weightOfAssignmentOne, weightOfAssignmentTwo,
+                             weightOfExam );
 
     if (studentUnitRecordList == null) {
       studentUnitRecordList = new StudentUnitRecordList();
     }
-    this.setAllStudentUnitRecords(studentUnitRecordList);
+    setAllStudentUnitRecords( studentUnitRecordList );
   }
 
 
@@ -332,6 +332,7 @@ public class Unit
                                       int weightOfAssignmentTwo,
                                       int weightOfExam)
   {
+    // array used to validate each weight
     int[] weightsForAssessments = {weightOfAssignmentOne,
                                    weightOfAssignmentTwo, weightOfExam};
 
@@ -365,6 +366,7 @@ public class Unit
   {
     float totalMark = markForAssignmentOne + markForAssignmentTwo + markForExam;
 
+    // array used to validate each mark
     float[] marksForAssessments = new float[]{markForAssignmentOne,
                                               markForAssignmentTwo,
                                               markForExam};
@@ -380,6 +382,7 @@ public class Unit
   {
     boolean isMarkLessThanMinimumValidMark;
     boolean isMarkGreaterThanAssessmentWeight;
+    // array used to validate each mark, by comparing against the weight
     float[] weightsOfAssessments = getWeightsOfAssessments();
 
     // check if each mark is valid and less than assessment weight
@@ -408,6 +411,7 @@ public class Unit
 
 
   private String compareTotalMarkToGradeMinimums(float totalMark) {
+    // array of minimum marks used to compare to totalMark
     float[] minimumMarksForGrades = getMinimumMarksForGrades();
 
     for (int i = 0; i < minimumMarksForGrades.length; i++) {
