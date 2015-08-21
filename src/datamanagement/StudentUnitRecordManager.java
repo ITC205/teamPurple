@@ -55,8 +55,8 @@ public class StudentUnitRecordManager
           String unitCode)
   {
     IStudentUnitRecord studentUnitRecord = studentUnitRecordMap_
-                                           .get(studentId.toString() +
-                                           unitCode);
+                                           .get( studentId.toString() +
+                                                   unitCode );
 
     if (studentUnitRecord != null) {
       return studentUnitRecord;
@@ -78,7 +78,7 @@ public class StudentUnitRecordManager
     }
     else {
       studentRecordsByUnit = new StudentUnitRecordList();
-      List<Element> allStudentUnitRecordElements = (List<Element>) XmlManager
+      List<Element> allStudentUnitRecordElements = (List<Element>) DataManager
                                              .getInstance()
                                              .getDocument().getRootElement()
                                              .getChild("studentUnitRecordTable")
@@ -112,7 +112,7 @@ public class StudentUnitRecordManager
     }
     else {
       unitRecordsByStudent = new StudentUnitRecordList();
-      List<Element> allStudentUnitRecordElements = (List<Element>) XmlManager
+      List<Element> allStudentUnitRecordElements = (List<Element>) DataManager
                                               .getInstance()
                                              .getDocument().getRootElement()
                                              .getChild("studentUnitRecordTable")
@@ -145,7 +145,7 @@ public class StudentUnitRecordManager
   {
     IStudentUnitRecord studentUnitRecord;
 
-    List<Element> allStudentUnitRecordElements = (List<Element>) XmlManager
+    List<Element> allStudentUnitRecordElements = (List<Element>) DataManager
                                              .getInstance()
                                              .getDocument().getRootElement()
                                              .getChild("studentUnitRecordTable")
@@ -197,7 +197,7 @@ public class StudentUnitRecordManager
 
   public void saveStudentUnitRecord(IStudentUnitRecord studentUnitRecord)
   {
-    List<Element> allStudentUnitRecordElements = (List<Element>) XmlManager
+    List<Element> allStudentUnitRecordElements = (List<Element>) DataManager
                                              .getInstance()
                                              .getDocument().getRootElement()
                                              .getChild("studentUnitRecordTable")
@@ -225,7 +225,7 @@ public class StudentUnitRecordManager
         studentUnitRecordElement.setAttribute("exam",
                 new Float(studentUnitRecord.getMarkForExam()).toString());
 
-        XmlManager.getInstance().saveDocument(); // write out the XML file for
+        DataManager.getInstance().saveDocument(); // write out the XML file for
                                                  // continuous save
         return;
       }   // End if

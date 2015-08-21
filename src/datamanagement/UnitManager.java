@@ -131,7 +131,7 @@ public class UnitManager
    */
   private List<Element> retrieveAllUnitElements()
   {
-    return XmlManager.getInstance().retrieveAllUnitElements();
+    return DataManager.getInstance().retrieveAllUnitElements();
   }
 
 
@@ -226,7 +226,7 @@ public class UnitManager
                     Integer.valueOf(unitElement.getAttributeValue("examwgt"))
                            .intValue(),
                     StudentUnitRecordManager.getInstance()
-                           .findStudentRecordsByUnit(unitCode));
+                           .findStudentRecordsByUnit( unitCode ));
   }
 
 
