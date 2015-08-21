@@ -52,7 +52,7 @@ public class UnitProxy
    * @return IUnit Actual unit that this object proxies.
    */
   private IUnit getActualUnit() {
-    return this.getUnitManager().getUnit(this.getUnitCode());
+    return this.getUnitManager().findUnit(this.getUnitCode());
   }
 
 

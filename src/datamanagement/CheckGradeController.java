@@ -103,7 +103,7 @@ public class CheckGradeController
   public String checkGradeHandler(float markForAssignmentOne,
                                   float markForAssignmentTwo, float markForExam)
   {
-    IUnit unit = UnitManager.getInstance().getUnit(currentUnitCode_);
+    IUnit unit = UnitManager.getInstance().findUnit(currentUnitCode_);
     String grade = unit.calculateGrade(markForAssignmentOne,
                                        markForAssignmentTwo, markForExam);
 
@@ -122,7 +122,7 @@ public class CheckGradeController
                                float markForAssignmentTwo, float markForExam)
   {
 
-    IUnit unit = UnitManager.getInstance().getUnit(currentUnitCode_);
+    IUnit unit = UnitManager.getInstance().findUnit(currentUnitCode_);
     IStudent student = StudentManager.get().getStudent(currentStudentId_);
     IStudentUnitRecord studentUnitRecord =
         student.getUnitRecord(currentUnitCode_);
