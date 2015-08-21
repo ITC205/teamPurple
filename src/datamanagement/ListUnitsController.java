@@ -1,7 +1,7 @@
 package datamanagement;
 
 /**
- *
+ * Controls the list of Units that is displayed within the GUI controls.
  */
 public class ListUnitsController
 {
@@ -39,11 +39,14 @@ public class ListUnitsController
 
 
   /**
-   *
+   * Returns the singleton UnitManager instance that holds the collection of
+   * units.
+   * @return UnitManager Returns the UnitManager instance that holds the
+   * collection of units.
    */
   private UnitManager getUnitManager()
   {
-    return this.unitManager_;
+    return unitManager_;
   }
 
 
@@ -55,7 +58,9 @@ public class ListUnitsController
 
 
   /**
-   *
+   * Updates the list of Units that is displayed within the GUI controls.
+   * @param unitLister IUnitLister The GUI control that displays the list of
+   *                   Units.
    */
   public void listAllUnits(IUnitLister unitLister)
   {
