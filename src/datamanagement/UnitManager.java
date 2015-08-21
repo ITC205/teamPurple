@@ -69,7 +69,7 @@ public class UnitManager
    */
   private UnitMap getUnits()
   {
-    return this.allUnits_;
+    return allUnits_;
   }
 
 
@@ -81,7 +81,7 @@ public class UnitManager
    */
   private void setUnits(UnitMap unitMap)
   {
-    this.allUnits_ = unitMap;
+    allUnits_ = unitMap;
   }
 
 
@@ -99,7 +99,7 @@ public class UnitManager
    */
   public IUnit findUnit(String unitCode)
   {
-    IUnit unit = this.getUnits().get(unitCode);
+    IUnit unit = getUnits().get(unitCode);
     // if not in collection, load it from XML file (if it exists)
     if (unit == null) {
       unit = loadUnit(unitCode);
@@ -144,7 +144,7 @@ public class UnitManager
    * @return UnitMap Returns UnitMap containing all the instantiated Unit
    *         Proxy objects.
    */
-  private UnitMap createAllRetrievedUnitProxies( List<Element> allUnitElements )
+  private UnitMap createAllRetrievedUnitProxies(List<Element> allUnitElements)
   {
     UnitMap unitMap = new UnitMap();
     IUnit unit;
@@ -167,7 +167,7 @@ public class UnitManager
    */
   private IUnit loadUnit(String unitCode) {
 
-    Element unitElement = retrieveUnitElement( unitCode );
+    Element unitElement = retrieveUnitElement(unitCode);
 
     if (unitElement == null) {
       throw new RuntimeException("UnitManager: loadUnit : unit not in file");
@@ -205,7 +205,7 @@ public class UnitManager
    * @param unitCode Unit code used to match unit in persistence layer.
    * @return IUnit Returns unit.
    */
-  private IUnit createRetrievedUnit( Element unitElement, String unitCode )
+  private IUnit createRetrievedUnit(Element unitElement, String unitCode)
   {
     return new Unit(unitElement.getAttributeValue("uid"),
                     unitElement.getAttributeValue("name"),
@@ -226,7 +226,7 @@ public class UnitManager
                     Integer.valueOf(unitElement.getAttributeValue("examwgt"))
                            .intValue(),
                     StudentUnitRecordManager.getInstance()
-                           .findStudentRecordsByUnit( unitCode ));
+                           .findStudentRecordsByUnit(unitCode));
   }
 
 
@@ -239,9 +239,9 @@ public class UnitManager
    */
   private void addUnitToCollection(IUnit unit)
   {
-    UnitMap unitMap = this.getUnits();
+    UnitMap unitMap = getUnits();
     unitMap.put(unit.getUnitCode(), unit);
-    this.setUnits(unitMap);
+    setUnits(unitMap);
   }
 
 }
