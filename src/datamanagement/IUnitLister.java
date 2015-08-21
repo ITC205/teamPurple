@@ -1,7 +1,7 @@
 package datamanagement;
 
 /**
- * Clears and updates display of selected unit
+ * Displays (and clears) list of Units within GUI controls.
  */
 public interface IUnitLister
 {
