@@ -14,9 +14,9 @@ public class StudentUnitRecordManager
 
 
   private static StudentUnitRecordManager instance_ = null;
-  private StudentUnitRecordMap studentUnitRecordMap_;
-  private HashMap<String, StudentUnitRecordList> unitRecord_;
-  private HashMap<Integer, StudentUnitRecordList> studentRecord_;
+  private StudentUnitRecordMap allStudentUnitRecordsMap_;
+  private HashMap<String, StudentUnitRecordList> studentRecordsByUnitMap_;
+  private HashMap<Integer, StudentUnitRecordList> unitRecordsByStudentMap_;
 
 
 
@@ -28,19 +28,19 @@ public class StudentUnitRecordManager
 
   private StudentUnitRecordManager()
   {
-    studentUnitRecordMap_ = new StudentUnitRecordMap();
-    unitRecord_ = new HashMap<>();
-    studentRecord_ = new HashMap<>();
+    allStudentUnitRecordsMap_ = new StudentUnitRecordMap();
+    studentRecordsByUnitMap_ = new HashMap<>();
+    unitRecordsByStudentMap_ = new HashMap<>();
   }
 
 
  
-  // ===========================================================================
-  // Methods
-  // ===========================================================================
-
-
-
+  //===========================================================================
+  // Getters and Setters
+  //===========================================================================
+  
+  
+  
   public static StudentUnitRecordManager getInstance()
   {
     if (instance_ == null) {
@@ -51,10 +51,16 @@ public class StudentUnitRecordManager
 
 
 
+  // ===========================================================================
+  // Methods
+  // ===========================================================================
+
+
+
   public IStudentUnitRecord findStudentUnitRecord(Integer studentId,
           String unitCode)
   {
-    IStudentUnitRecord studentUnitRecord = studentUnitRecordMap_
+    IStudentUnitRecord studentUnitRecord = allStudentUnitRecordsMap_
                                            .get(studentId.toString() + 
                                            unitCode);
 
@@ -71,7 +77,7 @@ public class StudentUnitRecordManager
   
   public StudentUnitRecordList findStudentRecordsByUnit(String unitCode)
   {
-    StudentUnitRecordList studentRecordsByUnit = unitRecord_.get(unitCode);
+    StudentUnitRecordList studentRecordsByUnit = studentRecordsByUnitMap_.get(unitCode);
 
     if (studentRecordsByUnit != null) {
       return studentRecordsByUnit;
@@ -97,7 +103,7 @@ public class StudentUnitRecordManager
       boolean isThereRecordsToAdd = studentRecordsByUnit.size() > 0;
       
       if (isThereRecordsToAdd) {
-        unitRecord_.put(unitCode, studentRecordsByUnit);
+        studentRecordsByUnitMap_.put(unitCode, studentRecordsByUnit);
       }
       
       return studentRecordsByUnit;
@@ -108,7 +114,7 @@ public class StudentUnitRecordManager
 
   public StudentUnitRecordList findUnitRecordsByStudent(Integer studentId)
   {
-    StudentUnitRecordList unitRecordsByStudent = studentRecord_.get(studentId);
+    StudentUnitRecordList unitRecordsByStudent = unitRecordsByStudentMap_.get(studentId);
 
     if (unitRecordsByStudent != null) {
       return unitRecordsByStudent;
@@ -137,7 +143,7 @@ public class StudentUnitRecordManager
       boolean isThereRecordsToAdd = unitRecordsByStudent.size() > 0;
       
       if (isThereRecordsToAdd) {
-      studentRecord_.put(studentId, unitRecordsByStudent);
+        unitRecordsByStudentMap_.put(studentId, unitRecordsByStudent);
       }
 
       return unitRecordsByStudent;
@@ -186,7 +192,7 @@ public class StudentUnitRecordManager
                                                   markForAssignmentTwo, 
                                                   markForExam);
 
-        studentUnitRecordMap_.put(studentUnitRecord.getStudentId().toString()
+        allStudentUnitRecordsMap_.put(studentUnitRecord.getStudentId().toString()
                      + studentUnitRecord.getUnitCode(), 
                        studentUnitRecord);
 

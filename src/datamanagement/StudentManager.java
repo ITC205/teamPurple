@@ -15,8 +15,8 @@ public class StudentManager
   
   private static StudentManager instance_ = null;
 
-  private StudentMap studentMap_;
-  private HashMap<String, StudentMap> unitMap_;
+  private StudentMap allStudentsMap_;
+  private HashMap<String, StudentMap> studentsByUnitMap_;
 
   
   
@@ -28,8 +28,8 @@ public class StudentManager
   
   private StudentManager() 
   {
-    studentMap_ = new StudentMap();
-    unitMap_ = new HashMap<>();
+    allStudentsMap_ = new StudentMap();
+    studentsByUnitMap_ = new HashMap<>();
   }
 
   
@@ -59,7 +59,7 @@ public class StudentManager
   // Create new student or return existing student
   public IStudent findStudent(Integer studentId) 
   {
-    IStudent student = studentMap_.get(studentId);
+    IStudent student = allStudentsMap_.get(studentId);
     
     if (student == null) {
       return loadStudent(studentId);
@@ -96,14 +96,14 @@ public class StudentManager
     Element studentElement = retrieveStudentElement(studentId);
     
     if (studentElement != null) {
-      StudentUnitRecordList studentUnitRecordList = StudentUnitRecordManager
+      StudentUnitRecordList unitRecordsByStudent = StudentUnitRecordManager
                             .getInstance()
                             .findUnitRecordsByStudent(studentId);
       student = new Student(new Integer(studentElement
                             .getAttributeValue("sid")),studentElement
                             .getAttributeValue("fname"),studentElement
-                            .getAttributeValue("lname"),studentUnitRecordList);
-      studentMap_.put(student.getStudentId(), student);
+                            .getAttributeValue("lname"),unitRecordsByStudent);
+      allStudentsMap_.put(student.getStudentId(), student);
       return student; 
     }
     
@@ -130,29 +130,29 @@ public class StudentManager
   
   
   
-   // Return students studying unitCode
+  // Return students studying unitCode
   public StudentMap findStudentsByUnit(String unitCode) 
   {
-    StudentMap studentMapByUnit = unitMap_.get(unitCode);
+    StudentMap mapOfStudentsInUnit_ = studentsByUnitMap_.get(unitCode);
     
-    if (studentMapByUnit != null) {
-      return studentMapByUnit;
+    if (mapOfStudentsInUnit_ != null) {
+      return mapOfStudentsInUnit_;
     }
     
-    studentMapByUnit = new StudentMap();
+    mapOfStudentsInUnit_ = new StudentMap();
     IStudent student;
-    StudentUnitRecordList studentUnitRecordList = StudentUnitRecordManager
+    StudentUnitRecordList studentRecordsByUnit = StudentUnitRecordManager
                           .getInstance()
                           .findStudentRecordsByUnit(unitCode);
    
-    for (IStudentUnitRecord studentUnitRecord : studentUnitRecordList) {
+    for (IStudentUnitRecord studentUnitRecord : studentRecordsByUnit) {
       student = createStudentProxy(new Integer(studentUnitRecord
                                                .getStudentId()));
-      studentMapByUnit.put(student.getStudentId(), student);
+      mapOfStudentsInUnit_.put(student.getStudentId(), student);
     }
     
-    unitMap_.put( unitCode, studentMapByUnit);
-    return studentMapByUnit;
+    studentsByUnitMap_.put( unitCode, mapOfStudentsInUnit_);
+    return mapOfStudentsInUnit_;
   }
    
 }
