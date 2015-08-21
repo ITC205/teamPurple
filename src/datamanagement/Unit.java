@@ -14,6 +14,7 @@ public class Unit
   //============================================================================
 
 
+  
   // these static variables are all used for validation purposes
   private static final float MINIMUM_VALID_MARK = 0;
   private static final float MAXIMUM_VALID_MARK = 100;
@@ -79,16 +80,16 @@ public class Unit
               int weightOfAssignmentOne, int weightOfAssignmentTwo,
               int weightOfExam, StudentUnitRecordList studentUnitRecordList)
   {
-    setUnitCode( unitCode );
-    setUnitName( unitName );
+    setUnitCode(unitCode);
+    setUnitName(unitName);
 
-    setMinimumMarksForGrades( minimumMarkForPass, minimumMarkForCredit,
-                              minimumMarkForDistinction,
-                              minimumMarkForHighDistinction,
-                              minimumMarkForAdditionalExamination );
+    setMinimumMarksForGrades(minimumMarkForPass, minimumMarkForCredit,
+                             minimumMarkForDistinction,
+                             minimumMarkForHighDistinction,
+                             minimumMarkForAdditionalExamination);
 
-    setWeightsOfAssessments( weightOfAssignmentOne, weightOfAssignmentTwo,
-                             weightOfExam );
+    setWeightsOfAssessments(weightOfAssignmentOne, weightOfAssignmentTwo,
+                            weightOfExam);
 
     if (studentUnitRecordList == null) {
       studentUnitRecordList = new StudentUnitRecordList();
@@ -493,7 +494,7 @@ public class Unit
 
       if (isMarkOutsideValidRange(minimumMark)) {
         throw new RuntimeException("Assessment cutoffs cant be less than zero" +
-                                     " or greater than 100");
+                                   " or greater than 100");
       }
     }
   }
@@ -527,7 +528,7 @@ public class Unit
       // cast int to float in order to reuse helper method
       if (isMarkOutsideValidRange((float)weight)) {
         throw new RuntimeException("Assessment weights cant be less than " +
-                                     "zero or greater than 100");
+                                   "zero or greater than 100");
       }
     }
   }
