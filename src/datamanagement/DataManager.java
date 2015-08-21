@@ -76,7 +76,7 @@ public class DataManager
    */
   public Document getDocument()
   {
-    return this.document_;
+    return document_;
   }
 
 
@@ -90,7 +90,7 @@ public class DataManager
    */
   private void setDocument(Document document)
   {
-    this.document_ = document;
+    document_ = document;
   }
 
 
@@ -135,8 +135,8 @@ public class DataManager
 
   private void logAndThrowException(String callingMethodAndExceptionMessage)
   {
-    String errorMessage = "DBMD: XMLManager : " +
-                          callingMethodAndExceptionMessage;
+    String errorMessage = "XMLManager : " + callingMethodAndExceptionMessage;
+
     System.err.printf("%s", errorMessage + "\n");
     throw new RuntimeException(errorMessage);
   }
