@@ -1,28 +1,33 @@
 package datamanagement;
 
-
-public class StudentProxy implements IStudent 
+public class StudentProxy 
+  implements IStudent 
 {
   //===========================================================================
   // Variables
   //===========================================================================
   
+  
+  
   private Integer studentId_;
   private String firstName_;
   private String lastName_;
-  private StudentManager allStudents_;
+  private StudentManager studentManager_;
 
+  
   
   //===========================================================================
   // Constructors
   //===========================================================================
+  
+  
   
   public StudentProxy(Integer studentId, String firstName, String lastName) 
   {
     studentId_ = studentId;
     firstName_ = firstName;
     lastName_ = lastName;
-    allStudents_ = StudentManager.getInstance();
+    studentManager_ = StudentManager.getInstance();
   }
 
 
@@ -30,6 +35,8 @@ public class StudentProxy implements IStudent
   //===========================================================================
   // Getters and Setters
   //===========================================================================
+  
+  
   
   public Integer getStudentId() 
   { 
@@ -54,42 +61,43 @@ public class StudentProxy implements IStudent
   
   public void setFirstName(String firstName) 
   {
-    allStudents_.findStudent(studentId_).setFirstName(firstName);
+    studentManager_.findStudent(studentId_).setFirstName(firstName);
   }
 
   
   
   public void setLastName(String lastName) 
   {
-    allStudents_.findStudent(studentId_).setLastName(lastName);
+    studentManager_.findStudent(studentId_).setLastName(lastName);
   }
-
+  
+  
+  
+  //===========================================================================
+  // Methods
+  //===========================================================================
+  
+  
+  
+  public IStudentUnitRecord retrieveStudentUnitRecord(String unitCode) 
+  {
+    return studentManager_.findStudent(studentId_)
+                          .retrieveStudentUnitRecord(unitCode);
+  }
+  
   
   
   public void addStudentUnitRecord(IStudentUnitRecord record) 
   {
-    allStudents_.findStudent(studentId_).addStudentUnitRecord(record);
-  }
-  
-  
-  
-  //===========================================================================
-  // Methods: primary
-  //===========================================================================
-  
-  public IStudentUnitRecord retrieveStudentUnitRecord(String unitCode) 
-  {
-    return allStudents_.findStudent(studentId_).retrieveStudentUnitRecord(unitCode);
+    studentManager_.findStudent(studentId_).addStudentUnitRecord(record);
   }
   
   
   
   public StudentUnitRecordList retrieveAllStudentUnitRecords() 
   { 
-    return allStudents_.findStudent(studentId_).retrieveAllStudentUnitRecords();
+    return studentManager_.findStudent(studentId_)
+                          .retrieveAllStudentUnitRecords();
   }
+
 }
-
-
-
-

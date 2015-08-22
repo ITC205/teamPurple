@@ -2,6 +2,7 @@ package datamanagement;
 
 public interface IStudentUnitRecord
 {
+  
   public Integer getStudentId();
 
 
@@ -22,10 +23,6 @@ public interface IStudentUnitRecord
 
 
 
-  public float calculateTotalMark();
-
-
-
   public void setMarkForAssignmentOne(float newMark);
 
 
@@ -35,6 +32,9 @@ public interface IStudentUnitRecord
 
 
   public void setMarkForExam(float newMark);
-
+  
+  
+  
+  public float calculateTotalMark();
 
 }

@@ -60,7 +60,8 @@ public class CheckGradeController
       userInterface_.setSelectStudentComboBoxEnabled(false);
     }
     else {
-      ListStudentsCTL listStudentsController = new ListStudentsCTL();
+      ListStudentsController listStudentsController = 
+                                  new ListStudentsController();
       
       listStudentsController.listStudents(userInterface_, unitCode);
       currentUnitCode_ = unitCode;

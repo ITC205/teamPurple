@@ -1,11 +1,13 @@
 package datamanagement;
 
-
-public class Student implements IStudent 
+public class Student
+  implements IStudent 
 {
   //===========================================================================
   // Variables
   //===========================================================================
+  
+  
   
   private Integer studentId_; 
   private String firstName_;
@@ -13,12 +15,15 @@ public class Student implements IStudent
   private StudentUnitRecordList allStudentUnitRecords_;
 
   
+  
   //===========================================================================
   // Constructors
   //===========================================================================
   
-  public Student(Integer studentId, String firstName, String lastName
-                   , StudentUnitRecordList allStudentUnitRecords)
+  
+  
+  public Student(Integer studentId, String firstName, String lastName,
+                 StudentUnitRecordList allStudentUnitRecords)
   { 
     studentId_ = studentId; 
     firstName_ = firstName;
@@ -36,6 +41,8 @@ public class Student implements IStudent
   //===========================================================================
   // Getters and Setters
   //===========================================================================
+  
+  
   
   public Integer getStudentId() 
   { 
@@ -58,13 +65,6 @@ public class Student implements IStudent
 
   
   
-  public StudentUnitRecordList retrieveAllStudentUnitRecords() 
-  { 
-    return allStudentUnitRecords_; 
-  }
-
-  
-  
   public void setFirstName(String firstName) 
   { 
     firstName_ = firstName;
@@ -80,8 +80,17 @@ public class Student implements IStudent
   
   
   //===========================================================================
-  // Methods: primary
+  // Methods
   //===========================================================================
+  
+  
+  
+  public StudentUnitRecordList retrieveAllStudentUnitRecords() 
+  { 
+    return allStudentUnitRecords_; 
+  }
+  
+  
   
   public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord) 
   { 
@@ -101,6 +110,4 @@ public class Student implements IStudent
     return null;   
   }
   
-  
-
 }
