@@ -133,13 +133,13 @@ public class StudentManager
   // Return students studying unitCode
   public StudentMap findStudentsByUnit(String unitCode) 
   {
-    StudentMap mapOfStudentsInUnit_ = studentsByUnitMap_.get(unitCode);
+    StudentMap studentsInUnit = studentsByUnitMap_.get(unitCode);
     
-    if (mapOfStudentsInUnit_ != null) {
-      return mapOfStudentsInUnit_;
+    if (studentsInUnit != null) {
+      return studentsInUnit;
     }
     
-    mapOfStudentsInUnit_ = new StudentMap();
+    studentsInUnit = new StudentMap();
     IStudent student;
     StudentUnitRecordList studentRecordsByUnit = StudentUnitRecordManager
                           .getInstance()
@@ -148,11 +148,11 @@ public class StudentManager
     for (IStudentUnitRecord studentUnitRecord : studentRecordsByUnit) {
       student = createStudentProxy(new Integer(studentUnitRecord
                                                .getStudentId()));
-      mapOfStudentsInUnit_.put(student.getStudentId(), student);
+      studentsInUnit.put(student.getStudentId(), student);
     }
     
-    studentsByUnitMap_.put( unitCode, mapOfStudentsInUnit_);
-    return mapOfStudentsInUnit_;
+    studentsByUnitMap_.put( unitCode, studentsInUnit);
+    return studentsInUnit;
   }
    
 }
