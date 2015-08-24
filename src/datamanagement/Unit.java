@@ -27,8 +27,8 @@ public class Unit
   private static final String CODE_DISTINCTION = "DI";
   private static final String CODE_HIGH_DISTINCTION = "HD";
 
-  private static final String[] GRADE_CODES = {CODE_FAIL,
-                                               CODE_ADDITIONAL_EXAMINATION,
+  // does not include Fail, as there is no minimum mark for a fail to check
+  private static final String[] GRADE_CODES = {CODE_ADDITIONAL_EXAMINATION,
                                                CODE_PASS, CODE_CREDIT,
                                                CODE_DISTINCTION,
                                                CODE_HIGH_DISTINCTION};
@@ -373,6 +373,45 @@ public class Unit
 
 
 
+
+  private void throwIfWeightsOfAssessmentsAreOutsideValidRange(
+               int[] weightsForAssessments)
+  {
+    // check each weight is valid
+    for (int weight : weightsForAssessments) {
+
+      // cast int to float in order to reuse helper method
+      if (isMarkOutsideValidRange((float)weight)) {
+        throw new RuntimeException("Assessment weights can't be less than " +
+                                     "zero or greater than 100");
+      }
+    }
+  }
+
+
+
+  private boolean isMarkOutsideValidRange(float markForAssessment)
+  {
+    boolean isLowerThanMinimumValidMark = markForAssessment <
+                                            MINIMUM_VALID_MARK;
+    boolean isGreaterThanMaximumValidMark = markForAssessment >
+                                              MAXIMUM_VALID_MARK;
+
+    return isLowerThanMinimumValidMark || isGreaterThanMaximumValidMark;
+  }
+
+
+
+  private void throwIfTotalOfAssessmentWeightsIsInvalid(
+               int totalOfAssessmentWeights)
+  {
+    if (totalOfAssessmentWeights != TOTAL_OF_ASSESSMENT_WEIGHTS) {
+      throw new RuntimeException("Assessment weights must add to 100");
+    }
+  }
+
+
+
   /**
    * {@inheritDoc}
    */
@@ -388,7 +427,7 @@ public class Unit
                                               markForAssignmentTwo,
                                               markForExam};
 
-    throwIfMarksForAssessmentsAreInvalid(marksForAssessments);
+    throwIfMarksForAssessmentsAreInvalid( marksForAssessments );
 
     return compareTotalMarkToGradeMinimums(totalMark);
   }
@@ -400,7 +439,9 @@ public class Unit
     boolean isMarkLessThanMinimumValidMark;
     boolean isMarkGreaterThanAssessmentWeight;
     // array used to validate each mark, by comparing against the weight
-    float[] weightsOfAssessments = getWeightsOfAssessments();
+    float[] weightsOfAssessments = {getWeightOfAssignmentOne(),
+                                    getWeightOfAssignmentTwo(),
+                                    getWeightOfExam()};
 
     // check if each mark is valid and less than assessment weight
     for (int i = 0; i < marksForAssessments.length; i++) {
@@ -419,14 +460,6 @@ public class Unit
 
 
 
-  private float[] getWeightsOfAssessments()
-  {
-    return new float[]{getWeightOfAssignmentOne(), getWeightOfAssignmentTwo(),
-                       getWeightOfExam()};
-  }
-
-
-
   private String compareTotalMarkToGradeMinimums(float totalMark) {
     for (Grade grade : grades_) {
       if (totalMark >= grade.getMinimumMarkRequired()) {
@@ -434,17 +467,6 @@ public class Unit
       }
     }
     return CODE_FAIL;
-  }
-
-
-
-  private float[] getMinimumMarksForGrades()
-  {
-    return new float[]{getMinimumMarkForAdditionalExamination(),
-                       getMinimumMarkForPass(),
-                       getMinimumMarkForCredit(),
-                       getMinimumMarkForDistinction(),
-                       getMinimumMarkForHighDistinction()};
   }
 
 
@@ -519,50 +541,11 @@ public class Unit
     for (int i = 0; i < minimumMarksForGrades.length - 1; i++) {
 
       // compare current grade minimum mark to next grade minimum grade
-      // actual grade is one position higher in its array (as there is no
-      // minimum mark for a FL
       if (minimumMarksForGrades[i] >= minimumMarksForGrades[i+1]) {
-        throw new RuntimeException( GRADE_CODES[i+1] + " cutoff must be less than " +
-                                   GRADE_CODES[i+2] + " cutoff");
+        throw new RuntimeException(GRADE_CODES[i] + " cutoff must be less " +
+                                   "than " +
+                                   GRADE_CODES[i+1] + " cutoff");
       }
-    }
-  }
-
-
-
-  private void throwIfWeightsOfAssessmentsAreOutsideValidRange(
-               int[] weightsForAssessments)
-  {
-    // check each weight is valid
-    for (int weight : weightsForAssessments) {
-
-      // cast int to float in order to reuse helper method
-      if (isMarkOutsideValidRange((float)weight)) {
-        throw new RuntimeException("Assessment weights cant be less than " +
-                                   "zero or greater than 100");
-      }
-    }
-  }
-
-
-
-  private boolean isMarkOutsideValidRange(float markForAssessment)
-  {
-    boolean isLowerThanMinimumValidMark = markForAssessment <
-                                          MINIMUM_VALID_MARK;
-    boolean isGreaterThanMaximumValidMark = markForAssessment >
-                                            MAXIMUM_VALID_MARK;
-
-    return isLowerThanMinimumValidMark || isGreaterThanMaximumValidMark;
-  }
-
-
-
-  private void throwIfTotalOfAssessmentWeightsIsInvalid(
-               int totalOfAssessmentWeights)
-  {
-    if (totalOfAssessmentWeights != TOTAL_OF_ASSESSMENT_WEIGHTS) {
-      throw new RuntimeException("Assessment weights must add to 100");
     }
   }
 
