@@ -193,7 +193,8 @@ public class UnitProxy
 
 
   /**
-   *
+   * Sets Unit code.
+   * @param unitCode String This unit code.
    */
   private void setUnitCode(String unitCode)
   {
@@ -203,7 +204,8 @@ public class UnitProxy
 
 
   /**
-   *
+   * Sets Unit name.
+   * @param unitName String This unit name.
    */
   private void setUnitName(String unitName)
   {

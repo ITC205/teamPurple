@@ -36,6 +36,7 @@ public class Unit
   private String unitCode_;
   private String unitName_;
 
+  // initial grades, with minimum marks set within constructor
   private Grade additionalExamination_ =
                 new Grade(CODE_ADDITIONAL_EXAMINATION, 0);
   private Grade pass_ = new Grade(CODE_PASS, 0);
@@ -256,7 +257,8 @@ public class Unit
 
 
   /**
-   *
+   * Sets Unit code
+   * @param unitCode String This unit code.
    */
   private void setUnitCode(String unitCode) {
     unitCode_ = unitCode;
@@ -265,7 +267,8 @@ public class Unit
 
 
   /**
-   *
+   * Sets Unit name
+   * @param unitName String This unit name.
    */
   private void setUnitName(String unitName)
   {
@@ -275,7 +278,9 @@ public class Unit
 
 
   /**
-   *
+   * Sets collection of all StudentUnitRecords.
+   * @param allStudentUnitRecords StudentUnitRecordList Collection of all
+   *                              StudentUnitRecords.
    */
   private void setAllStudentUnitRecords(StudentUnitRecordList
                                         allStudentUnitRecords)
@@ -370,7 +375,6 @@ public class Unit
   //============================================================================
   // Methods
   //============================================================================
-
 
 
 

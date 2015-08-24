@@ -20,6 +20,7 @@ public interface IUnitLister
 
   /**
    * Displays selected unit.
+   * @param unit IUnit The Unit to be added to the comboBox list.
    */
   public void addUnitToComboBox(IUnit unit);
 
