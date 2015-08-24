@@ -107,7 +107,7 @@ public class DataManager
    */
   public void initialize()
   {
-    String xmlFileName = AppProperties.getInstance().getProperties()
+    String xmlFileName = ApplicationProperties.getInstance().getProperties()
                                       .getProperty("XMLFILE");
     try {
       buildFromXmlAndLoadDocument(xmlFileName);
@@ -149,7 +149,7 @@ public class DataManager
    */
   public void saveDocument()
   {
-    String xmlFileName = AppProperties.getInstance()
+    String xmlFileName = ApplicationProperties.getInstance()
                                   .getProperties().getProperty("XMLFILE");
 
     try (FileWriter fileWriter = new FileWriter(xmlFileName)) {
