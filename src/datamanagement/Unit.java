@@ -19,17 +19,32 @@ public class Unit
   private static final float MINIMUM_VALID_MARK = 0;
   private static final float MAXIMUM_VALID_MARK = 100;
   private static final int TOTAL_OF_ASSESSMENT_WEIGHTS = 100;
-  private static final String[] GRADES = {"FL", "AE", "PS", "CR", "DI", "HD"};
+
+  private static final String CODE_FAIL = "FL";
+  private static final String CODE_ADDITIONAL_EXAMINATION = "AE";
+  private static final String CODE_PASS = "PS";
+  private static final String CODE_CREDIT = "CR";
+  private static final String CODE_DISTINCTION = "DI";
+  private static final String CODE_HIGH_DISTINCTION = "HD";
+
+  private static final String[] GRADE_CODES = {CODE_FAIL,
+                                               CODE_ADDITIONAL_EXAMINATION,
+                                               CODE_PASS, CODE_CREDIT,
+                                               CODE_DISTINCTION,
+                                               CODE_HIGH_DISTINCTION};
 
   private String unitCode_;
   private String unitName_;
 
-  private float minimumMarkForPass_;
-  private float minimumMarkForCredit_;
-  private float minimumMarkForDistinction_;
-  private float minimumMarkForHighDistinction_;
+  private Grade additionalExamination_ =
+                new Grade(CODE_ADDITIONAL_EXAMINATION, 0);
+  private Grade pass_ = new Grade(CODE_PASS, 0);
+  private Grade credit_ = new Grade(CODE_CREDIT, 0);
+  private Grade distinction_ = new Grade(CODE_DISTINCTION, 0);
+  private Grade highDistinction_ = new Grade(CODE_HIGH_DISTINCTION, 0);
 
-  private float minimumMarkForAdditionalExamination_;
+  private Grade[] grades_ = {highDistinction_, distinction_, credit_, pass_,
+                             additionalExamination_};
 
   private int weightOfAssignmentOne_;
   private int weightOfAssignmentTwo_;
@@ -81,12 +96,12 @@ public class Unit
               int weightOfExam, StudentUnitRecordList studentUnitRecordList)
   {
     setUnitCode(unitCode);
-    setUnitName(unitName);
+    setUnitName( unitName );
 
-    setMinimumMarksForGrades(minimumMarkForPass, minimumMarkForCredit,
-                             minimumMarkForDistinction,
-                             minimumMarkForHighDistinction,
-                             minimumMarkForAdditionalExamination);
+    setMinimumMarksForGrades( minimumMarkForPass, minimumMarkForCredit,
+                              minimumMarkForDistinction,
+                              minimumMarkForHighDistinction,
+                              minimumMarkForAdditionalExamination );
 
     setWeightsOfAssessments(weightOfAssignmentOne, weightOfAssignmentTwo,
                             weightOfExam);
@@ -132,7 +147,7 @@ public class Unit
   @Override
   public float getMinimumMarkForAdditionalExamination()
   {
-    return minimumMarkForAdditionalExamination_;
+    return additionalExamination_.getMinimumMarkRequired();
   }
 
 
@@ -143,7 +158,7 @@ public class Unit
   @Override
   public float getMinimumMarkForPass()
   {
-    return minimumMarkForPass_;
+    return pass_.getMinimumMarkRequired();
   }
 
 
@@ -154,7 +169,7 @@ public class Unit
   @Override
   public float getMinimumMarkForCredit()
   {
-    return minimumMarkForCredit_;
+    return credit_.getMinimumMarkRequired();
   }
 
 
@@ -165,7 +180,7 @@ public class Unit
   @Override
   public float getMinimumMarkForDistinction()
   {
-    return minimumMarkForDistinction_;
+    return distinction_.getMinimumMarkRequired();
   }
 
 
@@ -176,7 +191,7 @@ public class Unit
   @Override
   public float getMinimumMarkForHighDistinction()
   {
-    return minimumMarkForHighDistinction_;
+    return highDistinction_.getMinimumMarkRequired();
   }
 
 
@@ -276,7 +291,8 @@ public class Unit
   @Override
   public void setMinimumMarkForAdditionalExamination(float minimumMark)
   {
-    minimumMarkForAdditionalExamination_ = minimumMark;
+    additionalExamination_.setMinimumMarkRequired(minimumMark);
+
   }
 
 
@@ -287,7 +303,7 @@ public class Unit
   @Override
   public void setMinimumMarkForPass(float minimumMark)
   {
-    minimumMarkForPass_ = minimumMark;
+    pass_.setMinimumMarkRequired(minimumMark);
   }
 
 
@@ -298,7 +314,7 @@ public class Unit
   @Override
   public void setMinimumMarkForCredit(float minimumMark)
   {
-    minimumMarkForCredit_ = minimumMark;
+    credit_.setMinimumMarkRequired(minimumMark);
   }
 
 
@@ -309,7 +325,7 @@ public class Unit
   @Override
   public void setMinimumMarkForDistinction(float minimumMark)
   {
-    minimumMarkForDistinction_ = minimumMark;
+    distinction_.setMinimumMarkRequired(minimumMark);
   }
 
 
@@ -320,7 +336,7 @@ public class Unit
   @Override
   public void setMinimumMarkForHighDistinction(float minimumMark)
   {
-    minimumMarkForHighDistinction_ = minimumMark;
+    highDistinction_.setMinimumMarkRequired(minimumMark);
   }
 
 
@@ -412,17 +428,12 @@ public class Unit
 
 
   private String compareTotalMarkToGradeMinimums(float totalMark) {
-    // array of minimum marks used to compare to totalMark
-    float[] minimumMarksForGrades = getMinimumMarksForGrades();
-
-    for (int i = 0; i < minimumMarksForGrades.length; i++) {
-      if (totalMark < minimumMarksForGrades[i]) {
-        // Grade will be one position lower than minimum mark for next grade
-        // meaning GRADE[i] is achieved if totalMark < minimumMarkForGrades[i]
-        return GRADES[i];
+    for (Grade grade : grades_) {
+      if (totalMark >= grade.getMinimumMarkRequired()) {
+        return grade.getCode();
       }
     }
-    return GRADES[GRADES.length - 1]; // return highest grade
+    return CODE_FAIL;
   }
 
 
@@ -444,7 +455,7 @@ public class Unit
   @Override
   public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord)
   {
-    this.getAllStudentUnitRecords().add(studentUnitRecord);
+    this.getAllStudentUnitRecords().add( studentUnitRecord );
   }
 
 
@@ -476,13 +487,13 @@ public class Unit
             minimumMarkForHighDistinction};
 
     throwIfMarksAreOutsideValidRange(minimumMarksForGrades);
-    throwIfMinimumMarkForGradeIsHigherThanNextGrade(minimumMarksForGrades);
+    throwIfMinimumMarkForGradeIsHigherThanNextGrade( minimumMarksForGrades );
 
     setMinimumMarkForPass(minimumMarkForPass);
     setMinimumMarkForCredit(minimumMarkForCredit);
     setMinimumMarkForDistinction(minimumMarkForDistinction);
     setMinimumMarkForHighDistinction(minimumMarkForHighDistinction);
-    setMinimumMarkForAdditionalExamination(minimumMarkForAdditionalExamination);
+    setMinimumMarkForAdditionalExamination( minimumMarkForAdditionalExamination );
   }
 
 
@@ -511,8 +522,8 @@ public class Unit
       // actual grade is one position higher in its array (as there is no
       // minimum mark for a FL
       if (minimumMarksForGrades[i] >= minimumMarksForGrades[i+1]) {
-        throw new RuntimeException(GRADES[i+1] + " cutoff must be less than " +
-                                   GRADES[i+2] + " cutoff");
+        throw new RuntimeException( GRADE_CODES[i+1] + " cutoff must be less than " +
+                                   GRADE_CODES[i+2] + " cutoff");
       }
     }
   }
