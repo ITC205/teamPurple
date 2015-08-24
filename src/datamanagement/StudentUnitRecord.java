@@ -83,7 +83,7 @@ public class StudentUnitRecord
   {
     boolean isNegative = newMark < 0;
     boolean isGreaterThanWeight = newMark > UnitManager.getInstance()
-                                            .getUnit(unitCode_)
+                                            .findUnit(unitCode_)
                                             .getWeightOfAssignmentOne();
 
     if (isNegative || isGreaterThanWeight) {
@@ -101,7 +101,7 @@ public class StudentUnitRecord
   {
     boolean isNegative = newMark < 0;
     boolean isGreaterThanWeight = newMark > UnitManager.getInstance()
-                                            .getUnit(unitCode_)
+                                            .findUnit(unitCode_)
                                             .getWeightOfAssignmentTwo();
 
     if (isNegative || isGreaterThanWeight) {
@@ -119,7 +119,7 @@ public class StudentUnitRecord
   {
     boolean isNegative = newMark < 0;
     boolean isGreaterThanWeight = newMark > UnitManager.getInstance()
-                                            .getUnit(unitCode_)
+                                            .findUnit(unitCode_)
                                             .getWeightOfExam();
 
     if (isNegative || isGreaterThanWeight) {

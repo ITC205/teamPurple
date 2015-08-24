@@ -74,10 +74,8 @@ public class StudentManager
   // Get student record from XML file
   private Element retrieveStudentElement(Integer studentId) 
   {
-    for (Element studentElement : (List<Element>) XMLManager.getInstance()
-                                   .getDocument().getRootElement()
-                                   .getChild("studentTable")
-                                   .getChildren("student")) 
+    for (Element studentElement : (DataManager.getInstance()
+                                              .retrieveAllStudentElements()))
     {
       if (studentId.toString().equals(studentElement.getAttributeValue("sid")))
       {
@@ -87,7 +85,7 @@ public class StudentManager
     return null;
   }
 
-  
+
 
   // Retrieve student from XML file and create new student instance
   private IStudent loadStudent(Integer studentId) 

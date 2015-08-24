@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package datamanagement;
 
 public class StudentProxy 
