@@ -112,11 +112,9 @@ public class StudentUnitRecordManager
     }
     else {
       unitRecordsByStudent = new StudentUnitRecordList();
-      List<Element> allStudentUnitRecordElements = (List<Element>) DataManager
-                                              .getInstance()
-                                             .getDocument().getRootElement()
-                                             .getChild("studentUnitRecordTable")
-                                             .getChildren("record");
+      List<Element> allStudentUnitRecordElements =
+                    DataManager.getInstance()
+                                .retrieveAllStudentUnitRecordElements();
 
       for (Element studentUnitRecordElement : allStudentUnitRecordElements) {
         boolean isStudentIdMatch = studentId.toString()
@@ -145,11 +143,9 @@ public class StudentUnitRecordManager
   {
     IStudentUnitRecord studentUnitRecord;
 
-    List<Element> allStudentUnitRecordElements = (List<Element>) DataManager
-                                             .getInstance()
-                                             .getDocument().getRootElement()
-                                             .getChild("studentUnitRecordTable")
-                                             .getChildren("record");
+    List<Element> allStudentUnitRecordElements =
+                  DataManager.getInstance()
+                             .retrieveAllStudentUnitRecordElements();
 
     boolean isStudentIdMatch;
     boolean isUnitCodeMatch;
@@ -197,11 +193,9 @@ public class StudentUnitRecordManager
 
   public void saveStudentUnitRecord(IStudentUnitRecord studentUnitRecord)
   {
-    List<Element> allStudentUnitRecordElements = (List<Element>) DataManager
-                                             .getInstance()
-                                             .getDocument().getRootElement()
-                                             .getChild("studentUnitRecordTable")
-                                             .getChildren("record");
+    List<Element> allStudentUnitRecordElements =
+      DataManager.getInstance()
+                 .retrieveAllStudentUnitRecordElements();
 
     boolean isStudentIdMatch;
     boolean isUnitCodeMatch;
