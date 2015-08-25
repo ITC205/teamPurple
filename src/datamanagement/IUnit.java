@@ -7,11 +7,6 @@ package datamanagement;
  */
 public interface IUnit
 {
-  //============================================================================
-  // Getters & setters
-  //============================================================================
-
-
 
   /**
    * Returns this unit's code.
@@ -30,7 +25,7 @@ public interface IUnit
 
 
   /**
-   * Returns the minimum mark required to qualify for an Alternative Assessment
+   * Returns the minimum mark required to qualify for an Additional Examination
    * in this unit.
    * @return float Value of mark required to qualify for an Alternative
    * Assessment in this unit.
@@ -118,7 +113,7 @@ public interface IUnit
 
 
   /**
-   * Sets the minimum mark required to qualify for an Alternative Assessment
+   * Sets the minimum mark required to qualify for an Additional Examination
    * in this unit.
    * @param minimumMark float The minimum mark required to qualify for an
    *        Alternative Assessment in this unit.
@@ -173,13 +168,7 @@ public interface IUnit
   public void setWeightsOfAssessments(int weightOfAssignmentOne,
                                       int weightOfAssignmentTwo,
                                       int weightOfExam);
-
-
-
-  //============================================================================
-  // Methods
-  //============================================================================
-
+  
 
 
   /**
