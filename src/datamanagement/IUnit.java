@@ -95,16 +95,7 @@ public interface IUnit
 
 
 
-  /**
-   * Returns a specified student's (single) record for this unit.
-   * @param studentId String student identification number.
-   * @return IStudentUnitRecord Student record for this unit.
-   */
-  public IStudentUnitRecord getStudentUnitRecord(int studentId);
-
-
-
-  /**
+   /**
    * Returns the entire collection of student records for this unit.
    * @return StudentUnitRecordList Collection of student records for this unit.
    */
@@ -168,6 +159,15 @@ public interface IUnit
   public void setWeightsOfAssessments(int weightOfAssignmentOne,
                                       int weightOfAssignmentTwo,
                                       int weightOfExam);
+
+
+
+  /**
+   * Returns a specified student's (single) record for this unit.
+   * @param studentId String student identification number.
+   * @return IStudentUnitRecord Student record for this unit.
+   */
+  public IStudentUnitRecord findUnitRecordByStudent(int studentId);
 
 
 

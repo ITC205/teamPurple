@@ -231,22 +231,7 @@ public class Unit
 
 
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public IStudentUnitRecord getStudentUnitRecord(int studentId) {
-    for (IStudentUnitRecord studentUnitRecord : getAllStudentUnitRecords()) {
-      if (studentUnitRecord.getStudentId() == studentId) {
-        return studentUnitRecord;
-      }
-    }
-    return null;
-  }
-
-
-
-  /**
+   /**
    * {@inheritDoc}
    */
   @Override
@@ -423,6 +408,21 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
+  public IStudentUnitRecord findUnitRecordByStudent(int studentId) {
+    for (IStudentUnitRecord studentUnitRecord : getAllStudentUnitRecords()) {
+      if (studentUnitRecord.getStudentId() == studentId) {
+        return studentUnitRecord;
+      }
+    }
+    return null;
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public String calculateGrade(float markForAssignmentOne,
                                float markForAssignmentTwo,
                                float markForExam)
@@ -523,7 +523,7 @@ public class Unit
     setMinimumMarkForCredit(minimumMarkForCredit);
     setMinimumMarkForDistinction(minimumMarkForDistinction);
     setMinimumMarkForHighDistinction(minimumMarkForHighDistinction);
-    setMinimumMarkForAdditionalExamination( minimumMarkForAdditionalExamination );
+    setMinimumMarkForAdditionalExamination(minimumMarkForAdditionalExamination);
   }
 
 

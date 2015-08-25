@@ -173,17 +173,6 @@ public class UnitProxy
    * {@inheritDoc}
    */
   @Override
-  public IStudentUnitRecord getStudentUnitRecord(int studentId)
-  {
-    return resolveUnit().getStudentUnitRecord(studentId);
-  }
-
-
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
   public StudentUnitRecordList getAllStudentUnitRecords()
   {
     return resolveUnit().getAllStudentUnitRecords();
@@ -293,6 +282,17 @@ public class UnitProxy
   //============================================================================
   // Methods
   //============================================================================
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public IStudentUnitRecord findUnitRecordByStudent(int studentId)
+  {
+    return resolveUnit().findUnitRecordByStudent(studentId);
+  }
 
 
 
