@@ -165,10 +165,11 @@ public class DataManager
   private void convertDocumentToXmlAndSaveFile(FileWriter fileWriter)
     throws IOException
   {
-    XMLOutputter xmlOutputter = new XMLOutputter( Format.getPrettyFormat() );
-    xmlOutputter.output(this.getDocument(), fileWriter);
+    XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
+    xmlOutputter.output(getDocument(), fileWriter);
     fileWriter.close();
   }
+
 
 
   /**
@@ -179,10 +180,9 @@ public class DataManager
    */
   public List<Element> retrieveAllUnitElements()
   {
-    List<Element> allUnitElements = this.getDocument()
-                                        .getRootElement()
-                                        .getChild("unitTable")
-                                        .getChildren("unit");
+    List<Element> allUnitElements = getDocument().getRootElement()
+                                    .getChild("unitTable")
+                                    .getChildren("unit");
     return allUnitElements;
   }
 
@@ -196,10 +196,9 @@ public class DataManager
    */
   public List<Element> retrieveAllStudentUnitRecordElements()
   {
-    List<Element> allUnitElements = this.getDocument()
-                                        .getRootElement()
-                                        .getChild("studentUnitRecordTable")
-                                        .getChildren("record");
+    List<Element> allUnitElements = getDocument().getRootElement()
+                                    .getChild("studentUnitRecordTable")
+                                    .getChildren("record");
     return allUnitElements;
   }
 
@@ -213,10 +212,9 @@ public class DataManager
    */
   public List<Element> retrieveAllStudentElements()
   {
-    List<Element> allUnitElements = this.getDocument()
-                                        .getRootElement()
-                                        .getChild("studentTable")
-                                        .getChildren("student");
+    List<Element> allUnitElements = getDocument().getRootElement()
+                                    .getChild("studentTable")
+                                    .getChildren("student");
     return allUnitElements;
   }
 
