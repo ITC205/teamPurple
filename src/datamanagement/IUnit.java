@@ -27,8 +27,8 @@ public interface IUnit
   /**
    * Returns the minimum mark required to qualify for an Additional Examination
    * in this unit.
-   * @return float Value of mark required to qualify for an Alternative
-   * Assessment in this unit.
+   * @return float Value of mark required to qualify for an Additional
+   * Examination in this unit.
    */
   public float getMinimumMarkForAdditionalExamination();
 
@@ -107,7 +107,7 @@ public interface IUnit
    * Sets the minimum mark required to qualify for an Additional Examination
    * in this unit.
    * @param minimumMark float The minimum mark required to qualify for an
-   *        Alternative Assessment in this unit.
+   *        Additional Examination in this unit.
    */
   public void setMinimumMarkForAdditionalExamination(float minimumMark);
 
