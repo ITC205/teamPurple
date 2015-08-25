@@ -21,6 +21,7 @@ public class Grade
   //============================================================================
 
 
+
   /**
    * Creates a new Grade instance, enabling Units to tailor the marks required
    * for a specific grade.
@@ -56,7 +57,7 @@ public class Grade
   /**
    * Returns the minimum mark required to obtain the given grade for the given
    * Unit.
-   * @preturn float The minimum mark required to obtain the
+   * @return float The minimum mark required to obtain the
    *                given grade for the given Unit.
    */
   public float getMinimumMarkRequired()
