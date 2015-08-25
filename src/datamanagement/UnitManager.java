@@ -48,7 +48,7 @@ public class UnitManager
 
 
   /**
-   * Returns the sole XmlManager instance (following the singleton pattern).
+   * Returns the sole DataManager instance (following the singleton pattern).
    * @return XmlManager Returns sole XmlManager instance responsible for
    * managing data from XML file.
    */
@@ -89,6 +89,8 @@ public class UnitManager
   //============================================================================
   // Methods
   //============================================================================
+
+
 
   /**
    * Returns a unit from the collection of units, and if not not in the
@@ -188,7 +190,7 @@ public class UnitManager
    */
   private Element retrieveUnitElement(String unitCode)
   {
-    List<Element> unitElements = this.retrieveAllUnitElements();
+    List<Element> unitElements = retrieveAllUnitElements();
     for (Element element : unitElements) {
       if (unitCode.equals(element.getAttributeValue("uid"))) {
         return element;
