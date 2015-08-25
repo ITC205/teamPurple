@@ -175,7 +175,7 @@ public class UnitProxy
   @Override
   public IStudentUnitRecord getStudentUnitRecord(int studentId)
   {
-    return resolveUnit().getStudentUnitRecord( studentId );
+    return resolveUnit().getStudentUnitRecord(studentId);
   }
 
 
@@ -188,7 +188,6 @@ public class UnitProxy
   {
     return resolveUnit().getAllStudentUnitRecords();
   }
-
 
 
 
@@ -219,6 +218,8 @@ public class UnitProxy
     unitManager_= unitManager;
   }
 
+
+  
   /**
    * {@inheritDoc}
    */
