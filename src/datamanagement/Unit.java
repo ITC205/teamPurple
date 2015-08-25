@@ -16,8 +16,8 @@ public class Unit
 
 
   // these static variables are all used for validation purposes
-  private static final float MINIMUM_VALID_MARK = 0;
-  private static final float MAXIMUM_VALID_MARK = 100;
+  private static final float MINIMUM_VALID_MARK = 0.0F;
+  private static final float MAXIMUM_VALID_MARK = 100.0F;
   private static final int TOTAL_OF_ASSESSMENT_WEIGHTS = 100;
 
   private static final String CODE_FAIL = "FL";
@@ -29,7 +29,8 @@ public class Unit
 
   // does not include Fail, as there is no minimum mark for a fail to check
   private static final String[] GRADE_CODES = {CODE_ADDITIONAL_EXAMINATION,
-                                               CODE_PASS, CODE_CREDIT,
+                                               CODE_PASS,
+                                               CODE_CREDIT,
                                                CODE_DISTINCTION,
                                                CODE_HIGH_DISTINCTION};
 
@@ -97,12 +98,12 @@ public class Unit
               int weightOfExam, StudentUnitRecordList studentUnitRecordList)
   {
     setUnitCode(unitCode);
-    setUnitName( unitName );
+    setUnitName(unitName);
 
-    setMinimumMarksForGrades( minimumMarkForPass, minimumMarkForCredit,
-                              minimumMarkForDistinction,
-                              minimumMarkForHighDistinction,
-                              minimumMarkForAdditionalExamination );
+    setMinimumMarksForGrades(minimumMarkForPass, minimumMarkForCredit,
+                             minimumMarkForDistinction,
+                             minimumMarkForHighDistinction,
+                             minimumMarkForAdditionalExamination);
 
     setWeightsOfAssessments(weightOfAssignmentOne, weightOfAssignmentTwo,
                             weightOfExam);
@@ -110,7 +111,7 @@ public class Unit
     if (studentUnitRecordList == null) {
       studentUnitRecordList = new StudentUnitRecordList();
     }
-    setAllStudentUnitRecords( studentUnitRecordList );
+    setAllStudentUnitRecords(studentUnitRecordList);
   }
 
 
@@ -234,11 +235,11 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public IStudentUnitRecord getStudentUnitRecord(int studentId)
-  {
+  public IStudentUnitRecord getStudentUnitRecord(int studentId) {
     for (IStudentUnitRecord studentUnitRecord : getAllStudentUnitRecords()) {
-      if (studentUnitRecord.getStudentId() == studentId)
+      if (studentUnitRecord.getStudentId() == studentId) {
         return studentUnitRecord;
+      }
     }
     return null;
   }
@@ -297,7 +298,6 @@ public class Unit
   public void setMinimumMarkForAdditionalExamination(float minimumMark)
   {
     additionalExamination_.setMinimumMarkRequired(minimumMark);
-
   }
 
 
@@ -355,14 +355,14 @@ public class Unit
                                       int weightOfExam)
   {
     // array used to validate each weight
-    int[] weightsForAssessments = {weightOfAssignmentOne,
-                                   weightOfAssignmentTwo, weightOfExam};
+    int[] weightsOfAssessments = {weightOfAssignmentOne,
+                                  weightOfAssignmentTwo, weightOfExam};
 
     int totalOfAssessmentWeights = weightOfAssignmentOne +
                                    weightOfAssignmentTwo + weightOfExam;
 
 
-    throwIfWeightsOfAssessmentsAreOutsideValidRange(weightsForAssessments);
+    throwIfWeightsOfAssessmentsAreInvalid(weightsOfAssessments);
     throwIfTotalOfAssessmentWeightsIsInvalid(totalOfAssessmentWeights);
 
     weightOfAssignmentOne_ = weightOfAssignmentOne;
@@ -378,16 +378,17 @@ public class Unit
 
 
 
-  private void throwIfWeightsOfAssessmentsAreOutsideValidRange(
+  private void throwIfWeightsOfAssessmentsAreInvalid(
                int[] weightsForAssessments)
   {
     // check each weight is valid
     for (int weight : weightsForAssessments) {
-
       // cast int to float in order to reuse helper method
       if (isMarkOutsideValidRange((float)weight)) {
-        throw new RuntimeException("Assessment weights can't be less than " +
-                                     "zero or greater than 100");
+        throw new RuntimeException("Unit : " +
+                                   "throwIfWeightsOfAssessmentsAreInvalid : " +
+                                   "Assessment weights can't be less than " +
+                                   "zero or greater than 100");
       }
     }
   }
@@ -397,9 +398,9 @@ public class Unit
   private boolean isMarkOutsideValidRange(float markForAssessment)
   {
     boolean isLowerThanMinimumValidMark = markForAssessment <
-                                            MINIMUM_VALID_MARK;
+                                          MINIMUM_VALID_MARK;
     boolean isGreaterThanMaximumValidMark = markForAssessment >
-                                              MAXIMUM_VALID_MARK;
+                                            MAXIMUM_VALID_MARK;
 
     return isLowerThanMinimumValidMark || isGreaterThanMaximumValidMark;
   }
@@ -410,7 +411,9 @@ public class Unit
                int totalOfAssessmentWeights)
   {
     if (totalOfAssessmentWeights != TOTAL_OF_ASSESSMENT_WEIGHTS) {
-      throw new RuntimeException("Assessment weights must add to 100");
+      throw new RuntimeException("Unit : " +
+                                 "throwIfTotalOfAssessmentWeightsIsInvalid : " +
+                                 "Assessment weights must add to 100");
     }
   }
 
@@ -431,7 +434,7 @@ public class Unit
                                               markForAssignmentTwo,
                                               markForExam};
 
-    throwIfMarksForAssessmentsAreInvalid( marksForAssessments );
+    throwIfMarksForAssessmentsAreInvalid(marksForAssessments);
 
     return compareTotalMarkToGradeMinimums(totalMark);
   }
@@ -456,7 +459,8 @@ public class Unit
                                           weightsOfAssessments[i];
 
       if (isMarkLessThanMinimumValidMark || isMarkGreaterThanAssessmentWeight) {
-        throw new RuntimeException("marks cannot be less than zero or " +
+        // exception message is simplified as it is shown in GUI
+        throw new RuntimeException("Marks cannot be less than zero or " +
                                    "greater than assessment weights");
       }
     }
@@ -481,7 +485,7 @@ public class Unit
   @Override
   public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord)
   {
-    this.getAllStudentUnitRecords().add( studentUnitRecord );
+    getAllStudentUnitRecords().add(studentUnitRecord);
   }
 
 
@@ -513,7 +517,7 @@ public class Unit
             minimumMarkForHighDistinction};
 
     throwIfMarksAreOutsideValidRange(minimumMarksForGrades);
-    throwIfMinimumMarkForGradeIsHigherThanNextGrade( minimumMarksForGrades );
+    throwIfMinimumMarkForGradeIsHigherThanNextGrade(minimumMarksForGrades);
 
     setMinimumMarkForPass(minimumMarkForPass);
     setMinimumMarkForCredit(minimumMarkForCredit);
@@ -530,8 +534,9 @@ public class Unit
     for (float minimumMark : minimumMarksForGrades) {
 
       if (isMarkOutsideValidRange(minimumMark)) {
-        throw new RuntimeException("Assessment cutoffs cant be less than zero" +
-                                   " or greater than 100");
+        throw new RuntimeException("Unit : throwIfMarksAreOutsideValidRange :" +
+                                   " Assessment cutoffs cant be less than " +
+                                   "zero or greater than 100");
       }
     }
   }
@@ -546,9 +551,11 @@ public class Unit
 
       // compare current grade minimum mark to next grade minimum grade
       if (minimumMarksForGrades[i] >= minimumMarksForGrades[i+1]) {
-        throw new RuntimeException(GRADE_CODES[i] + " cutoff must be less " +
-                                   "than " +
-                                   GRADE_CODES[i+1] + " cutoff");
+        throw new RuntimeException(
+                  "Unit : "+
+                  "throwIfMinimumMarkForGradeIsHigherThanNextGrade : " +
+                  GRADE_CODES[i] + " cutoff must be less than " +
+                  GRADE_CODES[i+1] + " cutoff");
       }
     }
   }
