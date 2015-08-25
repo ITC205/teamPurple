@@ -168,7 +168,7 @@ public interface IUnit
   public void setWeightsOfAssessments(int weightOfAssignmentOne,
                                       int weightOfAssignmentTwo,
                                       int weightOfExam);
-  
+
 
 
   /**
