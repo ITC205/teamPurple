@@ -13,8 +13,8 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 /**
- * Responsible for loading data from xml file, holding the transformed set
- * of data used by the application and saving data back to xml file.
+ * Responsible for loading data from XML file, holding the transformed set
+ * of data used by the application and saving data back to XML file.
  */
 public class DataManager
 {
@@ -37,7 +37,7 @@ public class DataManager
 
 
   /**
-   * Creates and initializes a new XMLManager instance following the singleton
+   * Creates and initializes a new DataManager instance following the singleton
    * pattern. Creation of new instances is restricted through private access
    * modifier.
    */
@@ -55,8 +55,8 @@ public class DataManager
 
 
   /**
-   * Returns the sole xmlManager instance (following the singleton pattern).
-   * @return XmlManager instance responsible for managing data from XML file.
+   * Returns the sole DataManager instance (following the singleton pattern).
+   * @return DataManager instance responsible for managing data from XML file.
    */
   public static DataManager getInstance()
   {
@@ -83,7 +83,7 @@ public class DataManager
 
   /**
    * Sets the object which holds the transformed set of data loaded from
-   * the XML file. Private access restricts use to the XmlManger instance
+   * the XML file. Private access restricts use to the DataManger instance
    * itself.
    * @param document Document Holds the transformed set of data constructed by
    * SAXBuilder expanding entities from the XML file.
@@ -102,7 +102,7 @@ public class DataManager
 
 
   /**
-   * Initializes singleton instance XmlManager, attempts to load data from
+   * Initializes singleton instance of DataManager, attempts to load data from
    * XML file, logging and throwing any exceptions this causes.
    */
   public void initialize()
