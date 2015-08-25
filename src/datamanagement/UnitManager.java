@@ -48,9 +48,9 @@ public class UnitManager
 
 
   /**
-   * Returns the sole DataManager instance (following the singleton pattern).
-   * @return XmlManager Returns sole XmlManager instance responsible for
-   * managing data from XML file.
+   * Returns the sole UnitManager instance (following the singleton pattern).
+   * @return UnitManager Returns sole UnitManager instance responsible for
+   * managing the collection of IUnits.
    */
   public static UnitManager getInstance()
   {
