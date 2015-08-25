@@ -149,7 +149,7 @@ public class StudentManager
       studentsInUnit.put(student.getStudentId(), student);
     }
     
-    studentsByUnitMap_.put( unitCode, studentsInUnit);
+    studentsByUnitMap_.put(unitCode, studentsInUnit);
     return studentsInUnit;
   }
    
