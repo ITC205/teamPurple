@@ -87,8 +87,9 @@ public class StudentUnitRecord
                                             .getWeightOfAssignmentOne();
 
     if (isNegative || isGreaterThanWeight) {
-      throw new RuntimeException(
-              "Mark cannot be less than zero or greater than assessment weight");
+      throw new RuntimeException("StudentUnitRecord : setMarkForAssignmentOne" +
+                                 " : Mark cannot be less than zero or " +
+                                 "greater than assessment weight");
     }
     else {
       markForAssignmentOne_ = newMark;
@@ -105,8 +106,9 @@ public class StudentUnitRecord
                                             .getWeightOfAssignmentTwo();
 
     if (isNegative || isGreaterThanWeight) {
-      throw new RuntimeException(
-              "Mark cannot be less than zero or greater than assessment weight");
+      throw new RuntimeException("StudentUnitRecord : setMarkForAssignmentTwo" +
+                                 " : Mark cannot be less than zero or " +
+                                 "greater than assessment weight");
     }
     else {
       markForAssignmentTwo_ = newMark;
@@ -123,8 +125,9 @@ public class StudentUnitRecord
                                             .getWeightOfExam();
 
     if (isNegative || isGreaterThanWeight) {
-      throw new RuntimeException(
-              "Mark cannot be less than zero or greater than assessment weight");
+      throw new RuntimeException("StudentUnitRecord : setMarkForExam" +
+                                 " : Mark cannot be less than zero or " +
+                                  "greater than assessment weight");
     }
     else {
       markForExam_ = newMark;
