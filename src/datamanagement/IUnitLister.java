@@ -1,14 +1,24 @@
 package datamanagement;
 
-public interface IUnitLister 
+/**
+ * Displays (and clears) list of Units within GUI controls.
+ */
+public interface IUnitLister
 {
 
-  
-  
-    public void clearUnitsFromComboBox();
-    
-    
-    
-    public void addUnitToComboBox(IUnit unit);
+
+
+  /**
+   * Clears display of units.
+   */
+  public void clearUnitsFromComboBox();
+
+
+
+  /**
+   * Displays selected unit.
+   * @param unit IUnit The Unit to be added to the comboBox list.
+   */
+  public void addUnitToComboBox(IUnit unit);
 
 }

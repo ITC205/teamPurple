@@ -1,62 +1,334 @@
 package datamanagement;
-public class UnitProxy implements IUnit {
-private String UC;
-        private String un;
 
-        
-        UnitManager   um;
+/**
+ * Acts as proxy for unit, implementing shared IUnit interface.
+ * Applies the specified minimum marks (for grades) and weightings for
+ * assessments to this unit, calculates grades for this unit and adds student
+ * records for this unit to the collection of student unit records.
+ */
+public class UnitProxy
+  implements IUnit
+{
+  //============================================================================
+  // Variables
+  //============================================================================
 
-    public UnitProxy( String unitCode, String unitName ) {
-        this.UC = unitCode;
-            this.un = unitName;
-                um = UnitManager.getInstance(); }
-    public String getUnitCode() { 
-        return this.UC;}
-        public String getUnitName() { 
-            return this.un; 
-        }
-    public void setPsCutoff1(float cutoff) {
-        um.getUnit(UC).setPsCutoff1(cutoff);
-}
-public float getPsCutoff() {
-        return um.getUnit(UC).getPsCutoff();}
-    public void setCrCutoff(float cutoff) {um.getUnit(UC).setCrCutoff(cutoff);
-    }
-    public float getCrCutoff() {
-return um.getUnit(UC).getCrCutoff();
-    }
 
-public void setDiCutoff(float cutoff) {um.getUnit(UC).setDiCutoff(cutoff);}
-    public float getDiCuttoff() {return um.getUnit(UC).getDiCuttoff();}
-public void setHdCutoff(float cutoff) {
-    um.getUnit(UC).setHdCutoff(cutoff);}
-    public float getHdCutoff() {
 
-        return um.getUnit(UC).getHdCutoff();}
-public void setAeCutoff(float cutoff) {um.getUnit(UC).setAeCutoff(cutoff);
-    }
-    public float getAeCutoff() {return um.getUnit(UC).getAeCutoff();}
-public String calculateGrade(float f1, float f2, float f3) {
-return um.getUnit(UC).calculateGrade(f1, f2, f3);
-    }
-    public void addStudentRecord(IStudentUnitRecord record) 
-{ 
-um.getUnit(UC).addStudentRecord(record);
-    }
-    public IStudentUnitRecord getStudentRecord(int s) {return um.getUnit(UC).getStudentRecord(s);}
-public StudentUnitRecordList listStudentRecords() {
-    return um.getUnit(UC).listStudentRecords();
+  private String unitCode_;
+  private String unitName_;
+  private UnitManager unitManager_;
+
+
+
+  //============================================================================
+  // Constructors
+  //============================================================================
+
+
+
+  /**
+   * Creates a new UnitProxy instance, using just unit code and name and
+   * referencing the singleton unitManager_ that is used to identify the
+   * matching Unit instance.
+   */
+  public UnitProxy(String unitCode, String unitName)
+  {
+    setUnitCode(unitCode);
+    setUnitName(unitName);
+    setUnitManager(UnitManager.getInstance());
+  }
+
+
+
+  //============================================================================
+  // Getters & setters
+  //============================================================================
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getUnitCode()
+  {
+    return unitCode_;
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getUnitName()
+  {
+    return unitName_;
+  }
+
+
+
+  /**
+   * Returns the UnitManger instance that manages the collection of all units.
+   * @return UnitManager The UnitManger instance that manages the collection
+   *                     of all units.
+   */
+  private UnitManager getUnitManager()
+  {
+    return unitManager_;
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public float getMinimumMarkForAdditionalExamination()
+  {
+    return resolveUnit().getMinimumMarkForAdditionalExamination();
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public float getMinimumMarkForPass()
+  {
+    return resolveUnit().getMinimumMarkForPass();
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public float getMinimumMarkForCredit()
+  {
+    return resolveUnit().getMinimumMarkForCredit();
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public float getMinimumMarkForDistinction()
+  {
+    return resolveUnit().getMinimumMarkForDistinction();
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public float getMinimumMarkForHighDistinction()
+  {
+    return resolveUnit().getMinimumMarkForHighDistinction();
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getWeightOfAssignmentOne()
+  {
+    return resolveUnit().getWeightOfAssignmentOne();
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getWeightOfAssignmentTwo()
+  {
+    return resolveUnit().getWeightOfAssignmentTwo();
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int getWeightOfExam()
+  {
+    return resolveUnit().getWeightOfExam();
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public StudentUnitRecordList getAllStudentUnitRecords()
+  {
+    return resolveUnit().getAllStudentUnitRecords();
+  }
+
+
+
+  /**
+   * Sets Unit code.
+   * @param unitCode String This unit code.
+   */
+  private void setUnitCode(String unitCode)
+  {
+    this.unitCode_ = unitCode;
+  }
+
+
+
+  /**
+   * Sets Unit name.
+   * @param unitName String This unit name.
+   */
+  private void setUnitName(String unitName)
+  {
+    unitName_ = unitName;
+  }
+
+
+
+  private void setUnitManager(UnitManager unitManager)
+  {
+    unitManager_= unitManager;
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMinimumMarkForAdditionalExamination(float minimumMark)
+  {
+    resolveUnit().setMinimumMarkForAdditionalExamination(minimumMark);
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMinimumMarkForPass(float minimumMark)
+  {
+    resolveUnit().setMinimumMarkForPass(minimumMark);
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMinimumMarkForCredit(float minimumMark)
+  {
+    resolveUnit().setMinimumMarkForCredit(minimumMark);
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMinimumMarkForDistinction(float minimumMark)
+  {
+    resolveUnit().setMinimumMarkForDistinction(minimumMark);
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setMinimumMarkForHighDistinction(float minimumMark)
+  {
+    resolveUnit().setMinimumMarkForHighDistinction(minimumMark);
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setWeightsOfAssessments(int weightOfAssignmentOne,
+                                      int weightOfAssignmentTwo,
+                                      int weightOfExam)
+  {
+    resolveUnit().setWeightsOfAssessments(weightOfAssignmentOne,
+                                          weightOfAssignmentTwo,
+                                          weightOfExam);
+  }
+
+
+
+  //============================================================================
+  // Methods
+  //============================================================================
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public IStudentUnitRecord findUnitRecordByStudent(int studentId)
+  {
+    return resolveUnit().findUnitRecordByStudent(studentId);
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String calculateGrade(float markForAssignmentOne,
+                               float markForAssignmentTwo,
+                               float markForExam)
+  {
+    return resolveUnit().calculateGrade(markForAssignmentOne,
+                                        markForAssignmentTwo,
+                                        markForExam);
+  }
+
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addStudentUnitRecord(IStudentUnitRecord studentUnitRecord)
+  {
+    resolveUnit().addStudentUnitRecord(studentUnitRecord);
+  }
+
+
+
+  /**
+   * Returns the actual unit that this object proxies.
+   * @return IUnit Actual unit that this object proxies.
+   */
+  private IUnit resolveUnit()
+  {
+    return getUnitManager().findUnit(getUnitCode());
+  }
+
 }
-public int getWeightOfAssignmentOne() {
-	return um.getUnit(UC).getWeightOfAssignmentOne();
-}
-public int getWeightOfAssignmentTwo() {
-	return um.getUnit(UC).getWeightOfAssignmentTwo();
-}
-public int getWeightOfExam() {
-	return um.getUnit(UC).getWeightOfExam();
-}
-public void setAssessmentWeights(int asg1Wgt, int asg2Wgt, int examWgt) {
-	um.getUnit(UC).setAssessmentWeights(asg1Wgt, asg2Wgt, examWgt);
-	
-}}

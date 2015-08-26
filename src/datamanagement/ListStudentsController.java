@@ -36,7 +36,7 @@ public class ListStudentsController
     studentLister.clearStudentsFromComboBox();
     StudentMap studentsByUnit = studentManager_.findStudentsByUnit(unitCode);
     
-    for (Integer studentId : studentsByUnit.keySet() ) {
+    for (Integer studentId : studentsByUnit.keySet()) {
       studentLister.addStudentToComboBox(studentsByUnit.get(studentId));
     }
   }

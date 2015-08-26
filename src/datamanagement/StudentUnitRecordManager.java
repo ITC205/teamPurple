@@ -84,11 +84,9 @@ public class StudentUnitRecordManager
     }
     else {
       studentRecordsByUnit = new StudentUnitRecordList();
-      List<Element> allStudentUnitRecordElements = (List<Element>) XMLManager
-                                             .getInstance()
-                                             .getDocument().getRootElement()
-                                             .getChild("studentUnitRecordTable")
-                                             .getChildren("record");
+      List<Element> allStudentUnitRecordElements =
+                    DataManager.getInstance()
+                               .retrieveAllStudentUnitRecordElements();
 
       for (Element studentUnitRecordElement : allStudentUnitRecordElements) {
         if (unitCode.equals(studentUnitRecordElement
@@ -121,11 +119,9 @@ public class StudentUnitRecordManager
     }
     else {
       unitRecordsByStudent = new StudentUnitRecordList();
-      List<Element> allStudentUnitRecordElements = (List<Element>) XMLManager
-                                              .getInstance()
-                                             .getDocument().getRootElement()
-                                             .getChild("studentUnitRecordTable")
-                                             .getChildren("record");
+      List<Element> allStudentUnitRecordElements =
+                    DataManager.getInstance()
+                                .retrieveAllStudentUnitRecordElements();
 
       for (Element studentUnitRecordElement : allStudentUnitRecordElements) {
         boolean isStudentIdMatch = studentId.toString()
@@ -157,11 +153,9 @@ public class StudentUnitRecordManager
   {
     IStudentUnitRecord studentUnitRecord;
 
-    List<Element> allStudentUnitRecordElements = (List<Element>) XMLManager
-                                             .getInstance()
-                                             .getDocument().getRootElement()
-                                             .getChild("studentUnitRecordTable")
-                                             .getChildren("record");
+    List<Element> allStudentUnitRecordElements =
+                  DataManager.getInstance()
+                             .retrieveAllStudentUnitRecordElements();
 
     boolean isStudentIdMatch;
     boolean isUnitCodeMatch;
@@ -209,11 +203,9 @@ public class StudentUnitRecordManager
 
   public void saveStudentUnitRecord(IStudentUnitRecord studentUnitRecord)
   {
-    List<Element> allStudentUnitRecordElements = (List<Element>) XMLManager
-                                             .getInstance()
-                                             .getDocument().getRootElement()
-                                             .getChild("studentUnitRecordTable")
-                                             .getChildren("record");
+    List<Element> allStudentUnitRecordElements =
+      DataManager.getInstance()
+                 .retrieveAllStudentUnitRecordElements();
 
     boolean isStudentIdMatch;
     boolean isUnitCodeMatch;
@@ -237,7 +229,7 @@ public class StudentUnitRecordManager
         studentUnitRecordElement.setAttribute("exam",
                 new Float(studentUnitRecord.getMarkForExam()).toString());
 
-        XMLManager.getInstance().saveDocument(); // write out the XML file for
+        DataManager.getInstance().saveDocument(); // write out the XML file for
                                                  // continuous save
         return;
       }   // End if
