@@ -126,7 +126,8 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public String getUnitCode() {
+  public String getUnitCode()
+  {
     return unitCode_;
   }
 
@@ -246,7 +247,8 @@ public class Unit
    * Sets Unit code
    * @param unitCode String This unit code.
    */
-  private void setUnitCode(String unitCode) {
+  private void setUnitCode(String unitCode)
+  {
     unitCode_ = unitCode;
   }
 
@@ -408,7 +410,8 @@ public class Unit
    * {@inheritDoc}
    */
   @Override
-  public IStudentUnitRecord findUnitRecordByStudent(int studentId) {
+  public IStudentUnitRecord findUnitRecordByStudent(int studentId)
+  {
     for (IStudentUnitRecord studentUnitRecord : getAllStudentUnitRecords()) {
       if (studentUnitRecord.getStudentId() == studentId) {
         return studentUnitRecord;
@@ -468,7 +471,8 @@ public class Unit
 
 
 
-  private String compareTotalMarkToGradeMinimums(float totalMark) {
+  private String compareTotalMarkToGradeMinimums(float totalMark)
+  {
     for (Grade grade : grades_) {
       if (totalMark >= grade.getMinimumMarkRequired()) {
         return grade.getCode();
