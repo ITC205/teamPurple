@@ -167,8 +167,8 @@ public class UnitManager
    * @param unitCode Unit code used to match unit in persistence layer.
    * @return IUnit Returns unit.
    */
-  private IUnit loadUnit(String unitCode) {
-
+  private IUnit loadUnit(String unitCode)
+  {
     Element unitElement = retrieveUnitElement(unitCode);
 
     if (unitElement == null) {
