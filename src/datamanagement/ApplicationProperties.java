@@ -31,7 +31,7 @@ public class ApplicationProperties
     try {
       properties_.load(new FileInputStream("Properties.prop"));
     } 
-    catch (IOException e) {
+    catch (IOException exception) {
       throw new RuntimeException("ApplicationProperties : " +
                                  "ApplicationProperties : " +
                                  "Could not read property file");
@@ -59,6 +59,19 @@ public class ApplicationProperties
   public Properties getProperties() 
   {
     return properties_;
+  }
+
+
+
+  //===========================================================================
+  // Methods
+  //===========================================================================
+
+
+
+  public String xmlFileName()
+  {
+    return getProperties().getProperty("XMLFILE");
   }
 
 }

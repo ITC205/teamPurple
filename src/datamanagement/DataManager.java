@@ -107,8 +107,7 @@ public class DataManager
    */
   public void initialize()
   {
-    String xmlFileName = ApplicationProperties.getInstance().getProperties()
-                                      .getProperty("XMLFILE");
+    String xmlFileName = ApplicationProperties.getInstance().xmlFileName();
     try {
       buildFromXmlAndLoadDocument(xmlFileName);
     }
@@ -128,7 +127,7 @@ public class DataManager
     SAXBuilder saxBuilder = new SAXBuilder();
     saxBuilder.setExpandEntities(true);
     Document document = saxBuilder.build(xmlFileName);
-    this.setDocument(document);
+    setDocument( document );
   }
 
 
@@ -149,8 +148,7 @@ public class DataManager
    */
   public void saveDocument()
   {
-    String xmlFileName = ApplicationProperties.getInstance()
-                                  .getProperties().getProperty("XMLFILE");
+    String xmlFileName = ApplicationProperties.getInstance().xmlFileName();
 
     try (FileWriter fileWriter = new FileWriter(xmlFileName)) {
       convertDocumentToXmlAndSaveFile(fileWriter);
