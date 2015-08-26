@@ -326,7 +326,8 @@ public class UnitProxy
    * Returns the actual unit that this object proxies.
    * @return IUnit Actual unit that this object proxies.
    */
-  private IUnit resolveUnit() {
+  private IUnit resolveUnit()
+  {
     return getUnitManager().findUnit(getUnitCode());
   }
 
