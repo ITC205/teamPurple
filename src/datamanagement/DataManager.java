@@ -127,7 +127,7 @@ public class DataManager
     SAXBuilder saxBuilder = new SAXBuilder();
     saxBuilder.setExpandEntities(true);
     Document document = saxBuilder.build(xmlFileName);
-    setDocument( document );
+    setDocument(document);
   }
 
 

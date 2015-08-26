@@ -65,7 +65,7 @@ public class ListUnitsController
   public void listAllUnits(IUnitLister unitLister)
   {
     unitLister.clearUnitsFromComboBox();
-    UnitMap allUnits = this.getUnitManager().retrieveAllUnits();
+    UnitMap allUnits = getUnitManager().retrieveAllUnits();
     for (String unitCode : allUnits.keySet()) {
       unitLister.addUnitToComboBox(allUnits.get(unitCode));
     }
